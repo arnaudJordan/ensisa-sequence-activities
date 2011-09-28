@@ -30,6 +30,9 @@ public class Sequence {
 	public Activity get(int index) {
 		return activities.get(index);
 	}
+	public Activity getLastActivity() {
+		return activities.get(this.size()-1);
+	}
 	
 	public void addActivity(Activity activity) {
 		this.activities.add(activity);
@@ -39,4 +42,6 @@ public class Sequence {
 	public String toString() {
 		return "Sequence [activities=" + activities + "]";
 	}
+
+
 }
