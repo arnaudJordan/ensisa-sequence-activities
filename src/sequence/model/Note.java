@@ -3,7 +3,7 @@ package sequence.model;
 public class Note {
 	private final String note;
 	
-	Note(String note)
+	public Note(String note)
 	{
 		this.note=note;
 	}
