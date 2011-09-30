@@ -11,6 +11,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -28,6 +29,9 @@ public class MenuBar extends JMenuBar {
 		open.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.Event.CTRL_MASK));
 		
 		final JFileChooser fc = new JFileChooser();
+		
+		FileNameExtensionFilter filter= new FileNameExtensionFilter("XML file", "XML", "xml");
+	    fc.setFileFilter(filter);
 		final Container parent = getParent();
 		
 		open.addActionListener(new ActionListener() {
