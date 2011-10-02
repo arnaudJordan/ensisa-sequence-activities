@@ -10,8 +10,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -25,13 +23,8 @@ public class MenuBar extends JMenuBar {
 		JMenu file = new JMenu("File");
 		
 		JMenuItem open = new JMenuItem("Open");
-		open.setMnemonic('O');
-		open.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.Event.CTRL_MASK));
 		
 		final JFileChooser fc = new JFileChooser();
-		
-		FileNameExtensionFilter filter= new FileNameExtensionFilter("XML file", "XML", "xml");
-	    fc.setFileFilter(filter);
 		final Container parent = getParent();
 		
 		open.addActionListener(new ActionListener() {
@@ -59,16 +52,10 @@ public class MenuBar extends JMenuBar {
 		
 		file.add(open);
 		
-		
-		JMenuItem export = new JMenuItem("Export");
-		export.setMnemonic('E');
-		export.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.Event.CTRL_MASK));
-		file.add(export);
+		file.add(new JMenuItem("Export"));
 		
 		
 		JMenuItem quit = new JMenuItem("Quit");
-		quit.setMnemonic('Q');
-		quit.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.Event.CTRL_MASK));
 		quit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
