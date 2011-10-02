@@ -1,6 +1,8 @@
 package sequence.model;
 
-public class Activity {
+import sequence.mvc.Model;
+
+public class Activity implements Model {
 	private final int id;
 	private final String state;
 	private final int discipline;
@@ -27,6 +29,18 @@ public class Activity {
 		this.treatedStructure=new TreatedStructure();
 	}
 
+	public Activity(Activity activity) {
+		this.id=activity.getId();
+		this.state=activity.getState();
+		this.discipline=activity.getDiscipline();
+		this.type=activity.getType();
+		
+		this.activitytime=activity.getActivitytime();
+		this.actuator=activity.getActuator();
+		this.actions=activity.getActions();
+		this.usedInstrument=activity.getUsedInstrument();
+		this.treatedStructure=activity.getTreatedStructure();
+	}
 
 	public Note getNote() {
 		return note;
