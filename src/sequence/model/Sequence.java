@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Sequence {
+import sequence.mvc.Model;
+
+public class Sequence implements Model {
 	private List<Activity> activities;
 	
 	public Sequence() {
 		this.activities=new ArrayList<Activity>();
+	}
+	
+	public Sequence(Sequence sequence) {
+		this.activities=sequence.getActivities();
 	}
 	
 	public int size() {
@@ -36,6 +42,10 @@ public class Sequence {
 	
 	public void addActivity(Activity activity) {
 		this.activities.add(activity);
+	}
+	
+	public List<Activity> getActivities() {
+		return activities;
 	}
 
 	@Override
