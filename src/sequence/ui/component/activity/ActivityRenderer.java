@@ -28,14 +28,15 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 
 	private void renderBackground(Graphics2D g) {
 		Activity activity = (Activity) ((ActivityView)getView()).getModel();
+		g.setColor((getView().getParent().getGraphics().getColor()));
 		if(activity != null)
-			g.fillRect(0, 0, activity.getActivitytime().getDuration()*3, 50);
+			g.fillRect(0, 0, activity.getActivitytime().getDuration(), 10);
 	}
 	
 	public Dimension getPreferredSize() {
 		Activity activity = (Activity) ((ActivityView)getView()).getModel();
 		if(activity != null)
-			return new Dimension(activity.getActivitytime().getDuration(), 50);
+			return new Dimension(activity.getActivitytime().getDuration(), 10);
 		return new Dimension(200, 50);
 	}
 }
