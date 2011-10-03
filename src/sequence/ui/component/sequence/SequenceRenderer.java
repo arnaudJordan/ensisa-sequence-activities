@@ -1,6 +1,7 @@
 package sequence.ui.component.sequence;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
@@ -29,10 +30,20 @@ public class SequenceRenderer extends DefaultRenderer implements Renderer {
 	private void renderSequence(Graphics2D g) {
 		getView().setLayout(new FlowLayout());
 		for(Activity current : ((Sequence)getView().getModel()).getActivities()) {
-			g.setColor(Color.blue);
-			ActivityView f = new ActivityView(current);
-			getView().add(f);
+			boolean flag = false;
+			if(getView().getComponentCount() != 0) {
+				int i = 0;
+				while(!flag && i < getView().getComponents().length) {
+					if(((Activity)(((ActivityView)getView().getComponents()[i]).getModel())).getId() != current.getId())
+						i++;
+					else
+						flag = true;
+				}
+			}
+			if(!flag)
+				getView().add(new ActivityView(current));
 		}
+		System.out.println(getView().getComponentCount());
 	}
 	
 	public Dimension getPreferredSize() {
