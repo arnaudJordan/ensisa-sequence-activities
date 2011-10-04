@@ -1,5 +1,6 @@
 package sequence.ui.component.sequence.test;
 
+import java.awt.EventQueue;
 import java.io.File;
 
 import javax.swing.JFrame;
@@ -35,6 +36,10 @@ public class testSequence extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new testSequence();
+		EventQueue.invokeLater(new Runnable(){
+			public void run(){
+				new testSequence();
+			}
+		});
 	}
 }

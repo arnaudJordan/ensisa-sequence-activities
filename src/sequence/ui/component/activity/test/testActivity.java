@@ -1,5 +1,6 @@
 package sequence.ui.component.activity.test;
 
+import java.awt.EventQueue;
 import java.io.File;
 
 import javax.swing.JFrame;
@@ -34,6 +35,10 @@ public class testActivity extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new testActivity();
+		EventQueue.invokeLater(new Runnable(){
+			public void run(){
+				new testActivity();
+			}
+		});
 	}
 }
