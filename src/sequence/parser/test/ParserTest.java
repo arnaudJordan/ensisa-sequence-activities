@@ -11,7 +11,7 @@ import org.xml.sax.SAXException;
 import sequence.parser.SequenceHandler;
 
 public class ParserTest {
-	private final static String FILEPATH = "rsrc/data.xml";
+	private final static String FILEPATH = "src/data.xml";
 	
 	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
 		try{

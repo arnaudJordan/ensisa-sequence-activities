@@ -10,9 +10,9 @@ public class Activity implements Model {
 	
 	private Activitytime activitytime;
 	private Actuator actuator;
-	private Actions actions;
+	private Action action;
 	private UsedInstruments usedInstrument;
-	private TreatedStructure treatedStructure;
+	private AnatomicStructure anatomicStructure;
 	private Note note;
 
 	
@@ -23,10 +23,7 @@ public class Activity implements Model {
 		this.type=type;
 		
 		this.activitytime=new Activitytime();
-		this.actuator=new Actuator();
-		this.actions=new Actions();
 		this.usedInstrument=new UsedInstruments();
-		this.treatedStructure=new TreatedStructure();
 	}
 
 	public Activity(Activity activity) {
@@ -37,9 +34,7 @@ public class Activity implements Model {
 		
 		this.activitytime=activity.getActivitytime();
 		this.actuator=activity.getActuator();
-		this.actions=activity.getActions();
 		this.usedInstrument=activity.getUsedInstrument();
-		this.treatedStructure=activity.getTreatedStructure();
 	}
 
 	public Note getNote() {
@@ -74,26 +69,44 @@ public class Activity implements Model {
 		return actuator;
 	}
 
-	public Actions getActions() {
-		return actions;
+	public Action getActions() {
+		return action;
 	}
 
 	public UsedInstruments getUsedInstrument() {
 		return usedInstrument;
 	}
 
-	public TreatedStructure getTreatedStructure() {
-		return treatedStructure;
+	public AnatomicStructure getTreatedStructure() {
+		return anatomicStructure;
 	}
 
+	public void setActuator(Actuator actuator) {
+		this.actuator=actuator;
+	}
+	
+	public void setTreatedStructure(AnatomicStructure anatomicStructure) {
+		this.anatomicStructure=anatomicStructure;
+		
+	}
+	
+	public void setAction(Action action) {
+		this.action=action;
+	}
+	
 	@Override
 	public String toString() {
 		return "Activity [id=" + id + ", state=" + state + ", discipline="
 				+ discipline + ", type=" + type + ", activitytime="
 				+ activitytime + ", actuator=" + actuator + ", actions="
-				+ actions + ", usedInstrument=" + usedInstrument
-				+ ", treatedStructure=" + treatedStructure + ", note=" + note
+				+ action + ", usedInstrument=" + usedInstrument
+				+ ", treatedStructure=" + anatomicStructure + ", note=" + note
 				+ "]";
 	}
+
+	
+	
+
+
 	
 }
