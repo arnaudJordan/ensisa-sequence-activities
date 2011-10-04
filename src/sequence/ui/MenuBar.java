@@ -10,6 +10,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -18,55 +20,66 @@ import sequence.parser.SequenceHandler;
 
 public class MenuBar extends JMenuBar {
 
-	public MenuBar() {
-		super();
-		JMenu file = new JMenu("File");
-		
-		JMenuItem open = new JMenuItem("Open");
-		
-		final JFileChooser fc = new JFileChooser();
-		final Container parent = getParent();
-		
-		open.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int returnVal = fc.showOpenDialog(parent);
-				if (returnVal == JFileChooser.APPROVE_OPTION) {
-		            File file = fc.getSelectedFile();
-		            try{
-		    			SAXParserFactory factory = SAXParserFactory.newInstance();
+        public MenuBar() {
+                super();
+                JMenu file = new JMenu("File");
+                
+                JMenuItem open = new JMenuItem("Open");
+                open.setMnemonic('O');
+                open.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.Event.CTRL_MASK));
+                
+                final JFileChooser fc = new JFileChooser();
+                
+                FileNameExtensionFilter filter= new FileNameExtensionFilter("XML file", "XML", "xml");
+            fc.setFileFilter(filter);
+                final Container parent = getParent();
+                
+                open.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                                int returnVal = fc.showOpenDialog(parent);
+                                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                            File file = fc.getSelectedFile();
+                            try{
+                                        SAXParserFactory factory = SAXParserFactory.newInstance();
 
-		    			SAXParser parser = factory.newSAXParser();
+                                        SAXParser parser = factory.newSAXParser();
 
-		    			File parsedFile = file;
-		    			SequenceHandler sequenceHandler = new SequenceHandler();
-		    			parser.parse(parsedFile, sequenceHandler);
-		    			JOptionPane.showMessageDialog(parent, "Succes : " + sequenceHandler.getSequence().size() + " activities loaded", "File loaded", JOptionPane.INFORMATION_MESSAGE);
+                                        File parsedFile = file;
+                                        SequenceHandler sequenceHandler = new SequenceHandler();
+                                        parser.parse(parsedFile, sequenceHandler);
+                                        JOptionPane.showMessageDialog(parent, "Succes : " + sequenceHandler.getSequence().size() + " activities loaded", "File loaded", JOptionPane.INFORMATION_MESSAGE);
 
-		    		}catch(Exception ex){
-		    			JOptionPane.showMessageDialog(parent, ex.toString(), ex.getClass().toString(), JOptionPane.ERROR_MESSAGE);
-		    		}
-		            
-		        }
-			}
-		});
-		
-		file.add(open);
-		
-		file.add(new JMenuItem("Export"));
-		
-		
-		JMenuItem quit = new JMenuItem("Quit");
-		quit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		file.add(quit);
-		
-		add(file);
-		JMenu edit = new JMenu("Edit");
-		add(edit);
-	}
-	
+                                }catch(Exception ex){
+                                        JOptionPane.showMessageDialog(parent, ex.toString(), ex.getClass().toString(), JOptionPane.ERROR_MESSAGE);
+                                }
+                            
+                        }
+                        }
+                });
+                
+                file.add(open);
+                
+                
+                JMenuItem export = new JMenuItem("Export");
+                export.setMnemonic('E');
+                export.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.Event.CTRL_MASK));
+                file.add(export);
+                
+                
+                JMenuItem quit = new JMenuItem("Quit");
+                quit.setMnemonic('Q');
+                quit.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.Event.CTRL_MASK));
+                quit.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                                System.exit(0);
+                        }
+                });
+                file.add(quit);
+                
+                add(file);
+                JMenu edit = new JMenu("Edit");
+                add(edit);
+        }
+        
 
 }
