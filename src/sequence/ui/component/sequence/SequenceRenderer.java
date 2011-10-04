@@ -21,9 +21,7 @@ public class SequenceRenderer extends DefaultRenderer implements Renderer {
 	}
 
 	public void renderView(Graphics2D g) {
-		RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); 
-        rh.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY); 
-        g.setRenderingHints(rh);
+		super.renderView(g);
         renderSequence(g);
 	}
 	
