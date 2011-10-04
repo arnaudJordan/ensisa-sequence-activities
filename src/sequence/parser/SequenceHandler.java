@@ -9,7 +9,7 @@ import sequence.model.Activity;
 import sequence.model.AnatomicStructure;
 import sequence.model.Instrument;
 import sequence.model.Note;
-import sequence.model.Position;
+import sequence.model.Actuator;
 import sequence.model.Sequence;
 
 
@@ -111,7 +111,7 @@ public class SequenceHandler extends DefaultHandler {
 					if(inAction)
 					{
 						inAction=false;
-						sequence.getLastActivity().getActions().addAction(new Action(buffer.toString()));
+						sequence.getLastActivity().setAction(new Action(buffer.toString()));
 					}
 					else
 						inActions = false;
@@ -145,7 +145,7 @@ public class SequenceHandler extends DefaultHandler {
 						inDuration = false;
 					}
 				}else if(inActuator&&qName.equals("position")){
-					sequence.getLastActivity().getActuator().addPosition(new Position(buffer.toString()));
+					sequence.getLastActivity().setActuator(new Actuator(buffer.toString()));
 					buffer=null;
 					inPosition = false;
 				}else if(inUsedInstruments&&qName.equals("instrument")){
@@ -153,7 +153,7 @@ public class SequenceHandler extends DefaultHandler {
 					buffer=null;
 					inInstrument = false;
 				}else if(inTreatedStructure&&qName.equals("anatomicStructure")){
-					sequence.getLastActivity().getTreatedStructure().addAnatomicStructure(new AnatomicStructure(buffer.toString()));
+					sequence.getLastActivity().setTreatedStructure(new AnatomicStructure(buffer.toString()));
 					buffer=null;
 					inAnatomicStructure = false;
 				}
