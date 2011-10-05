@@ -29,6 +29,6 @@ public class SequenceRenderer extends DefaultRenderer implements Renderer {
 	}
 	
 	public Dimension getPreferredSize() {
-		return new Dimension(200, 50);
+		return getView().getLayout().preferredLayoutSize(getView());
 	}
 }

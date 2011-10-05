@@ -35,6 +35,6 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 		Activity activity = (Activity) ((ActivityView)getView()).getModel();
 		if(activity != null)
 			return new Dimension(activity.getActivitytime().getDuration(), 10);
-		return new Dimension(200, 50);
+		return super.getPreferredSize();
 	}
 }
