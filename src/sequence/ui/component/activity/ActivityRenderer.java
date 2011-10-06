@@ -26,7 +26,7 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 
 	private void renderBackground(Graphics2D g) {
 		Activity activity = (Activity) ((ActivityView)getView()).getModel();
-		g.setColor((getView().getParent().getGraphics().getColor()));
+		g.setColor(((ActivityRenderingModel)getView().getRenderingModel()).getColor());
 		if(activity != null)
 			g.fillRect(0, 0, activity.getActivitytime().getDuration(), 10);
 	}

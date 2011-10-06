@@ -8,5 +8,6 @@ public class ActivityView extends View {
 	public ActivityView(Model model) {
 		super(model);
 		setRenderer(new ActivityRenderer(this));
+		setRenderingModel(new ActivityRenderingModel());
 	}
 }

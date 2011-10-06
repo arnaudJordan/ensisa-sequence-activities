@@ -10,6 +10,7 @@ public abstract class View extends JComponent {
 
 	private Model model;
 	private Renderer renderer;
+	private RenderingModel renderingModel;
 
 	public View(Model model) {
 		initialize(model);
@@ -18,6 +19,7 @@ public abstract class View extends JComponent {
 	private void initialize(Model model) {
 		this.model = model;
 		this.setRenderer(null);
+		this.setRenderingModel(null);
 	}
 	
 	public Model getModel() {
@@ -30,6 +32,14 @@ public abstract class View extends JComponent {
 
 	public Renderer getRenderer() {
 		return renderer;
+	}
+	
+	public RenderingModel getRenderingModel() {
+		return renderingModel;
+	}
+
+	public void setRenderingModel(RenderingModel renderingModel) {
+		this.renderingModel = renderingModel;
 	}
 	
 	public Dimension getMinimumSize() {               
