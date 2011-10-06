@@ -25,7 +25,7 @@ public class ParserTest {
 			System.out.println( sequenceHandler.getSequence());
 
 		}catch(Exception e){
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 }
