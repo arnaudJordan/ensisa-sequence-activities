@@ -9,6 +9,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
+import sequence.ui.component.activity.ActivityController;
 import sequence.ui.component.activity.ActivityView;
 
 public class testActivity extends JFrame {
@@ -25,6 +26,8 @@ public class testActivity extends JFrame {
 			
 			Sequence model = new Sequence(sequenceHandler.getSequence());
 			ActivityView view = new ActivityView(model.getLastActivity());
+			ActivityController controller = new ActivityController(model, view);
+			
 			this.add(view);
 			this.pack();
 			this.setVisible(true);
