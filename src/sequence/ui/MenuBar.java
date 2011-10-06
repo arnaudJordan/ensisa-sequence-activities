@@ -1,6 +1,7 @@
 package sequence.ui;
 
 import java.awt.Container;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -15,10 +16,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
 
 
 public class MenuBar extends JMenuBar {
+	private Sequence sequence;
 
         public MenuBar() {
                 super();
@@ -31,9 +34,9 @@ public class MenuBar extends JMenuBar {
                 final JFileChooser fc = new JFileChooser();
                 
                 FileNameExtensionFilter filter= new FileNameExtensionFilter("XML file", "XML", "xml");
-            fc.setFileFilter(filter);
+                fc.setFileFilter(filter);
                 final Container parent = getParent();
-                
+                sequence=null;
                 open.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                                 int returnVal = fc.showOpenDialog(parent);
@@ -47,6 +50,7 @@ public class MenuBar extends JMenuBar {
                                         File parsedFile = file;
                                         SequenceHandler sequenceHandler = new SequenceHandler();
                                         parser.parse(parsedFile, sequenceHandler);
+                                        sequence=sequenceHandler.getSequence();
                                         JOptionPane.showMessageDialog(parent, "Succes : " + sequenceHandler.getSequence().size() + " activities loaded", "File loaded", JOptionPane.INFORMATION_MESSAGE);
 
                                 }catch(Exception ex){
@@ -79,6 +83,26 @@ public class MenuBar extends JMenuBar {
                 add(file);
                 JMenu edit = new JMenu("Edit");
                 add(edit);
+                JMenu help = new JMenu("Help");
+                
+                JMenuItem info = new JMenuItem("File Information");
+                info.setMnemonic('I');
+                info.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.Event.CTRL_MASK));
+                
+                info.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                        	if(sequence!=null)
+                        		EventQueue.invokeLater(new Runnable(){
+                    			public void run(){
+                    				new InfoWindow("Information", sequence);
+                    			}
+                    		});
+                        }
+                });
+                
+                help.add(info);
+                
+                add(help);
         }
         
 
