@@ -8,6 +8,7 @@ import sequence.model.Sequence;
 import sequence.mvc.DefaultRenderer;
 import sequence.mvc.Renderer;
 import sequence.mvc.View;
+import sequence.ui.component.activity.ActivityController;
 import sequence.ui.component.activity.ActivityView;
 
 public class SequenceRenderer extends DefaultRenderer implements Renderer {
@@ -15,8 +16,11 @@ public class SequenceRenderer extends DefaultRenderer implements Renderer {
 	public SequenceRenderer(View view) {
 		super(view);
 		getView().setLayout(new FlowLayout());
-		for(Activity current : ((Sequence)getView().getModel()).getActivities()) 
-			getView().add(new ActivityView(current));
+		for(Activity current : ((Sequence)getView().getModel()).getActivities()) {
+			ActivityView activityView = new ActivityView(current);
+			ActivityController activityController = new ActivityController(current, activityView);
+			getView().add(activityView);
+		}
 	}
 
 	public void renderView(Graphics2D g) {
