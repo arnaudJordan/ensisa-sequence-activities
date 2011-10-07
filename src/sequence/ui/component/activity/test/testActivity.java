@@ -33,7 +33,7 @@ public class testActivity extends JFrame {
 			this.setVisible(true);
 			
 		}catch(Exception e){
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 

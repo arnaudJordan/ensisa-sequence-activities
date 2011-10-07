@@ -9,6 +9,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
+import sequence.ui.component.activity.ActivityController;
 import sequence.ui.component.sequence.SequenceView;
 
 public class testSequence extends JFrame {
@@ -31,7 +32,7 @@ public class testSequence extends JFrame {
 			this.setVisible(true);
 			
 		}catch(Exception e){
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
