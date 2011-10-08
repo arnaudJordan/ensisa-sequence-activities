@@ -28,7 +28,7 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 		Activity activity = (Activity) ((ActivityView)getView()).getModel();
 		g.setColor(((ActivityRenderingModel)getView().getRenderingModel()).getColor());
 		if(activity != null)
-			g.fillRect(0, 0, (int)(getView().getSize().getWidth()) * activity.getActivitytime().getDuration(), (int)(getView().getSize().getHeight()) * 10);
+			g.fillRect(0, 0, (int)(getView().getSize().getWidth()), (int)(getView().getSize().getHeight()));
 	}
 	
 	public Dimension getPreferredSize() {
