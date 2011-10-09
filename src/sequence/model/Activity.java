@@ -69,7 +69,7 @@ public class Activity implements Model {
 		return actuator;
 	}
 
-	public Action getActions() {
+	public Action getAction() {
 		return action;
 	}
 
