@@ -8,6 +8,7 @@ import sequence.mvc.Model;
 
 public class Sequence implements Model {
 	private List<Activity> activities;
+	private Phases phases;
 	private Patient patient;
 	
 	public Sequence() {
@@ -57,10 +58,20 @@ public class Sequence implements Model {
 		return patient;
 	}
 
+	public void setPhases(Phases phases) {
+		this.phases = phases;
+	}
+
+	public Phases getPhases() {
+		return phases;
+	}
+
 	@Override
 	public String toString() {
-		return "Sequence [activities=" + activities + ", patient=" + patient
-				+ "]";
+		return "Sequence [activities=" + activities + ", phases=" + phases
+				+ ", patient=" + patient + "]";
 	}
+
+
 
 }
