@@ -19,7 +19,7 @@ import sequence.model.Sex;
 
 public class SequenceHandler extends DefaultHandler {
 	private Sequence sequence;
-	private boolean inSequence, inActivity, inPatient, inState, inActivityTime, inActuator, inActions, inAction, inUsedInstruments, inTreatedStructure, inNote, inStartTime, inStopTime, inDuration, inPosition, inInstrument, inAnatomicStructure;
+	private boolean inSequence, inActivity, inPatient, inState, inActivityTime, inActuator, inAction, inUsedInstruments, inTreatedStructure, inNote, inStartTime, inStopTime, inDuration, inPosition, inInstrument, inAnatomicStructure;
 	private StringBuffer buffer;
 
 	public SequenceHandler(){
@@ -124,7 +124,7 @@ public class SequenceHandler extends DefaultHandler {
 		}
 		if(qName.equals("action"))
 		{
-			inActions = true;
+			inAction = true;
 			return true;
 		}
 		if(qName.equals("usedInstruments"))
@@ -257,7 +257,7 @@ public class SequenceHandler extends DefaultHandler {
 				sequence.getLastActivity().setAction(new Action(buffer.toString()));
 			}
 			else
-				inActions = false;
+				inAction = false;
 			buffer = null;
 			return true;
 		}
