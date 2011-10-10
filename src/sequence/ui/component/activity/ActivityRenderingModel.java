@@ -16,6 +16,10 @@ public class ActivityRenderingModel implements RenderingModel {
 		this(DEFAULT_COLOR, DEFAULT_HEIGHT);
 	}
 	
+	public ActivityRenderingModel(Color color) {
+		this(color, DEFAULT_HEIGHT);
+	}
+	
 	public ActivityRenderingModel(Color color, int height) {
 		setColor(color);
 		setHeight(height);
