@@ -11,6 +11,12 @@ public class Instrument {
 		return instrument;
 	}
 
+	public boolean equals(Object o) {
+		if(this == o) return true;
+		if(!(o instanceof Instrument)) return false;
+	    return this.instrument.equalsIgnoreCase(((Instrument)o).getInstrument());
+	}
+	
 	@Override
 	public String toString() {
 		return "Instrument [instrument=" + instrument + "]";
