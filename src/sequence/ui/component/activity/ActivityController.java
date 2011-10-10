@@ -14,8 +14,7 @@ public class ActivityController extends Controller {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		if(e.getButton() == MouseEvent.BUTTON1)
-		{
+		if(e.getButton() == LEFT_MOUSE_BUTTON) {
 			ActivityRenderingModel renderingModel = ((ActivityRenderingModel)(((ActivityView)getView()).getRenderingModel()));
 			Color newColor = JColorChooser.showDialog(getView(), "Choose a new color", renderingModel.getColor());
 			if(newColor!= null && newColor != renderingModel.getColor()) {
@@ -24,4 +23,18 @@ public class ActivityController extends Controller {
 			}
 		}
 	}
+	
+	public void mousePressed(MouseEvent e) {
+		checkPopup(e);
+    }
+
+    public void mouseReleased(MouseEvent e) {
+    	checkPopup(e);
+    }
+
+    private void checkPopup(MouseEvent e) {
+        if (e.getButton() == RIGHT_MOUSE_BUTTON && e.isPopupTrigger()) {
+        	((ActivityView)getView()).popup.show(e.getComponent(), e.getX(), e.getY());
+        }
+    }
 }
