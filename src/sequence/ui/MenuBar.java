@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 import javax.swing.JFileChooser;
 import javax.swing.JMenu;
@@ -36,12 +38,27 @@ public class MenuBar extends JMenuBar {
                 FileNameExtensionFilter filter= new FileNameExtensionFilter("XML file", "XML", "xml");
                 fc.setFileFilter(filter);
                 final Container parent = getParent();
+                if(MainWindow.getConfig().getLastOpenedDirectory() !=null)
+                {
+                	fc.setCurrentDirectory(MainWindow.getConfig().getLastOpenedDirectory());
+                }
                 sequence=null;
                 open.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                                 int returnVal = fc.showOpenDialog(parent);
                                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                             File file = fc.getSelectedFile();
+                            MainWindow.getConfig().setLastOpenedDirectory(fc.getCurrentDirectory());
+                            try {
+                            	FileOutputStream configFile = new FileOutputStream("config.ser");
+                            	ObjectOutputStream oos = new ObjectOutputStream(configFile);
+                            	oos.writeObject(MainWindow.getConfig());
+                            	oos.flush();
+                            	oos.close();
+                            	}
+                            	catch (java.io.IOException ex) {
+                            	ex.printStackTrace();
+                            	}
                             try{
                                         SAXParserFactory factory = SAXParserFactory.newInstance();
 
