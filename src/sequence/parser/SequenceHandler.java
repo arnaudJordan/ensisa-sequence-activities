@@ -11,13 +11,15 @@ import sequence.model.Instrument;
 import sequence.model.Note;
 import sequence.model.Actuator;
 import sequence.model.Patient;
+import sequence.model.Phase;
+import sequence.model.Phases;
 import sequence.model.Sequence;
 import sequence.model.Sex;
 
 
 public class SequenceHandler extends DefaultHandler {
 	private Sequence sequence;
-	private boolean inSequence, inActivity, inPatient, inActivityTime, inActuator, inActions, inAction, inUsedInstruments, inTreatedStructure, inNote, inStartTime, inStopTime, inDuration, inPosition, inInstrument, inAnatomicStructure;
+	private boolean inSequence, inActivity, inPatient, inState, inActivityTime, inActuator, inActions, inAction, inUsedInstruments, inTreatedStructure, inNote, inStartTime, inStopTime, inDuration, inPosition, inInstrument, inAnatomicStructure;
 	private StringBuffer buffer;
 
 	public SequenceHandler(){
@@ -60,6 +62,29 @@ public class SequenceHandler extends DefaultHandler {
 		}
 		if(startElementInActivity(qName))
 			return true;
+		if(qName.equals("state"))
+		{
+			sequence.setPhases(new Phases());
+			inState=true;
+		}
+		if(startElementInState(qName, attributes))
+			return true;
+		return false;
+	}
+	private boolean startElementInState(String qName, Attributes attributes) throws SAXException {
+		if(!inState)
+			return false;
+		if(qName.equals("value"))
+		{
+			try{
+				int time = Integer.parseInt(attributes.getValue("time"));
+				sequence.getPhases().add(new Phase(time));
+			}catch(Exception e){
+				throw new SAXException(e);
+			}
+			return true;
+		}
+			
 		return false;
 	}
 	private boolean startElementInPatient(String qName) {
@@ -192,6 +217,23 @@ public class SequenceHandler extends DefaultHandler {
 		}
 		if(endElementInActivity(qName))
 			return true;
+		if(qName.equals("state")){
+			buffer = null;
+			inState = false;
+			return true;
+		}
+		if(endElementInState(qName))
+			return true;
+		return false;
+	}
+	private boolean endElementInState(String qName) {
+		if(!inState)
+			return false;
+		if(qName.equals("value"))
+		{
+			sequence.getPhases().getLastPhase().setName(buffer.toString());
+			buffer=null;
+		}
 		return false;
 	}
 	private boolean endElementInActivity(String qName) {
