@@ -30,11 +30,11 @@ public class UsedInstruments {
 	public Instrument get(int index) {
 		return usedInstruments.get(index);
 	}
-
+	public List<Instrument> getUsedInstruments() {
+		return usedInstruments;
+	}
 	@Override
 	public String toString() {
 		return "UsedInstruments [usedInstruments=" + usedInstruments + "]";
 	}
-	
-	
 }
