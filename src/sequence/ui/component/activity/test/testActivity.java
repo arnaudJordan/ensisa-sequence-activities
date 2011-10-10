@@ -10,7 +10,6 @@ import javax.xml.parsers.SAXParserFactory;
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
 import sequence.ui.component.activity.ActivityController;
-import sequence.ui.component.activity.ActivityMenuController;
 import sequence.ui.component.activity.ActivityView;
 
 public class testActivity extends JFrame {

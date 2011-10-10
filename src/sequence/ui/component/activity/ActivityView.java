@@ -1,10 +1,5 @@
 package sequence.ui.component.activity;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JColorChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
@@ -23,6 +18,5 @@ public class ActivityView extends View {
 	    JMenuItem colorItem = new JMenuItem("Color");
 	    colorItem.addActionListener(new ActivityMenuItemController(model, this));
 	    popup.add(colorItem);
-	    this.addMouseListener(new ActivityMenuController(model, this));
 	}
 }

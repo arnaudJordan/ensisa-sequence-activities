@@ -10,9 +10,9 @@ import java.awt.event.MouseWheelListener;
 
 public class Controller implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener{
 
-	public static final int LEFT_MOUSE_BUTTON   = MouseEvent.BUTTON1_MASK;
-    public static final int MIDDLE_MOUSE_BUTTON = MouseEvent.BUTTON2_MASK;
-    public static final int RIGHT_MOUSE_BUTTON  = MouseEvent.BUTTON3_MASK;
+	public static final int LEFT_MOUSE_BUTTON   = MouseEvent.BUTTON1;
+    public static final int MIDDLE_MOUSE_BUTTON = MouseEvent.BUTTON2;
+    public static final int RIGHT_MOUSE_BUTTON  = MouseEvent.BUTTON3;
 	
 	private Model model;
     private View view;
