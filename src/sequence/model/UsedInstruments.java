@@ -33,6 +33,11 @@ public class UsedInstruments {
 	public List<Instrument> getUsedInstruments() {
 		return usedInstruments;
 	}
+	public boolean equals(Object o) {
+		if(this == o) return true;
+		if(!(o instanceof UsedInstruments)) return false;
+		return this.usedInstruments.equals(((UsedInstruments)o).getUsedInstruments());
+	}	
 	@Override
 	public String toString() {
 		return "UsedInstruments [usedInstruments=" + usedInstruments + "]";
