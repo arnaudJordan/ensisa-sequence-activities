@@ -20,20 +20,18 @@ public class MainWindow extends JFrame {
 
 	public MainWindow(String title) throws HeadlessException {
 		super(title);
-		
+
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.setExtendedState(Frame.MAXIMIZED_BOTH);
+		
 		this.setPreferredSize(new Dimension(800, 600));
-		
+		setConfig(new Config());
 		try {
-			FileInputStream configFile = new FileInputStream("config.ser");
-			ObjectInputStream ois = new ObjectInputStream(configFile);
-			setConfig((Config) ois.readObject());
-			}
-			catch (Exception e) {
-				setConfig(new Config());
-			}
-		
+			setConfig(getConfig().deserialize());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
 		this.setJMenuBar(new MenuBar());
 		try{
 			SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -43,18 +41,18 @@ public class MainWindow extends JFrame {
 			File parsedFile = new File("src/data.xml");
 			SequenceHandler sequenceHandler = new SequenceHandler();
 			parser.parse(parsedFile, sequenceHandler);
-			
+
 			Sequence model = new Sequence(sequenceHandler.getSequence());
 			SequenceView view = new SequenceView(model);
 
 			this.add(view);
-			
+
 		}catch(Exception e){
-			System.out.println(e);
+			e.printStackTrace();
 		}
-		
+
 		this.pack();
-	    this.setVisible(true);
+		this.setVisible(true);
 	}
 
 	public static Config getConfig() {
