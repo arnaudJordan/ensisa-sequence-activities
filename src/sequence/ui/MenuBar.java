@@ -1,14 +1,11 @@
 package sequence.ui;
 
-import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -20,12 +17,13 @@ import javax.xml.parsers.SAXParserFactory;
 
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
+import sequence.ui.component.sequence.SequenceView;
 
 
 public class MenuBar extends JMenuBar {
-	private Sequence sequence;
+	private static final long serialVersionUID = 1L;
 
-	public MenuBar() {
+	public MenuBar(final JFrame parent) {
 		super();
 		JMenu file = new JMenu("File");
 
@@ -37,12 +35,10 @@ public class MenuBar extends JMenuBar {
 
 		FileNameExtensionFilter filter= new FileNameExtensionFilter("XML file", "XML", "xml");
 		fc.setFileFilter(filter);
-		final Container parent = getParent();
-		final Config config = MainWindow.getConfig();
+		final Config config = ((MainWindow) parent).getConfig();
 		if(config.getLastOpenedDirectory() !=null)
 			fc.setCurrentDirectory(config.getLastOpenedDirectory());
 		
-		sequence=null;
 		open.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int returnVal = fc.showOpenDialog(parent);
@@ -50,7 +46,7 @@ public class MenuBar extends JMenuBar {
 					File file = fc.getSelectedFile();
 					config.setLastOpenedDirectory(fc.getCurrentDirectory());
 					try {
-						MainWindow.getConfig().serialize();
+						config.serialize();
 					}
 					catch (java.io.IOException ex) {
 						ex.printStackTrace();
@@ -62,10 +58,16 @@ public class MenuBar extends JMenuBar {
 						File parsedFile = file;
 						SequenceHandler sequenceHandler = new SequenceHandler();
 						parser.parse(parsedFile, sequenceHandler);
-						sequence=sequenceHandler.getSequence();
-						JOptionPane.showMessageDialog(parent, "Succes : " + sequenceHandler.getSequence().size() + " activities loaded", "File loaded", JOptionPane.INFORMATION_MESSAGE);
+						Sequence sequence = sequenceHandler.getSequence();
+                        SequenceView view = new SequenceView(sequence);
+                        parent.toString();
+                        parent.add(view);
+                        parent.pack();
+                        parent.setVisible(true);
+                        ((MainWindow) parent).setSequence(sequence);
 
 					}catch(Exception ex){
+						ex.printStackTrace();
 						JOptionPane.showMessageDialog(parent, ex.toString(), ex.getClass().toString(), JOptionPane.ERROR_MESSAGE);
 					}
 
@@ -103,17 +105,16 @@ public class MenuBar extends JMenuBar {
 
 		info.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(sequence!=null)
+				if(((MainWindow) parent).getSequence()!=null)
 					EventQueue.invokeLater(new Runnable(){
 						public void run(){
-							new InfoWindow("Information", sequence);
+							new InfoWindow("Information", ((MainWindow) parent).getSequence());
 						}
 					});
 			}
 		});
 
 		help.add(info);
-
 		add(help);
 	}
 
