@@ -17,10 +17,8 @@ public class ActivityController extends Controller {
 		if(e.getButton() == LEFT_MOUSE_BUTTON) {
 			ActivityRenderingModel renderingModel = ((ActivityRenderingModel)(((ActivityView)getView()).getRenderingModel()));
 			Color newColor = JColorChooser.showDialog(getView(), "Choose a new color", renderingModel.getColor());
-			if(newColor!= null && newColor != renderingModel.getColor()) {
+			if(newColor!= null && newColor != renderingModel.getColor())
 				renderingModel.setColor(newColor);
-				getView().repaint();
-			}
 		}
 	}
 	

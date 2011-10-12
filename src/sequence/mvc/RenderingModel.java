@@ -1,5 +1,5 @@
 package sequence.mvc;
 
-public interface RenderingModel {
+public interface RenderingModel extends Model {
 
 }

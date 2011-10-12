@@ -1,8 +1,9 @@
 package sequence.model;
 
+import sequence.mvc.DefaultModel;
 import sequence.mvc.Model;
 
-public class Activity implements Model {
+public class Activity extends DefaultModel implements Model {
 	private final int id;
 	private final String state;
 	private final int discipline;

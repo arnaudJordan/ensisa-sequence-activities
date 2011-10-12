@@ -2,9 +2,10 @@ package sequence.ui.component.activity;
 
 import java.awt.Color;
 
+import sequence.mvc.DefaultModel;
 import sequence.mvc.RenderingModel;
 
-public class ActivityRenderingModel implements RenderingModel {
+public class ActivityRenderingModel extends DefaultModel implements RenderingModel {
 
 	private static final Color DEFAULT_COLOR = Color.BLACK;
 	private static final int DEFAULT_HEIGHT = 10;
@@ -30,14 +31,18 @@ public class ActivityRenderingModel implements RenderingModel {
 	}
 
 	public void setColor(Color color) {
+		if(this.color == color) return;
 		this.color = color;
+		this.modelChange();
 	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
+	
 	public int getHeight() {
 		return height;
+	}
+	
+	public void setHeight(int height) {
+		if(this.height == height) return;
+		this.height = height;
+		this.modelChange();
 	}
 }

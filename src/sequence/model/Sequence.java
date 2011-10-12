@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import sequence.mvc.DefaultModel;
 import sequence.mvc.Model;
 
-public class Sequence implements Model {
+public class Sequence extends DefaultModel implements Model {
 	private List<Activity> activities;
 	private Phases phases;
 	private Patient patient;
