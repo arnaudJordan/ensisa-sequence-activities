@@ -45,6 +45,7 @@ public class MenuBar extends JMenuBar {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
 					config.setLastOpenedDirectory(fc.getCurrentDirectory());
+					config.addOpenedFile(file);
 					try {
 						config.serialize();
 					}
@@ -58,19 +59,18 @@ public class MenuBar extends JMenuBar {
 						File parsedFile = file;
 						SequenceHandler sequenceHandler = new SequenceHandler();
 						parser.parse(parsedFile, sequenceHandler);
+						
 						Sequence sequence = sequenceHandler.getSequence();
+						((MainWindow) parent).setSequence(sequence);
+						
                         SequenceView view = new SequenceView(sequence);
-                        parent.toString();
                         parent.add(view);
                         parent.pack();
                         parent.setVisible(true);
-                        ((MainWindow) parent).setSequence(sequence);
-
 					}catch(Exception ex){
 						ex.printStackTrace();
 						JOptionPane.showMessageDialog(parent, ex.toString(), ex.getClass().toString(), JOptionPane.ERROR_MESSAGE);
 					}
-
 				}
 			}
 		});
