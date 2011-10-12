@@ -2,8 +2,6 @@ package sequence.ui.component.activity;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-
 import sequence.model.Activity;
 import sequence.mvc.DefaultRenderer;
 import sequence.mvc.Renderer;
@@ -33,8 +31,9 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 	
 	public Dimension getPreferredSize() {
 		Activity activity = (Activity) ((ActivityView)getView()).getModel();
-		if(activity != null)
-			return new Dimension(activity.getActivitytime().getDuration(), ((ActivityRenderingModel)getView().getRenderingModel()).getHeight());
+		ActivityRenderingModel renderingModel = ((ActivityRenderingModel)getView().getRenderingModel());
+		if(activity != null && renderingModel != null)
+			return new Dimension((int)(activity.getActivitytime().getDuration() * renderingModel.getScale()), (int)(((ActivityRenderingModel)getView().getRenderingModel()).getHeight() * renderingModel.getScale()));
 		return super.getPreferredSize();
 	}
 }
