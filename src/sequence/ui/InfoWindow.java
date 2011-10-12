@@ -9,16 +9,15 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.KeyStroke;
-
 import sequence.model.Sequence;
 
 public class InfoWindow extends JFrame {
+	private static final long serialVersionUID = 1L;
 
 	public InfoWindow(String title, Sequence sequence) throws HeadlessException {
 		super(title);
 
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setPreferredSize(new Dimension(300, 300));
 
 		this.setLayout(new GridLayout(0,2));
