@@ -61,12 +61,7 @@ public class MenuBar extends JMenuBar {
 						parser.parse(parsedFile, sequenceHandler);
 						
 						Sequence sequence = sequenceHandler.getSequence();
-						((MainWindow) parent).setSequence(sequence);
-						
-                        SequenceView view = new SequenceView(sequence);
-                        parent.add(view);
-                        parent.pack();
-                        parent.setVisible(true);
+						((MainWindow) parent).addSequence(new SequenceView(sequence));
 					}catch(Exception ex){
 						ex.printStackTrace();
 						JOptionPane.showMessageDialog(parent, ex.toString(), ex.getClass().toString(), JOptionPane.ERROR_MESSAGE);

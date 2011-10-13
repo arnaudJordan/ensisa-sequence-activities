@@ -8,6 +8,7 @@ import java.awt.HeadlessException;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,12 +16,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import sequence.model.Sequence;
+import sequence.mvc.Model;
+import sequence.ui.component.sequence.SequenceView;
 
 public class InfoWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 
-	public InfoWindow(String title, Sequence sequence) throws HeadlessException {
+	public InfoWindow(String title, List<SequenceView> list) throws HeadlessException {
 		super(title);
+		Sequence sequence = (Sequence) list.get(0).getModel();
 
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setPreferredSize(new Dimension(300, 300));
@@ -32,7 +36,7 @@ public class InfoWindow extends JFrame {
 		JPanel generalInfo = new JPanel();
 		generalInfo.setLayout(new GridLayout(0, 2));
 		generalInfo.add(new Label("Number of activities"));
-		generalInfo.add(new Label(new Integer(sequence.size()).toString()));
+		generalInfo.add(new Label(new Integer(list.size()).toString()));
 		
 		pane.add(generalInfo);
 		
