@@ -1,29 +1,27 @@
 package sequence.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Frame;
 import java.awt.HeadlessException;
-import java.awt.Label;
-import java.awt.ScrollPane;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
+import sequence.ui.component.activity.ActivityRenderingModel;
+import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.SequenceView;
 
 public class MainWindow extends JFrame {
@@ -31,6 +29,7 @@ public class MainWindow extends JFrame {
 	private Config config;
 	private List<SequenceView> sequenceViews;
 	private JPanel mainPane;
+	private JSlider scaleSlider;
 
 	public MainWindow(String title) throws HeadlessException {
 		super(title);
@@ -54,6 +53,8 @@ public class MainWindow extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(this.mainPane);
 		//scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		this.add(scrollPane);
+		
+		this.setupScaleSlider();
 
 		this.init();
 		this.pack();
@@ -81,6 +82,36 @@ public class MainWindow extends JFrame {
 			}
 		}
 
+	}
+	
+	private void setupScaleSlider()
+	{
+		JPanel scaleSliderPane = new JPanel();
+		
+		this.scaleSlider = new JSlider(JSlider.HORIZONTAL,100,300,100);
+		this.scaleSlider.setMajorTickSpacing(100);
+		this.scaleSlider.setPaintLabels(true);
+		this.scaleSlider.setPaintTicks(true);
+		this.scaleSlider.addChangeListener(new ChangeListener()
+		{
+			public void stateChanged(ChangeEvent changeEvent)
+			{
+				Object source = changeEvent.getSource();
+				JSlider s = (JSlider) source;
+				if (!s.getValueIsAdjusting());
+				{
+					for(SequenceView current : sequenceViews) {
+						Component[] components = current.getComponents();
+						for(int i=0; i<components.length ; i++)
+							((ActivityRenderingModel)((ActivityView)components[i]).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
+					}
+					mainPane.revalidate();
+				}
+			}
+		});
+
+		scaleSliderPane.add(this.scaleSlider);
+		this.add(scaleSliderPane, BorderLayout.PAGE_END);
 	}
 
 	public Config getConfig() {
