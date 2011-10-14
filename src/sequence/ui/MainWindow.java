@@ -72,7 +72,7 @@ public class MainWindow extends JFrame {
 				SAXParserFactory factory = SAXParserFactory.newInstance();
 				SAXParser parser = factory.newSAXParser();
 				SequenceHandler sequenceHandler = new SequenceHandler();
-				parser.parse(lastOpenedFile, sequenceHandler);
+				parser.parse(lastOpenedFiles[i], sequenceHandler);
 
 				Sequence sequence = sequenceHandler.getSequence();
 				addSequence(new SequenceView(sequence));
