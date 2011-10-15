@@ -12,7 +12,7 @@ public class ActivityView extends View {
 
 	public ActivityView(Model model) {
 		super(model);
-		setRenderer(new ActivityRenderer(this));
+		setRenderer(new ActivityContractedRenderer(this));
 		setRenderingModel(new ActivityRenderingModel());
 		popup = new JPopupMenu();
 	    JMenuItem colorItem = new JMenuItem("Color");
