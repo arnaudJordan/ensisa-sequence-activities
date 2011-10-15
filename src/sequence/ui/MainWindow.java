@@ -51,6 +51,7 @@ public class MainWindow extends JFrame {
 		
 		this.mainPane.setLayout(new BoxLayout(this.mainPane, BoxLayout.PAGE_AXIS));
 		JScrollPane scrollPane = new JScrollPane(this.mainPane);
+		scrollPane.setWheelScrollingEnabled(true);
 		//scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		this.add(scrollPane);
 		
@@ -92,6 +93,7 @@ public class MainWindow extends JFrame {
 		this.scaleSlider.setMajorTickSpacing(100);
 		this.scaleSlider.setPaintLabels(true);
 		this.scaleSlider.setPaintTicks(true);
+		final MainWindow frame = this;
 		this.scaleSlider.addChangeListener(new ChangeListener()
 		{
 			public void stateChanged(ChangeEvent changeEvent)
@@ -105,7 +107,7 @@ public class MainWindow extends JFrame {
 						for(int i=0; i<components.length ; i++)
 							((ActivityRenderingModel)((ActivityView)components[i]).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
 					}
-					mainPane.revalidate();
+					frame.setSize((int)frame.getSize().getWidth()+1,(int)frame.getSize().getHeight());
 				}
 			}
 		});
