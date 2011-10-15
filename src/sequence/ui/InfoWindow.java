@@ -3,6 +3,7 @@ package sequence.ui;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.Label;
@@ -32,7 +33,10 @@ public class InfoWindow extends JFrame {
 		Container pane = this.getContentPane();
 		pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
 		
-		pane.add(new Label("General information"));
+		Font titleFont = new Font("Courier New", Font.BOLD, 16);
+		Label generalInfoLabel = new Label("General information");
+		generalInfoLabel.setFont(titleFont);
+		pane.add(generalInfoLabel);
 		JPanel generalInfo = new JPanel();
 		generalInfo.setLayout(new GridLayout(0, 2));
 		generalInfo.add(new Label("Number of activities"));
@@ -40,7 +44,9 @@ public class InfoWindow extends JFrame {
 		
 		pane.add(generalInfo);
 		
-		pane.add(new Label("Patient information"));
+		Label patientInfoLabel = new Label("Patient information");
+		patientInfoLabel.setFont(titleFont);
+		pane.add(patientInfoLabel);
 		JPanel patientInfo = new JPanel();
 		patientInfo.setLayout(new GridLayout(0,2));
 		patientInfo.add(new Label("Age : "));
