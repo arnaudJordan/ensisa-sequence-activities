@@ -13,13 +13,14 @@ import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityController;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
+import sequence.utilities.BetterSizeFlowLayout;
 import sequence.utilities.ColorFactory;
 
 public class SequenceRenderer extends DefaultRenderer implements Renderer {
 	
 	public SequenceRenderer(View view) {
 		super(view);
-		getView().setLayout(new FlowLayout());
+		getView().setLayout(new BetterSizeFlowLayout());
 		List<Activity> activities = ((Sequence)getView().getModel()).getActivities();
 		ColorFactory colorFactory = new ColorFactory(activities);
 		for(Activity current : activities) {
