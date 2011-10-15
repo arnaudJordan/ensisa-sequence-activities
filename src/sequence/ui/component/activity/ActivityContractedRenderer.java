@@ -7,7 +7,6 @@ import sequence.model.Activity;
 import sequence.mvc.DefaultRenderer;
 import sequence.mvc.Renderer;
 import sequence.mvc.View;
-import sequence.utilities.ModifiedFlowLayout;
 
 public class ActivityContractedRenderer extends ActivityRenderer {
 
