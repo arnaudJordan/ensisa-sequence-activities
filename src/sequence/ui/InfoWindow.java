@@ -15,22 +15,36 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 import sequence.model.Sequence;
-import sequence.mvc.Model;
 import sequence.ui.component.sequence.SequenceView;
 
 public class InfoWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
+	private JTabbedPane jTabbedPane;
 
 	public InfoWindow(String title, List<SequenceView> list) throws HeadlessException {
 		super(title);
-		Sequence sequence = (Sequence) list.get(0).getModel();
-
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setPreferredSize(new Dimension(300, 300));
 		
-		Container pane = this.getContentPane();
+		jTabbedPane = new JTabbedPane();
+		add(jTabbedPane);
+		
+		for(int i=0; i<list.size();i++)
+		{
+			Sequence sequence = (Sequence) list.get(i).getModel();
+			createTab(sequence);
+		}
+		
+		this.pack();
+		this.setVisible(true);
+	}
+
+	private void createTab(Sequence sequence) {
+		Container pane = new JPanel();
+		
 		pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
 		
 		Font titleFont = new Font("Courier New", Font.BOLD, 16);
@@ -40,7 +54,7 @@ public class InfoWindow extends JFrame {
 		JPanel generalInfo = new JPanel();
 		generalInfo.setLayout(new GridLayout(0, 2));
 		generalInfo.add(new Label("Number of activities"));
-		generalInfo.add(new Label(new Integer(list.size()).toString()));
+		generalInfo.add(new Label(new Integer(sequence.size()).toString()));
 		
 		pane.add(generalInfo);
 		
@@ -70,10 +84,9 @@ public class InfoWindow extends JFrame {
 			}
 		});
 		
-		
 		pane.add(closeButton);
-		this.pack();
-		this.setVisible(true);
+		
+		jTabbedPane.addTab("File", pane);
 	}
 
 }
