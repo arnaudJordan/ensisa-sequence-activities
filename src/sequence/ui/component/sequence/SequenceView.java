@@ -7,6 +7,7 @@ public class SequenceView extends View {
 
 	public SequenceView(Model model) {
 		super(model);
+		setRenderingModel(new SequenceRenderingModel());
 		setRenderer(new SequenceRenderer(this));
 	}
 }

@@ -7,6 +7,7 @@ import sequence.model.Action;
 import sequence.model.Activity;
 import sequence.model.AnatomicStructure;
 import sequence.model.Instrument;
+import sequence.model.Sequence;
 import sequence.model.UsedInstruments;
 
 public class ColorFactory {
@@ -15,11 +16,11 @@ public class ColorFactory {
 	private List<AnatomicStructure> anatomicStructures;
 	private List<UsedInstruments> usedInstruments;
 	
-	public ColorFactory(List<Activity> activities) {
+	public ColorFactory(Sequence sequence) {
 		actions = new ArrayList<Action>();
 		anatomicStructures = new ArrayList<AnatomicStructure>();
 		usedInstruments = new ArrayList<UsedInstruments>();
-		for(Activity current : activities) {
+		for(Activity current : sequence) {
 			if(!actions.contains(current.getAction()))
 				actions.add(current.getAction());
 			if(!anatomicStructures.contains(current.getTreatedStructure()))
