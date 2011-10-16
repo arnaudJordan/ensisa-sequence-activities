@@ -4,15 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
+import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.xml.parsers.SAXParser;
@@ -22,6 +26,8 @@ import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
+import sequence.ui.component.sequence.SequenceController;
+import sequence.ui.component.sequence.SequenceRenderingModel;
 import sequence.ui.component.sequence.SequenceView;
 
 public class MainWindow extends JFrame {
@@ -30,6 +36,7 @@ public class MainWindow extends JFrame {
 	private List<SequenceView> sequenceViews;
 	private JPanel mainPane;
 	private JSlider scaleSlider;
+	private JTextField thresholdField;
 
 	public MainWindow(String title) throws HeadlessException {
 		super(title);
@@ -56,7 +63,8 @@ public class MainWindow extends JFrame {
 		this.add(scrollPane);
 		
 		this.setupScaleSlider();
-
+		this.setupThresholdField();
+		
 		this.init();
 		this.pack();
 		this.setVisible(true);
@@ -76,7 +84,9 @@ public class MainWindow extends JFrame {
 				parser.parse(lastOpenedFiles[i], sequenceHandler);
 
 				Sequence sequence = sequenceHandler.getSequence();
-				addSequence(new SequenceView(sequence));
+				SequenceView view= new SequenceView(sequence);
+				SequenceController controller = new SequenceController(sequence, view);
+				addSequence(view);
 
 			}catch(Exception ex){
 				ex.printStackTrace();
@@ -114,6 +124,28 @@ public class MainWindow extends JFrame {
 
 		scaleSliderPane.add(this.scaleSlider);
 		this.add(scaleSliderPane, BorderLayout.PAGE_END);
+	}
+	
+	private void setupThresholdField()
+	{
+		JPanel thresholdFieldPane = new JPanel();
+		JLabel thresholdFieldLabel = new JLabel("Minimal duration threshold : ");
+		
+		this.thresholdField = new JTextField("0", 2);
+		this.thresholdField.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent actionEvent)
+			{
+				Object source = actionEvent.getSource();
+				JTextField s = (JTextField) source;
+				for(SequenceView current : sequenceViews) {
+					((SequenceRenderingModel)current.getRenderingModel()).setDurationThreshold(Integer.parseInt(s.getText()));
+				}
+			}
+		});
+		thresholdFieldPane.add(thresholdFieldLabel);
+		thresholdFieldPane.add(this.thresholdField);
+		this.add(thresholdFieldPane, BorderLayout.PAGE_START);
 	}
 
 	public Config getConfig() {
