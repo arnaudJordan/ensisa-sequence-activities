@@ -30,13 +30,10 @@ public class UsedInstruments {
 	public Instrument get(int index) {
 		return usedInstruments.get(index);
 	}
-	public List<Instrument> getUsedInstruments() {
-		return usedInstruments;
-	}
 	public boolean equals(Object o) {
 		if(this == o) return true;
 		if(!(o instanceof UsedInstruments)) return false;
-		return this.usedInstruments.equals(((UsedInstruments)o).getUsedInstruments());
+		return this.usedInstruments.equals(((UsedInstruments)o).usedInstruments);
 	}	
 	@Override
 	public String toString() {
