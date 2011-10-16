@@ -7,7 +7,7 @@ import java.util.List;
 import sequence.mvc.DefaultModel;
 import sequence.mvc.Model;
 
-public class Sequence extends DefaultModel implements Model {
+public class Sequence extends DefaultModel implements Iterable<Activity>, Model {
 	private List<Activity> activities;
 	private Phases phases;
 	private Patient patient;
@@ -17,7 +17,7 @@ public class Sequence extends DefaultModel implements Model {
 	}
 	
 	public Sequence(Sequence sequence) {
-		this.activities=sequence.getActivities();
+		this.activities=sequence.activities;
 	}
 	
 	public int size() {
@@ -45,10 +45,6 @@ public class Sequence extends DefaultModel implements Model {
 	
 	public void addActivity(Activity activity) {
 		this.activities.add(activity);
-	}
-	
-	public List<Activity> getActivities() {
-		return activities;
 	}
 
 	public void setPatient(Patient patient) {

@@ -1,7 +1,6 @@
 package sequence.ui.component.sequence;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.util.List;
 
@@ -21,13 +20,15 @@ public class SequenceRenderer extends DefaultRenderer implements Renderer {
 	public SequenceRenderer(View view) {
 		super(view);
 		getView().setLayout(new BetterSizeFlowLayout());
-		List<Activity> activities = ((Sequence)getView().getModel()).getActivities();
-		ColorFactory colorFactory = new ColorFactory(activities);
-		for(Activity current : activities) {
-			ActivityView activityView = new ActivityView(current);
-			activityView.setRenderingModel(new ActivityRenderingModel(colorFactory.createColor(current)));
-			ActivityController activityController = new ActivityController(current, activityView);
-			getView().add(activityView);
+		Sequence sequence = (Sequence)getView().getModel();
+		ColorFactory colorFactory = new ColorFactory(sequence);
+		for(Activity current : sequence) {
+			if(((SequenceRenderingModel)getView().getRenderingModel()).getDurationThreshold() <= current.getActivitytime().getDuration()) {
+				ActivityView activityView = new ActivityView(current);
+				activityView.setRenderingModel(new ActivityRenderingModel(colorFactory.createColor(current)));
+				ActivityController activityController = new ActivityController(current, activityView);
+				getView().add(activityView);
+			}
 		}
 	}
 
@@ -37,7 +38,6 @@ public class SequenceRenderer extends DefaultRenderer implements Renderer {
 	}
 	
 	private void renderSequence(Graphics2D g) {
-		//System.out.println(getView().getComponentCount());
 	}
 	
 	public Dimension getPreferredSize() {
