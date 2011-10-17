@@ -12,6 +12,6 @@ public class SequenceController extends Controller {
 
 	public void modelChanged(Model m) {
 		getView().removeAll();
-		getView().setRenderer(new SequenceRenderer(getView()));
+		((SequenceRenderer)getView().getRenderer()).initialize();
 	}
 }
