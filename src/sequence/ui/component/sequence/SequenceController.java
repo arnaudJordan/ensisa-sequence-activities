@@ -9,9 +9,4 @@ public class SequenceController extends Controller {
 	public SequenceController(Model model, View view) {
 		super(model, view);
 	}
-
-	public void modelChanged(Model m) {
-		getView().removeAll();
-		((SequenceRenderer)getView().getRenderer()).initialize();
-	}
 }

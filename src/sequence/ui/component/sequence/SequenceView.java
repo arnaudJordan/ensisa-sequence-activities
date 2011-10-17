@@ -10,4 +10,9 @@ public class SequenceView extends View {
 		setRenderingModel(new SequenceRenderingModel());
 		setRenderer(new SequenceRenderer(this));
 	}
+	
+	public void modelChanged(Model m) {
+		removeAll();
+		((SequenceRenderer)getRenderer()).initialize();
+	}
 }

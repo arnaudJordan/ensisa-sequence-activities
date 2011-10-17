@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JComponent;
 
-public abstract class View extends JComponent {
+public abstract class View extends JComponent implements ModelListener {
 
 	private Model model;
 	private Renderer renderer;
@@ -17,9 +17,17 @@ public abstract class View extends JComponent {
 	}
 
 	private void initialize(Model model) {
-		this.model = model;
+		this.setModel(model);
 		this.setRenderer(null);
 		this.setRenderingModel(null);
+	}
+	
+	public void setModel(Model model) {
+		if(model == null) return;
+		if(this.model != null)
+			this.model.removeModelListener(this);
+		this.model = model;
+		this.model.addModelListener(this);
 	}
 	
 	public Model getModel() {
@@ -34,14 +42,18 @@ public abstract class View extends JComponent {
 		return renderer;
 	}
 	
+	public void setRenderingModel(RenderingModel renderingModel) {
+		if(renderingModel == null) return;
+		if(this.renderingModel != null)
+			this.renderingModel.removeModelListener(this);
+		this.renderingModel = renderingModel;
+		this.renderingModel.addModelListener(this);
+	}
+	
 	public RenderingModel getRenderingModel() {
 		return renderingModel;
 	}
 
-	public void setRenderingModel(RenderingModel renderingModel) {
-		this.renderingModel = renderingModel;
-	}
-	
 	public Dimension getMinimumSize() {               
 		return renderer.getMinimumSize();
     }
@@ -60,4 +72,8 @@ public abstract class View extends JComponent {
     	if (model != null && this.renderer != null)
     		this.renderer.renderView((Graphics2D)g);
     }
+	
+	public void modelChanged(Model m) {
+		this.repaint();
+	}
 }

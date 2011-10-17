@@ -8,7 +8,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
-public class Controller implements KeyListener, ModelListener, MouseListener, MouseMotionListener, MouseWheelListener {
+public class Controller implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
 
 	public static final int LEFT_MOUSE_BUTTON   = MouseEvent.BUTTON1;
     public static final int MIDDLE_MOUSE_BUTTON = MouseEvent.BUTTON2;
@@ -24,8 +24,6 @@ public class Controller implements KeyListener, ModelListener, MouseListener, Mo
         this.view.addMouseListener(this);
         this.view.addMouseMotionListener(this);
         this.view.addMouseWheelListener(this);
-        this.model.addModelListener(this);
-        this.view.getRenderingModel().addModelListener(this);
     }
 
 	public void setModel(Model model) {
@@ -86,10 +84,6 @@ public class Controller implements KeyListener, ModelListener, MouseListener, Mo
 
 	public void keyTyped(KeyEvent e) {
 		
-	}
-
-	public void modelChanged(Model m) {
-		this.view.repaint();
 	}
 }
 
