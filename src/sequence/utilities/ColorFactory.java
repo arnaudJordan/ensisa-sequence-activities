@@ -2,11 +2,11 @@ package sequence.utilities;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import sequence.model.Action;
 import sequence.model.Activity;
 import sequence.model.AnatomicStructure;
-import sequence.model.Instrument;
 import sequence.model.Sequence;
 import sequence.model.UsedInstruments;
 
@@ -28,6 +28,9 @@ public class ColorFactory {
 			if(!usedInstruments.contains(current.getUsedInstrument()))
 				usedInstruments.add(current.getUsedInstrument());
 		}
+		Collections.shuffle(actions);
+		Collections.shuffle(anatomicStructures);
+		Collections.shuffle(usedInstruments);
 	}
 	
 	public Color createColor(Activity activity) {
