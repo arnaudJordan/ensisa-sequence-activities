@@ -20,6 +20,10 @@ public class SequenceRenderer extends DefaultRenderer implements Renderer {
 	public SequenceRenderer(View view) {
 		super(view);
 		getView().setLayout(new BetterSizeFlowLayout());
+		initialize();
+	}
+
+	public void initialize() {
 		Sequence sequence = (Sequence)getView().getModel();
 		ColorFactory colorFactory = new ColorFactory(sequence);
 		for(Activity current : sequence) {
