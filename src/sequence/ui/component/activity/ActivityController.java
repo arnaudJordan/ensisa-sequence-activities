@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.MouseEvent;
 import javax.swing.JColorChooser;
+
+import sequence.model.Activity;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
@@ -23,9 +25,14 @@ public class ActivityController extends Controller {
 				renderingModel.setColor(newColor);
 			Container parent = getView().getParent();
 			if(parent != null) {
+				Activity model = (Activity)getView().getModel();
 				for(int i=0 ; i<parent.getComponentCount() ; i++) {
+					Activity componentModel = (Activity)((View)parent.getComponent(i)).getModel();
 					ActivityRenderingModel componentRenderingModel = ((ActivityRenderingModel)((View)parent.getComponent(i)).getRenderingModel());
-					if(componentRenderingModel != null && componentRenderingModel.getColor().equals(oldColor))
+					if(componentModel != null && componentRenderingModel != null
+							&& componentModel.getAction().equals(model.getAction())
+							&& componentModel.getTreatedStructure().equals(model.getTreatedStructure())
+							&& componentModel.getUsedInstrument().equals(model.getUsedInstrument()))
 						componentRenderingModel.setColor(newColor);
 				}
 			}
