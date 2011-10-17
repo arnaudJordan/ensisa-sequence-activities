@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -114,10 +115,11 @@ public class MainWindow extends JFrame {
 				{
 					for(SequenceView current : sequenceViews) {
 						Component[] components = current.getComponents();
-						for(int i=0; i<components.length ; i++)
+						for(int i=0; i<components.length ; i++) {
 							((ActivityRenderingModel)((ActivityView)components[i]).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
+							((JComponent)components[i]).revalidate();
+						}
 					}
-					frame.setSize((int)frame.getSize().getWidth()+1,(int)frame.getSize().getHeight());
 				}
 			}
 		});
@@ -140,6 +142,7 @@ public class MainWindow extends JFrame {
 				JTextField s = (JTextField) source;
 				for(SequenceView current : sequenceViews) {
 					((SequenceRenderingModel)current.getRenderingModel()).setDurationThreshold(Integer.parseInt(s.getText()));
+					current.revalidate();
 				}
 			}
 		});
