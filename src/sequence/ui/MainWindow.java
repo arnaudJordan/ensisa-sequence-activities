@@ -114,10 +114,9 @@ public class MainWindow extends JFrame {
 				if (!s.getValueIsAdjusting());
 				{
 					for(SequenceView current : sequenceViews) {
-						Component[] components = current.getComponents();
-						for(int i=0; i<components.length ; i++) {
-							((ActivityRenderingModel)((ActivityView)components[i]).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
-							((JComponent)components[i]).revalidate();
+						for(int i=0; i<current.getComponentCount()-1 ; i++) {
+							((ActivityRenderingModel)((ActivityView)current.getComponent(i)).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
+							((JComponent)current.getComponent(i)).revalidate();
 						}
 					}
 				}
