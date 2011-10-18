@@ -20,7 +20,7 @@ public class Action {
 	
 	@Override
 	public String toString() {
-		return "Action [action=" + action + "]";
+		return action;
 	}
 	
 }

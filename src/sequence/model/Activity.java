@@ -97,17 +97,10 @@ public class Activity extends DefaultModel implements Model {
 	
 	@Override
 	public String toString() {
-		return "Activity [id=" + id + ", state=" + state + ", discipline="
-				+ discipline + ", type=" + type + ", activitytime="
-				+ activitytime + ", actuator=" + actuator + ", actions="
-				+ action + ", usedInstrument=" + usedInstrument
-				+ ", treatedStructure=" + anatomicStructure + ", note=" + note
-				+ "]";
+		final String NEW_LINE = System.getProperty("line.separator");
+		return "<" + action + ", " + anatomicStructure + ", " + usedInstrument + ">" + NEW_LINE
+				+ "begin at : " + activitytime.getStartTime() + NEW_LINE
+				+ "end at : " + activitytime.getStopTime() + NEW_LINE
+				+ "duration : " + activitytime.getDuration();
 	}
-
-	
-	
-
-
-	
 }

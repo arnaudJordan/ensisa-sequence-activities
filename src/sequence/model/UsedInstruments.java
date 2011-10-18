@@ -37,6 +37,6 @@ public class UsedInstruments {
 	}	
 	@Override
 	public String toString() {
-		return "UsedInstruments [usedInstruments=" + usedInstruments + "]";
+		return usedInstruments.toString();
 	}
 }

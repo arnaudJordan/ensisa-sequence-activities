@@ -19,6 +19,6 @@ public class AnatomicStructure {
 	
 	@Override
 	public String toString() {
-		return "AnatomicStructure [anatomicStructure=" + anatomicStructure + "]";
+		return anatomicStructure;
 	}
 }
