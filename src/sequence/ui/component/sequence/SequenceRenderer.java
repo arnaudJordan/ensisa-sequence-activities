@@ -1,11 +1,8 @@
 package sequence.ui.component.sequence;
 
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics2D;
-import java.util.List;
-
 import sequence.model.Activity;
 import sequence.model.Sequence;
 import sequence.mvc.DefaultRenderer;
@@ -14,14 +11,14 @@ import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityController;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
-import sequence.utilities.BetterSizeFlowLayout;
 import sequence.utilities.ColorFactory;
+import sequence.utilities.TimeLayout;
 
 public class SequenceRenderer extends DefaultRenderer implements Renderer {
 	
 	public SequenceRenderer(View view) {
 		super(view);
-		getView().setLayout(new FlowLayout());
+		getView().setLayout(new TimeLayout());
 		initialize();
 	}
 
@@ -47,27 +44,6 @@ public class SequenceRenderer extends DefaultRenderer implements Renderer {
 	}
 	
 	public Dimension getPreferredSize() {
-		int width = getView().getParent().getWidth()-10;
-    	int parentWidth = getView().getParent().getWidth()-10;
-    	if(parentWidth>width)
-    		return new Dimension(parentWidth, contentMaximumHeight(getView(), width));
-    	else
-    		return new Dimension(width, contentMaximumHeight(getView(), width));
-	}
-	
-	private int contentMaximumHeight(Container target, int maxWidth) {
-    	int height = 0; 
-    	int lineWidth=0;
-		for(int i=0 ; i<target.getComponentCount() ; i++) {
-    		int width=target.getComponent(i).getWidth();
-    		if(lineWidth==0)
-    			height += target.getComponent(i).getHeight() + ((FlowLayout) getView().getLayout()).getVgap();
-    		
-    		lineWidth+=width + ((FlowLayout) getView().getLayout()).getHgap();
-    		
-    		if(lineWidth>=maxWidth)
-    			lineWidth=0;
-    	}
-    	return height;
+    	return new Dimension(getView().getParent().getParent().getWidth(), (int) getView().getLayout().minimumLayoutSize(this.getView()).getHeight());
     }
 }
