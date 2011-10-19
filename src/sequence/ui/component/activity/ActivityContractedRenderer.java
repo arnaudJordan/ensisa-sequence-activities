@@ -31,14 +31,12 @@ public class ActivityContractedRenderer extends ActivityRenderer {
 		ActivityRenderingModel renderingModel = ((ActivityRenderingModel)getView().getRenderingModel());
 		int parentWidth = getView().getParent().getWidth();
 		int activityWidth = (int) (activity.getActivitytime().getDuration() * renderingModel.getScale());
+		g.fillRect(0, 0, activityWidth, (int) (renderingModel.getHeight() * renderingModel.getScale()));
 		if(parentWidth<activityWidth)
 		{
-			g.fillRect(0, 0, parentWidth, (int) (renderingModel.getHeight() * renderingModel.getScale()));
 			g.drawLine(parentWidth/2 -5 , -5, parentWidth/2 +5, (int) getView().getSize().getHeight()+5);
 			drawCutMark(g, parentWidth/2);
-		}
-		else
-			g.fillRect(0, 0, activityWidth, (int) (renderingModel.getHeight() * renderingModel.getScale()));
+		}	
 	}
 	private void drawCutMark(Graphics2D g, int middle)
 	{
