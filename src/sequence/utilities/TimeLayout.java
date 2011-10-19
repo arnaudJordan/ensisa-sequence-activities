@@ -3,16 +3,16 @@ package sequence.utilities;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.LayoutManager;
+import java.util.ArrayList;
+import java.util.List;
 import sequence.model.Activity;
 import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 
 public class TimeLayout implements LayoutManager {
-	private static final int vgap=10;
-	private static final int hgap=5;
+	private static final int vgap=5;
 
 	@Override
 	public void addLayoutComponent(String name, Component comp) {
@@ -34,56 +34,64 @@ public class TimeLayout implements LayoutManager {
 	@Override
 	public Dimension minimumLayoutSize(Container parent) {
 		int currentHeight = 0;
-		int nextHeight = 0;
 		int parentWidth = parent.getWidth();
 		int initTime = 0;
+		if(parent.getComponentCount()>1)
+			initTime = (int) (((Activity) ((ActivityView)
+					parent.getComponent(0)).getModel()).getActivitytime().getStartTime());
 		
-		if(parent.getComponentCount()<1)
-			return new Dimension(0,0);
-		initTime = ((Activity) ((ActivityView) parent.getComponent(0)).getModel()).getActivitytime().getStartTime();
-		for(int i=0; i<parent.getComponentCount();i++)
+		List<Integer> levelsLastPosition = new ArrayList<Integer>();
+		levelsLastPosition.add(0);
+		for(int i=0; i<201;i++)
 		{
 			Component c = parent.getComponent(i);
 			if(c.isVisible())
 			{
 				float scale = ((ActivityRenderingModel)((View) c).getRenderingModel()).getScale();
 				Activity currentActivity = (Activity) ((ActivityView) parent.getComponent(i)).getModel();
-				int currentTime = (int) ((currentActivity.getActivitytime().getStartTime()-initTime)*scale);
-				if(currentTime+c.getWidth()>parentWidth)
+				int currentStopTime = (int) ((currentActivity.getActivitytime().getStopTime()-initTime)* scale);
+				if(currentStopTime>parentWidth)
 				{
-					initTime+=currentTime/scale;
-					currentTime=0;
-					currentHeight+=c.getHeight() + vgap + nextHeight;
-					nextHeight=0;
+					initTime = currentActivity.getActivitytime().getStartTime();
+					currentHeight+=(c.getHeight()+vgap)*levelsLastPosition.size() + 2 * vgap;
+					levelsLastPosition = new ArrayList<Integer>();
+					levelsLastPosition.add(0);
 				}
 				
-				if(i>0)
+				boolean drawed = false;
+				for(int j=0; j<levelsLastPosition.size(); j++)
 				{
-					Activity lastActivity = (Activity) ((ActivityView) parent.getComponent(i-1)).getModel();
-					if(currentActivity.getActivitytime().getStartTime()<lastActivity.getActivitytime().getStopTime())
+					int lastPosition = (Integer) levelsLastPosition.get(j);
+					if(lastPosition<=currentActivity.getActivitytime().getStartTime())
 					{
-						nextHeight=c.getHeight()+vgap/2;
-						continue;
-					}				
+						levelsLastPosition.set(j, currentActivity.getActivitytime().getStopTime());
+						drawed=true;
+						break;
+					}
+				}
+				if(!drawed)
+				{
+					levelsLastPosition.add(currentActivity.getActivitytime().getStopTime());
 				}
 			}
 		}
-		currentHeight+=parent.getComponent(0).getHeight();
+		currentHeight+=parent.getComponent(0).getHeight()+vgap;
 		return new Dimension(parentWidth, currentHeight);
 	}
 
 	@Override
 	public void layoutContainer(Container parent) {
 		int currentHeight = 0;
-		int nextHeight = 0;
 		int parentWidth = parent.getWidth();
 		
 		int initTime = 0;
-		Graphics g = parent.getGraphics();
 		if(parent.getComponentCount()>1)
-			initTime = ((Activity) ((ActivityView) parent.getComponent(0)).getModel()).getActivitytime().getStartTime();
-		int cpt=0;
-		for(int i=0; i<parent.getComponentCount();i++)
+			initTime = (int) (((Activity) ((ActivityView)
+					parent.getComponent(0)).getModel()).getActivitytime().getStartTime());
+		
+		List<Integer> levelsLastPosition = new ArrayList<Integer>();
+		levelsLastPosition.add(0);
+		for(int i=0; i<201;i++)
 		{
 			Component c = parent.getComponent(i);
 			if(c.isVisible())
@@ -91,35 +99,33 @@ public class TimeLayout implements LayoutManager {
 				float scale = ((ActivityRenderingModel)((View) c).getRenderingModel()).getScale();
 				Activity currentActivity = (Activity) ((ActivityView) parent.getComponent(i)).getModel();
 				int currentTime = (int) ((currentActivity.getActivitytime().getStartTime()-initTime)*scale);
-				int currentTimeNoScale = currentActivity.getActivitytime().getStartTime()-initTime;
-				int startTime = currentActivity.getActivitytime().getStartTime();
-				if(currentTime+c.getWidth()>parentWidth)
+				int currentStopTime = (int) ((currentActivity.getActivitytime().getStopTime()-initTime)* scale);
+				if(currentStopTime>parentWidth)
 				{
-					initTime+=currentTime/scale;
+					initTime = currentActivity.getActivitytime().getStartTime();
 					currentTime=0;
-					g.drawLine(0, currentHeight-vgap/2, parentWidth, currentHeight-vgap/2);
-					currentHeight+=c.getHeight() + vgap + nextHeight;
-					nextHeight=0;
-					cpt++;
+					currentHeight+=(c.getHeight()+vgap)*levelsLastPosition.size() + 2 * vgap;
+					levelsLastPosition = new ArrayList<Integer>();
+					levelsLastPosition.add(0);
 				}
 				
-				if(i>0)
+				boolean drawed = false;
+				for(int j=0; j<levelsLastPosition.size(); j++)
 				{
-					Activity lastActivity = (Activity) ((ActivityView) parent.getComponent(i-1)).getModel();
-					if(currentActivity.getActivitytime().getStartTime()<lastActivity.getActivitytime().getStopTime())
+					int lastPosition = (Integer) levelsLastPosition.get(j);
+					if(lastPosition<=currentActivity.getActivitytime().getStartTime())
 					{
-						nextHeight=c.getHeight()+vgap/2;
-						c.setBounds(currentTime, currentHeight+nextHeight, c.getPreferredSize().width, c.getPreferredSize().height);
-						continue;
-					}				
+						c.setBounds(currentTime, currentHeight+(c.getHeight()+vgap)*j, c.getPreferredSize().width, c.getPreferredSize().height);
+						levelsLastPosition.set(j, currentActivity.getActivitytime().getStopTime());
+						drawed=true;
+						break;
+					}
 				}
-				c.setBounds(currentTime, currentHeight, c.getPreferredSize().width, c.getPreferredSize().height);
-				System.out.println("Scale : " + scale);
-				System.out.println("StartTime : " + startTime);
-				System.out.println("CurrentTimeNoScale : " + currentTimeNoScale);
-				System.out.println("CurrentTime : " + currentTime);
-				System.out.println("CurrentHeight : " + currentHeight);
-				System.out.println("Cpt : " + cpt);
+				if(!drawed)
+				{
+					c.setBounds(currentTime, currentHeight+(c.getHeight()+vgap)*(levelsLastPosition.size()), c.getPreferredSize().width, c.getPreferredSize().height);
+					levelsLastPosition.add(currentActivity.getActivitytime().getStopTime());
+				}
 			}
 		}
 		parent.repaint();
