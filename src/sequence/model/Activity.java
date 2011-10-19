@@ -97,10 +97,10 @@ public class Activity extends DefaultModel implements Model {
 	
 	@Override
 	public String toString() {
-		final String NEW_LINE = System.getProperty("line.separator");
-		return "<" + action + ", " + anatomicStructure + ", " + usedInstrument + ">" + NEW_LINE
+		final String NEW_LINE = "<br>";
+		return "<html>" + "&lt;" + action + ", " + anatomicStructure + ", " + usedInstrument + "&gt;" + NEW_LINE
 				+ "begin at : " + activitytime.getStartTime() + NEW_LINE
 				+ "end at : " + activitytime.getStopTime() + NEW_LINE
-				+ "duration : " + activitytime.getDuration();
+				+ "duration : " + activitytime.getDuration() + "</html>";
 	}
 }
