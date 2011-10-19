@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import sequence.model.Activity;
-import sequence.mvc.DefaultRenderer;
-import sequence.mvc.Renderer;
 import sequence.mvc.View;
 
 public class ActivityContractedRenderer extends ActivityRenderer {
@@ -31,14 +29,14 @@ public class ActivityContractedRenderer extends ActivityRenderer {
 		ActivityRenderingModel renderingModel = ((ActivityRenderingModel)getView().getRenderingModel());
 		int parentWidth = getView().getParent().getWidth();
 		int activityWidth = (int) (activity.getActivitytime().getDuration() * renderingModel.getScale());
+		g.fillRect(0, 0, activityWidth, (int) (renderingModel.getHeight() * renderingModel.getScale()));
 		if(parentWidth<activityWidth)
 		{
-			g.fillRect(0, 0, parentWidth, (int) (renderingModel.getHeight() * renderingModel.getScale()));
 			g.drawLine(parentWidth/2 -5 , -5, parentWidth/2 +5, (int) getView().getSize().getHeight()+5);
 			drawCutMark(g, parentWidth/2);
 		}
-		else
-			g.fillRect(0, 0, activityWidth, (int) (renderingModel.getHeight() * renderingModel.getScale()));
+		g.setColor(Color.WHITE);
+		g.drawString(String.valueOf(activity.getId()), (int) getView().getSize().getWidth()/2, (int) getView().getSize().getHeight()/2);
 	}
 	private void drawCutMark(Graphics2D g, int middle)
 	{
