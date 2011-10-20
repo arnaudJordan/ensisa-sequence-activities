@@ -4,7 +4,7 @@ package sequence.model;
 public class Patient {
 	private int age;
 	private Sex sex;
-	private Actuator actuator;
+	private Position position;
 	private Note note;
 	
 	public int getAge() {
@@ -19,11 +19,11 @@ public class Patient {
 	public void setSex(Sex sex) {
 		this.sex = sex;
 	}
-	public Actuator getActuator() {
-		return actuator;
+	public Position getPosotion() {
+		return position;
 	}
-	public void setActuator(Actuator actuator) {
-		this.actuator = actuator;
+	public void setPosition(Position position) {
+		this.position = position;
 	}
 	public Note getNote() {
 		return note;
@@ -35,7 +35,7 @@ public class Patient {
 	@Override
 	public String toString() {
 		return "Patient [age=" + age + ", sex=" + sex + ", actuator="
-				+ actuator + ", note=" + note + "]";
+				+ position + ", note=" + note + "]";
 	}
 	
 	

@@ -3,6 +3,7 @@ package sequence.ui.component.activity;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import sequence.model.Activity;
 import sequence.mvc.Model;
 import sequence.mvc.View;
 
@@ -14,7 +15,7 @@ public class ActivityView extends View {
 		super(model);
 		setRenderer(new ActivityContractedRenderer(this));
 		setRenderingModel(new ActivityRenderingModel());
-		setToolTipText(model.toString());
+		setToolTipText(((Activity) model).toHTML());
 		popup = new JPopupMenu();
 	    JMenuItem colorItem = new JMenuItem("Color");
 	    colorItem.addActionListener(new ActivityMenuItemController(model, this));
