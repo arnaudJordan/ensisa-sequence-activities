@@ -15,11 +15,15 @@ import sequence.model.Phase;
 import sequence.model.Phases;
 import sequence.model.Sequence;
 import sequence.model.Sex;
+import sequence.model.location.City;
+import sequence.model.location.Country;
+import sequence.model.location.Institution;
+import sequence.model.location.Location;
 
 
 public class SequenceHandler extends DefaultHandler {
 	private Sequence sequence;
-	private boolean inSequence, inActivity, inPatient, inState, inActivityTime, inActuator, inAction, inUsedInstruments, inTreatedStructure, inNote, inStartTime, inStopTime, inDuration, inPosition, inInstrument, inAnatomicStructure;
+	private boolean inSequence, inActivity, inPatient, inLocation, inState, inActivityTime, inActuator, inAction, inUsedInstruments, inTreatedStructure, inNote, inStartTime, inStopTime, inDuration, inPosition, inInstrument, inAnatomicStructure;
 	private StringBuffer buffer;
 
 	public SequenceHandler(){
@@ -51,6 +55,15 @@ public class SequenceHandler extends DefaultHandler {
 			inPatient=true;
 		}
 		if(startElementInPatient(qName))
+		{
+			return true;
+		}
+		if(qName.equals("rec_location"))
+		{
+			sequence.setLocation(new Location());
+			inLocation=true;
+		}
+		if(startElementInLocation(qName))
 		{
 			return true;
 		}
@@ -105,6 +118,27 @@ public class SequenceHandler extends DefaultHandler {
 			return true;
 		}
 		if(qName.equals("position"))
+		{
+			return true;
+		}
+		if(qName.equals("note"))
+		{
+			return true;
+		}
+		return false;
+	}
+	private boolean startElementInLocation(String qName) {
+		if(!inLocation)
+			return false;
+		if(qName.equals("country"))
+		{
+			return true;
+		}
+		if(qName.equals("Institution"))
+		{
+			return true;
+		}
+		if(qName.equals("operatingtheatre"))
 		{
 			return true;
 		}
@@ -215,6 +249,13 @@ public class SequenceHandler extends DefaultHandler {
 			return true;
 		}
 		if(endElementInPatient(qName))
+			return true;
+		if(qName.equals("rec_location")){
+			buffer = null;
+			inLocation = false;
+			return true;
+		}
+		if(endElementInLocation(qName))
 			return true;
 		if(qName.equals("activity")){
 			buffer = null;
@@ -360,6 +401,35 @@ public class SequenceHandler extends DefaultHandler {
 		if(qName.equals("note"))
 		{
 			sequence.getPatient().setNote(new Note(buffer.toString()));
+			buffer=null;
+			return true;
+		}
+		return false;
+	}
+	private boolean endElementInLocation(String qName) {
+		if(!inLocation)
+			return false;
+		if(qName.equals("city"))
+		{
+			sequence.getLocation().setCity(new City(buffer.toString()));
+			buffer=null;
+			return true;
+		}
+		if(qName.equals("country"))
+		{
+			sequence.getLocation().setCountry(new Country(buffer.toString()));
+			buffer=null;
+			return true;
+		}
+		if(qName.equals("institution"))
+		{
+			sequence.getLocation().setInstitution(new Institution(buffer.toString()));
+			buffer=null;
+			return true;
+		}
+		if(qName.equals("note"))
+		{
+			sequence.getLocation().setNote(new Note(buffer.toString()));
 			buffer=null;
 			return true;
 		}
