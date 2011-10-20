@@ -14,6 +14,7 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	private Phases phases;
 	private Patient patient;
 	private Location location;
+	private Date date;
 	
 	public Sequence(String workflowID) {
 		this.activities=new ArrayList<Activity>();
@@ -72,6 +73,14 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return location;
 	}
 
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	public void setPhases(Phases phases) {
 		this.phases = phases;
 	}
@@ -84,7 +93,8 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	public String toString() {
 		return "Sequence [workflowID=" + workflowID + ", activities="
 				+ activities + ", phases=" + phases + ", patient=" + patient
-				+ ", location=" + location + "]";
+				+ ", location=" + location + ", date=" + date + "]";
 	}
+
 	
 }
