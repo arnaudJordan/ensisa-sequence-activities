@@ -1,4 +1,4 @@
-package sequence.model;
+package sequence.model.activity;
 
 public class Activitytime {
 	private int startTime;

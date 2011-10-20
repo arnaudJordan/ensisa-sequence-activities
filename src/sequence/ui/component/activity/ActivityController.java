@@ -5,7 +5,7 @@ import java.awt.Container;
 import java.awt.event.MouseEvent;
 import javax.swing.JColorChooser;
 
-import sequence.model.Activity;
+import sequence.model.activity.Activity;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;

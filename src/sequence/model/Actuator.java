@@ -1,5 +1,7 @@
 package sequence.model;
 
+import sequence.model.activity.BodyPart;
+
 
 public class Actuator {
 	private Position position;

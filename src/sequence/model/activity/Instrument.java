@@ -1,4 +1,4 @@
-package sequence.model;
+package sequence.model.activity;
 
 public class Instrument {
 	private final String instrument;

@@ -1,8 +1,9 @@
-package sequence.model;
+package sequence.model.activity;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 
 public class UsedInstruments {
 	private List<Instrument> usedInstruments;

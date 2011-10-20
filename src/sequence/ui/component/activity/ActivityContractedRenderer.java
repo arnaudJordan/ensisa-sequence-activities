@@ -3,7 +3,8 @@ package sequence.ui.component.activity;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import sequence.model.Activity;
+
+import sequence.model.activity.Activity;
 import sequence.mvc.View;
 
 public class ActivityContractedRenderer extends ActivityRenderer {
