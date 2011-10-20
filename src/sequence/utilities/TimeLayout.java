@@ -6,7 +6,8 @@ import java.awt.Dimension;
 import java.awt.LayoutManager;
 import java.util.ArrayList;
 import java.util.List;
-import sequence.model.Activity;
+
+import sequence.model.activity.Activity;
 import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;

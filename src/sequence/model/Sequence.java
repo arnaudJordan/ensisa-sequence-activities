@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import sequence.model.activity.Activity;
 import sequence.model.location.Location;
 import sequence.mvc.DefaultModel;
 import sequence.mvc.Model;

@@ -3,7 +3,7 @@ package sequence.ui.component.activity;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import sequence.model.Activity;
+import sequence.model.activity.Activity;
 import sequence.mvc.Model;
 import sequence.mvc.View;
 

@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import sequence.model.Action;
-import sequence.model.Activity;
-import sequence.model.AnatomicStructure;
 import sequence.model.Sequence;
-import sequence.model.UsedInstruments;
+import sequence.model.activity.Action;
+import sequence.model.activity.Activity;
+import sequence.model.activity.AnatomicStructure;
+import sequence.model.activity.UsedInstruments;
 
 public class ColorFactory {
 

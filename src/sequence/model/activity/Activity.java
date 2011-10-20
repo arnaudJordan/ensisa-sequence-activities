@@ -1,5 +1,7 @@
-package sequence.model;
+package sequence.model.activity;
 
+import sequence.model.Actuator;
+import sequence.model.Note;
 import sequence.mvc.DefaultModel;
 import sequence.mvc.Model;
 
