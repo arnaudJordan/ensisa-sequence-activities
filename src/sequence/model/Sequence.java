@@ -8,18 +8,25 @@ import sequence.mvc.DefaultModel;
 import sequence.mvc.Model;
 
 public class Sequence extends DefaultModel implements Iterable<Activity>, Model {
+	private final String workflowID;
 	private List<Activity> activities;
 	private Phases phases;
 	private Patient patient;
 	
-	public Sequence() {
+	public Sequence(String workflowID) {
 		this.activities=new ArrayList<Activity>();
+		this.workflowID=workflowID;
 	}
 	
 	public Sequence(Sequence sequence) {
 		this.activities=sequence.activities;
+		this.workflowID=sequence.workflowID;
 	}
 	
+	public String getWorkflowID() {
+		return workflowID;
+	}
+
 	public int size() {
 		return activities.size();
 	}

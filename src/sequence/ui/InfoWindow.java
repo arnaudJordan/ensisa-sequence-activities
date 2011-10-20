@@ -86,7 +86,7 @@ public class InfoWindow extends JFrame {
 		
 		pane.add(closeButton);
 		
-		jTabbedPane.addTab("File", pane);
+		jTabbedPane.addTab(sequence.getWorkflowID(), pane);
 	}
 
 }
