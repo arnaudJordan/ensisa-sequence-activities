@@ -10,6 +10,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import sequence.model.Action;
 import sequence.model.Activity;
 import sequence.model.AnatomicStructure;
+import sequence.model.BodyPart;
 import sequence.model.Date;
 import sequence.model.Instrument;
 import sequence.model.Note;
@@ -17,6 +18,7 @@ import sequence.model.Actuator;
 import sequence.model.Patient;
 import sequence.model.Phase;
 import sequence.model.Phases;
+import sequence.model.Position;
 import sequence.model.Sequence;
 import sequence.model.Sex;
 import sequence.model.location.City;
@@ -193,6 +195,7 @@ public class SequenceHandler extends DefaultHandler {
 		}
 		if(qName.equals("actuator"))
 		{
+			sequence.getLastActivity().setActuator(new Actuator());
 			inActuator = true;
 			return true;
 		}
@@ -368,7 +371,13 @@ public class SequenceHandler extends DefaultHandler {
 		if(endElementInActivityTime(qName))
 			return true;
 		if(inActuator&&qName.equals("position")){
-			sequence.getLastActivity().setActuator(new Actuator(buffer.toString()));
+			sequence.getLastActivity().getActuator().setPosition(new Position(buffer.toString()));
+			buffer=null;
+			inPosition = false;
+			return true;
+		}
+		if(inActuator&&qName.equals("usedbodypart")){
+			sequence.getLastActivity().getActuator().setUsedbodypart(new BodyPart(buffer.toString()));
 			buffer=null;
 			inPosition = false;
 			return true;
@@ -435,7 +444,7 @@ public class SequenceHandler extends DefaultHandler {
 		}
 		if(qName.equals("position"))
 		{
-			sequence.getPatient().setActuator(new Actuator(buffer.toString()));
+			sequence.getPatient().setPosition(new Position(buffer.toString()));
 			buffer=null;
 			return true;
 		}

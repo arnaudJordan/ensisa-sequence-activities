@@ -95,12 +95,23 @@ public class Activity extends DefaultModel implements Model {
 		this.action=action;
 	}
 	
+	
 	@Override
 	public String toString() {
+		return "Activity [id=" + id + ", state=" + state + ", discipline="
+				+ discipline + ", type=" + type + ", activitytime="
+				+ activitytime + ", actuator=" + actuator + ", action="
+				+ action + ", usedInstrument=" + usedInstrument
+				+ ", anatomicStructure=" + anatomicStructure + ", note=" + note
+				+ "]";
+	}
+
+	public String toHTML() {
 		final String NEW_LINE = "<br>";
 		return "<html>" + "&lt;" + action + ", " + anatomicStructure + ", " + usedInstrument + "&gt;" + NEW_LINE
 				+ "begin at : " + activitytime.getStartTime() + NEW_LINE
 				+ "end at : " + activitytime.getStopTime() + NEW_LINE
 				+ "duration : " + activitytime.getDuration() + "</html>";
 	}
+	
 }

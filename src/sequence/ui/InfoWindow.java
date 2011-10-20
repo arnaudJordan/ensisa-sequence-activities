@@ -68,7 +68,7 @@ public class InfoWindow extends JFrame {
 		patientInfo.add(new Label("Sex : "));
 		patientInfo.add(new Label(sequence.getPatient().getSex().toString()));
 		patientInfo.add(new Label("Actuator : "));
-		patientInfo.add(new Label(sequence.getPatient().getActuator().getPosition()));
+		patientInfo.add(new Label(sequence.getPatient().getPosotion().getPosition()));
 		patientInfo.add(new Label("Note : "));
 		patientInfo.add(new Label(sequence.getPatient().getNote().getNote()));
 		
