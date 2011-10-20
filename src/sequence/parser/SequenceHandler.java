@@ -1,5 +1,8 @@
 package sequence.parser;
 
+import java.util.Calendar;
+import java.util.StringTokenizer;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -7,6 +10,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import sequence.model.Action;
 import sequence.model.Activity;
 import sequence.model.AnatomicStructure;
+import sequence.model.Date;
 import sequence.model.Instrument;
 import sequence.model.Note;
 import sequence.model.Actuator;
@@ -23,7 +27,7 @@ import sequence.model.location.Location;
 
 public class SequenceHandler extends DefaultHandler {
 	private Sequence sequence;
-	private boolean inSequence, inActivity, inPatient, inLocation, inState, inActivityTime, inActuator, inAction, inUsedInstruments, inTreatedStructure, inNote, inStartTime, inStopTime, inDuration, inPosition, inInstrument, inAnatomicStructure;
+	private boolean inSequence, inActivity, inPatient, inLocation, inDate, inState, inActivityTime, inActuator, inAction, inUsedInstruments, inTreatedStructure, inNote, inStartTime, inStopTime, inDuration, inPosition, inInstrument, inAnatomicStructure;
 	private StringBuffer buffer;
 
 	public SequenceHandler(){
@@ -64,6 +68,15 @@ public class SequenceHandler extends DefaultHandler {
 			inLocation=true;
 		}
 		if(startElementInLocation(qName))
+		{
+			return true;
+		}
+		if(qName.equals("rec_date"))
+		{
+			sequence.setDate(new Date());
+			inDate=true;
+		}
+		if(startElementInDate(qName))
 		{
 			return true;
 		}
@@ -143,6 +156,27 @@ public class SequenceHandler extends DefaultHandler {
 			return true;
 		}
 		if(qName.equals("note"))
+		{
+			return true;
+		}
+		return false;
+	}
+	private boolean startElementInDate(String qName) {
+		if(!inDate)
+			return false;
+		if(qName.equals("date"))
+		{
+			return true;
+		}
+		if(qName.equals("stoptime"))
+		{
+			return true;
+		}
+		if(qName.equals("starttime"))
+		{
+			return true;
+		}
+		if(qName.equals("duration"))
 		{
 			return true;
 		}
@@ -256,6 +290,13 @@ public class SequenceHandler extends DefaultHandler {
 			return true;
 		}
 		if(endElementInLocation(qName))
+			return true;
+		if(qName.equals("rec_date")){
+			buffer = null;
+			inDate = false;
+			return true;
+		}
+		if(endElementInDate(qName))
 			return true;
 		if(qName.equals("activity")){
 			buffer = null;
@@ -430,6 +471,44 @@ public class SequenceHandler extends DefaultHandler {
 		if(qName.equals("note"))
 		{
 			sequence.getLocation().setNote(new Note(buffer.toString()));
+			buffer=null;
+			return true;
+		}
+		return false;
+	}
+	private boolean endElementInDate(String qName) {
+		if(!inDate)
+			return false;
+		if(qName.equals("date"))
+		{
+			Calendar date = Calendar.getInstance();
+			StringTokenizer st = new StringTokenizer(buffer.toString(), "-");
+			date.set(Calendar.YEAR, Integer.parseInt(st.nextToken()));
+			date.set(Calendar.MONTH, Integer.parseInt(st.nextToken()));
+			date.set(Calendar.DAY_OF_MONTH, Integer.parseInt(st.nextToken()));
+			
+			sequence.getDate().setDate(date);
+			buffer=null;
+			return true;
+		}
+		if(qName.equals("starttime"))
+		{
+			int startTime = Integer.parseInt(buffer.toString());
+			sequence.getDate().setStartTime(startTime);
+			buffer=null;
+			return true;
+		}
+		if(qName.equals("stoptime"))
+		{
+			int stopTime = Integer.parseInt(buffer.toString());
+			sequence.getDate().setStopTime(stopTime);
+			buffer=null;
+			return true;
+		}
+		if(qName.equals("duration"))
+		{
+			int duration = Integer.parseInt(buffer.toString());
+			sequence.getDate().setDuration(duration);
 			buffer=null;
 			return true;
 		}
