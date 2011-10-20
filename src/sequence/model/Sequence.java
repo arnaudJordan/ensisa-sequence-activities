@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import sequence.model.location.Location;
 import sequence.mvc.DefaultModel;
 import sequence.mvc.Model;
 
@@ -12,6 +13,7 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	private List<Activity> activities;
 	private Phases phases;
 	private Patient patient;
+	private Location location;
 	
 	public Sequence(String workflowID) {
 		this.activities=new ArrayList<Activity>();
@@ -62,6 +64,14 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return patient;
 	}
 
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
 	public void setPhases(Phases phases) {
 		this.phases = phases;
 	}
@@ -72,10 +82,9 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 
 	@Override
 	public String toString() {
-		return "Sequence [activities=" + activities + ", phases=" + phases
-				+ ", patient=" + patient + "]";
+		return "Sequence [workflowID=" + workflowID + ", activities="
+				+ activities + ", phases=" + phases + ", patient=" + patient
+				+ ", location=" + location + "]";
 	}
-
-
-
+	
 }
