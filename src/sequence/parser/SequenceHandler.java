@@ -7,14 +7,21 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import sequence.model.AcademicDegree;
 import sequence.model.Action;
 import sequence.model.Activity;
+import sequence.model.Actor;
 import sequence.model.AnatomicStructure;
 import sequence.model.BodyPart;
+import sequence.model.ClinicalDegree;
+import sequence.model.Color;
 import sequence.model.Date;
+import sequence.model.Discipline;
 import sequence.model.Instrument;
+import sequence.model.Name;
 import sequence.model.Note;
 import sequence.model.Actuator;
+import sequence.model.Participant;
 import sequence.model.Patient;
 import sequence.model.Phase;
 import sequence.model.Phases;
@@ -29,7 +36,7 @@ import sequence.model.location.Location;
 
 public class SequenceHandler extends DefaultHandler {
 	private Sequence sequence;
-	private boolean inSequence, inActivity, inPatient, inLocation, inDate, inState, inActivityTime, inActuator, inAction, inUsedInstruments, inTreatedStructure, inNote, inStartTime, inStopTime, inDuration, inPosition, inInstrument, inAnatomicStructure;
+	private boolean inSequence, inDiscipline, inParticipant, inActivity, inPatient, inLocation, inDate, inState, inActivityTime, inActuator, inAction, inUsedInstruments, inTreatedStructure, inNote, inStartTime, inStopTime, inDuration, inPosition, inInstrument, inAnatomicStructure;
 	private StringBuffer buffer;
 
 	public SequenceHandler(){
@@ -55,6 +62,15 @@ public class SequenceHandler extends DefaultHandler {
 	{
 		if(!inSequence)
 			return false;
+		if(qName.equals("discipline"))
+		{
+			sequence.setDiscipline(new Discipline());
+			inDiscipline=true;
+		}
+		if(startElementInDiscipline(qName))
+		{
+			return true;
+		}
 		if(qName.equals("patient"))
 		{
 			sequence.setPatient(new Patient());
@@ -102,6 +118,38 @@ public class SequenceHandler extends DefaultHandler {
 			inState=true;
 		}
 		if(startElementInState(qName, attributes))
+			return true;
+		return false;
+	}
+	private boolean startElementInDiscipline(String qName) throws SAXException {
+		if(!inDiscipline)
+			return false;
+		if(qName.equals("participant"))
+		{
+			sequence.getDiscipline().addParticipant(new Participant());
+			inParticipant = true;
+			return true;
+		}
+		if(startElementInParticipant(qName))
+			return true;
+		return false;
+	}
+	private boolean startElementInParticipant(String qName) throws SAXException {
+		if(!inParticipant)
+			return false;
+		if(qName.equals("position"))
+			return true;
+		if(qName.equals("name"))
+			return true;
+		if(qName.equals("clinicdegree"))
+			return true;
+		if(qName.equals("academicdegree"))
+			return true;
+		if(qName.equals("actor"))
+			return true;
+		if(qName.equals("note"))
+			return true;
+		if(qName.equals("color"))
 			return true;
 		return false;
 	}
@@ -280,6 +328,13 @@ public class SequenceHandler extends DefaultHandler {
 	private boolean endElementInSequence(String qName) {
 		if(!inSequence)
 			return false;
+		if(qName.equals("discipline")){
+			buffer = null;
+			inDiscipline = false;
+			return true;
+		}
+		if(endElementInDiscipline(qName))
+			return true;
 		if(qName.equals("patient")){
 			buffer = null;
 			inPatient = false;
@@ -315,6 +370,58 @@ public class SequenceHandler extends DefaultHandler {
 		}
 		if(endElementInState(qName))
 			return true;
+		return false;
+	}
+	private boolean endElementInDiscipline(String qName) {
+		if(!inDiscipline)
+			return false;
+		if(qName.equals("participant"))
+		{
+			inParticipant=false;
+			buffer=null;
+		}
+		if(endElementInParticipant(qName))
+			return true;
+		return false;
+	}
+	private boolean endElementInParticipant(String qName) {
+		if(!inParticipant)
+			return false;
+		if(qName.equals("position"))
+		{
+			sequence.getDiscipline().getLastParticipant().setPosition(new Position(buffer.toString()));
+			buffer=null;
+		}
+		if(qName.equals("name"))
+		{
+			sequence.getDiscipline().getLastParticipant().setName(new Name(buffer.toString()));
+			buffer=null;
+		}
+		if(qName.equals("clinicaldegree"))
+		{
+			sequence.getDiscipline().getLastParticipant().setClinicalDegree(new ClinicalDegree(buffer.toString()));
+			buffer=null;
+		}
+		if(qName.equals("academicdegree"))
+		{
+			sequence.getDiscipline().getLastParticipant().setAcademicDegree(new AcademicDegree(buffer.toString()));
+			buffer=null;
+		}
+		if(qName.equals("actor"))
+		{
+			sequence.getDiscipline().getLastParticipant().add(new Actor(buffer.toString()));
+			buffer=null;
+		}
+		if(qName.equals("note"))
+		{
+			sequence.getDiscipline().getLastParticipant().setNote(new Note(buffer.toString()));
+			buffer=null;
+		}
+		if(qName.equals("color"))
+		{
+			sequence.getDiscipline().getLastParticipant().setColor(new Color(Integer.parseInt(buffer.toString())));
+			buffer=null;
+		}
 		return false;
 	}
 	private boolean endElementInState(String qName) {
