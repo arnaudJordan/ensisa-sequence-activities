@@ -29,8 +29,14 @@ public class SequenceHandler extends DefaultHandler {
 			String qName, Attributes attributes) throws SAXException{
 		buffer = new StringBuffer();
 		if(qName.equals("rec_workflow")){
-			sequence = new Sequence();
-			inSequence = true;
+			try{
+				String workflowID = attributes.getValue("workflowID");
+				sequence = new Sequence(workflowID);
+				inSequence = true;
+			}catch(Exception e){
+				throw new SAXException(e);
+			}
+			
 		}
 		if(startElementInSequence(qName, attributes))
 			return;
@@ -55,10 +61,10 @@ public class SequenceHandler extends DefaultHandler {
 				int discipline = Integer.parseInt(attributes.getValue("discipline"));
 				int type = Integer.parseInt(attributes.getValue("type"));
 				sequence.addActivity(new Activity(id, state, discipline, type));
+				inActivity=true;
 			}catch(Exception e){
 				throw new SAXException(e);
 			}
-			inActivity=true;
 		}
 		if(startElementInActivity(qName))
 			return true;
