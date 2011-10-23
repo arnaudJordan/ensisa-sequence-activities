@@ -82,4 +82,18 @@ public class Participant {
 				+ academicDegree + ", actors=" + actors + ", note=" + note
 				+ ", color=" + color + "]";
 	}
+
+	public String toXML() {
+		StringBuilder sb = new StringBuilder("<participant>\n");
+		sb.append("\t"+position.toXML()+"\n");
+		sb.append("\t"+name.toXML()+"\n");
+		sb.append("\t"+clinicalDegree.toXML()+"\n");
+		sb.append("\t"+academicDegree.toXML()+"\n");
+		for(Actor actor : actors)
+			sb.append("\t"+actor.toXML()+"\n");
+		sb.append("\t"+note.toXML()+"\n");
+		sb.append("\t"+color.toXML()+"\n");
+		sb.append("</participant>");
+		return sb.toString();
+	}
 }

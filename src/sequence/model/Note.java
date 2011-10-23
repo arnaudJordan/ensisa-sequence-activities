@@ -15,4 +15,8 @@ public class Note {
 	public String toString() {
 		return "Note [note=" + note + "]";
 	}
+	
+	public String toXML() {
+		return "<note>"+note+"</note>";
+	}
 }

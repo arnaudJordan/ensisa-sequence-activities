@@ -16,4 +16,8 @@ public class Position {
 	public String toString() {
 		return "Position [position=" + position + "]";
 	}
+	
+	public String toXML() {
+		return "<position>"+position+"</position>";
+	}
 }

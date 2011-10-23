@@ -16,5 +16,7 @@ public class Actor {
 		return "Actor [actor=" + actor + "]";
 	}
 	
-
+	public String toXML() {
+		return "<actor>"+actor+"</actor>";
+	}
 }

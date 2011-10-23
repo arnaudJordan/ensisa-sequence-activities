@@ -16,6 +16,8 @@ public class ClinicalDegree {
 		return "ClinicalDegree [clinicalDegree=" + clinicalDegree + "]";
 	}
 	
-	
+	public String toXML() {
+		return "<clinicalDegree>"+clinicalDegree+"</clinicalDegree>";
+	}
 
 }

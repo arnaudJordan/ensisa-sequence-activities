@@ -31,4 +31,12 @@ public class Activitytime {
 		return "Activitytime [startTime=" + startTime + ", stopTime="
 				+ stopTime + ", duration=" + duration + "]";
 	}
+	
+	public String toXML() {
+		return "<activitytime>\n\t" +
+				"<starttime>"+startTime+"</starttime>\n\t" +
+				"<stoptime>"+stopTime+"</stoptime>\n\t" +
+				"<duration>"+duration+"</duration>\n" +
+				"</activitytime>";
+	}
 }

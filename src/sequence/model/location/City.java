@@ -15,4 +15,8 @@ public class City {
 	public String toString() {
 		return "City [city=" + city + "]";
 	}
+
+	public String toXML() {
+		return "<city>"+city+"</city>";
+	}
 }

@@ -15,4 +15,8 @@ public class AcademicDegree {
 	public String toString() {
 		return "AcademicDegree [academicDegree=" + academicDegree + "]";
 	}
+	
+	public String toXML() {
+		return "<academicDegree>"+academicDegree+"</academicDegree>";
+	}
 }

@@ -42,5 +42,13 @@ public class Discipline {
 		return "Discipline [participants=" + participants + "]";
 	}
 	
-
+	public String toXML() {
+		StringBuilder sb = new StringBuilder("<discipline>\n");
+		for(Participant p : participants)
+		{
+			sb.append("\n" + p.toXML() + "\n");
+		}
+		sb.append("</discipline>");
+		return sb.toString();
+	}
 }

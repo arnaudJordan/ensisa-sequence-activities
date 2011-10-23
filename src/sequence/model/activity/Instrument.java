@@ -21,5 +21,8 @@ public class Instrument {
 	public String toString() {
 		return instrument;
 	}
-
+	
+	public String toXML() {
+		return "<instrument>"+instrument+"</instrument>";
+	}
 }

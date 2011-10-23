@@ -15,4 +15,8 @@ public class Name {
 	public String toString() {
 		return "Name [name=" + name + "]";
 	}
+
+	public String toXML() {
+		return "<name>"+name+"</name>";
+	}
 }

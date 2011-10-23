@@ -44,4 +44,19 @@ public class Location {
 				+ ", institution=" + institution + ", operatingtheatre="
 				+ operatingtheatre + ", note=" + note + "]";
 	}
+	public String toXML() {
+		StringBuilder sb = new StringBuilder("<rec_location>\n");
+		if(city!=null)
+			sb.append("\t"+city.toXML()+"\n");
+		if(country!=null)
+			sb.append("\t"+country.toXML()+"\n");
+		if(institution!=null)
+			sb.append("\t"+institution.toXML()+"\n");
+		if(operatingtheatre!=null)
+			sb.append("\t"+operatingtheatre.toXML()+"\n");
+		if(note!=null)
+			sb.append("\t"+note.toXML()+"\n");
+		sb.append("</rec_location>\n");
+		return sb.toString();
+	}
 }

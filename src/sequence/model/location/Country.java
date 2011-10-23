@@ -15,4 +15,8 @@ public class Country {
 	public String toString() {
 		return "Country [country=" + country + "]";
 	}
+
+	public String toXML() {
+		return "<country>"+country+"</country>";
+	}
 }

@@ -116,4 +116,15 @@ public class Activity extends DefaultModel implements Model {
 				+ "duration : " + activitytime.getDuration() + "</html>";
 	}
 	
+	public String toXML() {
+		StringBuilder sb = new StringBuilder("<activity id=\""+id+"\" state=\""+state+"\" discipline=\""+discipline+"\" type=\""+type+"\">\n");
+		sb.append("\t"+activitytime.toXML()+"\n");
+		sb.append("\t"+actuator.toXML()+"\n");
+		sb.append("\t<action>"+action.toXML()+"</action>\n");
+		sb.append("\t"+usedInstrument.toXML()+"\n");
+		sb.append("\t<treatedStructure>"+anatomicStructure.toXML()+"</treatedStructure>\n");
+		sb.append("\t"+note.toXML()+"\n");
+		sb.append("</activity>\n");
+		return sb.toString();
+	}
 }

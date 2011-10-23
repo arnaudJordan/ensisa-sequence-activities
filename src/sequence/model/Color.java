@@ -16,4 +16,8 @@ public class Color {
 	public String toString() {
 		return "Color [color=" + color + "]";
 	}
+	
+	public String toXML() {
+		return "<color>"+color+"</color>";
+	}
 }

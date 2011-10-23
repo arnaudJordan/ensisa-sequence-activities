@@ -22,5 +22,7 @@ public class Phase {
 		return "Phase [date=" + date + ", name=" + name + "]";
 	}
 	
-	
+	public String toXML() {
+		return "<value time=\""+date+"\">"+name+"</value>";
+	}
 }
