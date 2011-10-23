@@ -23,4 +23,7 @@ public class Action {
 		return action;
 	}
 	
+	public String toXML() {
+		return "<action>"+action+"</action>";
+	}
 }

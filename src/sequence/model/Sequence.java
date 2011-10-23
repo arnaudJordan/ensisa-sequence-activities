@@ -106,4 +106,17 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 				+ ", location=" + location + ", date=" + date + ", discipline="
 				+ discipline + "]";
 	}
+	
+	public String toXML() {
+		StringBuilder sb = new StringBuilder("<rec_workflow workflowID=\""+workflowID+"\" ver=\"0.2\" rec_type=\"LIVE\">");
+		sb.append("\t"+discipline.toXML()+"\n");
+		sb.append("\t"+patient.toXML()+"\n");
+		sb.append("\t"+location.toXML()+"\n");
+		sb.append("\t"+date.toXML()+"\n");
+		for(Activity a : activities)
+			sb.append("\t"+a.toXML()+"\n");
+		sb.append("\t"+phases.toXML()+"\n");
+		sb.append("</rec_workflow>");
+		return sb.toString();
+	}
 }

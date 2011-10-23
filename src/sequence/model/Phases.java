@@ -40,6 +40,12 @@ public class Phases {
 		return "Phases [phase=" + phases + "]";
 	}
 
-	
+	public String toXML() {
+		StringBuilder sb = new StringBuilder("<state id=\"Phase\">\n");
+		for(Phase p : phases)
+			sb.append("\t"+p.toXML()+"\n");
+		sb.append("</state>");
+		return sb.toString();
+	}
 	
 }

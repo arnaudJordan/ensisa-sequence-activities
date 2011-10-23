@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -73,6 +76,36 @@ public class MenuBar extends JMenuBar {
 		file.add(open);
 
 
+		JMenuItem save = new JMenuItem("Save As");
+		save.setMnemonic('S');
+		save.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.Event.CTRL_MASK));
+
+		final JFileChooser fs = new JFileChooser();
+		
+		if(config.getLastOpenedDirectory() !=null)
+			fs.setCurrentDirectory(config.getLastOpenedDirectory());
+		
+		save.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int returnVal = fc.showSaveDialog(parent);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					File file = fc.getSelectedFile();
+					try {
+						FileWriter fw = new FileWriter(file);
+						fw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?><iccas xmlns=\"http://www.iccas.de/projects/workflow\">");
+						fw.write(((Sequence) ((MainWindow) parent).getSequence().get(0).getModel()).toXML());
+						fw.write("</iccas>");
+						fw.close();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+
+		file.add(save);
+		
+		
 		JMenuItem export = new JMenuItem("Export");
 		export.setMnemonic('E');
 		export.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.Event.CTRL_MASK));

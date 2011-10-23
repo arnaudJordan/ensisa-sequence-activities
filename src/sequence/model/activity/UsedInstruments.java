@@ -40,4 +40,14 @@ public class UsedInstruments {
 	public String toString() {
 		return usedInstruments.toString();
 	}
+	
+	public String toXML() {
+		StringBuilder sb = new StringBuilder("<usedInstruments>\n");
+		for(Instrument instrument : usedInstruments)
+		{
+			sb.append("\t"+instrument.toXML()+"\n");
+		}
+		sb.append("</usedInstruments>");
+		return sb.toString();
+	}
 }

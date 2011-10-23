@@ -15,4 +15,8 @@ public class Institution {
 	public String toString() {
 		return "Institution [institution=" + institution + "]";
 	}
+
+	public String toXML() {
+		return "<institution>"+institution+"</institution>";
+	}
 }

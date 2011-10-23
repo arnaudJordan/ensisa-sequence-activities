@@ -1,4 +1,4 @@
-package sequence.model;
+package sequence.utilities;
 
 public enum Sex {
 male,

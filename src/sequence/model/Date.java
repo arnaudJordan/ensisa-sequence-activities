@@ -37,5 +37,8 @@ public class Date {
 				+ ", stopTime=" + stopTime + ", duration=" + duration + "]";
 	}
 	
+	public String toXML() {
+		return "<date>"+date.get(Calendar.YEAR)+"-"+date.get(Calendar.MONTH)+"-"+date.get(Calendar.DAY_OF_MONTH)+"</date>";
+	}
 
 }

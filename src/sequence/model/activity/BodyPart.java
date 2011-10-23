@@ -16,4 +16,8 @@ public class BodyPart {
 	public String toString() {
 		return "BodyPart [bodypart=" + bodypart + "]";
 	}
+	
+	public String toXML() {
+		return "<bodyPart>"+bodypart+"</bodyPart>";
+	}
 }

@@ -21,4 +21,7 @@ public class AnatomicStructure {
 	public String toString() {
 		return anatomicStructure;
 	}
+	public String toXML() {
+		return "<anatomicStructure>"+anatomicStructure+"</anatomicStructure>";
+	}
 }

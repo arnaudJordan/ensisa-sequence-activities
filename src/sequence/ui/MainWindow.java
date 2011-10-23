@@ -85,7 +85,6 @@ public class MainWindow extends JFrame {
 				parser.parse(lastOpenedFiles[i], sequenceHandler);
 
 				Sequence sequence = sequenceHandler.getSequence();
-				System.out.println(sequence);
 				SequenceView view= new SequenceView(sequence);
 				SequenceController controller = new SequenceController(sequence, view);
 				addSequence(view);

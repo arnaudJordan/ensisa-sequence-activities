@@ -22,7 +22,6 @@ import sequence.model.Phase;
 import sequence.model.Phases;
 import sequence.model.Position;
 import sequence.model.Sequence;
-import sequence.model.Sex;
 import sequence.model.activity.Action;
 import sequence.model.activity.Activity;
 import sequence.model.activity.AnatomicStructure;
@@ -32,6 +31,7 @@ import sequence.model.location.City;
 import sequence.model.location.Country;
 import sequence.model.location.Institution;
 import sequence.model.location.Location;
+import sequence.utilities.Sex;
 
 
 public class SequenceHandler extends DefaultHandler {

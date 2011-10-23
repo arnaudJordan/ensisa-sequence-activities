@@ -1,5 +1,7 @@
 package sequence.model;
 
+import sequence.utilities.Sex;
+
 
 public class Patient {
 	private int age;
@@ -36,6 +38,18 @@ public class Patient {
 	public String toString() {
 		return "Patient [age=" + age + ", sex=" + sex + ", actuator="
 				+ position + ", note=" + note + "]";
+	}
+	public String toXML() {
+		StringBuilder sb = new StringBuilder("<patient>");
+		sb.append("\t<age>"+age+"</age>\n");
+		if(sex==Sex.male)
+			sb.append("\t<sex>M</sex>\n");
+		else
+			sb.append("\t<sex>F</sex>\n");
+		sb.append("\t"+position.toXML()+"\n");
+		sb.append("\t"+note.toXML()+"\n");
+		sb.append("</patient>");
+		return sb.toString();
 	}
 	
 	

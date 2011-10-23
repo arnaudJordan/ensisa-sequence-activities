@@ -28,4 +28,14 @@ public class Actuator {
 		return "Actuator [position=" + position + ", usedbodypart="
 				+ usedbodypart + "]";
 	}
+
+	public String toXML() {
+		StringBuilder sb = new StringBuilder("<actuator>\n");
+		if(position!=null)
+			sb.append("\t"+position.toXML()+"\n");
+		if(usedbodypart!=null)
+			sb.append("\t"+usedbodypart.toXML()+"\n");
+		sb.append("</actuator>");
+		return sb.toString();
+	}
 }

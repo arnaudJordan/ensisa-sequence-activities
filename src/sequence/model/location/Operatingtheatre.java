@@ -15,4 +15,8 @@ public class Operatingtheatre {
 	public String toString() {
 		return "Operatingtheatre [operatingtheatre=" + operatingtheatre + "]";
 	}
+
+	public String toXML() {
+		return "<operatingtheatre>"+operatingtheatre+"</operatingtheatre>";
+	}
 }
