@@ -114,6 +114,20 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return duration;
 	}
 	
+	public List<Integer> phaseDuration()
+	{
+		List<Integer> phasesDuration = new ArrayList<Integer>();
+		int nbPhase = phases.size();
+		for(int i=0 ; i < nbPhase ; i++)
+		{
+			if(i<nbPhase-1)
+				phasesDuration.add(phases.get(i+1).getDate() - phases.get(i).getDate());
+			else
+				phasesDuration.add(getDate().getStopTime() - phases.get(i).getDate());
+		}
+		return phasesDuration;
+	}
+	
 	@Override
 	public String toString() {
 		return "Sequence [workflowID=" + workflowID + ", activities="
