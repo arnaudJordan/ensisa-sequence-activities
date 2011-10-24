@@ -79,11 +79,6 @@ public class MenuBar extends JMenuBar {
 		JMenuItem save = new JMenuItem("Save As");
 		save.setMnemonic('S');
 		save.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.Event.CTRL_MASK));
-
-		final JFileChooser fs = new JFileChooser();
-		
-		if(config.getLastOpenedDirectory() !=null)
-			fs.setCurrentDirectory(config.getLastOpenedDirectory());
 		
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
