@@ -42,11 +42,10 @@ public class UsedInstruments {
 	}
 	
 	public String toXML() {
-		StringBuilder sb = new StringBuilder("<usedInstruments>\n");
+		final String NEW_LINE = System.getProperty("line.separator");
+		StringBuilder sb = new StringBuilder("<usedInstruments>"+NEW_LINE);
 		for(Instrument instrument : usedInstruments)
-		{
-			sb.append("\t"+instrument.toXML()+"\n");
-		}
+			sb.append("\t"+instrument.toXML()+NEW_LINE);
 		sb.append("</usedInstruments>");
 		return sb.toString();
 	}

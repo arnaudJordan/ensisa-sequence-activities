@@ -33,10 +33,11 @@ public class Activitytime {
 	}
 	
 	public String toXML() {
-		return "<activitytime>\n\t" +
-				"<starttime>"+startTime+"</starttime>\n\t" +
-				"<stoptime>"+stopTime+"</stoptime>\n\t" +
-				"<duration>"+duration+"</duration>\n" +
+		final String NEW_LINE = System.getProperty("line.separator");
+		return "<activitytime>"+NEW_LINE+"\t" +
+				"<starttime>"+startTime+"</starttime>"+NEW_LINE+"\t" +
+				"<stoptime>"+stopTime+"</stoptime>"+NEW_LINE+"\t" +
+				"<duration>"+duration+"</duration>"+NEW_LINE +
 				"</activitytime>";
 	}
 }
