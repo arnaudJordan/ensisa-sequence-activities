@@ -128,6 +128,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return phasesDuration;
 	}
 	
+	public int activityNumber()
+	{
+		return activities.size();
+	}
+	
 	@Override
 	public String toString() {
 		return "Sequence [workflowID=" + workflowID + ", activities="
