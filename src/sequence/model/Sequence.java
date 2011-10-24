@@ -104,6 +104,16 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return date.getDuration();
 	}
 
+	public int completeWorkDuration()
+	{
+		int duration =0;
+		for(Activity activity : activities)
+		{
+			duration += activity.getActivitytime().getDuration();
+		}
+		return duration;
+	}
+	
 	@Override
 	public String toString() {
 		return "Sequence [workflowID=" + workflowID + ", activities="
