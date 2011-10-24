@@ -41,9 +41,10 @@ public class Phases {
 	}
 
 	public String toXML() {
-		StringBuilder sb = new StringBuilder("<state id=\"Phase\">\n");
+		final String NEW_LINE = System.getProperty("line.separator");
+		StringBuilder sb = new StringBuilder("<state id=\"Phase\">"+NEW_LINE);
 		for(Phase p : phases)
-			sb.append("\t"+p.toXML()+"\n");
+			sb.append("\t"+p.toXML()+NEW_LINE);
 		sb.append("</state>");
 		return sb.toString();
 	}

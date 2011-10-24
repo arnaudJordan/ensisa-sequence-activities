@@ -45,18 +45,19 @@ public class Location {
 				+ operatingtheatre + ", note=" + note + "]";
 	}
 	public String toXML() {
-		StringBuilder sb = new StringBuilder("<rec_location>\n");
+		final String NEW_LINE = System.getProperty("line.separator");
+		StringBuilder sb = new StringBuilder("<rec_location>"+NEW_LINE);
 		if(city!=null)
-			sb.append("\t"+city.toXML()+"\n");
+			sb.append("\t"+city.toXML()+NEW_LINE);
 		if(country!=null)
-			sb.append("\t"+country.toXML()+"\n");
+			sb.append("\t"+country.toXML()+NEW_LINE);
 		if(institution!=null)
-			sb.append("\t"+institution.toXML()+"\n");
+			sb.append("\t"+institution.toXML()+NEW_LINE);
 		if(operatingtheatre!=null)
-			sb.append("\t"+operatingtheatre.toXML()+"\n");
+			sb.append("\t"+operatingtheatre.toXML()+NEW_LINE);
 		if(note!=null)
-			sb.append("\t"+note.toXML()+"\n");
-		sb.append("</rec_location>\n");
+			sb.append("\t"+note.toXML()+NEW_LINE);
+		sb.append("</rec_location>"+NEW_LINE);
 		return sb.toString();
 	}
 }

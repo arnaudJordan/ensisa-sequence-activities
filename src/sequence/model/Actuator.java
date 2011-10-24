@@ -30,11 +30,12 @@ public class Actuator {
 	}
 
 	public String toXML() {
-		StringBuilder sb = new StringBuilder("<actuator>\n");
+		final String NEW_LINE = System.getProperty("line.separator");
+		StringBuilder sb = new StringBuilder("<actuator>"+NEW_LINE);
 		if(position!=null)
-			sb.append("\t"+position.toXML()+"\n");
+			sb.append("\t"+position.toXML()+NEW_LINE);
 		if(usedbodypart!=null)
-			sb.append("\t"+usedbodypart.toXML()+"\n");
+			sb.append("\t"+usedbodypart.toXML()+NEW_LINE);
 		sb.append("</actuator>");
 		return sb.toString();
 	}
