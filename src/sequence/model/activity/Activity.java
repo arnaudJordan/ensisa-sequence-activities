@@ -108,7 +108,7 @@ public class Activity extends DefaultModel implements Model {
 				+ "]";
 	}
 
-	public String toHTML() {
+	public String toToolTip() {
 		final String NEW_LINE = "<br>";
 		return "<html>" + "&lt;" + action + ", " + anatomicStructure + ", " + usedInstrument + "&gt;" + NEW_LINE
 				+ "begin at : " + activitytime.getStartTime() + NEW_LINE
@@ -117,14 +117,15 @@ public class Activity extends DefaultModel implements Model {
 	}
 	
 	public String toXML() {
-		StringBuilder sb = new StringBuilder("<activity id=\""+id+"\" state=\""+state+"\" discipline=\""+discipline+"\" type=\""+type+"\">\n");
-		sb.append("\t"+activitytime.toXML()+"\n");
-		sb.append("\t"+actuator.toXML()+"\n");
-		sb.append("\t<action>"+action.toXML()+"</action>\n");
-		sb.append("\t"+usedInstrument.toXML()+"\n");
-		sb.append("\t<treatedStructure>"+anatomicStructure.toXML()+"</treatedStructure>\n");
-		sb.append("\t"+note.toXML()+"\n");
-		sb.append("</activity>\n");
+		final String NEW_LINE = System.getProperty("line.separator");
+		StringBuilder sb = new StringBuilder("<activity id=\""+id+"\" state=\""+state+"\" discipline=\""+discipline+"\" type=\""+type+"\">"+NEW_LINE);
+		sb.append("\t"+activitytime.toXML()+NEW_LINE);
+		sb.append("\t"+actuator.toXML()+NEW_LINE);
+		sb.append("\t<action>"+action.toXML()+"</action>"+NEW_LINE);
+		sb.append("\t"+usedInstrument.toXML()+NEW_LINE);
+		sb.append("\t<treatedStructure>"+anatomicStructure.toXML()+"</treatedStructure>"+NEW_LINE);
+		sb.append("\t"+note.toXML()+NEW_LINE);
+		sb.append("</activity>"+NEW_LINE);
 		return sb.toString();
 	}
 }

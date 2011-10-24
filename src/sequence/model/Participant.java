@@ -85,19 +85,14 @@ public class Participant {
 
 	public String toXML() {
 		StringBuilder sb = new StringBuilder("<participant>\n");
-		if(clinicalDegree!=null)
-			sb.append("\t"+position.toXML()+"\n");
-		if(clinicalDegree!=null)
-			sb.append("\t"+name.toXML()+"\n");
-		if(clinicalDegree!=null)
-			sb.append("\t"+clinicalDegree.toXML()+"\n");
+		sb.append("\t"+position.toXML()+"\n");
+		sb.append("\t"+name.toXML()+"\n");
+		sb.append("\t"+clinicalDegree.toXML()+"\n");
 		sb.append("\t"+academicDegree.toXML()+"\n");
 		for(Actor actor : actors)
 			sb.append("\t"+actor.toXML()+"\n");
-		if(clinicalDegree!=null)
-			sb.append("\t"+note.toXML()+"\n");
-		if(clinicalDegree!=null)
-			sb.append("\t"+color.toXML()+"\n");
+		sb.append("\t"+note.toXML()+"\n");
+		sb.append("\t"+color.toXML()+"\n");
 		sb.append("</participant>");
 		return sb.toString();
 	}

@@ -108,14 +108,15 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	}
 	
 	public String toXML() {
+		final String NEW_LINE = System.getProperty("line.separator");
 		StringBuilder sb = new StringBuilder("<rec_workflow workflowID=\""+workflowID+"\" ver=\"0.2\" rec_type=\"LIVE\">");
-		sb.append("\t"+discipline.toXML()+"\n");
-		sb.append("\t"+patient.toXML()+"\n");
-		sb.append("\t"+location.toXML()+"\n");
-		sb.append("\t"+date.toXML()+"\n");
+		sb.append("\t"+discipline.toXML()+NEW_LINE);
+		sb.append("\t"+patient.toXML()+NEW_LINE);
+		sb.append("\t"+location.toXML()+NEW_LINE);
+		sb.append("\t"+date.toXML()+NEW_LINE);
 		for(Activity a : activities)
-			sb.append("\t"+a.toXML()+"\n");
-		sb.append("\t"+phases.toXML()+"\n");
+			sb.append("\t"+a.toXML()+NEW_LINE);
+		sb.append("\t"+phases.toXML()+NEW_LINE);
 		sb.append("</rec_workflow>");
 		return sb.toString();
 	}

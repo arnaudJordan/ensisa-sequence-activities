@@ -43,11 +43,10 @@ public class Discipline {
 	}
 	
 	public String toXML() {
-		StringBuilder sb = new StringBuilder("<discipline>\n");
+		final String NEW_LINE = System.getProperty("line.separator");
+		StringBuilder sb = new StringBuilder("<discipline>"+NEW_LINE);
 		for(Participant p : participants)
-		{
-			sb.append("\n" + p.toXML() + "\n");
-		}
+			sb.append(NEW_LINE + p.toXML() + NEW_LINE);
 		sb.append("</discipline>");
 		return sb.toString();
 	}

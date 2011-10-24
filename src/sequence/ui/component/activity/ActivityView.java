@@ -15,7 +15,7 @@ public class ActivityView extends View {
 		super(model);
 		setRenderer(new ActivityContractedRenderer(this));
 		setRenderingModel(new ActivityRenderingModel());
-		setToolTipText(((Activity) model).toHTML());
+		setToolTipText(((Activity) model).toToolTip());
 		popup = new JPopupMenu();
 	    JMenuItem colorItem = new JMenuItem("Color");
 	    colorItem.addActionListener(new ActivityMenuItemController(model, this));
