@@ -98,6 +98,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	public void setDiscipline(Discipline discipline) {
 		this.discipline = discipline;
 	}
+	
+	public int completeDuration()
+	{
+		return date.getDuration();
+	}
 
 	@Override
 	public String toString() {
