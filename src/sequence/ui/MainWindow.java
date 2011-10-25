@@ -3,6 +3,7 @@ package sequence.ui;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -172,6 +173,13 @@ public class MainWindow extends JFrame {
 		pack();
 		setVisible(true);
 	}
-
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable(){
+			public void run(){
+				new MainWindow("Sequence activities");
+			}
+		});
+	}
 
 }
