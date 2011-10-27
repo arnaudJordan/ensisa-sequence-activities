@@ -17,6 +17,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
+
+import sequence.model.Phases;
 import sequence.model.Sequence;
 import sequence.ui.component.sequence.SequenceView;
 
@@ -71,8 +78,27 @@ public class InfoWindow extends JFrame {
 		patientInfo.add(new Label(sequence.getPatient().getPosotion().getPosition()));
 		patientInfo.add(new Label("Note : "));
 		patientInfo.add(new Label(sequence.getPatient().getNote().getNote()));
-		
 		pane.add(patientInfo);
+		
+		Phases phases = sequence.getPhases();
+		List<Integer> phasesDuration = sequence.phaseDuration();
+		DefaultPieDataset dataset = new DefaultPieDataset();
+		for(int i=0 ; i< phases.size() ; i++)
+			dataset.setValue(phases.get(i).getName(), phasesDuration.get(i));
+		JFreeChart chart = ChartFactory.createPieChart(
+	            "Phase duration",  // chart title
+	            dataset,             // data
+	            false,               // include legend
+	            true,
+	            false
+	        );
+		
+		PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 12));
+        plot.setCircular(false);
+        plot.setLabelGap(0.02);
+       
+        pane.add(new ChartPanel(chart));
 		
 		JButton closeButton = new JButton();
 		closeButton.setText("Close");
