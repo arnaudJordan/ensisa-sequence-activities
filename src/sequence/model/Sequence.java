@@ -144,6 +144,7 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return completeDuration()/activityNumber();
 	}
 	
+	
 	public int[] ActionStructureInstrumentNumber()
 	{
 		List<Action> actions = new ArrayList<Action>();
