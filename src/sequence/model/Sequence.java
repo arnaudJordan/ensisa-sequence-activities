@@ -1,5 +1,8 @@
 package sequence.model;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -136,6 +139,15 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	public int meanActivityDuration()
 	{
 		return completeDuration()/activityNumber();
+	}
+	
+	public void toFile(File file) throws IOException
+	{
+		FileWriter fw = new FileWriter(file);
+		fw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?><iccas xmlns=\"http://www.iccas.de/projects/workflow\">");
+		fw.write(this.toXML());
+		fw.write("</iccas>");
+		fw.close();
 	}
 	
 	@Override

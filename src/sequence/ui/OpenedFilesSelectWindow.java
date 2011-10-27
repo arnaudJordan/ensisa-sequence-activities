@@ -2,12 +2,10 @@ package sequence.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -43,9 +41,6 @@ public class OpenedFilesSelectWindow extends JFrame {
 		jlist.setLayoutOrientation(JList.VERTICAL_WRAP);
 		jlist.setVisibleRowCount(-1);
 		class MyCellRenderer extends DefaultListCellRenderer{
-			/**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
 			public Component getListCellRendererComponent(
@@ -88,11 +83,7 @@ public class OpenedFilesSelectWindow extends JFrame {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
 					try {
-						FileWriter fw = new FileWriter(file);
-						fw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?><iccas xmlns=\"http://www.iccas.de/projects/workflow\">");
-						fw.write(((Sequence) jlist.getSelectedValue()).toXML());
-						fw.write("</iccas>");
-						fw.close();
+						((Sequence) jlist.getSelectedValue()).toFile(file);
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
