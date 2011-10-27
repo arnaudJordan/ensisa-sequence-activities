@@ -15,6 +15,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import com.sun.java.swing.plaf.windows.resources.windows;
+
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
 import sequence.ui.component.sequence.SequenceView;
@@ -127,6 +129,23 @@ public class MenuBar extends JMenuBar {
 		});
 
 		help.add(info);
+		
+		JMenuItem option = new JMenuItem("Option");
+		option.setMnemonic('O');
+
+		option.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(((MainWindow) parent).getSequence()!=null)
+					EventQueue.invokeLater(new Runnable(){
+						public void run(){
+							new OptionWindow(parent);
+						}
+					});
+			}
+		});
+
+		help.add(option);
+		
 		add(help);
 	}
 
