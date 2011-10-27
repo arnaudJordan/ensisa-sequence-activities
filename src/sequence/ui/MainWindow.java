@@ -18,6 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.xml.parsers.SAXParser;
@@ -47,6 +50,7 @@ public class MainWindow extends JFrame {
 		//this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.setPreferredSize(new Dimension(800, 600));
 
+		
 		setConfig(new Config());
 		try {
 			setConfig(getConfig().deserialize());
@@ -75,6 +79,15 @@ public class MainWindow extends JFrame {
 	}
 	public void init()
 	{
+		
+		String laf = getConfig().getStyle();
+		try {
+			UIManager.setLookAndFeel(laf);
+			SwingUtilities.updateComponentTreeUI(this);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
 		File[] lastOpenedFiles = getConfig().getLastOpenedFiles();
 		for(int i=0; i <lastOpenedFiles.length;i++)
 		{
@@ -87,7 +100,6 @@ public class MainWindow extends JFrame {
 				parser.parse(lastOpenedFiles[i], sequenceHandler);
 
 				Sequence sequence = sequenceHandler.getSequence();
-				System.out.println(sequence);
 				SequenceView view= new SequenceView(sequence);
 				SequenceController controller = new SequenceController(sequence, view);
 				addSequence(view);
@@ -106,7 +118,6 @@ public class MainWindow extends JFrame {
 		this.scaleSlider.setMajorTickSpacing(100);
 		this.scaleSlider.setPaintLabels(true);
 		this.scaleSlider.setPaintTicks(true);
-		final MainWindow frame = this;
 		this.scaleSlider.addChangeListener(new ChangeListener()
 		{
 			public void stateChanged(ChangeEvent changeEvent)

@@ -8,12 +8,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+
 public class Config implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private final String FILENAME="config.ser";
 	private File lastOpenedDirectory;
 	private final int NUMBEROFLASTOPENEDFILES = 5;
 	private File[] lastOpenedFiles;
+	private String style;
 	
 	public Config()
 	{
@@ -57,5 +61,11 @@ public class Config implements Serializable{
 		FileInputStream configFile = new FileInputStream(FILENAME);
 		ObjectInputStream ois = new ObjectInputStream(configFile);
 		return ((Config) ois.readObject());
+	}
+	public String getStyle() {
+		return style;
+	}
+	public void setStyle(String string) {
+		this.style = string;
 	}
 }
