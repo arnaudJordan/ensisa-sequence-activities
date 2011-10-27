@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import sequence.model.activity.Action;
 import sequence.model.activity.Activity;
+import sequence.model.activity.AnatomicStructure;
+import sequence.model.activity.UsedInstruments;
 import sequence.model.location.Location;
 import sequence.mvc.DefaultModel;
 import sequence.mvc.Model;
@@ -139,6 +142,22 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	public int meanActivityDuration()
 	{
 		return completeDuration()/activityNumber();
+	}
+	
+	public int[] ActionStructureInstrumentNumber()
+	{
+		List<Action> actions = new ArrayList<Action>();
+		List<AnatomicStructure> anatomicStructures = new ArrayList<AnatomicStructure>();
+		List<UsedInstruments> usedInstruments = new ArrayList<UsedInstruments>();
+		for(Activity current : activities) {
+			if(!actions.contains(current.getAction()))
+				actions.add(current.getAction());
+			if(!anatomicStructures.contains(current.getTreatedStructure()))
+				anatomicStructures.add(current.getTreatedStructure());
+			if(!usedInstruments.contains(current.getUsedInstrument()))
+				usedInstruments.add(current.getUsedInstrument());
+		}
+		return new int[]{actions.size(), anatomicStructures.size(),usedInstruments.size()};
 	}
 	
 	public void toFile(File file) throws IOException
