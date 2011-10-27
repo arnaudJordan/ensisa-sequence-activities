@@ -27,6 +27,7 @@ import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
+import sequence.ui.component.sequence.SequenceContainer;
 import sequence.ui.component.sequence.SequenceController;
 import sequence.ui.component.sequence.SequenceRenderingModel;
 import sequence.ui.component.sequence.SequenceView;
@@ -35,6 +36,7 @@ public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private Config config;
 	private List<SequenceView> sequenceViews;
+	private List<SequenceContainer> sequenceContainer;
 	private JPanel mainPane;
 	private JSlider scaleSlider;
 	private JTextField thresholdField;
@@ -55,6 +57,7 @@ public class MainWindow extends JFrame {
 		this.setJMenuBar(new MenuBar(this));
 
 		this.sequenceViews = new ArrayList<SequenceView>();
+		this.sequenceContainer = new ArrayList<SequenceContainer>();
 		this.mainPane=new JPanel();
 		
 		this.mainPane.setLayout(new BoxLayout(this.mainPane, BoxLayout.PAGE_AXIS));
@@ -72,7 +75,6 @@ public class MainWindow extends JFrame {
 	}
 	public void init()
 	{
-		File lastOpenedFile = getConfig().getLastOpenedFile();
 		File[] lastOpenedFiles = getConfig().getLastOpenedFiles();
 		for(int i=0; i <lastOpenedFiles.length;i++)
 		{
@@ -94,7 +96,6 @@ public class MainWindow extends JFrame {
 				ex.printStackTrace();
 			}
 		}
-
 	}
 	
 	private void setupScaleSlider()
@@ -168,10 +169,20 @@ public class MainWindow extends JFrame {
 	}
 	public void addSequence(SequenceView sequenceView)
 	{
+		SequenceContainer sc = new SequenceContainer(sequenceView, this);
 		this.sequenceViews.add(sequenceView);
-		mainPane.add(sequenceView);
+		this.sequenceContainer.add(sc);
+		mainPane.add(sc);
+		this.validate();
 		pack();
 		setVisible(true);
+	}
+	public void removeSequence(SequenceContainer sequenceContainer)
+	{
+		this.sequenceContainer.remove(sequenceContainer);
+		this.sequenceViews.remove(sequenceContainer.getSequenceView());
+		this.mainPane.remove(sequenceContainer);
+		this.pack();
 	}
 	
 	public static void main(String[] args) {
