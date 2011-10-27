@@ -82,19 +82,11 @@ public class MenuBar extends JMenuBar {
 		
 		save.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int returnVal = fc.showSaveDialog(parent);
-				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					File file = fc.getSelectedFile();
-					try {
-						FileWriter fw = new FileWriter(file);
-						fw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?><iccas xmlns=\"http://www.iccas.de/projects/workflow\">");
-						fw.write(((Sequence) ((MainWindow) parent).getSequence().get(0).getModel()).toXML());
-						fw.write("</iccas>");
-						fw.close();
-					} catch (IOException e1) {
-						e1.printStackTrace();
+				EventQueue.invokeLater(new Runnable(){
+					public void run(){
+						new OpenedFilesSelectWindow(((MainWindow) parent).getSequence(), fc);
 					}
-				}
+				});
 			}
 		});
 
