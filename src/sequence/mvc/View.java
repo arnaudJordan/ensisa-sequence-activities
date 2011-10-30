@@ -3,6 +3,7 @@ package sequence.mvc;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
 
@@ -75,5 +76,11 @@ public abstract class View extends JComponent implements ModelListener {
 	
 	public void modelChanged(Model m) {
 		this.repaint();
+	}
+	public BufferedImage createImage()
+	{
+		BufferedImage image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+		this.paint(image.getGraphics());
+		return image;
 	}
 }
