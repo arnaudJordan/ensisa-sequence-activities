@@ -26,7 +26,7 @@ public class ActivityController extends Controller {
 							&& (!componentModel.getAction().equals(model.getAction())
 							|| !componentModel.getTreatedStructure().equals(model.getTreatedStructure())
 							|| !componentModel.getUsedInstrument().equals(model.getUsedInstrument())))
-						componentRenderingModel.setColor(ColorFactory.setAlpha(componentRenderingModel.getColor(), 100));
+						componentRenderingModel.setColor(ColorFactory.setAlpha(componentRenderingModel.getColor(), componentRenderingModel.getTransparencyAlpha()));
 				}
 			}
 		}
