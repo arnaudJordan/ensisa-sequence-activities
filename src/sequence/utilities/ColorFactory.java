@@ -39,4 +39,8 @@ public class ColorFactory {
 		int blue = 255 / usedInstruments.size() * usedInstruments.indexOf(activity.getUsedInstrument());
 		return new Color(red, green, blue);
 	}
+	
+	public static Color setAlpha(Color color, int alpha) {
+		return new Color(color.getRed(), color.getGreen(), color.getBlue(), alpha);
+	}
 }
