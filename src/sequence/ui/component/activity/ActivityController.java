@@ -21,19 +21,19 @@ public class ActivityController extends Controller {
 			ActivityRenderingModel renderingModel = ((ActivityRenderingModel)(((ActivityView)getView()).getRenderingModel()));
 			Color oldColor = renderingModel.getColor();
 			Color newColor = JColorChooser.showDialog(getView(), "Choose a new color", oldColor);
-			if(newColor!= null && !newColor.equals(oldColor))
-				renderingModel.setColor(newColor);
-			Container parent = getView().getParent();
-			if(parent != null) {
-				Activity model = (Activity)getView().getModel();
-				for(int i=0 ; i<parent.getComponentCount() ; i++) {
-					Activity componentModel = (Activity)((View)parent.getComponent(i)).getModel();
-					ActivityRenderingModel componentRenderingModel = ((ActivityRenderingModel)((View)parent.getComponent(i)).getRenderingModel());
-					if(componentModel != null && componentRenderingModel != null
-							&& componentModel.getAction().equals(model.getAction())
-							&& componentModel.getTreatedStructure().equals(model.getTreatedStructure())
-							&& componentModel.getUsedInstrument().equals(model.getUsedInstrument()))
-						componentRenderingModel.setColor(newColor);
+			if(newColor != null && !newColor.equals(oldColor)) {
+				Container parent = getView().getParent();
+				if(parent != null) {
+					Activity model = (Activity)getView().getModel();
+					for(int i=0 ; i<parent.getComponentCount() ; i++) {
+						Activity componentModel = (Activity)((View)parent.getComponent(i)).getModel();
+						ActivityRenderingModel componentRenderingModel = ((ActivityRenderingModel)((View)parent.getComponent(i)).getRenderingModel());
+						if(componentModel != null && componentRenderingModel != null
+								&& componentModel.getAction().equals(model.getAction())
+								&& componentModel.getTreatedStructure().equals(model.getTreatedStructure())
+								&& componentModel.getUsedInstrument().equals(model.getUsedInstrument()))
+							componentRenderingModel.setColor(newColor);
+					}
 				}
 			}
 		}
