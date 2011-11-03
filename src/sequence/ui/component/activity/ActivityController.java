@@ -6,7 +6,6 @@ import sequence.model.activity.Activity;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
-import sequence.utilities.ColorFactory;
 
 public class ActivityController extends Controller {
 
@@ -18,20 +17,28 @@ public class ActivityController extends Controller {
 		if(e.getButton() == LEFT_MOUSE_BUTTON) {
 			Container parent = getView().getParent();
 			if(parent != null) {
-				Activity model = (Activity)getView().getModel();
-				for(int i=0 ; i<parent.getComponentCount() ; i++) {
-					Activity componentModel = (Activity)((View)parent.getComponent(i)).getModel();
-					ActivityRenderingModel componentRenderingModel = ((ActivityRenderingModel)((View)parent.getComponent(i)).getRenderingModel());
-					if(componentModel != null && componentRenderingModel != null
-							&& (!componentModel.getAction().equals(model.getAction())
-							|| !componentModel.getTreatedStructure().equals(model.getTreatedStructure())
-							|| !componentModel.getUsedInstrument().equals(model.getUsedInstrument())))
-						componentRenderingModel.setColor(ColorFactory.setAlpha(componentRenderingModel.getColor(), componentRenderingModel.getTransparencyAlpha()));
+				ActivityRenderingModel clickedActivityRenderingModel = (ActivityRenderingModel)getView().getRenderingModel();
+				if(clickedActivityRenderingModel.isTransparent()) {
+					for(int i=0 ; i<parent.getComponentCount() ; i++) {
+						ActivityRenderingModel currentActivityRenderingModel = ((ActivityRenderingModel)((View)parent.getComponent(i)).getRenderingModel());
+						currentActivityRenderingModel.setOpaque();
+					}
+				} else {
+					Activity clickedActivity = (Activity)getView().getModel();
+					for(int i=0 ; i<parent.getComponentCount() ; i++) {
+						Activity currentActivity = (Activity)((View)parent.getComponent(i)).getModel();
+						ActivityRenderingModel currentActivityRenderingModel = ((ActivityRenderingModel)((View)parent.getComponent(i)).getRenderingModel());
+						if(currentActivity != null && currentActivityRenderingModel != null
+								&& (!currentActivity.getAction().equals(clickedActivity.getAction())
+										|| !currentActivity.getTreatedStructure().equals(clickedActivity.getTreatedStructure())
+										|| !currentActivity.getUsedInstrument().equals(clickedActivity.getUsedInstrument())))
+							currentActivityRenderingModel.setTransparent();
+					}
 				}
 			}
 		}
 	}
-	
+
 	public void mousePressed(MouseEvent e) {
 		checkPopup(e);
     }

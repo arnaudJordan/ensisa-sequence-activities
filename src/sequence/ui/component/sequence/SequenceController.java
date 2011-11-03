@@ -46,10 +46,10 @@ public class SequenceController extends Controller implements ActionListener {
 			}catch (Exception e1){
 				System.err.println("Error: " + e1.getMessage());
 			}
-			ActivityRenderingModel componentRenderingModel;
+			ActivityRenderingModel currentActivityRenderingModel;
 			for(int i=0 ; i<getView().getComponentCount() ; i++) {
-				componentRenderingModel = ((ActivityRenderingModel)((View)getView().getComponent(i)).getRenderingModel());
-				componentRenderingModel.setColor(ColorFactory.setAlpha(componentRenderingModel.getColor(), 255));
+				currentActivityRenderingModel = ((ActivityRenderingModel)((View)getView().getComponent(i)).getRenderingModel());
+				currentActivityRenderingModel.setColor(ColorFactory.setAlpha(currentActivityRenderingModel.getColor(), 255));
 			}
 		}
 	}
