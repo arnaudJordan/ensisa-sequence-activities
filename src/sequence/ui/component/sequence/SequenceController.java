@@ -27,10 +27,10 @@ public class SequenceController extends Controller implements ActionListener {
 	
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == LEFT_MOUSE_BUTTON) {
-			ActivityRenderingModel componentRenderingModel;
+			ActivityRenderingModel currentActivityRenderingModel;
 			for(int i=0 ; i<getView().getComponentCount() ; i++) {
-				componentRenderingModel = ((ActivityRenderingModel)((View)getView().getComponent(i)).getRenderingModel());
-				componentRenderingModel.setOpaque();
+				currentActivityRenderingModel = ((ActivityRenderingModel)((View)getView().getComponent(i)).getRenderingModel());
+				currentActivityRenderingModel.setOpaque();
 			}
 		}
 	}
