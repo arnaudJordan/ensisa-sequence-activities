@@ -17,6 +17,7 @@ public class ActivityRenderingModel extends DefaultModel implements RenderingMod
 	private int transparencyAlpha;
 	private int height;
 	private float scale;
+	private boolean isTransparent;
 	
 	public ActivityRenderingModel() {
 		this(DEFAULT_COLOR, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, DEFAULT_SCALE);
@@ -31,6 +32,7 @@ public class ActivityRenderingModel extends DefaultModel implements RenderingMod
 		setTransparencyAlpha(transparencyAlpha);
 		setHeight(height);
 		setScale(scale);
+		this.isTransparent = false;
 	}
 	
 	public void setColor(Color color) {
@@ -50,10 +52,12 @@ public class ActivityRenderingModel extends DefaultModel implements RenderingMod
 	}
 	
 	public void setTransparent() {
+		this.isTransparent = true;
 		setColor(ColorFactory.setAlpha(this.color, this.transparencyAlpha));
 	}
 	
 	public void setOpaque() {
+		this.isTransparent = false;
 		setColor(ColorFactory.setAlpha(this.color, 255));
 	}
 
@@ -79,5 +83,9 @@ public class ActivityRenderingModel extends DefaultModel implements RenderingMod
 
 	public float getScale() {
 		return scale;
+	}
+
+	public boolean isTransparent() {
+		return isTransparent;
 	}
 }
