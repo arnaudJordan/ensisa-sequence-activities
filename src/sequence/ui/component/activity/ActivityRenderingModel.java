@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import sequence.mvc.DefaultModel;
 import sequence.mvc.RenderingModel;
+import sequence.utilities.ColorFactory;
 
 public class ActivityRenderingModel extends DefaultModel implements RenderingModel {
 
@@ -46,6 +47,14 @@ public class ActivityRenderingModel extends DefaultModel implements RenderingMod
 		if(this.transparencyAlpha == transparencyAlpha) return;
 		this.transparencyAlpha = transparencyAlpha;
 		this.modelChange();
+	}
+	
+	public void setTransparent() {
+		setColor(ColorFactory.setAlpha(this.color, this.transparencyAlpha));
+	}
+	
+	public void setOpaque() {
+		setColor(ColorFactory.setAlpha(this.color, 255));
 	}
 
 	public int getTransparencyAlpha() {
