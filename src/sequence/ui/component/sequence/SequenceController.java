@@ -10,7 +10,6 @@ import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityRenderingModel;
-import sequence.utilities.ColorFactory;
 
 public class SequenceController extends Controller implements ActionListener {
 
@@ -31,7 +30,7 @@ public class SequenceController extends Controller implements ActionListener {
 			ActivityRenderingModel componentRenderingModel;
 			for(int i=0 ; i<getView().getComponentCount() ; i++) {
 				componentRenderingModel = ((ActivityRenderingModel)((View)getView().getComponent(i)).getRenderingModel());
-				componentRenderingModel.setColor(ColorFactory.setAlpha(componentRenderingModel.getColor(), 255));
+				componentRenderingModel.setOpaque();
 			}
 		}
 	}

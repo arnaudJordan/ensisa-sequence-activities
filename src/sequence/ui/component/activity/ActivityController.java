@@ -6,7 +6,6 @@ import sequence.model.activity.Activity;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
-import sequence.utilities.ColorFactory;
 
 public class ActivityController extends Controller {
 
@@ -26,7 +25,7 @@ public class ActivityController extends Controller {
 							&& (!componentModel.getAction().equals(model.getAction())
 							|| !componentModel.getTreatedStructure().equals(model.getTreatedStructure())
 							|| !componentModel.getUsedInstrument().equals(model.getUsedInstrument())))
-						componentRenderingModel.setColor(ColorFactory.setAlpha(componentRenderingModel.getColor(), componentRenderingModel.getTransparencyAlpha()));
+						componentRenderingModel.setTransparent();
 				}
 			}
 		}
