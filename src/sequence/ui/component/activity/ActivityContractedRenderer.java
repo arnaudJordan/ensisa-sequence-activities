@@ -36,7 +36,6 @@ public class ActivityContractedRenderer extends ActivityRenderer {
 		if(parentWidth<activityWidth)
 		{
 			this.contracted = true;
-			System.out.println("true");
 			g.drawLine(parentWidth/2 -5 , -5, parentWidth/2 +5, (int) getView().getSize().getHeight()+5);
 			drawCutMark(g, parentWidth/2);
 		}

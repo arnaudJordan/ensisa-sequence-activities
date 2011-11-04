@@ -26,6 +26,15 @@ public class SequenceController extends Controller implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		try {
 			ImageIO.write(getView().createImage(), "png", new File("D:/User/test.png"));
+
+			FileWriter fstream = new FileWriter("activity.svg");
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(SVGFactory.AddHeader(SVGFactory.ActivityToSVG((ActivityView) getView().getComponent(0))));
+			out.close();
+			fstream = new FileWriter("sequence.svg");
+			out = new BufferedWriter(fstream);
+			out.write(SVGFactory.AddHeader(SVGFactory.SequenceToSVG((SequenceView) getView())));
+			out.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} 
@@ -34,18 +43,6 @@ public class SequenceController extends Controller implements ActionListener {
 	public void mouseClicked(MouseEvent e) {
 
 		if(e.getButton() == LEFT_MOUSE_BUTTON) {
-			try{
-				FileWriter fstream = new FileWriter("activity.svg");
-				BufferedWriter out = new BufferedWriter(fstream);
-				out.write(SVGFactory.AddHeader(SVGFactory.ActivityToSVG((ActivityView) getView().getComponent(0))));
-				out.close();
-				fstream = new FileWriter("sequence.svg");
-				out = new BufferedWriter(fstream);
-				out.write(SVGFactory.AddHeader(SVGFactory.SequenceToSVG((SequenceView) getView())));
-				out.close();
-			}catch (Exception e1){
-				System.err.println("Error: " + e1.getMessage());
-			}
 			ActivityRenderingModel currentActivityRenderingModel;
 			for(int i=0 ; i<getView().getComponentCount() ; i++) {
 				currentActivityRenderingModel = ((ActivityRenderingModel)((View)getView().getComponent(i)).getRenderingModel());
