@@ -8,9 +8,11 @@ import sequence.model.activity.Activity;
 import sequence.mvc.View;
 
 public class ActivityContractedRenderer extends ActivityRenderer {
+	private boolean contracted;
 
 	public ActivityContractedRenderer(View view) {
 		super(view);
+		this.contracted = false;
 	}
 	
 	public void renderView(Graphics2D g) {
@@ -33,9 +35,13 @@ public class ActivityContractedRenderer extends ActivityRenderer {
 		g.fillRect(0, 0, activityWidth, (int) (renderingModel.getHeight() * renderingModel.getScale()));
 		if(parentWidth<activityWidth)
 		{
+			this.contracted = true;
+			System.out.println("true");
 			g.drawLine(parentWidth/2 -5 , -5, parentWidth/2 +5, (int) getView().getSize().getHeight()+5);
 			drawCutMark(g, parentWidth/2);
 		}
+		else
+			this.contracted = false;
 		g.setColor(Color.WHITE);
 		g.drawString(String.valueOf(activity.getId()), (int) getView().getSize().getWidth()/2, (int) getView().getSize().getHeight()/2);
 	}
@@ -63,5 +69,7 @@ public class ActivityContractedRenderer extends ActivityRenderer {
 			
 		return super.getPreferredSize();
 	}
-
+	public boolean isContracted() {
+		return contracted;
+	}
 }

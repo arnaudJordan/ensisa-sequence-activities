@@ -4,6 +4,8 @@ import java.awt.Component;
 
 import sequence.model.Sequence;
 import sequence.model.activity.Activity;
+import sequence.ui.component.activity.ActivityContractedRenderer;
+import sequence.ui.component.activity.ActivityRenderer;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.SequenceView;
@@ -22,6 +24,12 @@ public class SVGFactory {
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("<rect width=\""+activityView.getWidth()+"\" height=\""+activityView.getHeight()+"\" x=\""+activityView.getX()+"\" y=\""+activityView.getY()+"\" fill=\"#"+Integer.toHexString(((ActivityRenderingModel) activityView.getRenderingModel()).getColor().getRGB()-0xff000000)+"\" />");
+		if((ActivityContractedRenderer)activityView.getRenderer() instanceof ActivityContractedRenderer)
+			if(((ActivityContractedRenderer) activityView.getRenderer()).isContracted())
+			{
+				sb.append("<line x1=\""+(activityView.getX()+activityView.getWidth()/2-10)+"\" y1=\""+(activityView.getY()+activityView.getHeight())+"\" x2=\""+(activityView.getX()+activityView.getWidth()/2)+"\" y2=\""+activityView.getY()+"\" style=\"stroke:white);stroke-width:2\" />");
+				sb.append("<line x1=\""+(activityView.getX()+activityView.getWidth()/2)+"\" y1=\""+(activityView.getY()+activityView.getHeight())+"\" x2=\""+(activityView.getX()+activityView.getWidth()/2+10)+"\" y2=\""+activityView.getY()+"\" style=\"stroke:white;stroke-width:2\" />");
+			}
 		return sb.toString();
 	}
 	public static String SequenceToSVG(SequenceView sequenceView)
