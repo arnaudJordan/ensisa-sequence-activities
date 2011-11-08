@@ -46,8 +46,8 @@ public class SequenceController extends Controller implements ActionListener {
 			ActivityRenderingModel currentActivityRenderingModel;
 			for(int i=0 ; i<getView().getComponentCount() ; i++) {
 				currentActivityRenderingModel = ((ActivityRenderingModel)((View)getView().getComponent(i)).getRenderingModel());
-				currentActivityRenderingModel.setColor(ColorFactory.setAlpha(currentActivityRenderingModel.getColor(), 255));
-			}
+            currentActivityRenderingModel.setOpaque();
+         }
 		}
 	}
 
