@@ -8,7 +8,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.JComponent;
 
 public abstract class View extends JComponent implements ModelListener {
-
+	private static final long serialVersionUID = 1L;
+	
 	private Model model;
 	private Renderer renderer;
 	private RenderingModel renderingModel;

@@ -5,7 +5,6 @@ import java.awt.Component;
 import sequence.model.Sequence;
 import sequence.model.activity.Activity;
 import sequence.ui.component.activity.ActivityContractedRenderer;
-import sequence.ui.component.activity.ActivityRenderer;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.SequenceView;

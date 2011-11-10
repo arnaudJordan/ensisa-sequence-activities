@@ -1,4 +1,4 @@
-package sequence.ui;
+package sequence.ui.window;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -15,11 +15,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import com.sun.java.swing.plaf.windows.resources.windows;
-
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
 import sequence.ui.component.sequence.SequenceView;
+import sequence.utilities.Config;
 
 
 public class MenuBar extends JMenuBar {

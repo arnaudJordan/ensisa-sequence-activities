@@ -1,4 +1,4 @@
-package sequence.ui;
+package sequence.ui.window;
 
 import java.awt.BorderLayout;
 import java.awt.Component;

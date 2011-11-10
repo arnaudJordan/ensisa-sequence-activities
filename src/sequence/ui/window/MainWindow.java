@@ -1,4 +1,4 @@
-package sequence.ui;
+package sequence.ui.window;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -20,7 +20,6 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.xml.parsers.SAXParser;
@@ -34,6 +33,7 @@ import sequence.ui.component.sequence.SequenceContainer;
 import sequence.ui.component.sequence.SequenceController;
 import sequence.ui.component.sequence.SequenceRenderingModel;
 import sequence.ui.component.sequence.SequenceView;
+import sequence.utilities.Config;
 
 public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -81,6 +81,7 @@ public class MainWindow extends JFrame {
 	{
 		
 		String laf = getConfig().getStyle();
+		if(laf!=null)
 		try {
 			UIManager.setLookAndFeel(laf);
 			SwingUtilities.updateComponentTreeUI(this);
@@ -101,7 +102,7 @@ public class MainWindow extends JFrame {
 
 				Sequence sequence = sequenceHandler.getSequence();
 				SequenceView view= new SequenceView(sequence);
-				SequenceController controller = new SequenceController(sequence, view);
+				new SequenceController(sequence, view);
 				addSequence(view);
 
 			}catch(Exception ex){

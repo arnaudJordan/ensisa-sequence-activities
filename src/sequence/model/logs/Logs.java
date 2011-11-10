@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import sequence.model.activity.Instrument;
-
 public class Logs {
 	private List<EditEvent> editEvents;
 	

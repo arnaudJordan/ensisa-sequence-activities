@@ -9,10 +9,10 @@ import javax.xml.parsers.SAXParserFactory;
 
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
-import sequence.ui.component.activity.ActivityController;
 import sequence.ui.component.sequence.SequenceView;
 
 public class testSequence extends JFrame {
+	private static final long serialVersionUID = 1L;
 
 	public testSequence() {
 		try{

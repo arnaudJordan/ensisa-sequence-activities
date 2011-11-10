@@ -7,7 +7,7 @@ import sequence.mvc.Model;
 import sequence.mvc.View;
 
 public class SequenceView extends View {
-	
+	private static final long serialVersionUID = 1L;
 	private JPopupMenu popup;
 
 	public SequenceView(Model model) {
