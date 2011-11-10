@@ -1,4 +1,4 @@
-package sequence.ui;
+package sequence.ui.window;
 
 import java.awt.Component;
 import java.awt.Container;

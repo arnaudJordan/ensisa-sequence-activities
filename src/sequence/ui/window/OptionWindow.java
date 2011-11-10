@@ -1,18 +1,17 @@
-package sequence.ui;
+package sequence.ui.window;
 
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 public class OptionWindow extends JFrame {
-	
+	private static final long serialVersionUID = 1L;
+
 	public OptionWindow(final JFrame parent)
 	{
 		super("Option");

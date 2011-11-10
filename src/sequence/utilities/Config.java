@@ -1,4 +1,4 @@
-package sequence.ui;
+package sequence.utilities;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 
 public class Config implements Serializable{
 	private static final long serialVersionUID = 1L;

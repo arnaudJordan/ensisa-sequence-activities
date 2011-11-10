@@ -1,7 +1,8 @@
 package sequence.ui.test;
 
 import java.awt.EventQueue;
-import sequence.ui.MainWindow;
+
+import sequence.ui.window.MainWindow;
 
 public class UiTest {
 

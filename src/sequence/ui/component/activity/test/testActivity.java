@@ -13,6 +13,7 @@ import sequence.ui.component.activity.ActivityController;
 import sequence.ui.component.activity.ActivityView;
 
 public class testActivity extends JFrame {
+	private static final long serialVersionUID = 1L;
 
 	public testActivity() {
 		try{
@@ -26,7 +27,7 @@ public class testActivity extends JFrame {
 			
 			Sequence model = new Sequence(sequenceHandler.getSequence());
 			ActivityView view = new ActivityView(model.getLastActivity());
-			ActivityController controller = new ActivityController(model, view);
+			new ActivityController(model, view);
 			
 			this.add(view);
 			this.pack();

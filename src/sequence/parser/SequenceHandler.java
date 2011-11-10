@@ -36,7 +36,7 @@ import sequence.utilities.Sex;
 
 public class SequenceHandler extends DefaultHandler {
 	private Sequence sequence;
-	private boolean inSequence, inDiscipline, inParticipant, inActivity, inPatient, inLocation, inDate, inState, inActivityTime, inActuator, inAction, inUsedInstruments, inTreatedStructure, inNote, inStartTime, inStopTime, inDuration, inPosition, inInstrument, inAnatomicStructure;
+	private boolean inSequence, inDiscipline, inParticipant, inActivity, inPatient, inLocation, inDate, inState, inActivityTime, inActuator, inAction, inUsedInstruments, inTreatedStructure;
 	private StringBuffer buffer;
 
 	public SequenceHandler(){
@@ -264,7 +264,6 @@ public class SequenceHandler extends DefaultHandler {
 		}
 		if(qName.equals("note"))
 		{
-			inNote = true;
 			return true;
 		}
 		if(startElementInActivityTime(qName))
@@ -273,20 +272,17 @@ public class SequenceHandler extends DefaultHandler {
 		else if(inActuator)
 		{
 			if(qName.equals("position")){
-				inPosition = true;
 				return true;
 			}
 			return true;
 		}else if(inUsedInstruments)
 		{
 			if(qName.equals("instrument")){
-				inInstrument = true;
 				return true;
 			}
 		}else if(inTreatedStructure)
 		{
 			if(qName.equals("anatomicStructure")){
-				inAnatomicStructure = true;
 				return true;
 			}
 		}
@@ -298,19 +294,14 @@ public class SequenceHandler extends DefaultHandler {
 		if(!inActivityTime)
 			return false;
 		if(qName.equals("startime")){
-			inStartTime = true;
 			return true;
 		}else if(qName.equals("stoptime")){
-			inStopTime = true;
 			return true;
 		}else if(qName.equals("duration")){
-			inDuration = true;
 			return true;
 		}else if(qName.equals("position")){
-			inPosition = true;
 			return true;
 		}else if(qName.equals("instrument")){
-			inInstrument = true;
 			return true;
 		}
 		return false;
@@ -472,7 +463,6 @@ public class SequenceHandler extends DefaultHandler {
 		if(qName.equals("note")){
 			sequence.getLastActivity().setNote(new Note(buffer.toString()));
 			buffer = null;
-			inNote = false;
 			return true;
 		}
 		if(endElementInActivityTime(qName))
@@ -480,25 +470,21 @@ public class SequenceHandler extends DefaultHandler {
 		if(inActuator&&qName.equals("position")){
 			sequence.getLastActivity().getActuator().setPosition(new Position(buffer.toString()));
 			buffer=null;
-			inPosition = false;
 			return true;
 		}
 		if(inActuator&&qName.equals("usedbodypart")){
 			sequence.getLastActivity().getActuator().setUsedbodypart(new BodyPart(buffer.toString()));
 			buffer=null;
-			inPosition = false;
 			return true;
 		}
 		if(inUsedInstruments&&qName.equals("instrument")){
 			sequence.getLastActivity().getUsedInstrument().addInstrument(new Instrument(buffer.toString()));
 			buffer=null;
-			inInstrument = false;
 			return true;
 		}
 		if(inTreatedStructure&&qName.equals("anatomicStructure")){
 			sequence.getLastActivity().setTreatedStructure(new AnatomicStructure(buffer.toString()));
 			buffer=null;
-			inAnatomicStructure = false;
 			return true;
 		}
 		return false;
@@ -511,21 +497,18 @@ public class SequenceHandler extends DefaultHandler {
 			int startTime = Integer.parseInt(buffer.toString());
 			sequence.getLastActivity().getActivitytime().setStartTime(startTime);
 			buffer=null;
-			inStartTime = false;
 			return true;
 		}
 		if(qName.equals("stoptime")){
 			int stopTime = Integer.parseInt(buffer.toString());
 			sequence.getLastActivity().getActivitytime().setStopTime(stopTime);
 			buffer=null;
-			inStopTime = false;
 			return true;
 		}
 		if(qName.equals("duration")){
 			int duration = Integer.parseInt(buffer.toString());
 			sequence.getLastActivity().getActivitytime().setDuration(duration);
 			buffer=null;
-			inDuration = false;
 			return true;
 		}
 		return false;

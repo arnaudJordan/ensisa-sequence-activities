@@ -1,7 +1,6 @@
 package sequence.ui.component.sequence;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import sequence.model.Sequence;
 import sequence.model.activity.Activity;
@@ -29,7 +28,7 @@ public class SequenceRenderer extends DefaultRenderer implements Renderer {
 			if(((SequenceRenderingModel)getView().getRenderingModel()).getDurationThreshold() <= current.getActivitytime().getDuration()) {
 				ActivityView activityView = new ActivityView(current);
 				activityView.setRenderingModel(new ActivityRenderingModel(colorFactory.createColor(current)));
-				ActivityController activityController = new ActivityController(current, activityView);
+				new ActivityController(current, activityView);
 				getView().add(activityView);
 			}
 		}

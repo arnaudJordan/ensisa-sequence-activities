@@ -13,18 +13,14 @@ import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 
 public class TimeLayout implements LayoutManager {
-	private static final int vgap = 5;
+	private static final int vgap = 10;
 
 	@Override
 	public void addLayoutComponent(String name, Component comp) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void removeLayoutComponent(Component comp) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

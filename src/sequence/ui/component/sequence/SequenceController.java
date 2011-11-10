@@ -14,7 +14,6 @@ import sequence.mvc.Model;
 import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
-import sequence.utilities.ColorFactory;
 import sequence.utilities.SVGFactory;
 
 public class SequenceController extends Controller implements ActionListener {
