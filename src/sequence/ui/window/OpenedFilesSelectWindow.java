@@ -1,6 +1,5 @@
 package sequence.ui.window;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
@@ -17,18 +16,22 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
 
 import sequence.model.Sequence;
 import sequence.ui.component.sequence.SequenceView;
 
 public class OpenedFilesSelectWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
+	
+    private JButton saveButton;
+    private JButton cancelButton;
+    private JList jList;
+    private JScrollPane scrollPane;
 
 	public OpenedFilesSelectWindow(List<SequenceView> list, final JFileChooser fc) throws HeadlessException {
 		super("Select file");
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		this.setLayout(new BorderLayout());
+		initComponents();
 		
 		DefaultListModel listModel = new DefaultListModel();
 		for(int i=0; i<list.size();i++)
@@ -36,10 +39,6 @@ public class OpenedFilesSelectWindow extends JFrame {
 			listModel.addElement(list.get(i).getModel());
 		}
 		
-		final JList jlist = new JList(listModel);
-		jlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		jlist.setLayoutOrientation(JList.VERTICAL_WRAP);
-		jlist.setVisibleRowCount(-1);
 		class MyCellRenderer extends DefaultListCellRenderer{
 			private static final long serialVersionUID = 1L;
 
@@ -67,23 +66,18 @@ public class OpenedFilesSelectWindow extends JFrame {
 			        return this;
 			    }
 		 }
-		jlist.setCellRenderer(new MyCellRenderer());
-		JScrollPane listScroller = new JScrollPane(jlist);
+		jList.setCellRenderer(new MyCellRenderer());
+		jList.setModel(listModel);
 		
-		add(listScroller, BorderLayout.CENTER);
-		
-		JButton closeButton = new JButton();
-		closeButton.setText("Select");
-		closeButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		final JFrame jFrame = this;
-		closeButton.addActionListener(new ActionListener() {
+		saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				jFrame.setVisible(false);
 				int returnVal = fc.showSaveDialog(jFrame.getParent());
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
 					try {
-						((Sequence) jlist.getSelectedValue()).toFile(file);
+						((Sequence) jList.getSelectedValue()).toFile(file);
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -91,10 +85,53 @@ public class OpenedFilesSelectWindow extends JFrame {
 			}
 		});
 		
-		add(closeButton, BorderLayout.SOUTH);
-		
-		this.pack();
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jFrame.setVisible(false);
+			}
+		});
 		this.setVisible(true);
 	}
+	private void initComponents() {
 
+        scrollPane = new javax.swing.JScrollPane();
+        jList = new javax.swing.JList();
+        saveButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+
+        jList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        scrollPane.setViewportView(jList);
+
+        saveButton.setText("Save");
+
+        cancelButton.setText("Cancel");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(scrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cancelButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                        .addComponent(saveButton)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveButton)
+                    .addComponent(cancelButton))
+                .addContainerGap())
+        );
+
+        pack();
+    }
 }
