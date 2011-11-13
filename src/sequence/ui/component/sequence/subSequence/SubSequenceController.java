@@ -1,4 +1,4 @@
-package sequence.ui.component.sequence;
+package sequence.ui.component.sequence.subSequence;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,9 +16,9 @@ import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.utilities.SVGFactory;
 
-public class SequenceController extends Controller implements ActionListener {
+public class SubSequenceController extends Controller implements ActionListener {
 
-	public SequenceController(Model model, View view) {
+	public SubSequenceController(Model model, View view) {
 		super(model, view);
 	}
 
@@ -32,7 +32,7 @@ public class SequenceController extends Controller implements ActionListener {
 			out.close();
 			fstream = new FileWriter("sequence.svg");
 			out = new BufferedWriter(fstream);
-			out.write(SVGFactory.AddHeader(SVGFactory.SequenceToSVG((SequenceView) getView())));
+			out.write(SVGFactory.AddHeader(SVGFactory.SequenceToSVG((SubSequenceView) getView())));
 			out.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -60,7 +60,7 @@ public class SequenceController extends Controller implements ActionListener {
 
 	private void checkPopup(MouseEvent e) {
 		if (e.getButton() == RIGHT_MOUSE_BUTTON && e.isPopupTrigger()) {
-			((SequenceView)getView()).getPopup().show(e.getComponent(), e.getX(), e.getY());
+			((SubSequenceView)getView()).getPopup().show(e.getComponent(), e.getX(), e.getY());
 		}
 	}
 }

@@ -25,13 +25,13 @@ import org.jfree.data.general.DefaultPieDataset;
 
 import sequence.model.Phases;
 import sequence.model.Sequence;
-import sequence.ui.component.sequence.SequenceView;
+import sequence.ui.component.sequence.SequenceContainer;
 
 public class InfoWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JTabbedPane jTabbedPane;
 
-	public InfoWindow(String title, List<SequenceView> list) throws HeadlessException {
+	public InfoWindow(String title, List<SequenceContainer> list) throws HeadlessException {
 		super(title);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setPreferredSize(new Dimension(300, 300));
@@ -39,9 +39,9 @@ public class InfoWindow extends JFrame {
 		jTabbedPane = new JTabbedPane();
 		add(jTabbedPane);
 		
-		for(int i=0; i<list.size();i++)
+		for(SequenceContainer current : list)
 		{
-			Sequence sequence = (Sequence) list.get(i).getModel();
+			Sequence sequence = (Sequence) current.getSummarizedSequenceView().getModel();
 			createTab(sequence);
 		}
 		
