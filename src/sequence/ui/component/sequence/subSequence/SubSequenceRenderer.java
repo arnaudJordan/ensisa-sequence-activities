@@ -1,7 +1,8 @@
-package sequence.ui.component.sequence;
+package sequence.ui.component.sequence.subSequence;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+
 import sequence.model.Sequence;
 import sequence.model.activity.Activity;
 import sequence.mvc.DefaultRenderer;
@@ -13,9 +14,9 @@ import sequence.ui.component.activity.ActivityView;
 import sequence.utilities.ColorFactory;
 import sequence.utilities.TimeLayout;
 
-public class SequenceRenderer extends DefaultRenderer implements Renderer {
+public class SubSequenceRenderer extends DefaultRenderer implements Renderer {
 	
-	public SequenceRenderer(View view) {
+	public SubSequenceRenderer(View view) {
 		super(view);
 		getView().setLayout(new TimeLayout());
 		initialize();
@@ -25,7 +26,7 @@ public class SequenceRenderer extends DefaultRenderer implements Renderer {
 		Sequence sequence = (Sequence)getView().getModel();
 		ColorFactory colorFactory = new ColorFactory(sequence);
 		for(Activity current : sequence) {
-			if(((SequenceRenderingModel)getView().getRenderingModel()).getDurationThreshold() <= current.getActivitytime().getDuration()) {
+			if(((SubSequenceRenderingModel)getView().getRenderingModel()).getDurationThreshold() <= current.getActivitytime().getDuration()) {
 				ActivityView activityView = new ActivityView(current);
 				activityView.setRenderingModel(new ActivityRenderingModel(colorFactory.createColor(current)));
 				new ActivityController(current, activityView);
@@ -43,6 +44,6 @@ public class SequenceRenderer extends DefaultRenderer implements Renderer {
 	}
 	
 	public Dimension getPreferredSize() {
-    	return new Dimension(getView().getParent().getWidth(), (int) getView().getLayout().minimumLayoutSize(this.getView()).getHeight());
+    	return new Dimension(getView().getParent().getWidth(), (int) getView().getLayout().minimumLayoutSize(getView()).getHeight());
     }
 }

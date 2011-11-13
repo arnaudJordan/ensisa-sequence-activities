@@ -10,18 +10,22 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import sequence.model.Sequence;
+import sequence.ui.component.sequence.subSequence.SubSequenceView;
+import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
 import sequence.ui.window.MainWindow;
 
 public class SequenceContainer extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private SequenceView sequenceView;
+	private SummarizedSequenceView summarizedSequenceView;
+	private SubSequenceView subSequenceView;
 	
-	public SequenceContainer(final SequenceView sequenceView, final MainWindow mainWindow)
+	public SequenceContainer(final SummarizedSequenceView summarizedSequenceView, final SubSequenceView subSequenceView, final MainWindow mainWindow)
 	{
-		this.sequenceView = sequenceView;
+		this.summarizedSequenceView = summarizedSequenceView;
+		this.subSequenceView = subSequenceView;
 
 		setBackground(Color.WHITE);
-		setBorder(BorderFactory.createTitledBorder(((Sequence)sequenceView.getModel()).getWorkflowID()));
+		setBorder(BorderFactory.createTitledBorder(((Sequence)subSequenceView.getModel()).getWorkflowID()));
 		setLayout(new BorderLayout());
 		
 		ImageIcon icon = new ImageIcon("icons/dialog-close.png");
@@ -32,12 +36,17 @@ public class SequenceContainer extends JPanel {
 				mainWindow.removeSequence(sc);
 			}
 		});
-		add(button, BorderLayout.PAGE_START);;
-		add(sequenceView, BorderLayout.CENTER);
+		add(button, BorderLayout.NORTH);
+		add(summarizedSequenceView, BorderLayout.CENTER);
+		add(subSequenceView, BorderLayout.SOUTH);
 		setVisible(true);
 	}
 
-	public  SequenceView getSequenceView() {
-		return sequenceView;
+	public SummarizedSequenceView getSummarizedSequenceView() {
+		return summarizedSequenceView;
+	}
+
+	public SubSequenceView getSubSequenceView() {
+		return subSequenceView;
 	}
 }

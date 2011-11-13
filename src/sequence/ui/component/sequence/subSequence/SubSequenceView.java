@@ -1,4 +1,4 @@
-package sequence.ui.component.sequence;
+package sequence.ui.component.sequence.subSequence;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -6,17 +6,17 @@ import javax.swing.JPopupMenu;
 import sequence.mvc.Model;
 import sequence.mvc.View;
 
-public class SequenceView extends View {
+public class SubSequenceView extends View {
 	private static final long serialVersionUID = 1L;
 	private JPopupMenu popup;
 
-	public SequenceView(Model model) {
+	public SubSequenceView(Model model) {
 		super(model);
-		setRenderingModel(new SequenceRenderingModel());
-		setRenderer(new SequenceRenderer(this));
+		setRenderingModel(new SubSequenceRenderingModel());
+		setRenderer(new SubSequenceRenderer(this));
 		popup = new JPopupMenu();
 	    JMenuItem exportItem = new JMenuItem("Export");
-	    exportItem.addActionListener(new SequenceController(getModel(), this));
+	    exportItem.addActionListener(new SubSequenceController(getModel(), this));
 	    popup.add(exportItem);
 	}
 	
@@ -26,6 +26,6 @@ public class SequenceView extends View {
 	
 	public void modelChanged(Model m) {
 		removeAll();
-		((SequenceRenderer)getRenderer()).initialize();
+		((SubSequenceRenderer)getRenderer()).initialize();
 	}
 }

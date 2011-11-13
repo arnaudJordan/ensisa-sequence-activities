@@ -17,7 +17,8 @@ import javax.xml.parsers.SAXParserFactory;
 
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
-import sequence.ui.component.sequence.SequenceView;
+import sequence.ui.component.sequence.subSequence.SubSequenceView;
+import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
 import sequence.utilities.Config;
 
 
@@ -62,7 +63,7 @@ public class MenuBar extends JMenuBar {
 						parser.parse(parsedFile, sequenceHandler);
 						
 						Sequence sequence = sequenceHandler.getSequence();
-						((MainWindow) parent).addSequence(new SequenceView(sequence));
+						((MainWindow) parent).addSequence(new SummarizedSequenceView(sequence), new SubSequenceView(sequence));
 					}catch(Exception ex){
 						ex.printStackTrace();
 						JOptionPane.showMessageDialog(parent, ex.toString(), ex.getClass().toString(), JOptionPane.ERROR_MESSAGE);
@@ -82,7 +83,7 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				EventQueue.invokeLater(new Runnable(){
 					public void run(){
-						new OpenedFilesSelectWindow(((MainWindow) parent).getSequence(), fc);
+						new OpenedFilesSelectWindow(((MainWindow) parent).getSequenceContainers(), fc);
 					}
 				});
 			}
@@ -118,10 +119,10 @@ public class MenuBar extends JMenuBar {
 
 		info.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(((MainWindow) parent).getSequence()!=null)
+				if(((MainWindow) parent).getSequenceContainers()!=null)
 					EventQueue.invokeLater(new Runnable(){
 						public void run(){
-							new InfoWindow("Information", ((MainWindow) parent).getSequence());
+							new InfoWindow("Information", ((MainWindow) parent).getSequenceContainers());
 						}
 					});
 			}
@@ -134,7 +135,7 @@ public class MenuBar extends JMenuBar {
 
 		option.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(((MainWindow) parent).getSequence()!=null)
+				if(((MainWindow) parent).getSequenceContainers()!=null)
 					EventQueue.invokeLater(new Runnable(){
 						public void run(){
 							new OptionWindow(parent);
