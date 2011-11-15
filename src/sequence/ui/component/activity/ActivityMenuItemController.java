@@ -11,6 +11,8 @@ import sequence.model.activity.Activity;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
+import sequence.processor.ColorChange;
+import sequence.ui.window.MainWindow;
 
 public class ActivityMenuItemController extends Controller implements
 		ActionListener {
@@ -34,7 +36,11 @@ public class ActivityMenuItemController extends Controller implements
 							&& componentModel.getAction().equals(model.getAction())
 							&& componentModel.getTreatedStructure().equals(model.getTreatedStructure())
 							&& componentModel.getUsedInstrument().equals(model.getUsedInstrument()))
-						componentRenderingModel.setColor(newColor);
+					{
+						ColorChange command = new ColorChange(componentRenderingModel, newColor);
+						((MainWindow) getView().getTopLevelAncestor()).getProcessor().Do(command);
+						//componentRenderingModel.setColor(newColor);
+					}
 				}
 			}
 		}

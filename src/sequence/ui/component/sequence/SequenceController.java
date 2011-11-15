@@ -25,7 +25,7 @@ public class SequenceController extends Controller implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		try {
-			ImageIO.write(getView().createImage(), "png", new File("test.png"));
+			ImageIO.write(getView().createImage(), "png", new File("sequence.png"));
 
 			FileWriter fstream = new FileWriter("activity.svg");
 			BufferedWriter out = new BufferedWriter(fstream);
