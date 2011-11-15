@@ -3,28 +3,28 @@ package sequence.processor;
 import java.util.Stack;
 
 public class Processor {
-	protected Stack<Command> didCommands;
-	protected Stack<Command> unDidCommands;
+	protected Stack<ICommand> didCommands;
+	protected Stack<ICommand> unDidCommands;
 	
 	public Processor()
 	{
-		this.didCommands=new Stack<Command>();
-		this.unDidCommands=new Stack<Command>();
+		this.didCommands=new Stack<ICommand>();
+		this.unDidCommands=new Stack<ICommand>();
 	}
-	public void Do(Command command)
+	public void Do(ICommand command)
 	{
 		command.Do();
 		didCommands.push(command);
 	}
 	public void Undo()
 	{
-		Command command = didCommands.pop();
+		ICommand command = didCommands.pop();
 		command.Undo();
 		unDidCommands.push(command);
 	}
 	public void Redo()
 	{
-		Command command = unDidCommands.pop();
+		ICommand command = unDidCommands.pop();
 		command.Do();
 		didCommands.push(command);
 	}
