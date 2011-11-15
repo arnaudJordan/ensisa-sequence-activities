@@ -28,6 +28,7 @@ import javax.xml.parsers.SAXParserFactory;
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
 import sequence.processor.Processor;
+import sequence.processor.SafeProcessor;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.SequenceContainer;
@@ -57,7 +58,7 @@ public class MainWindow extends JFrame {
 		//this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.setPreferredSize(new Dimension(800, 600));
 
-		this.processor=new Processor();
+		this.processor=new SafeProcessor();
 		setConfig(new Config());
 		try {
 			setConfig(getConfig().deserialize());

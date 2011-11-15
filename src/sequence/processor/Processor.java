@@ -3,8 +3,8 @@ package sequence.processor;
 import java.util.Stack;
 
 public class Processor {
-	private Stack<Command> didCommands;
-	private Stack<Command> unDidCommands;
+	protected Stack<Command> didCommands;
+	protected Stack<Command> unDidCommands;
 	
 	public Processor()
 	{
@@ -15,14 +15,12 @@ public class Processor {
 	{
 		command.Do();
 		didCommands.push(command);
-		System.out.println("Do");
 	}
 	public void Undo()
 	{
 		Command command = didCommands.pop();
 		command.Undo();
 		unDidCommands.push(command);
-		System.out.println("unDo");
 	}
 	public void Redo()
 	{
