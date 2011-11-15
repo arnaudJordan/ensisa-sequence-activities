@@ -15,6 +15,7 @@ import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.utilities.SVGFactory;
+import sequence.utilities.TikzFactory;
 
 public class SequenceController extends Controller implements ActionListener {
 
@@ -24,7 +25,7 @@ public class SequenceController extends Controller implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		try {
-			ImageIO.write(getView().createImage(), "png", new File("D:/User/test.png"));
+			ImageIO.write(getView().createImage(), "png", new File("test.png"));
 
 			FileWriter fstream = new FileWriter("activity.svg");
 			BufferedWriter out = new BufferedWriter(fstream);
@@ -34,6 +35,12 @@ public class SequenceController extends Controller implements ActionListener {
 			out = new BufferedWriter(fstream);
 			out.write(SVGFactory.AddHeader(SVGFactory.SequenceToSVG((SequenceView) getView())));
 			out.close();
+			
+			fstream = new FileWriter("sequence.tex");
+			out = new BufferedWriter(fstream);
+			out.write(TikzFactory.AddHeader(TikzFactory.SequenceToTikz((SequenceView) getView())));
+			out.close();
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} 
