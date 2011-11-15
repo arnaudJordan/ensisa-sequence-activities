@@ -3,8 +3,8 @@ package sequence.processor;
 import sequence.mvc.Model;
 
 public abstract class Command {
-	private Command undo;
-	private Model model;
+	protected Command undo;
+	protected Model model;
 	
 	public abstract void Do();
 	public void Undo()
