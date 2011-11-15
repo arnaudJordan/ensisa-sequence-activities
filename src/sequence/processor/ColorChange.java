@@ -10,7 +10,7 @@ public class ColorChange extends Command {
 	{
 		this.model=model;
 		this.color=color;
-		this.undo=new ColorChange(model, color, this);
+		this.undo=new ColorChange(model, model.getColor(), this);
 	}
 	public ColorChange(ActivityRenderingModel model, Color color, ColorChange colorChange) {
 		this.model=model;

@@ -108,7 +108,29 @@ public class MenuBar extends JMenuBar {
 		file.add(quit);
 
 		add(file);
+		
 		JMenu edit = new JMenu("Edit");
+		JMenuItem undo = new JMenuItem("Undo");
+		undo.setMnemonic('Z');
+		undo.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.Event.CTRL_MASK));
+
+		undo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				((MainWindow) parent).getProcessor().Undo();
+			}
+		});
+		edit.add(undo);
+		JMenuItem redo = new JMenuItem("Undo");
+		redo.setMnemonic('Y');
+		redo.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.Event.CTRL_MASK));
+
+		redo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				((MainWindow) parent).getProcessor().Redo();
+			}
+		});
+		edit.add(redo);
+		
 		add(edit);
 		JMenu help = new JMenu("Help");
 

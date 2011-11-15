@@ -15,12 +15,14 @@ public class Processor {
 	{
 		command.Do();
 		didCommands.push(command);
+		System.out.println("Do");
 	}
 	public void Undo()
 	{
 		Command command = didCommands.pop();
 		command.Undo();
 		unDidCommands.push(command);
+		System.out.println("unDo");
 	}
 	public void Redo()
 	{
