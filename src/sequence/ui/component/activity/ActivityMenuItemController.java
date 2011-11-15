@@ -6,12 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JColorChooser;
-
 import sequence.model.activity.Activity;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
 import sequence.processor.ColorChange;
+import sequence.processor.CommandList;
 import sequence.ui.window.MainWindow;
 
 public class ActivityMenuItemController extends Controller implements
@@ -29,6 +29,7 @@ public class ActivityMenuItemController extends Controller implements
 			Container parent = getView().getParent();
 			if(parent != null) {
 				Activity model = (Activity)getView().getModel();
+				CommandList command = new CommandList();
 				for(int i=0 ; i<parent.getComponentCount() ; i++) {
 					Activity componentModel = (Activity)((View)parent.getComponent(i)).getModel();
 					ActivityRenderingModel componentRenderingModel = ((ActivityRenderingModel)((View)parent.getComponent(i)).getRenderingModel());
@@ -37,10 +38,9 @@ public class ActivityMenuItemController extends Controller implements
 							&& componentModel.getTreatedStructure().equals(model.getTreatedStructure())
 							&& componentModel.getUsedInstrument().equals(model.getUsedInstrument()))
 					{
-						ColorChange command = new ColorChange(componentRenderingModel, newColor);
-						((MainWindow) getView().getTopLevelAncestor()).getProcessor().Do(command);
-						//componentRenderingModel.setColor(newColor);
+						command.Add(new ColorChange(componentRenderingModel, newColor));
 					}
+					((MainWindow) getView().getTopLevelAncestor()).getProcessor().Do(command);
 				}
 			}
 		}

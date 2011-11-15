@@ -1,0 +1,30 @@
+package sequence.processor;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CommandList implements ICommand {
+	private List<ICommand> commands;
+	
+	public CommandList()
+	{
+		this(new ArrayList<ICommand>());
+	}
+	public CommandList(List<ICommand> commands)
+	{
+		this.commands=commands;
+	}
+	public void Do() {
+		for(ICommand command : commands)
+			command.Do();
+	}
+	public void Undo() {
+		for(ICommand command : commands)
+			command.Undo();
+	}
+	
+	public void Add(ICommand command)
+	{
+		this.commands.add(command);
+	}
+}
