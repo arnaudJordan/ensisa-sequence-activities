@@ -27,6 +27,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
+import sequence.processor.Processor;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.SequenceContainer;
@@ -38,11 +39,17 @@ import sequence.utilities.Config;
 public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private Config config;
+	
+	/* Model */
 	private List<SequenceView> sequenceViews;
 	private List<SequenceContainer> sequenceContainer;
+	private Processor processor;
+	
+	/* Window elements */
 	private JPanel mainPane;
 	private JSlider scaleSlider;
 	private JTextField thresholdField;
+	
 
 	public MainWindow(String title) throws HeadlessException {
 		super(title);
@@ -50,7 +57,7 @@ public class MainWindow extends JFrame {
 		//this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.setPreferredSize(new Dimension(800, 600));
 
-		
+		this.processor=new Processor();
 		setConfig(new Config());
 		try {
 			setConfig(getConfig().deserialize());
@@ -104,7 +111,6 @@ public class MainWindow extends JFrame {
 				SequenceView view= new SequenceView(sequence);
 				new SequenceController(sequence, view);
 				addSequence(view);
-
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}
@@ -197,6 +203,9 @@ public class MainWindow extends JFrame {
 		this.pack();
 	}
 	
+	public Processor getProcessor() {
+		return processor;
+	}
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable(){
 			public void run(){

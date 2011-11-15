@@ -5,6 +5,7 @@ import javax.swing.JPopupMenu;
 
 import sequence.mvc.Model;
 import sequence.mvc.View;
+import sequence.processor.Processor;
 
 public class SequenceView extends View {
 	private static final long serialVersionUID = 1L;
