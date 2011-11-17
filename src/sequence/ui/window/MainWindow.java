@@ -105,11 +105,6 @@ public class MainWindow extends JFrame {
 				parser.parse(lastOpenedFiles[i], sequenceHandler);				
 				
 				Sequence sequence = sequenceHandler.getSequence();
-				/*SummarizedSequenceView summarizedView = new SummarizedSequenceView(sequence);
-				new SummarizedSequenceController(sequence, summarizedView);
-				SubSequenceView subView = new SubSequenceView(sequence);
-				new SubSequenceController(sequence, subView);
-				addSequence(summarizedView, subView);*/
 				addSequence(sequence);
 			}catch(Exception ex){
 				ex.printStackTrace();
