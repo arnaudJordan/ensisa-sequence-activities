@@ -2,7 +2,6 @@ package sequence.ui.component.sequence.subSequence;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-
 import sequence.model.Sequence;
 import sequence.model.activity.Activity;
 import sequence.mvc.DefaultRenderer;
@@ -11,7 +10,8 @@ import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityController;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
-import sequence.utilities.ColorFactory;
+import sequence.ui.component.sequence.SequenceContainer;
+import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
 import sequence.utilities.TimeLayout;
 
 public class SubSequenceRenderer extends DefaultRenderer implements Renderer {
@@ -24,11 +24,12 @@ public class SubSequenceRenderer extends DefaultRenderer implements Renderer {
 
 	public void initialize() {
 		Sequence sequence = (Sequence)getView().getModel();
-		ColorFactory colorFactory = new ColorFactory(sequence);
+		SummarizedSequenceView summarizedSelectedActivities = ((SequenceContainer) getView().getParent()).getSummarizedSequenceView();
 		for(Activity current : sequence) {
 			if(((SubSequenceRenderingModel)getView().getRenderingModel()).getDurationThreshold() <= current.getActivitytime().getDuration()) {
+				int index = ((Sequence) summarizedSelectedActivities.getModel()).indexOf(current);
 				ActivityView activityView = new ActivityView(current);
-				activityView.setRenderingModel(new ActivityRenderingModel(colorFactory.createColor(current)));
+				((ActivityRenderingModel) activityView.getRenderingModel()).setColor(((ActivityRenderingModel) ((View) summarizedSelectedActivities.getComponent(index)).getRenderingModel()).getColor());
 				new ActivityController(current, activityView);
 				getView().add(activityView);
 			}

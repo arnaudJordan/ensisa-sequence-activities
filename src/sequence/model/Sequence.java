@@ -59,6 +59,10 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return activities.contains(o);
 	}
 
+	public int indexOf(Object o) {
+		return activities.indexOf(o);
+	}
+
 	public Iterator<Activity> iterator() {
 		return activities.iterator();
 	}
