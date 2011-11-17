@@ -11,31 +11,33 @@ public class ActivityRenderingModel extends DefaultModel implements RenderingMod
 	private static final Color DEFAULT_COLOR = Color.BLACK;
 	private static final int DEFAULT_TRANSPARENCY_ALPHA = 50;
 	private static final int DEFAULT_HEIGHT = 10;
-	private static final float DEFAULT_SCALE = 1;
+	private static final float DEFAULT_HSCALE = 1;
+	private static final float DEFAULT_VSCALE = 1;
 	
 	private Color color;
 	private int transparencyAlpha;
 	private int height;
-	private float scale;
+	private float Hscale, Vscale;
 	private boolean isTransparent;
 	
 	public ActivityRenderingModel() {
-		this(DEFAULT_COLOR, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, DEFAULT_SCALE);
+		this(DEFAULT_COLOR, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, DEFAULT_HSCALE, DEFAULT_VSCALE);
 	}
 	
 	public ActivityRenderingModel(Color color) {
-		this(color, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, DEFAULT_SCALE);
+		this(color, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, DEFAULT_HSCALE, DEFAULT_VSCALE);
 	}
 	
-	public ActivityRenderingModel(Color color, float scale) {
-		this(color, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, scale);
+	public ActivityRenderingModel(Color color, float Hscale) {
+		this(color, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, Hscale, DEFAULT_VSCALE);
 	}
 	
-	public ActivityRenderingModel(Color color, int transparencyAlpha, int height, float scale) {
+	public ActivityRenderingModel(Color color, int transparencyAlpha, int height, float Hscale, float Vscale) {
 		setColor(color);
 		setTransparencyAlpha(transparencyAlpha);
 		setHeight(height);
-		setScale(scale);
+		setHScale(Hscale);
+		setVScale(Vscale);
 		this.isTransparent = false;
 	}
 	
@@ -79,14 +81,31 @@ public class ActivityRenderingModel extends DefaultModel implements RenderingMod
 		return height;
 	}
 
-	public void setScale(float scale) {
-		if(this.scale == scale) return;
-		this.scale = scale;
+	public void setHScale(float Hscale) {
+		if(this.Hscale == Hscale) return;
+		this.Hscale = Hscale;
 		this.modelChange();
 	}
 
-	public float getScale() {
-		return scale;
+	public float getHScale() {
+		return Hscale;
+	}
+	
+	public void setVScale(float Vscale) {
+		if(this.Vscale == Vscale) return;
+		this.Vscale = Vscale;
+		this.modelChange();
+	}
+
+	public float getVScale() {
+		return Vscale;
+	}
+	
+	public void setScale(float scale) {
+		if(this.Hscale == scale && this.Vscale == scale) return;
+		this.Hscale = scale;
+		this.Vscale = scale;
+		this.modelChange();
 	}
 
 	public boolean isTransparent() {

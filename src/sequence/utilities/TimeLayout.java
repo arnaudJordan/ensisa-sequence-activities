@@ -44,7 +44,7 @@ public class TimeLayout implements LayoutManager {
 			Component c = parent.getComponent(i);
 			if (c.isVisible()) {
 				float scale = ((ActivityRenderingModel) ((View) c)
-						.getRenderingModel()).getScale();
+						.getRenderingModel()).getHScale();
 				Activity currentActivity = (Activity) ((ActivityView) parent
 						.getComponent(i)).getModel();
 				int currentStopTime = (int) ((currentActivity.getActivitytime()
@@ -95,7 +95,7 @@ public class TimeLayout implements LayoutManager {
 			Component c = parent.getComponent(i);
 			if (c.isVisible()) {
 				float scale = ((ActivityRenderingModel) ((View) c)
-						.getRenderingModel()).getScale();
+						.getRenderingModel()).getHScale();
 				Activity currentActivity = (Activity) ((ActivityView) parent
 						.getComponent(i)).getModel();
 				int currentTime = (int) ((currentActivity.getActivitytime()
