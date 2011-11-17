@@ -20,16 +20,19 @@ public abstract class View extends JComponent implements ModelListener {
 
 	private void initialize(Model model) {
 		this.setModel(model);
-		this.setRenderer(null);
-		this.setRenderingModel(null);
+		//this.setRenderer(null);
+		//this.setRenderingModel(null);
 	}
 	
 	public void setModel(Model model) {
 		if(model == null) return;
 		if(this.model != null)
 			this.model.removeModelListener(this);
+		Model oldModel = this.model;
 		this.model = model;
 		this.model.addModelListener(this);
+		if(oldModel != null && oldModel != model)
+			modelChanged(model);
 	}
 	
 	public Model getModel() {
@@ -78,6 +81,7 @@ public abstract class View extends JComponent implements ModelListener {
 	public void modelChanged(Model m) {
 		this.repaint();
 	}
+	
 	public BufferedImage createImage()
 	{
 		BufferedImage image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);

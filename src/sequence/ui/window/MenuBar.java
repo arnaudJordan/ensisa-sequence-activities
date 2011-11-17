@@ -17,8 +17,6 @@ import javax.xml.parsers.SAXParserFactory;
 
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
-import sequence.ui.component.sequence.subSequence.SubSequenceView;
-import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
 import sequence.utilities.Config;
 
 
@@ -63,7 +61,7 @@ public class MenuBar extends JMenuBar {
 						parser.parse(parsedFile, sequenceHandler);
 						
 						Sequence sequence = sequenceHandler.getSequence();
-						((MainWindow) parent).addSequence(new SummarizedSequenceView(sequence), new SubSequenceView(sequence));
+						((MainWindow) parent).addSequence(sequence);
 					}catch(Exception ex){
 						ex.printStackTrace();
 						JOptionPane.showMessageDialog(parent, ex.toString(), ex.getClass().toString(), JOptionPane.ERROR_MESSAGE);

@@ -34,6 +34,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		this.workflowID=sequence.workflowID;
 	}
 	
+	public Sequence(String workflowID, List<Activity> activities) {
+		this.activities=activities;
+		this.workflowID=workflowID;
+	}
+	
 	public String getWorkflowID() {
 		return workflowID;
 	}
@@ -44,6 +49,10 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 
 	public boolean isEmpty() {
 		return activities.isEmpty();
+	}
+
+	public void clear() {
+		activities.clear();
 	}
 
 	public boolean contains(Object o) {

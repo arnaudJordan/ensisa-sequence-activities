@@ -27,6 +27,10 @@ public class ActivityRenderingModel extends DefaultModel implements RenderingMod
 		this(color, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, DEFAULT_SCALE);
 	}
 	
+	public ActivityRenderingModel(Color color, float scale) {
+		this(color, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, scale);
+	}
+	
 	public ActivityRenderingModel(Color color, int transparencyAlpha, int height, float scale) {
 		setColor(color);
 		setTransparencyAlpha(transparencyAlpha);
