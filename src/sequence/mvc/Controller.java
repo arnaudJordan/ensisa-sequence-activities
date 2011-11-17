@@ -1,5 +1,6 @@
 package sequence.mvc;
 
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -13,6 +14,7 @@ public class Controller implements KeyListener, MouseListener, MouseMotionListen
 	public static final int LEFT_MOUSE_BUTTON   = MouseEvent.BUTTON1;
     public static final int MIDDLE_MOUSE_BUTTON = MouseEvent.BUTTON2;
     public static final int RIGHT_MOUSE_BUTTON  = MouseEvent.BUTTON3;
+    public static final int CTRL  = InputEvent.CTRL_MASK;
 	
 	private Model model;
     private View view;

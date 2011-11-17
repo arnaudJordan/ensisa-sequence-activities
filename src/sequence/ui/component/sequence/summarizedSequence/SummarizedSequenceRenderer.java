@@ -1,4 +1,4 @@
-package sequence.ui.component.sequence;
+package sequence.ui.component.sequence.summarizedSequence;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
@@ -7,17 +7,19 @@ import sequence.model.activity.Activity;
 import sequence.mvc.DefaultRenderer;
 import sequence.mvc.Renderer;
 import sequence.mvc.View;
-import sequence.ui.component.activity.ActivityController;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
+import sequence.ui.component.activity.ActivitySummarizedController;
 import sequence.utilities.ColorFactory;
 import sequence.utilities.TimeLayout;
 
-public class SequenceRenderer extends DefaultRenderer implements Renderer {
+public class SummarizedSequenceRenderer extends DefaultRenderer implements Renderer {
+	private float scale;
 	
-	public SequenceRenderer(View view) {
+	public SummarizedSequenceRenderer(View view) {
 		super(view);
 		getView().setLayout(new TimeLayout());
+		setScale();
 		initialize();
 	}
 
@@ -25,13 +27,19 @@ public class SequenceRenderer extends DefaultRenderer implements Renderer {
 		Sequence sequence = (Sequence)getView().getModel();
 		ColorFactory colorFactory = new ColorFactory(sequence);
 		for(Activity current : sequence) {
-			if(((SequenceRenderingModel)getView().getRenderingModel()).getDurationThreshold() <= current.getActivitytime().getDuration()) {
-				ActivityView activityView = new ActivityView(current);
-				activityView.setRenderingModel(new ActivityRenderingModel(colorFactory.createColor(current)));
-				new ActivityController(current, activityView);
-				getView().add(activityView);
-			}
+			ActivityView activityView = new ActivityView(current);
+			ActivityRenderingModel renderingModel = (ActivityRenderingModel) activityView.getRenderingModel();
+			renderingModel.setColor(colorFactory.createColor(current));
+			renderingModel.setHScale(scale);
+			new ActivitySummarizedController(current, activityView);
+			getView().add(activityView);
 		}
+	}
+	
+	public void setScale() {
+		Sequence sequence = (Sequence)getView().getModel();
+		int sequenceSize = sequence.getLastActivity().getActivitytime().getStopTime() - sequence.get(0).getActivitytime().getStartTime();
+		scale = (float) (getView().getParent().getPreferredSize().getWidth()/sequenceSize);
 	}
 
 	public void renderView(Graphics2D g) {

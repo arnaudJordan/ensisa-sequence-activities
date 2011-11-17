@@ -5,7 +5,7 @@ import java.awt.Component;
 import sequence.model.activity.Activity;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
-import sequence.ui.component.sequence.SequenceView;
+import sequence.ui.component.sequence.subSequence.SubSequenceView;
 
 public class TikzFactory {
 	final static String NEW_LINE = System.getProperty("line.separator");
@@ -23,7 +23,7 @@ public class TikzFactory {
 		sb.append("\\draw[draw=none,fill=color"+((Activity) activityView.getModel()).getId()+"] ("+activityView.getX()/HSCALE+","+activityView.getY()/VSCALE+") rectangle ("+activityView.getWidth()/HSCALE+","+activityView.getHeight()/VSCALE+");");
 		return sb.toString();
 	}
-	public static String SequenceToTikz(SequenceView sequenceView)
+	public static String SequenceToTikz(SubSequenceView sequenceView)
 	{
 		StringBuilder sb = new StringBuilder();
 		for(int i=0; i <sequenceView.getComponentCount(); i++)
