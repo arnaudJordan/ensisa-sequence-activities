@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Phases {
+public class Phases implements Iterable<Phase> {
 	private List<Phase> phases;
 	
 	public Phases()
@@ -18,6 +18,10 @@ public class Phases {
 
 	public boolean isEmpty() {
 		return phases.isEmpty();
+	}
+
+	public int indexOf(Object o) {
+		return phases.indexOf(o);
 	}
 
 	public Iterator<Phase> iterator() {
