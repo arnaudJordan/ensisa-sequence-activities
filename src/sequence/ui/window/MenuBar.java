@@ -17,7 +17,6 @@ import javax.xml.parsers.SAXParserFactory;
 
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
-import sequence.ui.component.sequence.SequenceView;
 import sequence.utilities.Config;
 
 
@@ -62,7 +61,7 @@ public class MenuBar extends JMenuBar {
 						parser.parse(parsedFile, sequenceHandler);
 						
 						Sequence sequence = sequenceHandler.getSequence();
-						((MainWindow) parent).addSequence(new SequenceView(sequence));
+						((MainWindow) parent).addSequence(sequence);
 					}catch(Exception ex){
 						ex.printStackTrace();
 						JOptionPane.showMessageDialog(parent, ex.toString(), ex.getClass().toString(), JOptionPane.ERROR_MESSAGE);
@@ -82,7 +81,7 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				EventQueue.invokeLater(new Runnable(){
 					public void run(){
-						new OpenedFilesSelectWindow(((MainWindow) parent).getSequence(), fc);
+						new OpenedFilesSelectWindow(((MainWindow) parent).getSequenceContainers(), fc);
 					}
 				});
 			}
@@ -111,26 +110,26 @@ public class MenuBar extends JMenuBar {
 		
 		JMenu edit = new JMenu("Edit");
 		JMenuItem undo = new JMenuItem("Undo");
-		undo.setMnemonic('Z');
-		undo.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.Event.CTRL_MASK));
+        undo.setMnemonic('Z');
+        undo.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.Event.CTRL_MASK));
 
-		undo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				((MainWindow) parent).getProcessor().Undo();
-			}
-		});
-		edit.add(undo);
-		JMenuItem redo = new JMenuItem("Undo");
-		redo.setMnemonic('Y');
-		redo.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.Event.CTRL_MASK));
+        undo.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                        ((MainWindow) parent).getProcessor().Undo();
+                }
+        });
+        edit.add(undo);
+        JMenuItem redo = new JMenuItem("Redo");
+        redo.setMnemonic('Y');
+        redo.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.Event.CTRL_MASK));
 
-		redo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				((MainWindow) parent).getProcessor().Redo();
-			}
-		});
-		edit.add(redo);
-		
+        redo.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                        ((MainWindow) parent).getProcessor().Redo();
+                }
+        });
+        edit.add(redo);
+
 		add(edit);
 		JMenu help = new JMenu("Help");
 
@@ -140,10 +139,10 @@ public class MenuBar extends JMenuBar {
 
 		info.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(((MainWindow) parent).getSequence()!=null)
+				if(((MainWindow) parent).getSequenceContainers()!=null)
 					EventQueue.invokeLater(new Runnable(){
 						public void run(){
-							new InfoWindow("Information", ((MainWindow) parent).getSequence());
+							new InfoWindow("Information", ((MainWindow) parent).getSequenceContainers());
 						}
 					});
 			}
@@ -156,7 +155,7 @@ public class MenuBar extends JMenuBar {
 
 		option.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(((MainWindow) parent).getSequence()!=null)
+				if(((MainWindow) parent).getSequenceContainers()!=null)
 					EventQueue.invokeLater(new Runnable(){
 						public void run(){
 							new OptionWindow(parent);

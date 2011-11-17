@@ -31,8 +31,8 @@ public class ActivityContractedRenderer extends ActivityRenderer {
 		
 		ActivityRenderingModel renderingModel = ((ActivityRenderingModel)getView().getRenderingModel());
 		int parentWidth = getView().getParent().getWidth();
-		int activityWidth = (int) (activity.getActivitytime().getDuration() * renderingModel.getScale());
-		g.fillRect(0, 0, activityWidth, (int) (renderingModel.getHeight() * renderingModel.getScale()));
+		int activityWidth = (int) (activity.getActivitytime().getDuration() * renderingModel.getHScale());
+		g.fillRect(0, 0, activityWidth, (int) (renderingModel.getHeight() * renderingModel.getVScale()));
 		if(parentWidth<activityWidth)
 		{
 			this.contracted = true;
@@ -59,11 +59,11 @@ public class ActivityContractedRenderer extends ActivityRenderer {
 		if(activity != null && renderingModel != null)
 		{
 			int parentWidth = getView().getParent().getWidth();
-			int activityWidth = (int) (activity.getActivitytime().getDuration() * renderingModel.getScale());
+			int activityWidth = (int) (activity.getActivitytime().getDuration() * renderingModel.getHScale());
 			if(parentWidth<activityWidth)
-				return new Dimension(parentWidth, (int) (renderingModel.getHeight() * renderingModel.getScale()));
+				return new Dimension(parentWidth, (int) (renderingModel.getHeight() * renderingModel.getVScale()));
 			else
-				return new Dimension(activityWidth, (int) (renderingModel.getHeight() * renderingModel.getScale()));
+				return new Dimension(activityWidth, (int) (renderingModel.getHeight() * renderingModel.getVScale()));
 		}
 			
 		return super.getPreferredSize();

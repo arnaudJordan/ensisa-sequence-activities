@@ -18,7 +18,7 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 
 import sequence.model.Sequence;
-import sequence.ui.component.sequence.SequenceView;
+import sequence.ui.component.sequence.SequenceContainer;
 
 public class OpenedFilesSelectWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -28,15 +28,15 @@ public class OpenedFilesSelectWindow extends JFrame {
     private JList jList;
     private JScrollPane scrollPane;
 
-	public OpenedFilesSelectWindow(List<SequenceView> list, final JFileChooser fc) throws HeadlessException {
+	public OpenedFilesSelectWindow(List<SequenceContainer> list, final JFileChooser fc) throws HeadlessException {
 		super("Select file");
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		initComponents();
 		
 		DefaultListModel listModel = new DefaultListModel();
-		for(int i=0; i<list.size();i++)
+		for(SequenceContainer current : list)
 		{
-			listModel.addElement(list.get(i).getModel());
+			listModel.addElement(current.getSummarizedSequenceView().getModel());
 		}
 		
 		class MyCellRenderer extends DefaultListCellRenderer{

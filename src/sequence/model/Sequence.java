@@ -34,6 +34,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		this.workflowID=sequence.workflowID;
 	}
 	
+	public Sequence(String workflowID, List<Activity> activities) {
+		this.activities=activities;
+		this.workflowID=workflowID;
+	}
+	
 	public String getWorkflowID() {
 		return workflowID;
 	}
@@ -46,8 +51,16 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return activities.isEmpty();
 	}
 
+	public void clear() {
+		activities.clear();
+	}
+
 	public boolean contains(Object o) {
 		return activities.contains(o);
+	}
+
+	public int indexOf(Object o) {
+		return activities.indexOf(o);
 	}
 
 	public Iterator<Activity> iterator() {
@@ -132,6 +145,30 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 				phasesDuration.add(getDate().getStopTime() - phases.get(i).getDate());
 		}
 		return phasesDuration;
+	}
+	
+	public List<Activity> getActivitiesInPhase(Phase phase) {
+		List<Activity> activities = new ArrayList<Activity>();
+		Iterator<Activity> it = this.activities.iterator();
+		boolean stop = false;
+		while(!stop && it.hasNext()) {
+			Activity current = it.next();
+			if(current.getActivitytime().getStartTime() >= phase.getDate()
+					&& current.getActivitytime().getStartTime() <= phase.getDate()+phaseDuration().get(phases.indexOf(phase)))
+				activities.add(current);
+			else if(!activities.isEmpty())
+				stop = true;
+		}
+		return activities;
+	}
+	
+	public Phase getPhaseOfActivity(Activity activity) {
+		for(Phase current : phases) {
+			if(current.getDate() <= activity.getActivitytime().getStartTime()
+					&& current.getDate()+phaseDuration().get(phases.indexOf(current)) >= activity.getActivitytime().getStartTime())
+				return current;
+		}
+		return null;
 	}
 	
 	public int activityNumber()

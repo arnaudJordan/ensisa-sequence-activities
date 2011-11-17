@@ -32,9 +32,8 @@ import sequence.processor.SafeProcessor;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.SequenceContainer;
-import sequence.ui.component.sequence.SequenceController;
-import sequence.ui.component.sequence.SequenceRenderingModel;
-import sequence.ui.component.sequence.SequenceView;
+import sequence.ui.component.sequence.subSequence.SubSequenceRenderingModel;
+import sequence.ui.component.sequence.subSequence.SubSequenceView;
 import sequence.utilities.Config;
 
 public class MainWindow extends JFrame {
@@ -42,15 +41,13 @@ public class MainWindow extends JFrame {
 	private Config config;
 	
 	/* Model */
-	private List<SequenceView> sequenceViews;
-	private List<SequenceContainer> sequenceContainer;
+	private List<SequenceContainer> sequenceContainers;
 	private Processor processor;
 	
 	/* Window elements */
 	private JPanel mainPane;
 	private JSlider scaleSlider;
 	private JTextField thresholdField;
-	
 
 	public MainWindow(String title) throws HeadlessException {
 		super(title);
@@ -68,8 +65,7 @@ public class MainWindow extends JFrame {
 
 		this.setJMenuBar(new MenuBar(this));
 
-		this.sequenceViews = new ArrayList<SequenceView>();
-		this.sequenceContainer = new ArrayList<SequenceContainer>();
+		this.sequenceContainers = new ArrayList<SequenceContainer>();
 		this.mainPane=new JPanel();
 		
 		this.mainPane.setLayout(new BoxLayout(this.mainPane, BoxLayout.PAGE_AXIS));
@@ -106,12 +102,15 @@ public class MainWindow extends JFrame {
 				SAXParserFactory factory = SAXParserFactory.newInstance();
 				SAXParser parser = factory.newSAXParser();
 				SequenceHandler sequenceHandler = new SequenceHandler();
-				parser.parse(lastOpenedFiles[i], sequenceHandler);
-
+				parser.parse(lastOpenedFiles[i], sequenceHandler);				
+				
 				Sequence sequence = sequenceHandler.getSequence();
-				SequenceView view= new SequenceView(sequence);
-				new SequenceController(sequence, view);
-				addSequence(view);
+				/*SummarizedSequenceView summarizedView = new SummarizedSequenceView(sequence);
+				new SummarizedSequenceController(sequence, summarizedView);
+				SubSequenceView subView = new SubSequenceView(sequence);
+				new SubSequenceController(sequence, subView);
+				addSequence(summarizedView, subView);*/
+				addSequence(sequence);
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}
@@ -134,10 +133,11 @@ public class MainWindow extends JFrame {
 				JSlider s = (JSlider) source;
 				if (!s.getValueIsAdjusting());
 				{
-					for(SequenceView current : sequenceViews) {
-						for(int i=0; i<current.getComponentCount() ; i++) {
-							((ActivityRenderingModel)((ActivityView)current.getComponent(i)).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
-							((JComponent)current.getComponent(i)).revalidate();
+					for(SequenceContainer current : sequenceContainers) {
+						SubSequenceView subSequence = current.getSubSequenceView();
+						for(int i=0; i<subSequence.getComponentCount() ; i++) {
+							((ActivityRenderingModel)((ActivityView)subSequence.getComponent(i)).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
+							((JComponent)subSequence.getComponent(i)).revalidate();
 						}
 					}
 				}
@@ -160,8 +160,8 @@ public class MainWindow extends JFrame {
 			{
 				Object source = actionEvent.getSource();
 				JTextField s = (JTextField) source;
-				for(SequenceView current : sequenceViews) {
-					((SequenceRenderingModel)current.getRenderingModel()).setDurationThreshold(Integer.parseInt(s.getText()));
+				for(SequenceContainer current : sequenceContainers) {
+					((SubSequenceRenderingModel)current.getSubSequenceView().getRenderingModel()).setDurationThreshold(Integer.parseInt(s.getText()));
 					current.revalidate();
 				}
 			}
@@ -179,27 +179,21 @@ public class MainWindow extends JFrame {
 		this.config = config;
 	}
 
-	public List<SequenceView> getSequence() {
-		return sequenceViews;
+	public List<SequenceContainer> getSequenceContainers() {
+		return sequenceContainers;
 	}
-
-	public void setSequence(List<SequenceView> sequenceViews) {
-		this.sequenceViews = sequenceViews;
-	}
-	public void addSequence(SequenceView sequenceView)
+	public void addSequence(Sequence sequence)
 	{
-		SequenceContainer sc = new SequenceContainer(sequenceView, this);
-		this.sequenceViews.add(sequenceView);
-		this.sequenceContainer.add(sc);
+		SequenceContainer sc = new SequenceContainer(sequence, this);
+		this.sequenceContainers.add(sc);
 		mainPane.add(sc);
-		this.validate();
+		validate();
 		pack();
 		setVisible(true);
 	}
 	public void removeSequence(SequenceContainer sequenceContainer)
 	{
-		this.sequenceContainer.remove(sequenceContainer);
-		this.sequenceViews.remove(sequenceContainer.getSequenceView());
+		this.sequenceContainers.remove(sequenceContainer);
 		this.mainPane.remove(sequenceContainer);
 		this.pack();
 	}
@@ -207,6 +201,7 @@ public class MainWindow extends JFrame {
 	public Processor getProcessor() {
 		return processor;
 	}
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable(){
 			public void run(){

@@ -1,19 +1,19 @@
-package sequence.ui.component.sequence;
+package sequence.ui.component.sequence.subSequence;
 
 import sequence.mvc.DefaultModel;
 import sequence.mvc.RenderingModel;
 
-public class SequenceRenderingModel extends DefaultModel implements RenderingModel {
+public class SubSequenceRenderingModel extends DefaultModel implements RenderingModel {
 
 	private static final int DEFAULT_DURATION_THRESHOLD = 0;
 	
 	private int durationThreshold;
 	
-	public SequenceRenderingModel() {
+	public SubSequenceRenderingModel() {
 		this(DEFAULT_DURATION_THRESHOLD);
 	}
 	
-	public SequenceRenderingModel(int durationThreshold) {
+	public SubSequenceRenderingModel(int durationThreshold) {
 		setDurationThreshold(durationThreshold);
 	}
 

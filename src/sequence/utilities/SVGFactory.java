@@ -7,7 +7,7 @@ import sequence.model.activity.Activity;
 import sequence.ui.component.activity.ActivityContractedRenderer;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
-import sequence.ui.component.sequence.SequenceView;
+import sequence.ui.component.sequence.subSequence.SubSequenceView;
 
 public class SVGFactory {
 	final static String NEW_LINE = System.getProperty("line.separator");
@@ -42,7 +42,7 @@ public class SVGFactory {
 		sb.append(NEW_LINE);
 		return sb.toString();
 	}
-	public static String SequenceToSVG(SequenceView sequenceView)
+	public static String SequenceToSVG(SubSequenceView sequenceView)
 	{
 		Sequence sequence = (Sequence) sequenceView.getModel();
 		StringBuilder sb = new StringBuilder();
