@@ -28,7 +28,7 @@ public class SequenceContainer extends JPanel {
 		this.mainWindow = mainWindow;
 		summarizedSequenceView = new SummarizedSequenceView(sequence, this);
 		new SummarizedSequenceController(sequence, summarizedSequenceView);
-		subSequenceView = new SubSequenceView(sequence);
+		subSequenceView = new SubSequenceView(sequence, this);
 		new SubSequenceController(sequence, subSequenceView);
 		
 		setBackground(Color.WHITE);

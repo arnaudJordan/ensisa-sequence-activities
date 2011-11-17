@@ -25,7 +25,7 @@ public class testSequence extends JFrame {
 			parser.parse(parsedFile, sequenceHandler);
 			
 			Sequence model = new Sequence(sequenceHandler.getSequence());
-			SubSequenceView view = new SubSequenceView(model);
+			SubSequenceView view = new SubSequenceView(model, this);
 
 			this.add(view);
 			this.pack();

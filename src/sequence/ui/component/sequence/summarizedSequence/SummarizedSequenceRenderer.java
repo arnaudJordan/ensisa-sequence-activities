@@ -28,7 +28,9 @@ public class SummarizedSequenceRenderer extends DefaultRenderer implements Rende
 		ColorFactory colorFactory = new ColorFactory(sequence);
 		for(Activity current : sequence) {
 			ActivityView activityView = new ActivityView(current);
-			activityView.setRenderingModel(new ActivityRenderingModel(colorFactory.createColor(current), scale));
+			ActivityRenderingModel renderingModel = (ActivityRenderingModel) activityView.getRenderingModel();
+			renderingModel.setColor(colorFactory.createColor(current));
+			renderingModel.setHScale(scale);
 			new ActivitySummarizedController(current, activityView);
 			getView().add(activityView);
 		}
