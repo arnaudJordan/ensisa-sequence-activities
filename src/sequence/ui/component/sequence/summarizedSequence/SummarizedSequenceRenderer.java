@@ -29,7 +29,6 @@ public class SummarizedSequenceRenderer extends DefaultRenderer implements Rende
 		for(Activity current : sequence) {
 			ActivityView activityView = new ActivityView(current);
 			activityView.setRenderingModel(new ActivityRenderingModel(colorFactory.createColor(current), scale));
-			((ActivityRenderingModel)activityView.getRenderingModel()).setHeight((int)(((ActivityRenderingModel)activityView.getRenderingModel()).getHeight()/scale));
 			new ActivitySummarizedController(current, activityView);
 			getView().add(activityView);
 		}
@@ -50,6 +49,6 @@ public class SummarizedSequenceRenderer extends DefaultRenderer implements Rende
 	}
 	
 	public Dimension getPreferredSize() {
-    	return new Dimension(getView().getParent().getWidth(), /*(int) getView().getLayout().minimumLayoutSize(this.getView()).getHeight()*/10);
+    	return new Dimension(getView().getParent().getWidth(), (int) getView().getLayout().minimumLayoutSize(this.getView()).getHeight());
     }
 }
