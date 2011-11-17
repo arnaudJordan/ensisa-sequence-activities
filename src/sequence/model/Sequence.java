@@ -147,6 +147,30 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return phasesDuration;
 	}
 	
+	public List<Activity> getActivitiesInPhase(Phase phase) {
+		List<Activity> activities = new ArrayList<Activity>();
+		Iterator<Activity> it = this.activities.iterator();
+		boolean stop = false;
+		while(!stop && it.hasNext()) {
+			Activity current = it.next();
+			if(current.getActivitytime().getStartTime() >= phase.getDate()
+					&& current.getActivitytime().getStartTime() <= phase.getDate()+phaseDuration().get(phases.indexOf(phase)))
+				activities.add(current);
+			else if(!activities.isEmpty())
+				stop = true;
+		}
+		return activities;
+	}
+	
+	public Phase getPhaseOfActivity(Activity activity) {
+		for(Phase current : phases) {
+			if(current.getDate() <= activity.getActivitytime().getStartTime()
+					&& current.getDate()+phaseDuration().get(phases.indexOf(current)) >= activity.getActivitytime().getStartTime())
+				return current;
+		}
+		return null;
+	}
+	
 	public int activityNumber()
 	{
 		return activities.size();

@@ -26,11 +26,17 @@ public class SummarizedSequenceController extends Controller implements ActionLi
 		SummarizedSequenceView view = (SummarizedSequenceView) getView();
 		List<Activity> selectedActivities = view.getSelectedActivities();
 		if(!selectedActivities.isEmpty()) {
-			Collections.sort(selectedActivities, new Comparator<Activity>() {
-				public int compare(Activity a1, Activity a2) {
-					return a1.getId() < a2.getId() ? -1 : 1;
-				}
-			});
+			if(selectedActivities.size() == 1) {
+				Activity selectedActivity = selectedActivities.get(0);
+				Sequence sequence = (Sequence) view.getModel();
+				selectedActivities = sequence.getActivitiesInPhase(sequence.getPhaseOfActivity(selectedActivity));
+			} else {
+				Collections.sort(selectedActivities, new Comparator<Activity>() {
+					public int compare(Activity a1, Activity a2) {
+						return a1.getId() < a2.getId() ? -1 : 1;
+					}
+				});
+			}
 			Sequence subSequenceModel = new Sequence(((Sequence) view.getModel()).getWorkflowID(), selectedActivities);
 			SubSequenceView subView = ((SequenceContainer) view.getParent()).getSubSequenceView();
 			subView.setModel(subSequenceModel);

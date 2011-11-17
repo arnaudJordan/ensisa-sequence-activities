@@ -16,6 +16,11 @@ public class Phase {
 	public void setName(String name) {
 		this.name=name;
 	}
+	public boolean equals(Object o) {
+		if(this == o) return true;
+		if(!(o instanceof Phase)) return false;
+	    return this.date == (((Phase)o).getDate()) && this.name.equalsIgnoreCase(((Phase) o).getName());
+	}
 	
 	@Override
 	public String toString() {
