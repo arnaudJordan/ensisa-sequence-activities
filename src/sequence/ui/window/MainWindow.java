@@ -30,11 +30,8 @@ import sequence.parser.SequenceHandler;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.SequenceContainer;
-import sequence.ui.component.sequence.subSequence.SubSequenceController;
 import sequence.ui.component.sequence.subSequence.SubSequenceRenderingModel;
 import sequence.ui.component.sequence.subSequence.SubSequenceView;
-import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceController;
-import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
 import sequence.utilities.Config;
 
 public class MainWindow extends JFrame {
@@ -98,14 +95,15 @@ public class MainWindow extends JFrame {
 				SAXParserFactory factory = SAXParserFactory.newInstance();
 				SAXParser parser = factory.newSAXParser();
 				SequenceHandler sequenceHandler = new SequenceHandler();
-				parser.parse(lastOpenedFiles[i], sequenceHandler);
-
+				parser.parse(lastOpenedFiles[i], sequenceHandler);				
+				
 				Sequence sequence = sequenceHandler.getSequence();
-				SummarizedSequenceView summarizedView = new SummarizedSequenceView(sequence);
+				/*SummarizedSequenceView summarizedView = new SummarizedSequenceView(sequence);
 				new SummarizedSequenceController(sequence, summarizedView);
 				SubSequenceView subView = new SubSequenceView(sequence);
 				new SubSequenceController(sequence, subView);
-				addSequence(summarizedView, subView);
+				addSequence(summarizedView, subView);*/
+				addSequence(sequence);
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}
@@ -177,9 +175,9 @@ public class MainWindow extends JFrame {
 	public List<SequenceContainer> getSequenceContainers() {
 		return sequenceContainers;
 	}
-	public void addSequence(SummarizedSequenceView summarizedSequenceView, SubSequenceView subSequenceView)
+	public void addSequence(Sequence sequence)
 	{
-		SequenceContainer sc = new SequenceContainer(summarizedSequenceView, subSequenceView, this);
+		SequenceContainer sc = new SequenceContainer(sequence, this);
 		this.sequenceContainers.add(sc);
 		mainPane.add(sc);
 		validate();
