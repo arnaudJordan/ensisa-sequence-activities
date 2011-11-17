@@ -30,6 +30,7 @@ public class SequenceContainer extends JPanel {
 		new SummarizedSequenceController(sequence, summarizedSequenceView);
 		subSequenceView = new SubSequenceView(sequence, this);
 		new SubSequenceController(sequence, subSequenceView);
+		subSequenceView.setVisible(false);
 		
 		setBackground(Color.WHITE);
 		setBorder(BorderFactory.createTitledBorder(((Sequence)summarizedSequenceView.getModel()).getWorkflowID()));
@@ -45,6 +46,7 @@ public class SequenceContainer extends JPanel {
 		});
 		add(button, BorderLayout.NORTH);
 		add(summarizedSequenceView, BorderLayout.CENTER);
+		add(subSequenceView, BorderLayout.SOUTH);
 		setVisible(true);
 	}
 	

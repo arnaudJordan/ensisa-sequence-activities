@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.swing.JComponent;
+
 import sequence.model.Sequence;
 import sequence.model.activity.Activity;
 import sequence.mvc.Controller;
@@ -40,7 +42,8 @@ public class SummarizedSequenceController extends Controller implements ActionLi
 			Sequence subSequenceModel = new Sequence(((Sequence) view.getModel()).getWorkflowID(), selectedActivities);
 			SubSequenceView subView = ((SequenceContainer) view.getParent()).getSubSequenceView();
 			subView.setModel(subSequenceModel);
-			getView().getParent().add(subView, BorderLayout.SOUTH);
+			if(!subView.isVisible())
+				subView.setVisible(true);
 		}
 	}
 
