@@ -1,4 +1,4 @@
-package sequence.ui.component.activity;
+package sequence.ui.component.activity.controller;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -12,12 +12,14 @@ import sequence.mvc.Model;
 import sequence.mvc.View;
 import sequence.processor.ColorChange;
 import sequence.processor.CommandList;
+import sequence.ui.component.activity.ActivityRenderingModel;
+import sequence.ui.component.activity.ActivityView;
 import sequence.ui.window.MainWindow;
 
-public class ActivityMenuItemController extends Controller implements
+public class ActivityMenuColorController extends Controller implements
 		ActionListener {
 
-	public ActivityMenuItemController(Model model, View view) {
+	public ActivityMenuColorController(Model model, View view) {
 		super(model, view);
 	}
 
