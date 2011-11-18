@@ -109,7 +109,6 @@ public class EditActivityWindow extends javax.swing.JFrame {
         cancelButton = new javax.swing.JButton();
         id = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Edit Activity");
         setAlwaysOnTop(true);
 
