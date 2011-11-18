@@ -1,22 +1,15 @@
 package sequence.ui.component.sequence.summarizedSequence;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import javax.swing.JComponent;
-
-import sequence.model.Sequence;
-import sequence.model.activity.Activity;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
+import sequence.processor.Command;
+import sequence.processor.DisplaySubSequence;
 import sequence.ui.component.sequence.SequenceContainer;
-import sequence.ui.component.sequence.subSequence.SubSequenceView;
+import sequence.ui.window.MainWindow;
 
 public class SummarizedSequenceController extends Controller implements ActionListener  {
 	
@@ -25,26 +18,8 @@ public class SummarizedSequenceController extends Controller implements ActionLi
 	}	
 
 	public void actionPerformed(ActionEvent e) {
-		SummarizedSequenceView view = (SummarizedSequenceView) getView();
-		List<Activity> selectedActivities = view.getSelectedActivities();
-		if(!selectedActivities.isEmpty()) {
-			if(selectedActivities.size() == 1) {
-				Activity selectedActivity = selectedActivities.get(0);
-				Sequence sequence = (Sequence) view.getModel();
-				selectedActivities = sequence.getActivitiesInPhase(sequence.getPhaseOfActivity(selectedActivity));
-			} else {
-				Collections.sort(selectedActivities, new Comparator<Activity>() {
-					public int compare(Activity a1, Activity a2) {
-						return a1.getId() < a2.getId() ? -1 : 1;
-					}
-				});
-			}
-			Sequence subSequenceModel = new Sequence(((Sequence) view.getModel()).getWorkflowID(), selectedActivities);
-			SubSequenceView subView = ((SequenceContainer) view.getParent()).getSubSequenceView();
-			subView.setModel(subSequenceModel);
-			if(!subView.isVisible())
-				subView.setVisible(true);
-		}
+		Command command = new DisplaySubSequence((SequenceContainer) getView().getParent());
+		((MainWindow) getView().getTopLevelAncestor()).getProcessor().Do(command);
 	}
 
 	public void mousePressed(MouseEvent e) {
