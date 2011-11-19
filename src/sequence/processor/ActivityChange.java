@@ -17,7 +17,7 @@ public class ActivityChange extends Command {
 	{
 		this.model=model;
 		this.newModel=newModel;
-		this.undo=new ActivityChange(newModel, model, this);
+		this.undo=new ActivityChange(model, new Activity(model), this);
 	}
 	public ActivityChange(Activity model, Activity newModel, ActivityChange undo) {
 		this.model=model;
@@ -27,7 +27,12 @@ public class ActivityChange extends Command {
 	@Override
 	public void Do() {
 		Activity oldmodel = (Activity) this.model;
-		Activity tempModel = new Activity(oldmodel);
+		oldmodel.setState(newModel.getState());
+		oldmodel.setType(newModel.getType());
+		oldmodel.setDiscipline(newModel.getDiscipline());
+		oldmodel.setActuator(newModel.getActuator());
+		oldmodel.setAction(newModel.getAction());
+		oldmodel.setTreatedStructure(newModel.getTreatedStructure());
 		oldmodel.setNote(newModel.getNote());
 	}
 }

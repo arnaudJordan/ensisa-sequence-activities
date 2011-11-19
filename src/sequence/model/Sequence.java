@@ -225,6 +225,21 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		}
 		return new int[]{actions.size(), anatomicStructures.size(),usedInstruments.size()};
 	}
+	public Object[] ActionsStructuresInstruments()
+	{
+		Set<Action> actions = new HashSet<Action>();
+		Set<AnatomicStructure> anatomicStructures = new HashSet<AnatomicStructure>();
+		Set<UsedInstruments> usedInstruments = new HashSet<UsedInstruments>();
+		for(Activity current : activities) {
+			if(!actions.contains(current.getAction()))
+				actions.add(current.getAction());
+			if(!anatomicStructures.contains(current.getTreatedStructure()))
+				anatomicStructures.add(current.getTreatedStructure());
+			if(!usedInstruments.contains(current.getUsedInstrument()))
+				usedInstruments.add(current.getUsedInstrument());
+		}
+		return new Object[]{actions.toArray(), anatomicStructures.toArray(),usedInstruments.toArray()};
+	}
 	
 	public void toFile(File file) throws IOException
 	{
