@@ -15,25 +15,32 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import sequence.model.Actuator;
 import sequence.model.Note;
+import sequence.model.Sequence;
 import sequence.model.activity.Action;
 import sequence.model.activity.Activity;
 import sequence.model.activity.AnatomicStructure;
 import sequence.processor.ActivityChange;
 import sequence.processor.Processor;
-
+import javax.swing.DefaultComboBoxModel;
 /**
  *
  * @author jordan
  */
 public class EditActivityWindow extends javax.swing.JFrame {
+    private Sequence sequence;
 
     /** Creates new form EditActivityWindow */
     public EditActivityWindow() {
         initComponents();
     }
-    public EditActivityWindow(final MainWindow mainWindow, final Activity activity) {
+    public EditActivityWindow(final MainWindow mainWindow, final Activity activity, final Sequence sequence) {
+        this.sequence=sequence;
         initComponents();
+        
         id.setText(Integer.toString(activity.getId()));
+        stateEdit.setModel(new DefaultComboBoxModel(sequence.states()));
+        disciplineEdit.setModel(new DefaultComboBoxModel(sequence.disciplines()));
+        typeEdit.setModel(new DefaultComboBoxModel(sequence.types()));
         actuatorEdit.setText(activity.getActuator().toString());
         actionEdit.setText(activity.getAction().toString());
         usedInstrumentsEdit.setText(activity.getUsedInstrument().toString());
@@ -112,7 +119,7 @@ public class EditActivityWindow extends javax.swing.JFrame {
         setTitle("Edit Activity");
         setAlwaysOnTop(true);
 
-        title.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        title.setFont(new java.awt.Font("Tahoma", 1, 18));
         title.setText("Activity Edition");
 
         state.setText("State");
@@ -175,7 +182,7 @@ public class EditActivityWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(noteEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
+                    .addComponent(noteEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(state)
@@ -202,16 +209,16 @@ public class EditActivityWindow extends javax.swing.JFrame {
                             .addComponent(endTime))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(endTimeEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
-                            .addComponent(durationEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
-                            .addComponent(startTimeEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)))
+                            .addComponent(endTimeEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                            .addComponent(durationEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                            .addComponent(startTimeEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(cancelButton)
                         .addGap(18, 18, 18)
                         .addComponent(saveButton))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(title)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
                         .addComponent(id)))
                 .addContainerGap())
         );

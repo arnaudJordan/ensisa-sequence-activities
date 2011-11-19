@@ -27,6 +27,7 @@ public class ActivityChange extends Command {
 	@Override
 	public void Do() {
 		Activity oldmodel = (Activity) this.model;
+		Activity tempModel = new Activity(oldmodel);
 		oldmodel.setNote(newModel.getNote());
 	}
 }

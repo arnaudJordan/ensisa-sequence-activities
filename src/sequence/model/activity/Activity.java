@@ -5,7 +5,7 @@ import sequence.model.Note;
 import sequence.mvc.DefaultModel;
 import sequence.mvc.Model;
 
-public class Activity extends DefaultModel implements Model {
+public class Activity extends DefaultModel {
 	private final int id;
 	private final String state;
 	private final int discipline;
