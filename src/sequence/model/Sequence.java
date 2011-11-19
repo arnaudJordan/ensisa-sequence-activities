@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import sequence.model.activity.Action;
 import sequence.model.activity.Activity;
@@ -180,7 +182,33 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	{
 		return completeDuration()/activityNumber();
 	}
-	
+	public Object[] states()
+	{
+		Set<String> set = new HashSet<String>();
+		for(Activity activity : activities)
+		{
+			set.add(activity.getState());
+		}
+		return set.toArray();
+	}
+	public Object[] disciplines()
+	{
+		Set<Integer> set = new HashSet<Integer>();
+		for(Activity activity : activities)
+		{
+			set.add(activity.getDiscipline());
+		}
+		return set.toArray();
+	}
+	public Object[] types()
+	{
+		Set<Integer> set = new HashSet<Integer>();
+		for(Activity activity : activities)
+		{
+			set.add(activity.getType());
+		}
+		return set.toArray();
+	}
 	
 	public int[] ActionStructureInstrumentNumber()
 	{
