@@ -7,9 +7,9 @@ import sequence.mvc.Model;
 
 public class Activity extends DefaultModel {
 	private final int id;
-	private final String state;
-	private final int discipline;
-	private final int type;
+	private String state;
+	private int discipline;
+	private int type;
 	
 	private Activitytime activitytime;
 	private Actuator actuator;
@@ -38,6 +38,10 @@ public class Activity extends DefaultModel {
 		this.activitytime=activity.getActivitytime();
 		this.actuator=activity.getActuator();
 		this.usedInstrument=activity.getUsedInstrument();
+	}
+	public void setState(String state) {
+		this.state=state;
+		
 	}
 
 	public Note getNote() {
@@ -127,5 +131,13 @@ public class Activity extends DefaultModel {
 		sb.append("\t"+note.toXML()+NEW_LINE);
 		sb.append("</activity>"+NEW_LINE);
 		return sb.toString();
+	}
+
+	public void setType(int type) {
+		this.type=type;
+	}
+
+	public void setDiscipline(int discipline) {
+		this.discipline=discipline;
 	}
 }

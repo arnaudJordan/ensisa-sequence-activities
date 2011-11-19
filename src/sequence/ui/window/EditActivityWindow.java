@@ -38,11 +38,24 @@ public class EditActivityWindow extends javax.swing.JFrame {
         initComponents();
         
         id.setText(Integer.toString(activity.getId()));
-        stateEdit.setModel(new DefaultComboBoxModel(sequence.states()));
-        disciplineEdit.setModel(new DefaultComboBoxModel(sequence.disciplines()));
-        typeEdit.setModel(new DefaultComboBoxModel(sequence.types()));
+        DefaultComboBoxModel stateModel = new DefaultComboBoxModel(sequence.states());
+        stateEdit.setModel(stateModel);
+        stateEdit.setSelectedIndex(stateModel.getIndexOf(activity.getState()));
+        
+        DefaultComboBoxModel disciplineModel = new DefaultComboBoxModel(sequence.disciplines());
+        disciplineEdit.setModel(disciplineModel);
+        disciplineEdit.setSelectedIndex(disciplineModel.getIndexOf(activity.getDiscipline()));
+        
+        DefaultComboBoxModel typeModel = new DefaultComboBoxModel(sequence.types());
+        typeEdit.setModel(typeModel);
+        typeEdit.setSelectedIndex(typeModel.getIndexOf(activity.getType()));
+        
         actuatorEdit.setText(activity.getActuator().toString());
-        actionEdit.setText(activity.getAction().toString());
+        
+        DefaultComboBoxModel actionModel = new DefaultComboBoxModel((Object[]) sequence.ActionsStructuresInstruments()[0]);
+        actionEdit.setModel(actionModel);
+        actionEdit.setSelectedItem(activity.getAction().toString());
+        
         usedInstrumentsEdit.setText(activity.getUsedInstrument().toString());
         anatomicStructureEdit.setText(activity.getTreatedStructure().toString());
         startTimeEdit.setText(Integer.toString(activity.getActivitytime().getStartTime()));
@@ -64,8 +77,8 @@ public class EditActivityWindow extends javax.swing.JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                Activity newActivity = new Activity(activity.getId(), activity.getState(), activity.getDiscipline(), activity.getType());
-                newActivity.setAction(new Action(actionEdit.getText()));
+                Activity newActivity = new Activity(activity.getId(), stateEdit.getSelectedItem().toString(), Integer.parseInt(disciplineEdit.getSelectedItem().toString()), Integer.parseInt(typeEdit.getSelectedItem().toString()));
+                newActivity.setAction(new Action(actionEdit.getSelectedItem().toString()));
                 newActivity.setActuator(new Actuator());
                 newActivity.setNote(new Note(noteText.getText()));
                 newActivity.setTreatedStructure(new AnatomicStructure(anatomicStructureEdit.getText()));
@@ -77,6 +90,7 @@ public class EditActivityWindow extends javax.swing.JFrame {
                 frame.setVisible(false);
             }
         });
+        
     }
 
     /** This method is called from within the constructor to
@@ -101,7 +115,6 @@ public class EditActivityWindow extends javax.swing.JFrame {
         usedInstruments = new javax.swing.JLabel();
         anatomicStructure = new javax.swing.JLabel();
         note = new javax.swing.JLabel();
-        actionEdit = new javax.swing.JTextField();
         usedInstrumentsEdit = new javax.swing.JTextField();
         anatomicStructureEdit = new javax.swing.JTextField();
         noteEdit = new javax.swing.JScrollPane();
@@ -115,6 +128,7 @@ public class EditActivityWindow extends javax.swing.JFrame {
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         id = new javax.swing.JLabel();
+        actionEdit = new javax.swing.JComboBox();
 
         setTitle("Edit Activity");
         setAlwaysOnTop(true);
@@ -128,10 +142,14 @@ public class EditActivityWindow extends javax.swing.JFrame {
 
         type.setText("Type");
 
+        stateEdit.setEditable(true);
         stateEdit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        stateEdit.setSelectedIndex(2);
 
+        disciplineEdit.setEditable(true);
         disciplineEdit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        typeEdit.setEditable(true);
         typeEdit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         actuator.setText("Actuator");
@@ -145,8 +163,6 @@ public class EditActivityWindow extends javax.swing.JFrame {
         anatomicStructure.setText("AnatomicStructure");
 
         note.setText("Note");
-
-        actionEdit.setText("action");
 
         usedInstrumentsEdit.setText("usedInstruments");
 
@@ -175,6 +191,9 @@ public class EditActivityWindow extends javax.swing.JFrame {
 
         id.setText("ID");
 
+        actionEdit.setEditable(true);
+        actionEdit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,14 +213,14 @@ public class EditActivityWindow extends javax.swing.JFrame {
                             .addComponent(anatomicStructure)
                             .addComponent(note))
                         .addGap(52, 52, 52)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(stateEdit, 0, 299, Short.MAX_VALUE)
-                            .addComponent(disciplineEdit, javax.swing.GroupLayout.Alignment.LEADING, 0, 299, Short.MAX_VALUE)
-                            .addComponent(typeEdit, javax.swing.GroupLayout.Alignment.LEADING, 0, 299, Short.MAX_VALUE)
-                            .addComponent(actuatorEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                            .addComponent(actionEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                            .addComponent(usedInstrumentsEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                            .addComponent(anatomicStructureEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(stateEdit, javax.swing.GroupLayout.Alignment.TRAILING, 0, 299, Short.MAX_VALUE)
+                            .addComponent(disciplineEdit, 0, 299, Short.MAX_VALUE)
+                            .addComponent(typeEdit, 0, 299, Short.MAX_VALUE)
+                            .addComponent(actuatorEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                            .addComponent(usedInstrumentsEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                            .addComponent(anatomicStructureEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                            .addComponent(actionEdit, 0, 299, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(startTime)
@@ -296,7 +315,7 @@ public class EditActivityWindow extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel action;
-    private javax.swing.JTextField actionEdit;
+    private javax.swing.JComboBox actionEdit;
     private javax.swing.JLabel actuator;
     private javax.swing.JTextField actuatorEdit;
     private javax.swing.JLabel anatomicStructure;
