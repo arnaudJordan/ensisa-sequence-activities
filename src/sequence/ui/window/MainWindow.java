@@ -27,6 +27,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
+import sequence.processor.AddSequence;
 import sequence.processor.Processor;
 import sequence.processor.SafeProcessor;
 import sequence.ui.component.activity.ActivityRenderingModel;
@@ -68,8 +69,8 @@ public class MainWindow extends JFrame {
 		this.sequenceContainers = new ArrayList<SequenceContainer>();
 		this.mainPane=new JPanel();
 		
-		this.mainPane.setLayout(new BoxLayout(this.mainPane, BoxLayout.PAGE_AXIS));
-		JScrollPane scrollPane = new JScrollPane(this.mainPane);
+		this.getMainPane().setLayout(new BoxLayout(this.getMainPane(), BoxLayout.PAGE_AXIS));
+		JScrollPane scrollPane = new JScrollPane(this.getMainPane());
 		scrollPane.setWheelScrollingEnabled(true);
 		//scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		this.add(scrollPane);
@@ -179,18 +180,24 @@ public class MainWindow extends JFrame {
 	}
 	public void addSequence(Sequence sequence)
 	{
-		SequenceContainer sc = new SequenceContainer(sequence, this);
-		this.sequenceContainers.add(sc);
-		mainPane.add(sc);
-		validate();
-		pack();
-		setVisible(true);
+		getProcessor().Do(new AddSequence(sequence, this));
 	}
 	public void removeSequence(SequenceContainer sequenceContainer)
 	{
-		this.sequenceContainers.remove(sequenceContainer);
-		this.mainPane.remove(sequenceContainer);
-		this.pack();
+		getProcessor().Do(new RemoveSequence((Sequence) sequenceContainer.getSubSequenceView().getModel(), this));
+	}
+	public void removeSequence(Sequence model) {
+		for(SequenceContainer sc : sequenceContainers)
+		{
+			if(sc.getSubSequenceView().getModel().equals(model))
+			{
+				this.sequenceContainers.remove(sc);
+		        this.mainPane.remove(sc);
+		        this.pack();
+		        break;
+			}
+		}
+		
 	}
 	
 	public Processor getProcessor() {
@@ -204,5 +211,8 @@ public class MainWindow extends JFrame {
 			}
 		});
 	}
-
+	public JPanel getMainPane() {
+		return mainPane;
+	}
+	
 }
