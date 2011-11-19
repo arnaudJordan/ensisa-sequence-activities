@@ -13,6 +13,7 @@ public class Processor {
 	}
 	public void Do(ICommand command)
 	{
+		System.out.println("Do : " + command.getClass().toString());
 		command.Do();
 		didCommands.push(command);
 	}
@@ -24,6 +25,7 @@ public class Processor {
 	}
 	public void Redo()
 	{
+		
 		ICommand command = unDidCommands.pop();
 		command.Do();
 		didCommands.push(command);
