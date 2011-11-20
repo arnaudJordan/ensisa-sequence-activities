@@ -39,15 +39,22 @@ public class SummarizedSequenceRenderer extends DefaultRenderer implements Rende
 	public void setScale() {
 		Sequence sequence = (Sequence)getView().getModel();
 		int sequenceSize = sequence.getLastActivity().getActivitytime().getStopTime() - sequence.get(0).getActivitytime().getStartTime();
-		scale = (float) (getView().getParent().getPreferredSize().getWidth()/sequenceSize);
+		scale = (float) (getView().getSize().getWidth()/sequenceSize);
 	}
 
 	public void renderView(Graphics2D g) {
 		super.renderView(g);
+		setScale();
         renderSequence(g);
 	}
 	
 	private void renderSequence(Graphics2D g) {
+		for(int i=0 ; i<getView().getComponentCount() ; i++) {
+			ActivityView activityView = (ActivityView) getView().getComponent(i);
+			((ActivityRenderingModel) activityView.getRenderingModel()).setHScale(scale);
+		}
+		getView().revalidate();
+		getView().repaint();
 	}
 	
 	public Dimension getPreferredSize() {
