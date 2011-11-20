@@ -29,6 +29,7 @@ import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
 import sequence.processor.AddSequence;
 import sequence.processor.Processor;
+import sequence.processor.RemoveSequence;
 import sequence.processor.SafeProcessor;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
@@ -193,11 +194,9 @@ public class MainWindow extends JFrame {
 			{
 				this.sequenceContainers.remove(sc);
 		        this.mainPane.remove(sc);
-		        this.pack();
 		        break;
 			}
-		}
-		
+		}		
 	}
 	
 	public Processor getProcessor() {
