@@ -51,8 +51,8 @@ public class SelectRectangle extends JPanel implements MouseMotionListener, Mous
 		if(!contains(component) && !component.equals(context))
 			add(component);
 		for(int i=0 ; i<getComponentCount() ; i++) {
-			if(!selection.intersects(getComponent(i).getBounds()));
-			remove(getComponent(i));
+			if(!selection.intersects(getComponent(i).getBounds()))
+				remove(getComponent(i));
 		}
 	}
 	
