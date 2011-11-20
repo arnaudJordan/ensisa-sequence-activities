@@ -1,8 +1,7 @@
-package sequence.ui.window;
+package sequence.processor;
 
 import sequence.model.Sequence;
-import sequence.processor.AddSequence;
-import sequence.processor.Command;
+import sequence.ui.window.MainWindow;
 
 public class RemoveSequence extends Command {
 	private MainWindow mainWindow;
@@ -22,6 +21,8 @@ public class RemoveSequence extends Command {
 	@Override
 	public void Do() {
         this.mainWindow.removeSequence((Sequence) this.model);
+        this.mainWindow.getMainPane().revalidate();
+        this.mainWindow.getMainPane().repaint();
 	}
 
 }
