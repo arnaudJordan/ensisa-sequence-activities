@@ -137,6 +137,5 @@ public class TimeLayout implements LayoutManager {
 				}
 			}
 		}
-		parent.repaint();
 	}
 }
