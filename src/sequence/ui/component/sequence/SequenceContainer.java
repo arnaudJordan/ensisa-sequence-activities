@@ -2,7 +2,6 @@ package sequence.ui.component.sequence;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,7 +38,8 @@ public class SequenceContainer extends JPanel {
 		
 		ImageIcon icon = new ImageIcon("icons/dialog-close.png");
 		JButton button = new JButton(icon);
-		final SequenceContainer sc= this;
+		//button.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
+		final SequenceContainer sc = this;
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainWindow.removeSequence(sc);
@@ -48,29 +48,6 @@ public class SequenceContainer extends JPanel {
 		add(button, BorderLayout.NORTH);
 		add(summarizedSequenceView, BorderLayout.CENTER);
 		add(subSequenceView, BorderLayout.SOUTH);
-		setVisible(true);
-	}
-	
-	public SequenceContainer(final SummarizedSequenceView summarizedSequenceView, final SubSequenceView subSequenceView, final MainWindow mainWindow)
-	{
-		this.summarizedSequenceView = summarizedSequenceView;
-		this.subSequenceView = subSequenceView;
-
-		setBackground(Color.WHITE);
-		setBorder(BorderFactory.createTitledBorder(((Sequence)subSequenceView.getModel()).getWorkflowID()));
-		setLayout(new BorderLayout());
-		
-		ImageIcon icon = new ImageIcon("icons/dialog-close.png");
-		JButton button = new JButton(icon);
-		final SequenceContainer sc= this;
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				mainWindow.removeSequence(sc);
-			}
-		});
-		add(button, BorderLayout.NORTH);
-		add(summarizedSequenceView, BorderLayout.CENTER);
-		//add(subSequenceView, BorderLayout.SOUTH);
 		setVisible(true);
 	}
 
@@ -83,6 +60,7 @@ public class SequenceContainer extends JPanel {
 	}
 	
 	public Dimension getPreferredSize() {
-		return new Dimension(mainWindow.getPreferredSize().width-50, getMinimumSize().height);
+		int Hinsets = 2*(getInsets().left + getInsets().right);
+		return new Dimension(mainWindow.getWidth() - Hinsets, getMinimumSize().height);
 	}
 }
