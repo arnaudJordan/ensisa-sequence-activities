@@ -7,13 +7,9 @@ import java.awt.LayoutManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import sequence.model.activity.Activity;
-import sequence.mvc.View;
-import sequence.ui.component.activity.ActivityRenderingModel;
-import sequence.ui.component.activity.ActivityView;
-
 public class TimeLayout implements LayoutManager {
-	private static final int vgap = 10;
+	private static final int VGAP = 10;
+	private static final int MARGIN = 10;
 
 	@Override
 	public void addLayoutComponent(String name, Component comp) {
@@ -34,25 +30,20 @@ public class TimeLayout implements LayoutManager {
 		int parentWidth = parent.getWidth();
 		int initTime = 0;
 		if (parent.getComponentCount() > 1)
-			initTime = (int) (((Activity) ((ActivityView) parent
-					.getComponent(0)).getModel()).getActivitytime()
-					.getStartTime());
+			initTime = ((Timeable) parent.getComponent(0)).getStartTime();
 
 		List<Integer> levelsLastPosition = new ArrayList<Integer>();
 		levelsLastPosition.add(0);
 		for (int i=0 ; i < parent.getComponentCount() ; i++) {
 			Component c = parent.getComponent(i);
 			if (c.isVisible()) {
-				float scale = ((ActivityRenderingModel) ((View) c)
-						.getRenderingModel()).getHScale();
-				Activity currentActivity = (Activity) ((ActivityView) parent
-						.getComponent(i)).getModel();
-				int currentStopTime = (int) ((currentActivity.getActivitytime()
-						.getStopTime() - initTime) * scale);
+				float scale = ((Scaleable) c).getHScale();
+				Timeable currentElement = (Timeable) parent.getComponent(i);
+				int currentStopTime = (int) ((currentElement.getStopTime() - initTime) * scale);
 				if (currentStopTime > parentWidth) {
-					initTime = currentActivity.getActivitytime().getStartTime();
-					currentHeight += (c.getHeight() + vgap)
-							* levelsLastPosition.size() + 2 * vgap;
+					initTime = currentElement.getStartTime();
+					currentHeight += (c.getHeight() + VGAP)
+							* levelsLastPosition.size() + 2 * VGAP;
 					levelsLastPosition = new ArrayList<Integer>();
 					levelsLastPosition.add(0);
 				}
@@ -60,21 +51,18 @@ public class TimeLayout implements LayoutManager {
 				boolean drawed = false;
 				for (int j = 0; j < levelsLastPosition.size(); j++) {
 					int lastPosition = (Integer) levelsLastPosition.get(j);
-					if (lastPosition <= currentActivity.getActivitytime()
-							.getStartTime()) {
-						levelsLastPosition.set(j, currentActivity
-								.getActivitytime().getStopTime());
+					if (lastPosition <= currentElement.getStartTime()) {
+						levelsLastPosition.set(j, currentElement.getStopTime());
 						drawed = true;
 						break;
 					}
 				}
 				if (!drawed) {
-					levelsLastPosition.add(currentActivity.getActivitytime()
-							.getStopTime());
+					levelsLastPosition.add(currentElement.getStopTime());
 				}
 			}
 		}
-		currentHeight += parent.getComponent(0).getHeight() + vgap;
+		currentHeight += 2 * parent.getComponent(0).getHeight() + VGAP + MARGIN;
 		return new Dimension(parentWidth, currentHeight);
 	}
 
@@ -85,28 +73,22 @@ public class TimeLayout implements LayoutManager {
 
 		int initTime = 0;
 		if (parent.getComponentCount() > 1)
-			initTime = (int) (((Activity) ((ActivityView) parent
-					.getComponent(0)).getModel()).getActivitytime()
-					.getStartTime());
+			initTime = ((Timeable) parent.getComponent(0)).getStartTime();
 
 		List<Integer> levelsLastPosition = new ArrayList<Integer>();
 		levelsLastPosition.add(0);
 		for (int i=0; i < parent.getComponentCount(); i++) {
 			Component c = parent.getComponent(i);
 			if (c.isVisible()) {
-				float scale = ((ActivityRenderingModel) ((View) c)
-						.getRenderingModel()).getHScale();
-				Activity currentActivity = (Activity) ((ActivityView) parent
-						.getComponent(i)).getModel();
-				int currentTime = (int) ((currentActivity.getActivitytime()
-						.getStartTime() - initTime) * scale);
-				int currentStopTime = (int) ((currentActivity.getActivitytime()
-						.getStopTime() - initTime) * scale);
+				float scale = ((Scaleable) c).getHScale();
+				Timeable currentElement = (Timeable) parent.getComponent(i);
+				int currentTime = (int) ((currentElement.getStartTime() - initTime) * scale);
+				int currentStopTime = (int) ((currentElement.getStopTime() - initTime) * scale);
 				if (currentStopTime > parentWidth) {
-					initTime = currentActivity.getActivitytime().getStartTime();
+					initTime = currentElement.getStartTime();
 					currentTime = 0;
-					currentHeight += (c.getHeight() + vgap)
-							* levelsLastPosition.size() + 2 * vgap;
+					currentHeight += (c.getHeight() + VGAP)
+							* levelsLastPosition.size() + 2 * VGAP;
 					levelsLastPosition = new ArrayList<Integer>();
 					levelsLastPosition.add(0);
 				}
@@ -114,26 +96,23 @@ public class TimeLayout implements LayoutManager {
 				boolean drawed = false;
 				for (int j = 0 ; j < levelsLastPosition.size() ; j++) {
 					int lastPosition = (Integer) levelsLastPosition.get(j);
-					if (lastPosition <= currentActivity.getActivitytime()
-							.getStartTime()) {
+					if (lastPosition <= currentElement.getStartTime()) {
 						c.setBounds(currentTime, currentHeight
-								+ (c.getHeight() + vgap) * j,
+								+ (c.getHeight() + VGAP) * j,
 								c.getPreferredSize().width,
 								c.getPreferredSize().height);
-						levelsLastPosition.set(j, currentActivity
-								.getActivitytime().getStopTime());
+						levelsLastPosition.set(j, currentElement.getStopTime());
 						drawed = true;
 						break;
 					}
 				}
 				if (!drawed) {
 					c.setBounds(currentTime,
-							currentHeight + (c.getHeight() + vgap)
+							currentHeight + (c.getHeight() + VGAP)
 									* (levelsLastPosition.size()),
 							c.getPreferredSize().width,
 							c.getPreferredSize().height);
-					levelsLastPosition.add(currentActivity.getActivitytime()
-							.getStopTime());
+					levelsLastPosition.add(currentElement.getStopTime());
 				}
 			}
 		}
