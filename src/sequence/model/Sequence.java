@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -212,6 +214,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	
 	public int[] ActionStructureInstrumentNumber()
 	{
+		Object[] tab = ActionsStructuresInstruments();
+		return new int[]{((Action[]) tab[0]).length, ((AnatomicStructure[]) tab[1]).length,((UsedInstruments[]) tab[2]).length};
+	}
+	public Object[] ActionsStructuresInstruments()
+	{
 		List<Action> actions = new ArrayList<Action>();
 		List<AnatomicStructure> anatomicStructures = new ArrayList<AnatomicStructure>();
 		List<UsedInstruments> usedInstruments = new ArrayList<UsedInstruments>();
@@ -223,21 +230,21 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 			if(!usedInstruments.contains(current.getUsedInstrument()))
 				usedInstruments.add(current.getUsedInstrument());
 		}
-		return new int[]{actions.size(), anatomicStructures.size(),usedInstruments.size()};
-	}
-	public Object[] ActionsStructuresInstruments()
-	{
-		Set<Action> actions = new HashSet<Action>();
-		Set<AnatomicStructure> anatomicStructures = new HashSet<AnatomicStructure>();
-		Set<UsedInstruments> usedInstruments = new HashSet<UsedInstruments>();
-		for(Activity current : activities) {
-			if(!actions.contains(current.getAction()))
-				actions.add(current.getAction());
-			if(!anatomicStructures.contains(current.getTreatedStructure()))
-				anatomicStructures.add(current.getTreatedStructure());
-			if(!usedInstruments.contains(current.getUsedInstrument()))
-				usedInstruments.add(current.getUsedInstrument());
-		}
+		Collections.sort(actions, new Comparator<Action>() {
+			public int compare(Action o1, Action o2) {
+				return o1.toString().compareTo(o2.toString());
+			}
+		});
+		Collections.sort(anatomicStructures, new Comparator<AnatomicStructure>() {
+			public int compare(AnatomicStructure o1, AnatomicStructure o2) {
+				return o1.toString().compareTo(o2.toString());
+			}
+		});
+		Collections.sort(usedInstruments, new Comparator<UsedInstruments>() {
+			public int compare(UsedInstruments o1, UsedInstruments o2) {
+				return o1.toString().compareTo(o2.toString());
+			}
+		});
 		return new Object[]{actions.toArray(), anatomicStructures.toArray(),usedInstruments.toArray()};
 	}
 	
