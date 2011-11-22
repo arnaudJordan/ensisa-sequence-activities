@@ -58,7 +58,7 @@ public class SummarizedSequenceRenderer extends DefaultRenderer implements Rende
 	}
 	
 	public Dimension getPreferredSize() {
-		int Hinsets = getView().getParent().getInsets().left + getView().getParent().getInsets().right;
+		int Hinsets = 2*(getView().getParent().getInsets().left + getView().getParent().getInsets().right);
     	return new Dimension(getView().getParent().getWidth() - Hinsets, (int) getView().getLayout().minimumLayoutSize(getView()).getHeight());
     }
 }

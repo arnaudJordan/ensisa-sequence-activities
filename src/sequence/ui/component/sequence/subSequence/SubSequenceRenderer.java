@@ -45,6 +45,7 @@ public class SubSequenceRenderer extends DefaultRenderer implements Renderer {
 	}
 	
 	public Dimension getPreferredSize() {
-    	return new Dimension(getView().getParent().getWidth(), (int) getView().getLayout().minimumLayoutSize(getView()).getHeight());
+		int Hinsets = 2*(getView().getParent().getInsets().left + getView().getParent().getInsets().right);
+    	return new Dimension(getView().getParent().getWidth() - Hinsets, (int) getView().getLayout().minimumLayoutSize(getView()).getHeight());
     }
 }
