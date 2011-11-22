@@ -17,9 +17,9 @@ import sequence.ui.component.activity.ActivityView;
 import sequence.utilities.SVGFactory;
 import sequence.utilities.TikzFactory;
 
-public class SubSequenceController extends Controller implements ActionListener {
+public class SubSequenceMenuExportController extends Controller implements ActionListener {
 
-	public SubSequenceController(Model model, View view) {
+	public SubSequenceMenuExportController(Model model, View view) {
 		super(model, view);
 	}
 

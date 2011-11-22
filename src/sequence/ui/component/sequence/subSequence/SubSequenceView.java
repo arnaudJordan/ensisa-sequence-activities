@@ -20,8 +20,11 @@ public class SubSequenceView extends View {
 		setRenderer(new SubSequenceRenderer(this));
 		popup = new JPopupMenu();
 	    JMenuItem exportItem = new JMenuItem("Export");
-	    exportItem.addActionListener(new SubSequenceController(getModel(), this));
+	    exportItem.addActionListener(new SubSequenceMenuExportController(getModel(), this));
 	    popup.add(exportItem);
+	    JMenuItem infoItem = new JMenuItem("Info");
+	    infoItem.addActionListener(new SubSequenceMenuInfoController(getModel(), this));
+	    popup.add(infoItem);
 	}
 	
 	public Container getParent() {

@@ -124,7 +124,8 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	
 	public int completeDuration()
 	{
-		return date.getDuration();
+		if(getDate()==null) return 0;
+		return getDate().getDuration();
 	}
 
 	public int completeWorkDuration()
@@ -215,7 +216,7 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	public int[] ActionStructureInstrumentNumber()
 	{
 		Object[] tab = ActionsStructuresInstruments();
-		return new int[]{((Action[]) tab[0]).length, ((AnatomicStructure[]) tab[1]).length,((UsedInstruments[]) tab[2]).length};
+		return new int[]{((Object[]) tab[0]).length, ((Object[]) tab[1]).length,((Object[]) tab[2]).length};
 	}
 	public Object[] ActionsStructuresInstruments()
 	{
