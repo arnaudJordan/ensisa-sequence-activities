@@ -39,14 +39,14 @@
                           <Component id="note" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="stateEdit" pref="299" max="32767" attributes="0"/>
-                          <Component id="disciplineEdit" alignment="0" pref="299" max="32767" attributes="0"/>
-                          <Component id="typeEdit" alignment="0" pref="299" max="32767" attributes="0"/>
-                          <Component id="actuatorEdit" alignment="0" pref="299" max="32767" attributes="0"/>
-                          <Component id="actionEdit" alignment="0" pref="299" max="32767" attributes="0"/>
-                          <Component id="usedInstrumentsEdit" alignment="0" pref="299" max="32767" attributes="0"/>
-                          <Component id="anatomicStructureEdit" alignment="0" pref="299" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="stateEdit" alignment="1" pref="342" max="32767" attributes="0"/>
+                          <Component id="disciplineEdit" alignment="0" pref="342" max="32767" attributes="0"/>
+                          <Component id="typeEdit" alignment="0" pref="342" max="32767" attributes="0"/>
+                          <Component id="actuatorEdit" alignment="0" pref="342" max="32767" attributes="0"/>
+                          <Component id="usedInstrumentsEdit" alignment="0" pref="342" max="32767" attributes="0"/>
+                          <Component id="anatomicStructureEdit" alignment="0" pref="342" max="32767" attributes="0"/>
+                          <Component id="actionEdit" alignment="0" pref="342" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -57,19 +57,19 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="endTimeEdit" pref="400" max="32767" attributes="1"/>
-                          <Component id="durationEdit" pref="400" max="32767" attributes="1"/>
-                          <Component id="startTimeEdit" alignment="1" pref="400" max="32767" attributes="1"/>
+                          <Component id="endTimeEdit" pref="432" max="32767" attributes="1"/>
+                          <Component id="durationEdit" pref="432" max="32767" attributes="1"/>
+                          <Component id="startTimeEdit" alignment="1" pref="432" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="saveButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="title" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="313" max="32767" attributes="0"/>
+                      <EmptySpace pref="339" max="32767" attributes="0"/>
                       <Component id="id" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -141,8 +141,8 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -239,11 +239,6 @@
         <Property name="text" type="java.lang.String" value="Note"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="actionEdit">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="action"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="usedInstrumentsEdit">
       <Properties>
         <Property name="text" type="java.lang.String" value="usedInstruments"/>
@@ -313,6 +308,18 @@
     <Component class="javax.swing.JLabel" name="id">
       <Properties>
         <Property name="text" type="java.lang.String" value="ID"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="actionEdit">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

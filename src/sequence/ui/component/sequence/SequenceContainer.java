@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import sequence.model.Sequence;
-import sequence.ui.component.sequence.subSequence.SubSequenceController;
+import sequence.ui.component.sequence.subSequence.SubSequenceMenuExportController;
 import sequence.ui.component.sequence.subSequence.SubSequenceView;
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceController;
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
@@ -29,7 +29,7 @@ public class SequenceContainer extends JPanel {
 		summarizedSequenceView = new SummarizedSequenceView(sequence, this);
 		new SummarizedSequenceController(sequence, summarizedSequenceView);
 		subSequenceView = new SubSequenceView(sequence, this);
-		new SubSequenceController(sequence, subSequenceView);
+		new SubSequenceMenuExportController(sequence, subSequenceView);
 		subSequenceView.setVisible(false);
 		
 		setBackground(Color.WHITE);
