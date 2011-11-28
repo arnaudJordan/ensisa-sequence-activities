@@ -6,7 +6,15 @@ import java.awt.Dimension;
 import java.awt.LayoutManager;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Place elements of a <code>Container</code> 
+ * in fonction of their time and their scale.
+ * Elements must implement <code>Timeable</code> and <code>Scaleable</code>.
+ *
+ * @see java.awt.LayoutManager
+ *
+ * @author      Arnaud Jordan
+ */
 public class TimeLayout implements LayoutManager {
 	private static final int VGAP = 10;
 	private static final int MARGIN = 10;
