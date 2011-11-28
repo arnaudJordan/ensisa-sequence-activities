@@ -236,7 +236,7 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 				return o1.toString().compareTo(o2.toString());
 			}
 		});
-		Collections.sort(anatomicStructures, new Comparator<AnatomicStructure>() {
+		/*Collections.sort(anatomicStructures, new Comparator<AnatomicStructure>() {
 			public int compare(AnatomicStructure o1, AnatomicStructure o2) {
 				return o1.toString().compareTo(o2.toString());
 			}
@@ -245,7 +245,7 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 			public int compare(UsedInstruments o1, UsedInstruments o2) {
 				return o1.toString().compareTo(o2.toString());
 			}
-		});
+		});*/
 		return new Object[]{actions.toArray(), anatomicStructures.toArray(),usedInstruments.toArray()};
 	}
 	
