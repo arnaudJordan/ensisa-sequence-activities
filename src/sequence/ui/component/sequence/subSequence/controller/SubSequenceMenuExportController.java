@@ -1,4 +1,4 @@
-package sequence.ui.component.sequence.subSequence;
+package sequence.ui.component.sequence.subSequence.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +14,7 @@ import sequence.mvc.Model;
 import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
+import sequence.ui.component.sequence.subSequence.SubSequenceView;
 import sequence.utilities.SVGFactory;
 import sequence.utilities.TikzFactory;
 

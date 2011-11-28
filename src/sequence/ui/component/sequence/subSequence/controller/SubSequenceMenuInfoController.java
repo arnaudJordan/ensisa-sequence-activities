@@ -1,4 +1,4 @@
-package sequence.ui.component.sequence.subSequence;
+package sequence.ui.component.sequence.subSequence.controller;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
