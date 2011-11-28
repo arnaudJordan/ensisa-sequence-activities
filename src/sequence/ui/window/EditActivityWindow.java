@@ -10,6 +10,7 @@
  */
 package sequence.ui.window;
 
+import com.jidesoft.swing.AutoCompletion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -55,6 +56,10 @@ public class EditActivityWindow extends javax.swing.JFrame {
         DefaultComboBoxModel actionModel = new DefaultComboBoxModel((Object[]) sequence.ActionsStructuresInstruments()[0]);
         actionEdit.setModel(actionModel);
         actionEdit.setSelectedItem(activity.getAction().toString());
+        actionEdit.setEditable(true);
+
+        AutoCompletion ac = new AutoCompletion(actionEdit);
+        ac.setStrict(false);
         
         usedInstrumentsEdit.setText(activity.getUsedInstrument().toString());
         anatomicStructureEdit.setText(activity.getTreatedStructure().toString());
@@ -196,7 +201,7 @@ public class EditActivityWindow extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(noteEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+                    .addComponent(noteEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(state)
@@ -223,16 +228,16 @@ public class EditActivityWindow extends javax.swing.JFrame {
                             .addComponent(endTime))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(endTimeEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
-                            .addComponent(durationEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
-                            .addComponent(startTimeEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)))
+                            .addComponent(endTimeEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                            .addComponent(durationEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
+                            .addComponent(startTimeEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(saveButton)
                         .addGap(18, 18, 18)
                         .addComponent(cancelButton))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(title)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 339, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 356, Short.MAX_VALUE)
                         .addComponent(id)))
                 .addContainerGap())
         );
