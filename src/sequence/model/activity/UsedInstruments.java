@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class UsedInstruments {
+public class UsedInstruments implements Iterable<Instrument> {
 	private List<Instrument> usedInstruments;
 	
 	public UsedInstruments() {

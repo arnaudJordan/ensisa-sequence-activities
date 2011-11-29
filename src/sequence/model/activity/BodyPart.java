@@ -11,10 +11,17 @@ public class BodyPart {
 	public String getBodypart() {
 		return bodypart;
 	}
-
+	
+	@Override
+	public boolean equals(Object o) {
+		if(this == o) return true;
+		if(!(o instanceof BodyPart)) return false;
+	    return this.bodypart.equalsIgnoreCase(((BodyPart)o).getBodypart());
+	}
+	
 	@Override
 	public String toString() {
-		return "BodyPart [bodypart=" + bodypart + "]";
+		return bodypart;
 	}
 	
 	public String toXML() {

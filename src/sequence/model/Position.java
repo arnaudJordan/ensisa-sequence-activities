@@ -11,10 +11,16 @@ public class Position {
 	public String getPosition() {
 		return position;
 	}
-
+	@Override
+	public boolean equals(Object o) {
+		if(this == o) return true;
+		if(!(o instanceof Position)) return false;
+	    return this.position.equalsIgnoreCase(((Position)o).getPosition());
+	}
+	
 	@Override
 	public String toString() {
-		return "Position [position=" + position + "]";
+		return position;
 	}
 	
 	public String toXML() {

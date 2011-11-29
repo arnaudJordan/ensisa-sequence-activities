@@ -14,6 +14,8 @@ import java.util.Set;
 import sequence.model.activity.Action;
 import sequence.model.activity.Activity;
 import sequence.model.activity.AnatomicStructure;
+import sequence.model.activity.BodyPart;
+import sequence.model.activity.Instrument;
 import sequence.model.activity.UsedInstruments;
 import sequence.model.location.Location;
 import sequence.mvc.DefaultModel;
@@ -247,6 +249,34 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 			}
 		});*/
 		return new Object[]{actions.toArray(), anatomicStructures.toArray(),usedInstruments.toArray()};
+	}
+	public Object[] Positions()
+	{
+		List<Position> positions = new ArrayList<Position>();
+		for(Activity current : activities) {
+			if(!positions.contains(current.getActuator().getPosition()))
+				positions.add(current.getActuator().getPosition());
+		}
+/*		Collections.sort(positions, new Comparator<Position>() {
+			public int compare(Position o1, Position o2) {
+				return o1.toString().compareTo(o2.toString());
+			}
+		});
+*/		return positions.toArray();
+	}
+	public Object[] BodyParts()
+	{
+		List<BodyPart> bodyParts = new ArrayList<BodyPart>();
+		for(Activity current : activities) {
+			if(!bodyParts.contains(current.getActuator().getUsedbodypart()))
+				bodyParts.add(current.getActuator().getUsedbodypart());
+		}
+/*		Collections.sort(bodyParts, new Comparator<BodyPart>() {
+			public int compare(BodyPart o1, BodyPart o2) {
+				return o1.getBodypart().compareTo(o2.getBodypart());
+			}
+		});*/
+		return bodyParts.toArray();
 	}
 	
 	public void toFile(File file) throws IOException
