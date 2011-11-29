@@ -1,6 +1,20 @@
 <?xml version="1.1" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JComboBox" name="jComboBox1">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="title" type="java.lang.String" value="Edit Activity"/>
     <Property name="alwaysOnTop" type="boolean" value="true"/>
@@ -26,29 +40,12 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="noteEdit" alignment="0" pref="526" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="state" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="discipline" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="type" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="actuator" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="action" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="usedInstruments" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="anatomicStructure" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="note" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="stateEdit" alignment="1" pref="342" max="32767" attributes="0"/>
-                          <Component id="disciplineEdit" alignment="0" pref="342" max="32767" attributes="0"/>
-                          <Component id="typeEdit" alignment="0" pref="342" max="32767" attributes="0"/>
-                          <Component id="actuatorEdit" alignment="0" pref="342" max="32767" attributes="0"/>
-                          <Component id="usedInstrumentsEdit" alignment="0" pref="342" max="32767" attributes="0"/>
-                          <Component id="anatomicStructureEdit" alignment="0" pref="342" max="32767" attributes="0"/>
-                          <Component id="actionEdit" alignment="0" pref="342" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="title" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="356" max="32767" attributes="0"/>
+                      <Component id="id" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="noteEdit" alignment="0" pref="526" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="startTime" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -68,9 +65,27 @@
                       <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="title" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="356" max="32767" attributes="0"/>
-                      <Component id="id" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="state" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="discipline" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="type" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="actuator" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="anatomicStructure" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="note" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="action" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="usedInstruments" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" alignment="1" pref="342" max="32767" attributes="0"/>
+                          <Component id="actionEdit" alignment="1" pref="342" max="32767" attributes="0"/>
+                          <Component id="bodyPartEdit" alignment="1" pref="342" max="32767" attributes="0"/>
+                          <Component id="stateEdit" alignment="1" pref="342" max="32767" attributes="0"/>
+                          <Component id="disciplineEdit" alignment="0" pref="342" max="32767" attributes="0"/>
+                          <Component id="typeEdit" alignment="0" pref="342" max="32767" attributes="0"/>
+                          <Component id="positionEdit" alignment="0" pref="342" max="32767" attributes="0"/>
+                          <Component id="anatomicStructureEdit" alignment="0" pref="342" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -100,28 +115,32 @@
                   <Component id="type" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="typeEdit" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="actuator" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="actuatorEdit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="positionEdit" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="bodyPartEdit" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="action" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="actionEdit" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="usedInstruments" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="usedInstrumentsEdit" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="usedInstruments" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="73" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="anatomicStructure" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="anatomicStructureEdit" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="anatomicStructure" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="note" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="anatomicStructureEdit" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="note" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="noteEdit" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -144,7 +163,6 @@
                   <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -214,11 +232,6 @@
         <Property name="text" type="java.lang.String" value="Actuator"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="actuatorEdit">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Actuator"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="action">
       <Properties>
         <Property name="text" type="java.lang.String" value="Action"/>
@@ -237,16 +250,6 @@
     <Component class="javax.swing.JLabel" name="note">
       <Properties>
         <Property name="text" type="java.lang.String" value="Note"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="usedInstrumentsEdit">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="usedInstruments"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="anatomicStructureEdit">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="anatomicStructure"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="noteEdit">
@@ -311,6 +314,85 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="actionEdit">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="positionEdit">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="bodyPartEdit">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="usedInstrumentList">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jComboBox2" pref="315" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="34" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JComboBox" name="jComboBox2">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="4">
+                    <StringItem index="0" value="Item 1"/>
+                    <StringItem index="1" value="Item 2"/>
+                    <StringItem index="2" value="Item 3"/>
+                    <StringItem index="3" value="Item 4"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JComboBox" name="anatomicStructureEdit">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
