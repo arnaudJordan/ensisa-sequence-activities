@@ -29,7 +29,6 @@ public class SubSequenceMenuImageExportController extends Controller implements
         	
         	int returnVal = fc.showSaveDialog(getView());
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				System.out.println(ImageIO.getWriterFormatNames());
 				File f = fc.getSelectedFile();
 				int mid = f.getName().lastIndexOf('.') + 1;
 				String ext = f.getName().substring(mid);
