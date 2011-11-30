@@ -79,6 +79,10 @@ public class Activity extends DefaultModel {
 	public Action getAction() {
 		return action;
 	}
+        
+        public void setUsedInstrument(UsedInstruments usedInstruments) {
+		this.usedInstrument=usedInstruments;
+	}
 
 	public UsedInstruments getUsedInstrument() {
 		return usedInstrument;

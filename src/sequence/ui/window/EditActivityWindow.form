@@ -42,8 +42,28 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="title" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="356" max="32767" attributes="0"/>
+                      <EmptySpace pref="382" max="32767" attributes="0"/>
                       <Component id="id" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="state" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="discipline" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="type" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="actuator" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="action" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="usedInstruments" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jScrollPane1" pref="385" max="32767" attributes="0"/>
+                          <Component id="actionEdit" alignment="1" pref="385" max="32767" attributes="0"/>
+                          <Component id="bodyPartEdit" alignment="1" pref="385" max="32767" attributes="0"/>
+                          <Component id="stateEdit" alignment="1" pref="385" max="32767" attributes="0"/>
+                          <Component id="disciplineEdit" alignment="0" pref="385" max="32767" attributes="0"/>
+                          <Component id="typeEdit" alignment="0" pref="385" max="32767" attributes="0"/>
+                          <Component id="positionEdit" alignment="0" pref="385" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <Component id="noteEdit" alignment="0" pref="526" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
@@ -54,38 +74,23 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="endTimeEdit" pref="443" max="32767" attributes="1"/>
-                          <Component id="durationEdit" pref="443" max="32767" attributes="1"/>
-                          <Component id="startTimeEdit" alignment="1" pref="443" max="32767" attributes="1"/>
+                          <Component id="endTimeEdit" pref="475" max="32767" attributes="1"/>
+                          <Component id="durationEdit" pref="475" max="32767" attributes="1"/>
+                          <Component id="startTimeEdit" alignment="1" pref="475" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="saveButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="saveButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="state" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="discipline" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="type" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="actuator" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="anatomicStructure" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="note" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="action" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="usedInstruments" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" alignment="1" pref="342" max="32767" attributes="0"/>
-                          <Component id="actionEdit" alignment="1" pref="342" max="32767" attributes="0"/>
-                          <Component id="bodyPartEdit" alignment="1" pref="342" max="32767" attributes="0"/>
-                          <Component id="stateEdit" alignment="1" pref="342" max="32767" attributes="0"/>
-                          <Component id="disciplineEdit" alignment="0" pref="342" max="32767" attributes="0"/>
-                          <Component id="typeEdit" alignment="0" pref="342" max="32767" attributes="0"/>
-                          <Component id="positionEdit" alignment="0" pref="342" max="32767" attributes="0"/>
-                          <Component id="anatomicStructureEdit" alignment="0" pref="342" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="anatomicStructureEdit" pref="385" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -130,11 +135,11 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="usedInstruments" min="-2" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="73" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="93" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="anatomicStructure" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="note" min="-2" max="-2" attributes="0"/>
@@ -160,9 +165,10 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -360,7 +366,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jComboBox2" pref="315" max="32767" attributes="0"/>
+                      <Component id="jComboBox2" pref="363" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -370,7 +376,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="34" max="32767" attributes="0"/>
+                      <EmptySpace pref="72" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

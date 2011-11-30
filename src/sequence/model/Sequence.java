@@ -233,11 +233,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 			if(!usedInstruments.contains(current.getUsedInstrument()))
 				usedInstruments.add(current.getUsedInstrument());
 		}
-		Collections.sort(actions, new Comparator<Action>() {
+		/*Collections.sort(actions, new Comparator<Action>() {
 			public int compare(Action o1, Action o2) {
 				return o1.toString().compareTo(o2.toString());
 			}
-		});
+		});*/
 		/*Collections.sort(anatomicStructures, new Comparator<AnatomicStructure>() {
 			public int compare(AnatomicStructure o1, AnatomicStructure o2) {
 				return o1.toString().compareTo(o2.toString());
