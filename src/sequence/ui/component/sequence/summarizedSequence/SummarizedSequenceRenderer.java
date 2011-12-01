@@ -10,6 +10,7 @@ import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.activity.ActivitySummarizedController;
+import sequence.ui.component.sequence.SequenceContainer;
 import sequence.utilities.ColorFactory;
 import sequence.utilities.TimeLayout;
 
@@ -54,7 +55,6 @@ public class SummarizedSequenceRenderer extends DefaultRenderer implements Rende
 			((ActivityRenderingModel) activityView.getRenderingModel()).setHScale(scale);
 		}
 		getView().revalidate();
-		getView().repaint();
 	}
 	
 	public Dimension getPreferredSize() {
