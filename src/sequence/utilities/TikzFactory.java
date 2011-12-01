@@ -9,18 +9,26 @@ import sequence.ui.component.sequence.subSequence.SubSequenceView;
 
 public class TikzFactory {
 	final static String NEW_LINE = System.getProperty("line.separator");
-	final static int HSCALE = 10;
-	final static int VSCALE = 2;
+	final static double HSCALE = 0.1;
+	final static double VSCALE = 0.2;
+	final static int DefaultHscale = 4;
+	final static int DefaultVscale = 10;
+	final static int PDFHeight = 800;
+	final static int PDFWidth = 600;
+	final static int HMARGIN = 20;
+	final static int VMARGIN = 20;
 	
 	public static String ActivityToTikz(ActivityView activityView)
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("\\draw[draw=none,fill=color"+((Activity) activityView.getModel()).getId()+"] (0,.8) rectangle ("+activityView.getWidth()+",1.1);");
+		sb.append("\\draw[draw=none,fill="+((Activity) activityView.getModel()).getId()+"] (0,.8) rectangle ("+activityView.getWidth()+",1.1);");
 		return sb.toString();
 	}
-	private static String SequenceActivityToTikz(ActivityView activityView) {
+	private static String SequenceActivityToTikz(ActivityView activityView, SubSequenceView sequenceView) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("\\draw[draw=none,fill=color"+((Activity) activityView.getModel()).getId()+"] ("+activityView.getX()/HSCALE+","+activityView.getY()/VSCALE+") rectangle ("+activityView.getWidth()/HSCALE+","+activityView.getHeight()/VSCALE+");");
+		int Hscale=1+DefaultHscale*sequenceView.getWidth()/(PDFWidth-HMARGIN);
+		int Vscale=1+DefaultVscale*sequenceView.getHeight()/(PDFHeight-VMARGIN);
+		sb.append("\\draw[draw=none,fill=color"+((Activity) activityView.getModel()).getId()+"] ("+activityView.getX()/(Hscale)+","+(sequenceView.getHeight()-activityView.getY())/Vscale+") rectangle ("+(activityView.getX()+activityView.getWidth())/Hscale+","+(sequenceView.getHeight()-activityView.getY()-activityView.getHeight())/Vscale+");");
 		return sb.toString();
 	}
 	public static String SequenceToTikz(SubSequenceView sequenceView)
@@ -41,7 +49,7 @@ public class TikzFactory {
 			Component objet = sequenceView.getComponent(i);
 			if(objet instanceof ActivityView)
 			{
-				sb.append(TikzFactory.SequenceActivityToTikz((ActivityView) objet));
+				sb.append(TikzFactory.SequenceActivityToTikz((ActivityView) objet, sequenceView));
 				sb.append(NEW_LINE);
 			}
 		}
@@ -54,33 +62,19 @@ public class TikzFactory {
 		StringBuilder sb = new StringBuilder();
 		sb.append("\\documentclass{article}");
 		sb.append(NEW_LINE);
-		sb.append("\\usepackage[paperwidth=1000px, paperheight=1000px]{geometry}");
+		sb.append("\\usepackage[paperwidth="+PDFWidth+"px, paperheight="+PDFHeight+"px]{geometry}");
 		sb.append(NEW_LINE);
 		sb.append("\\usepackage{tikz}");
 		sb.append(NEW_LINE);
-		sb.append("\\usepackage{subfigure}");
-		sb.append(NEW_LINE);
-		sb.append("\\usepackage[tightpage,active]{preview}");
-		sb.append(NEW_LINE);
-		sb.append("\\PreviewEnvironment{tikzpicture}");
-		sb.append(NEW_LINE);
-		sb.append(TikzLib());
-		sb.append(NEW_LINE);
 		sb.append("\\begin{document}");
 		sb.append(NEW_LINE);
-		sb.append("\\begin{figure}");
-		sb.append(NEW_LINE);
-		sb.append("\\centering");
-		sb.append(NEW_LINE);
-		sb.append("\\begin{tikzpicture}");
+		sb.append("\\begin{tikzpicture}[yscale="+VSCALE+", xscale="+HSCALE+"] ");
 		sb.append(NEW_LINE);
 		sb.append(s);
 		sb.append(NEW_LINE);
 		sb.append("\\end{scope}");
 		sb.append(NEW_LINE);
 		sb.append("\\end{tikzpicture}");
-		sb.append(NEW_LINE);
-		sb.append("\\end{figure}");
 		sb.append(NEW_LINE);
 		sb.append("\\end{document}");
 		return sb.toString();
