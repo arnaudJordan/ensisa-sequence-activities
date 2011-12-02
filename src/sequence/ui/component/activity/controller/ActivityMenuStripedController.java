@@ -7,7 +7,9 @@ import java.awt.event.ActionListener;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
+import sequence.processor.BackgroundDrawerChange;
 import sequence.ui.component.activity.ActivityRenderer;
+import sequence.ui.window.MainWindow;
 import sequence.utilities.BackgroundDrawer;
 import sequence.utilities.StripedBackgroundDrawer;
 
@@ -20,10 +22,10 @@ public class ActivityMenuStripedController extends Controller implements
 
 	public void actionPerformed(ActionEvent e) {
 		ActivityRenderer activityRenderer = ((ActivityRenderer) getView().getRenderer());
+
 		if(activityRenderer.getBackgroundDrawer() instanceof StripedBackgroundDrawer)
-			activityRenderer.setBackgroundDrawer(new BackgroundDrawer());
+			((MainWindow) getView().getTopLevelAncestor()).getProcessor().Do(new BackgroundDrawerChange(activityRenderer, new BackgroundDrawer()));
 		else
-			activityRenderer.setBackgroundDrawer(new StripedBackgroundDrawer());
-		getView().repaint();
+			((MainWindow) getView().getTopLevelAncestor()).getProcessor().Do(new BackgroundDrawerChange(activityRenderer, new StripedBackgroundDrawer()));
 	}
 }
