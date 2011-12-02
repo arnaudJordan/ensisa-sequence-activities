@@ -95,6 +95,19 @@ public class MainWindow extends JFrame {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		else
+		{
+			for (UIManager.LookAndFeelInfo lf : UIManager.getInstalledLookAndFeels())
+			{
+				if ("Nimbus".equals(lf.getName()))
+					try
+					{
+						UIManager.setLookAndFeel(lf.getClassName());
+					}
+					catch (Exception e) {}
+			}
+			SwingUtilities.updateComponentTreeUI(this);
+		}
 		
 		List<File> lastOpenedFiles = getConfig().getLastOpenedFiles();
 		for(File file:lastOpenedFiles)
