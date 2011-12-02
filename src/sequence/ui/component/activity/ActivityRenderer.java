@@ -36,7 +36,9 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 	{
 		this.bd=bd;
 	}
-	
+	public BackgroundDrawer getBackgroundDrawer() {
+		return this.bd;
+	}
 	public Dimension getPreferredSize() {
 		Activity activity = (Activity) ((ActivityView)getView()).getModel();
 		ActivityRenderingModel renderingModel = ((ActivityRenderingModel)getView().getRenderingModel());
@@ -44,4 +46,6 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 			return new Dimension((int)(activity.getActivitytime().getDuration() * renderingModel.getHScale()), (int)(((ActivityRenderingModel)getView().getRenderingModel()).getHeight() * renderingModel.getVScale()));
 		return super.getPreferredSize();
 	}
+
+	
 }
