@@ -15,7 +15,7 @@ public class TikzFactory {
 	final static int DefaultVscale = 10;
 	final static int PDFHeight = 800;
 	final static int PDFWidth = 600;
-	final static int HMARGIN = 40;
+	final static int HMARGIN = 60;
 	final static int VMARGIN = 40;
 	
 	public static String ActivityToTikz(ActivityView activityView)
@@ -26,12 +26,8 @@ public class TikzFactory {
 	}
 	private static String SequenceActivityToTikz(ActivityView activityView, SubSequenceView sequenceView) {
 		StringBuilder sb = new StringBuilder();
-		double Hscale=sequenceView.getWidth()/(PDFWidth-HMARGIN);
-		double Vscale=1;//sequenceView.getHeight()/(PDFHeight-VMARGIN);
-		System.out.println("Hscale : "+Hscale);
-		System.out.println("Height : "+sequenceView.getHeight());
-		System.out.println("Vscale : "+Vscale);
-		System.out.println("Width : "+sequenceView.getWidth());
+		float Hscale=4;//sequenceView.getWidth()/(PDFWidth-HMARGIN);
+		float Vscale=1;//sequenceView.getHeight()/(PDFHeight-VMARGIN);
 		sb.append("\\draw[draw=none,fill=color"+((Activity) activityView.getModel()).getId()+"] ("+activityView.getX()/(Hscale)+","+(sequenceView.getHeight()-activityView.getY())/Vscale+") rectangle ("+(activityView.getX()+activityView.getWidth())/Hscale+","+(sequenceView.getHeight()-activityView.getY()-activityView.getHeight())/Vscale+");");
 		return sb.toString();
 	}
