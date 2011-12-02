@@ -28,6 +28,8 @@ public class OptionWindow extends JFrame {
 		
 		for(int i=0; i< UIManager.getInstalledLookAndFeels().length; i++)
 			jComboBox1.addItem(UIManager.getInstalledLookAndFeels()[i].getName());
+		jComboBox1.setSelectedItem(UIManager.getLookAndFeel().getName());
+		
 		final JFrame jFrame = this;
 		jComboBox1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
