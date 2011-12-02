@@ -15,8 +15,8 @@ public class TikzFactory {
 	final static int DefaultVscale = 10;
 	final static int PDFHeight = 800;
 	final static int PDFWidth = 600;
-	final static int HMARGIN = 20;
-	final static int VMARGIN = 20;
+	final static int HMARGIN = 40;
+	final static int VMARGIN = 40;
 	
 	public static String ActivityToTikz(ActivityView activityView)
 	{
@@ -26,8 +26,12 @@ public class TikzFactory {
 	}
 	private static String SequenceActivityToTikz(ActivityView activityView, SubSequenceView sequenceView) {
 		StringBuilder sb = new StringBuilder();
-		int Hscale=1+DefaultHscale*sequenceView.getWidth()/(PDFWidth-HMARGIN);
-		int Vscale=1+DefaultVscale*sequenceView.getHeight()/(PDFHeight-VMARGIN);
+		double Hscale=sequenceView.getWidth()/(PDFWidth-HMARGIN);
+		double Vscale=1;//sequenceView.getHeight()/(PDFHeight-VMARGIN);
+		System.out.println("Hscale : "+Hscale);
+		System.out.println("Height : "+sequenceView.getHeight());
+		System.out.println("Vscale : "+Vscale);
+		System.out.println("Width : "+sequenceView.getWidth());
 		sb.append("\\draw[draw=none,fill=color"+((Activity) activityView.getModel()).getId()+"] ("+activityView.getX()/(Hscale)+","+(sequenceView.getHeight()-activityView.getY())/Vscale+") rectangle ("+(activityView.getX()+activityView.getWidth())/Hscale+","+(sequenceView.getHeight()-activityView.getY()-activityView.getHeight())/Vscale+");");
 		return sb.toString();
 	}
@@ -77,16 +81,6 @@ public class TikzFactory {
 		sb.append("\\end{tikzpicture}");
 		sb.append(NEW_LINE);
 		sb.append("\\end{document}");
-		return sb.toString();
-	}
-	private static String TikzLib()
-	{
-		StringBuilder sb = new StringBuilder();
-		sb.append("\\usetikzlibrary{arrows,shapes,snakes,automata,backgrounds,petri}");
-		sb.append(NEW_LINE);
-		sb.append("\\usetikzlibrary[arrows,backgrounds,fit,decorations.pathmorphing,shapes.geometric,shapes,chains,scopes,positioning,arrows,fit,shadows,shapes.gates.logic.US,trees,positioning,arrows]");
-		sb.append(NEW_LINE);
-		sb.append("\\usetikzlibrary[arrows,backgrounds,fit,decorations.pathmorphing,shapes.geometric,shapes,chains,scopes,positioning,arrows,fit,shadows,shapes.gates.logic.US,trees,positioning,arrows]");
 		return sb.toString();
 	}
 	private static String TikzColor(ActivityView activityView)
