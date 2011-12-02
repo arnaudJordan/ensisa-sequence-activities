@@ -9,6 +9,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import sequence.utilities.Config;
+
 public class OptionWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
@@ -34,7 +36,7 @@ public class OptionWindow extends JFrame {
 				try {
 					UIManager.setLookAndFeel(laf.getClassName());
 					((MainWindow) parent).getConfig().setStyle(laf.getClassName());
-					((MainWindow) parent).getConfig().serialize();
+					Config.serialize(((MainWindow) parent).getConfig());
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}

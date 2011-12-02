@@ -47,7 +47,7 @@ public class MenuBar extends JMenuBar {
 					config.setLastOpenedDirectory(fc.getCurrentDirectory());
 					config.addOpenedFile(file);
 					try {
-						config.serialize();
+						Config.serialize(config);
 					}
 					catch (java.io.IOException ex) {
 						ex.printStackTrace();
