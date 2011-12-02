@@ -7,6 +7,7 @@ import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,11 +59,11 @@ public class MainWindow extends JFrame {
 		this.setPreferredSize(new Dimension(800, 600));
 
 		this.processor=new SafeProcessor();
-		setConfig(new Config());
 		try {
-			setConfig(getConfig().deserialize());
+			setConfig(Config.deserialize());
 		}catch(Exception e){
 			e.printStackTrace();
+			setConfig(new Config());
 		}
 
 		this.setJMenuBar(new MenuBar(this));
@@ -95,16 +96,14 @@ public class MainWindow extends JFrame {
 			ex.printStackTrace();
 		}
 		
-		File[] lastOpenedFiles = getConfig().getLastOpenedFiles();
-		for(int i=0; i <lastOpenedFiles.length;i++)
+		List<File> lastOpenedFiles = getConfig().getLastOpenedFiles();
+		for(File file:lastOpenedFiles)
 		{
-			if(lastOpenedFiles[i]==null)
-				return;
 			try{
 				SAXParserFactory factory = SAXParserFactory.newInstance();
 				SAXParser parser = factory.newSAXParser();
-				SequenceHandler sequenceHandler = new SequenceHandler();
-				parser.parse(lastOpenedFiles[i], sequenceHandler);				
+				SequenceHandler sequenceHandler = new SequenceHandler(file);
+				parser.parse(file, sequenceHandler);				
 				
 				Sequence sequence = sequenceHandler.getSequence();
 				addSequence(sequence);
@@ -194,6 +193,12 @@ public class MainWindow extends JFrame {
 			{
 				this.sequenceContainers.remove(sc);
 		        this.mainPane.remove(sc);
+		        config.removeOpenedFile(model.getFile());
+		        try {
+					Config.serialize(config);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 		        break;
 			}
 		}		

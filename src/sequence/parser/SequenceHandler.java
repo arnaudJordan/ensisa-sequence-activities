@@ -1,5 +1,6 @@
 package sequence.parser;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.StringTokenizer;
 
@@ -35,6 +36,7 @@ import sequence.utilities.Sex;
 
 
 public class SequenceHandler extends DefaultHandler {
+	private File file;
 	private Sequence sequence;
 	private boolean inSequence, inDiscipline, inParticipant, inActivity, inPatient, inLocation, inDate, inState, inActivityTime, inActuator, inAction, inUsedInstruments, inTreatedStructure;
 	private StringBuffer buffer;
@@ -42,13 +44,19 @@ public class SequenceHandler extends DefaultHandler {
 	public SequenceHandler(){
 		super();
 	}
+	public SequenceHandler(File file) {
+		this.file=file;
+	}
 	public void startElement(String uri, String localName,
 			String qName, Attributes attributes) throws SAXException{
 		buffer = new StringBuffer();
 		if(qName.equals("rec_workflow")){
 			try{
 				String workflowID = attributes.getValue("workflowID");
-				sequence = new Sequence(workflowID);
+				if(file==null)
+					sequence = new Sequence(workflowID);
+				else
+					sequence = new Sequence(workflowID, file);
 				inSequence = true;
 			}catch(Exception e){
 				throw new SAXException(e);

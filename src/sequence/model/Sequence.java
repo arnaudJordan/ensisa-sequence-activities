@@ -22,6 +22,7 @@ import sequence.mvc.DefaultModel;
 import sequence.mvc.Model;
 
 public class Sequence extends DefaultModel implements Iterable<Activity>, Model {
+	private File file;
 	private final String workflowID;
 	private List<Activity> activities;
 	private Phases phases;
@@ -30,9 +31,15 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	private Date date;
 	private Discipline discipline;
 	
+	
 	public Sequence(String workflowID) {
 		this.activities=new ArrayList<Activity>();
 		this.workflowID=workflowID;
+	}
+	public Sequence(String workflowID, File file) {
+		this.activities=new ArrayList<Activity>();
+		this.workflowID=workflowID;
+		this.file=file;
 	}
 	
 	public Sequence(Sequence sequence) {
@@ -45,10 +52,14 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		this.workflowID=workflowID;
 	}
 	
+	
 	public String getWorkflowID() {
 		return workflowID;
 	}
 
+	public File getFile() {
+		return file;
+	}
 	public int size() {
 		return activities.size();
 	}
