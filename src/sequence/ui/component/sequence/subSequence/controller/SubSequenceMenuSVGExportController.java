@@ -13,6 +13,8 @@ import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
 import sequence.ui.component.sequence.subSequence.SubSequenceView;
+import sequence.ui.window.MainWindow;
+import sequence.utilities.Config;
 import sequence.utilities.SVGFactory;
 
 public class SubSequenceMenuSVGExportController extends Controller implements
@@ -29,8 +31,19 @@ public class SubSequenceMenuSVGExportController extends Controller implements
         	FileNameExtensionFilter filter= new FileNameExtensionFilter("SVG file", "svg");
         	fc.setFileFilter(filter);
         	
-        	int returnVal = fc.showSaveDialog(getView());
+        	Config config = ((MainWindow) getView().getTopLevelAncestor()).getConfig();
+    		if(config.getLastOpenedDirectory() !=null)
+    			fc.setCurrentDirectory(config.getLastOpenedDirectory());
+    		fc.setMultiSelectionEnabled(true);
+    		int returnVal = fc.showSaveDialog(getView());
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				config.setLastOpenedDirectory(fc.getCurrentDirectory());
+				try {
+					Config.serialize(config);
+				}
+				catch (java.io.IOException ex) {
+					ex.printStackTrace();
+				}
 				FileWriter fstream = new FileWriter(fc.getSelectedFile());
 				BufferedWriter out = new BufferedWriter(fstream);
 				out.write(SVGFactory.AddHeader(SVGFactory.SequenceToSVG((SubSequenceView) getView())));
