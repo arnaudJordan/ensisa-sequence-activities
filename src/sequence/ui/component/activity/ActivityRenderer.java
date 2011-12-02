@@ -35,6 +35,7 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 	public void setBackgroundDrawer(BackgroundDrawer bd)
 	{
 		this.bd=bd;
+		getView().repaint();
 	}
 	public BackgroundDrawer getBackgroundDrawer() {
 		return this.bd;

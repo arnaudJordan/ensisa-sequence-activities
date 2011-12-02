@@ -21,6 +21,5 @@ public class BackgroundDrawerChange extends Command {
 	@Override
 	public void Do() {
 		activityRenderer.setBackgroundDrawer(bd);
-		activityRenderer.getView().repaint();
 	}
 }
