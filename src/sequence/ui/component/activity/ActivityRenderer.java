@@ -7,11 +7,14 @@ import sequence.model.activity.Activity;
 import sequence.mvc.DefaultRenderer;
 import sequence.mvc.Renderer;
 import sequence.mvc.View;
+import sequence.utilities.BackgroundDrawer;
 
 public class ActivityRenderer extends DefaultRenderer implements Renderer {
+	protected BackgroundDrawer bd;
 	
 	public ActivityRenderer(View view) {
 		super(view);
+		this.bd=new BackgroundDrawer();
 	}
 
 	public void renderView(Graphics2D g) {
@@ -25,9 +28,13 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 
 	private void renderBackground(Graphics2D g) {
 		Activity activity = (Activity) ((ActivityView)getView()).getModel();
-		g.setColor(((ActivityRenderingModel)getView().getRenderingModel()).getColor());
 		if(activity != null)
-			g.fillRect(0, 0, (int)(getView().getSize().getWidth()), (int)(getView().getSize().getHeight()));
+			bd.Draw(g, (int)(getView().getSize().getWidth()), (int)(getView().getSize().getHeight()), ((ActivityRenderingModel)getView().getRenderingModel()).getColor());
+	}
+	
+	public void setBackgroundDrawer(BackgroundDrawer bd)
+	{
+		this.bd=bd;
 	}
 	
 	public Dimension getPreferredSize() {

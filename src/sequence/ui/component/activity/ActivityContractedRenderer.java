@@ -32,7 +32,7 @@ public class ActivityContractedRenderer extends ActivityRenderer {
 		ActivityRenderingModel renderingModel = ((ActivityRenderingModel)getView().getRenderingModel());
 		int parentWidth = getView().getParent().getWidth();
 		int activityWidth = (int) (activity.getActivitytime().getDuration() * renderingModel.getHScale());
-		g.fillRect(0, 0, activityWidth, (int) (renderingModel.getHeight() * renderingModel.getVScale()));
+		bd.Draw(g, activityWidth, (int) (renderingModel.getHeight() * renderingModel.getVScale()), ((ActivityRenderingModel)getView().getRenderingModel()).getColor());
 		if(parentWidth<activityWidth)
 		{
 			this.contracted = true;
