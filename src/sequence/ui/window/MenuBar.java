@@ -38,33 +38,37 @@ public class MenuBar extends JMenuBar {
 		final Config config = ((MainWindow) parent).getConfig();
 		if(config.getLastOpenedDirectory() !=null)
 			fc.setCurrentDirectory(config.getLastOpenedDirectory());
+		fc.setMultiSelectionEnabled(true);
 		
 		open.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int returnVal = fc.showOpenDialog(parent);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
-					File file = fc.getSelectedFile();
-					config.setLastOpenedDirectory(fc.getCurrentDirectory());
-					config.addOpenedFile(file);
-					try {
-						Config.serialize(config);
-					}
-					catch (java.io.IOException ex) {
-						ex.printStackTrace();
-					}
-					
-					try{
-						SAXParserFactory factory = SAXParserFactory.newInstance();
-						SAXParser parser = factory.newSAXParser();
-						File parsedFile = file;
-						SequenceHandler sequenceHandler = new SequenceHandler();
-						parser.parse(parsedFile, sequenceHandler);
+					File[] file = fc.getSelectedFiles();
+					for(int i=0; i<file.length; i++)
+					{
+						config.setLastOpenedDirectory(fc.getCurrentDirectory());
+						config.addOpenedFile(file[i]);
+						try {
+							Config.serialize(config);
+						}
+						catch (java.io.IOException ex) {
+							ex.printStackTrace();
+						}
 						
-						Sequence sequence = sequenceHandler.getSequence();
-						((MainWindow) parent).addSequence(sequence);
-					}catch(Exception ex){
-						ex.printStackTrace();
-						JOptionPane.showMessageDialog(parent, ex.toString(), ex.getClass().toString(), JOptionPane.ERROR_MESSAGE);
+						try{
+							SAXParserFactory factory = SAXParserFactory.newInstance();
+							SAXParser parser = factory.newSAXParser();
+							File parsedFile = file[i];
+							SequenceHandler sequenceHandler = new SequenceHandler();
+							parser.parse(parsedFile, sequenceHandler);
+							
+							Sequence sequence = sequenceHandler.getSequence();
+							((MainWindow) parent).addSequence(sequence);
+						}catch(Exception ex){
+							ex.printStackTrace();
+							JOptionPane.showMessageDialog(parent, ex.toString(), ex.getClass().toString(), JOptionPane.ERROR_MESSAGE);
+						}
 					}
 				}
 			}
