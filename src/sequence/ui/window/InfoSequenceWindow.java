@@ -10,10 +10,29 @@
  */
 package sequence.ui.window;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
 import sequence.model.Sequence;
+import sequence.model.activity.Activity;
 
 /**
  *
@@ -38,6 +57,61 @@ public class InfoSequenceWindow extends javax.swing.JFrame {
         structureNumber.setText(Integer.toString(numbers[1]));
         instrumentNumber.setText(Integer.toString(numbers[2]));
         
+        Map activityMap = new HashMap();
+        for(Activity activity : sequence)
+        {
+            if (activityMap.containsKey(activity))
+            {
+		int duration = ((Integer)activityMap.get(activity));
+                activityMap.put(activity, duration+activity.getActivitytime().getDuration());
+            }
+	    else
+            {
+                activityMap.put(activity, activity.getActivitytime().getDuration());
+            }
+        }
+        
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        Collection values = activityMap.values();
+        List<Integer> displayValues = new ArrayList(values);
+        
+        
+        Set cles = activityMap.keySet();
+        Iterator it = cles.iterator();
+        
+        while (it.hasNext()){
+           Activity cle = (Activity)it.next();
+           int valeur = (Integer)activityMap.get(cle);
+           displayValues.add(valeur);
+        }
+        Collections.sort(displayValues);
+        it = cles.iterator();
+        
+        int rest = 0;
+        while (it.hasNext()){
+           Activity cle = (Activity)it.next();
+           int valeur = (Integer)activityMap.get(cle);
+           if(valeur>=displayValues.get(displayValues.size()-5))
+                dataset.setValue(cle.getAction().getAction(), valeur);
+           else
+               rest+=valeur;
+        }
+        dataset.setValue("Others", rest);
+         
+	JFreeChart chart = ChartFactory.createPieChart(
+	            "Longest Activities",  // chart title
+	            dataset,             // data
+	            false,               // include legend
+	            true,
+	            false
+	        );
+		
+	PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 12));
+        plot.setCircular(false);
+        plot.setLabelGap(0.02);
+        graphicsPane.add(new ChartPanel(chart));
+        
         final JFrame frame = this;
         okButton.addActionListener(new ActionListener() {
             @Override
@@ -58,21 +132,24 @@ public class InfoSequenceWindow extends javax.swing.JFrame {
 
         okButton = new javax.swing.JButton();
         title = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         id = new javax.swing.JLabel();
-        completeDuration = new javax.swing.JLabel();
-        activityNumber = new javax.swing.JLabel();
-        meanActivityDuration = new javax.swing.JLabel();
-        actionNumber = new javax.swing.JLabel();
-        structureNumber = new javax.swing.JLabel();
-        instrumentNumber = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
         jlabel5 = new javax.swing.JLabel();
         workDuration = new javax.swing.JLabel();
+        structureNumber = new javax.swing.JLabel();
+        instrumentNumber = new javax.swing.JLabel();
+        meanActivityDuration = new javax.swing.JLabel();
+        actionNumber = new javax.swing.JLabel();
+        completeDuration = new javax.swing.JLabel();
+        activityNumber = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        graphicsPane = new javax.swing.JPanel();
 
         okButton.setText("OK");
         okButton.addActionListener(new java.awt.event.ActionListener() {
@@ -81,69 +158,122 @@ public class InfoSequenceWindow extends javax.swing.JFrame {
             }
         });
 
-        title.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        title.setFont(new java.awt.Font("Tahoma", 1, 14));
         title.setText("Informartion about sequence");
 
-        jLabel1.setText("Number of activities");
-
-        jLabel2.setText("Total duration");
-
-        jLabel3.setText("Mean activities duration");
-
-        jLabel4.setText("Different action number");
-
-        jLabel5.setText("Different structure number");
-
-        jLabel6.setText("Different instrument number");
-
         id.setText("id");
-
-        completeDuration.setText("completeDuration");
-
-        activityNumber.setText("activityNumber");
-
-        meanActivityDuration.setText("meanActivityDuration");
-
-        actionNumber.setText("actionNumber");
-
-        structureNumber.setText("structureNumber");
-
-        instrumentNumber.setText("instrumentNumber");
 
         jlabel5.setText("Total work duration");
 
         workDuration.setText("workDuration");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        structureNumber.setText("structureNumber");
+
+        instrumentNumber.setText("instrumentNumber");
+
+        meanActivityDuration.setText("meanActivityDuration");
+
+        actionNumber.setText("actionNumber");
+
+        completeDuration.setText("completeDuration");
+
+        activityNumber.setText("activityNumber");
+
+        jLabel4.setText("Different action number");
+
+        jLabel3.setText("Mean activities duration");
+
+        jLabel2.setText("Total duration");
+
+        jLabel1.setText("Number of activities");
+
+        jLabel6.setText("Different instrument number");
+
+        jLabel5.setText("Different structure number");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(okButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(title)
+                            .addComponent(jlabel5))
+                        .addGap(186, 186, 186)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(workDuration)
+                            .addComponent(completeDuration)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3)
                             .addComponent(jLabel1)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jlabel5))
+                            .addComponent(jLabel6))
                         .addGap(123, 123, 123)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(instrumentNumber)
                             .addComponent(structureNumber)
                             .addComponent(actionNumber)
                             .addComponent(meanActivityDuration)
-                            .addComponent(activityNumber)
-                            .addComponent(workDuration)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                                .addComponent(id))
-                            .addComponent(completeDuration))))
+                            .addComponent(activityNumber))))
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jlabel5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(completeDuration)
+                        .addGap(18, 18, 18)
+                        .addComponent(workDuration)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(activityNumber))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(meanActivityDuration))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(actionNumber))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(structureNumber))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(instrumentNumber))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Data", jPanel1);
+        jTabbedPane1.addTab("Graphics", graphicsPane);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
+                    .addComponent(okButton)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(title)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
+                        .addComponent(id)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -153,35 +283,9 @@ public class InfoSequenceWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(title)
                     .addComponent(id))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(completeDuration))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlabel5)
-                    .addComponent(workDuration))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(activityNumber))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(meanActivityDuration))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(actionNumber))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(structureNumber))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(instrumentNumber))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(okButton)
                 .addContainerGap())
         );
@@ -208,6 +312,7 @@ public class InfoSequenceWindow extends javax.swing.JFrame {
     private javax.swing.JLabel actionNumber;
     private javax.swing.JLabel activityNumber;
     private javax.swing.JLabel completeDuration;
+    private javax.swing.JPanel graphicsPane;
     private javax.swing.JLabel id;
     private javax.swing.JLabel instrumentNumber;
     private javax.swing.JLabel jLabel1;
@@ -216,6 +321,8 @@ public class InfoSequenceWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel jlabel5;
     private javax.swing.JLabel meanActivityDuration;
     private javax.swing.JButton okButton;

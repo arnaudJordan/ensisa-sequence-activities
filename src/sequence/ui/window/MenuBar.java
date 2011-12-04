@@ -17,6 +17,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
+import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuImageExportController;
 import sequence.utilities.Config;
 
 
@@ -94,9 +95,48 @@ public class MenuBar extends JMenuBar {
 		file.add(save);
 		
 		
-		JMenuItem export = new JMenuItem("Export");
+		JMenu export = new JMenu("Export");
 		export.setMnemonic('E');
-		export.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.Event.CTRL_MASK));
+		
+		JMenuItem imageExport = new JMenuItem("to image");
+		imageExport.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable(){
+					public void run(){
+						new OpenedFilesSelectWindow(((MainWindow) parent).getSequenceContainers(), fc);
+					}
+				});
+			}
+		});
+		export.add(imageExport);
+		
+		JMenuItem svgExport = new JMenuItem("to svg");
+		svgExport.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable(){
+					public void run(){
+						new OpenedFilesSelectWindow(((MainWindow) parent).getSequenceContainers(), fc);
+					}
+				});
+			}
+		});
+		export.add(svgExport);
+		
+		JMenuItem tikzExport = new JMenuItem("to tikz");
+		tikzExport.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable(){
+					public void run(){
+						new OpenedFilesSelectWindow(((MainWindow) parent).getSequenceContainers(), fc);
+					}
+				});
+			}
+		});
+		export.add(tikzExport);
+		
 		file.add(export);
 
 
