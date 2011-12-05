@@ -4,6 +4,7 @@ import java.awt.Component;
 
 import sequence.model.Sequence;
 import sequence.model.activity.Activity;
+import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityContractedRenderer;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
@@ -11,51 +12,59 @@ import sequence.ui.component.sequence.subSequence.SubSequenceView;
 
 public class SVGFactory {
 	final static String NEW_LINE = System.getProperty("line.separator");
-	public static String ActivityToSVG(ActivityView activityView)
+	public static String ActivityToSVG(View view)
 	{
-		Activity activity = (Activity) activityView.getModel();
+		
 		StringBuilder sb = new StringBuilder();
-		sb.append("<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"" + activityView.getWidth() + "\" height=\"" + activityView.getHeight() + "\">");
+		sb.append("<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"" + view.getWidth() + "\" height=\"" + view.getHeight() + "\">");
 		sb.append(NEW_LINE);
-		sb.append("<title>Activity : "+ activity.getId() +"</title>");
-		sb.append(NEW_LINE);
-		sb.append(SequenceActivityToSVG(activityView));
+		if(view.getModel() instanceof Activity)
+		{
+			Activity activity = (Activity) view.getModel();
+			sb.append("<title>Activity : "+ activity.getId() +"</title>");
+			sb.append(NEW_LINE);
+		}
+		sb.append(SequenceActivityToSVG(view));
 		return sb.toString();
 	}
-	private static String SequenceActivityToSVG(ActivityView activityView)
+	private static String SequenceActivityToSVG(View view)
 	{
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("<g>");
 		sb.append(NEW_LINE);
-		sb.append("<rect width=\""+activityView.getWidth()+"\" height=\""+activityView.getHeight()+"\" x=\""+activityView.getX()+"\" y=\""+activityView.getY()+"\" fill=\"#"+Integer.toHexString(((ActivityRenderingModel) activityView.getRenderingModel()).getColor().getRGB()-0xff000000)+"\" />");
+		sb.append("<rect width=\""+view.getWidth()+"\" height=\""+view.getHeight()+"\" x=\""+view.getX()+"\" y=\""+view.getY()+"\" fill=\"#"+Integer.toHexString(((ActivityRenderingModel) view.getRenderingModel()).getColor().getRGB()-0xff000000)+"\" />");
 		sb.append(NEW_LINE);
-		if((ActivityContractedRenderer)activityView.getRenderer() instanceof ActivityContractedRenderer)
-			if(((ActivityContractedRenderer) activityView.getRenderer()).isContracted())
+		if(view.getRenderer() instanceof ActivityContractedRenderer)
+			if(((ActivityContractedRenderer) view.getRenderer()).isContracted())
 			{
-				sb.append("<line x1=\""+(activityView.getX()+activityView.getWidth()/2-10)+"\" y1=\""+(activityView.getY()+activityView.getHeight())+"\" x2=\""+(activityView.getX()+activityView.getWidth()/2-5)+"\" y2=\""+activityView.getY()+"\" style=\"stroke:white;stroke-width:2\" />");
+				sb.append("<line x1=\""+(view.getX()+view.getWidth()/2-10)+"\" y1=\""+(view.getY()+view.getHeight())+"\" x2=\""+(view.getX()+view.getWidth()/2-5)+"\" y2=\""+view.getY()+"\" style=\"stroke:white;stroke-width:2\" />");
 				sb.append(NEW_LINE);
-				sb.append("<line x1=\""+(activityView.getX()+activityView.getWidth()/2+5)+"\" y1=\""+(activityView.getY()+activityView.getHeight())+"\" x2=\""+(activityView.getX()+activityView.getWidth()/2+10)+"\" y2=\""+activityView.getY()+"\" style=\"stroke:white;stroke-width:2\" />");
+				sb.append("<line x1=\""+(view.getX()+view.getWidth()/2+5)+"\" y1=\""+(view.getY()+view.getHeight())+"\" x2=\""+(view.getX()+view.getWidth()/2+10)+"\" y2=\""+view.getY()+"\" style=\"stroke:white;stroke-width:2\" />");
 				sb.append(NEW_LINE);
 			}
 		sb.append("</g>");
 		sb.append(NEW_LINE);
 		return sb.toString();
 	}
-	public static String SequenceToSVG(SubSequenceView sequenceView)
+	public static String SequenceToSVG(View view)
 	{
-		Sequence sequence = (Sequence) sequenceView.getModel();
+		
 		StringBuilder sb = new StringBuilder();
-		sb.append("<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"" + sequenceView.getWidth() + "\" height=\"" + sequenceView.getHeight() + "\">");
+		sb.append("<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"" + view.getWidth() + "\" height=\"" + view.getHeight() + "\">");
 		sb.append(NEW_LINE);
-		sb.append("<title>Sequence : "+ sequence.getWorkflowID() +"</title>");
-		sb.append(NEW_LINE);
-		for(int i=0; i <sequenceView.getComponentCount(); i++)
+		if(view.getModel() instanceof Sequence)
 		{
-			Component objet = sequenceView.getComponent(i);
+			Sequence sequence = (Sequence) view.getModel();
+			sb.append("<title>Sequence : "+ sequence.getWorkflowID() +"</title>");
+			sb.append(NEW_LINE);
+		}
+		for(int i=0; i <view.getComponentCount(); i++)
+		{
+			Component objet = view.getComponent(i);
 			if(objet instanceof ActivityView)
 			{
-				sb.append(SVGFactory.SequenceActivityToSVG((ActivityView) objet));
+				sb.append(SVGFactory.SequenceActivityToSVG((View) objet));
 			}
 		}
 		return sb.toString();
