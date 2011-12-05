@@ -46,7 +46,7 @@ public class SubSequenceMenuSVGExportController extends Controller implements
 				}
 				FileWriter fstream = new FileWriter(fc.getSelectedFile());
 				BufferedWriter out = new BufferedWriter(fstream);
-				out.write(SVGFactory.AddHeader(SVGFactory.SequenceToSVG((SubSequenceView) getView())));
+				out.write(SVGFactory.AddHeader(SVGFactory.SequenceToSVG(getView())));
 				out.close();
 			}
 		} catch (IOException e1) {

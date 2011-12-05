@@ -47,7 +47,7 @@ public class SubSequenceMenuTikzExportController extends Controller implements
 				
 				FileWriter fstream = new FileWriter(fc.getSelectedFile());
 				BufferedWriter out = new BufferedWriter(fstream);
-				out.write(TikzFactory.AddHeader(TikzFactory.SequenceToTikz((SubSequenceView) getView())));
+				out.write(TikzFactory.AddHeader(TikzFactory.SequenceToTikz(getView())));
 				out.close();
 			}
 		} catch (IOException e1) {
