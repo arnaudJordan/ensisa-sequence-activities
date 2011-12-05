@@ -3,6 +3,7 @@ package sequence.utilities;
 import java.awt.Component;
 
 import sequence.model.activity.Activity;
+import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.subSequence.SubSequenceView;
@@ -18,38 +19,44 @@ public class TikzFactory {
 	final static int HMARGIN = 60;
 	final static int VMARGIN = 40;
 	
-	public static String ActivityToTikz(ActivityView activityView)
+	public static String ActivityToTikz(View view)
 	{
 		StringBuilder sb = new StringBuilder();
-		sb.append("\\draw[draw=none,fill="+((Activity) activityView.getModel()).getId()+"] (0,.8) rectangle ("+activityView.getWidth()+",1.1);");
+		int id=0;
+		if(view.getModel() instanceof Activity)
+			id=((Activity) view.getModel()).getId();
+		sb.append("\\draw[draw=none,fill="+id+"] (0,.8) rectangle ("+view.getWidth()+",1.1);");
 		return sb.toString();
 	}
-	private static String SequenceActivityToTikz(ActivityView activityView, SubSequenceView sequenceView) {
+	private static String SequenceActivityToTikz(View elementView, View containerView) {
 		StringBuilder sb = new StringBuilder();
 		float Hscale=4;//sequenceView.getWidth()/(PDFWidth-HMARGIN);
 		float Vscale=1;//sequenceView.getHeight()/(PDFHeight-VMARGIN);
-		sb.append("\\draw[draw=none,fill=color"+((Activity) activityView.getModel()).getId()+"] ("+activityView.getX()/(Hscale)+","+(sequenceView.getHeight()-activityView.getY())/Vscale+") rectangle ("+(activityView.getX()+activityView.getWidth())/Hscale+","+(sequenceView.getHeight()-activityView.getY()-activityView.getHeight())/Vscale+");");
+		int id=0;
+		if(elementView.getModel() instanceof Activity)
+			id=((Activity) elementView.getModel()).getId();
+		sb.append("\\draw[draw=none,fill=color"+id+"] ("+elementView.getX()/(Hscale)+","+(containerView.getHeight()-elementView.getY())/Vscale+") rectangle ("+(elementView.getX()+elementView.getWidth())/Hscale+","+(containerView.getHeight()-elementView.getY()-elementView.getHeight())/Vscale+");");
 		return sb.toString();
 	}
-	public static String SequenceToTikz(SubSequenceView sequenceView)
+	public static String SequenceToTikz(View view)
 	{
 		StringBuilder sb = new StringBuilder();
-		for(int i=0; i <sequenceView.getComponentCount(); i++)
+		for(int i=0; i <view.getComponentCount(); i++)
 		{
-			Component objet = sequenceView.getComponent(i);
-			if(objet instanceof ActivityView)
+			Component objet = view.getComponent(i);
+			if(objet instanceof View)
 			{
 				sb.append(TikzFactory.TikzColor((ActivityView) objet));
 				sb.append(NEW_LINE);
 			}
 		}
 		sb.append("\\begin{scope}[yshift=-0]");
-		for(int i=0; i <sequenceView.getComponentCount(); i++)
+		for(int i=0; i <view.getComponentCount(); i++)
 		{
-			Component objet = sequenceView.getComponent(i);
-			if(objet instanceof ActivityView)
+			Component objet = view.getComponent(i);
+			if(objet instanceof View)
 			{
-				sb.append(TikzFactory.SequenceActivityToTikz((ActivityView) objet, sequenceView));
+				sb.append(TikzFactory.SequenceActivityToTikz((View) objet, view));
 				sb.append(NEW_LINE);
 			}
 		}
