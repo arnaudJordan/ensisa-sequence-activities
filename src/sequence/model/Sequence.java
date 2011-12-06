@@ -235,14 +235,15 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	{
 		List<Action> actions = new ArrayList<Action>();
 		List<AnatomicStructure> anatomicStructures = new ArrayList<AnatomicStructure>();
-		List<UsedInstruments> usedInstruments = new ArrayList<UsedInstruments>();
+		List<Instrument> instruments = new ArrayList<Instrument>();
 		for(Activity current : activities) {
 			if(!actions.contains(current.getAction()))
 				actions.add(current.getAction());
 			if(!anatomicStructures.contains(current.getTreatedStructure()))
 				anatomicStructures.add(current.getTreatedStructure());
-			if(!usedInstruments.contains(current.getUsedInstrument()))
-				usedInstruments.add(current.getUsedInstrument());
+			for(Instrument ins : current.getUsedInstrument())
+				if(!instruments.contains(ins))
+					instruments.add(ins);
 		}
 		/*Collections.sort(actions, new Comparator<Action>() {
 			public int compare(Action o1, Action o2) {
@@ -259,7 +260,7 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 				return o1.toString().compareTo(o2.toString());
 			}
 		});*/
-		return new Object[]{actions.toArray(), anatomicStructures.toArray(),usedInstruments.toArray()};
+		return new Object[]{actions.toArray(), anatomicStructures.toArray(),instruments.toArray()};
 	}
 	public Object[] Positions()
 	{

@@ -17,7 +17,6 @@ import javax.xml.parsers.SAXParserFactory;
 
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
-import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuImageExportController;
 import sequence.utilities.Config;
 
 
