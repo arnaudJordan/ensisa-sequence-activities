@@ -23,6 +23,7 @@ import sequence.model.activity.Activity;
 import sequence.processor.ActivityChange;
 import sequence.processor.Processor;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import sequence.model.Position;
@@ -30,6 +31,8 @@ import sequence.model.activity.AnatomicStructure;
 import sequence.model.activity.BodyPart;
 import sequence.model.activity.Instrument;
 import sequence.model.activity.UsedInstruments;
+import sequence.utilities.ListLayout;
+import sequence.utilities.TimeLayout;
 /**
  *
  * @author jordan
@@ -83,7 +86,9 @@ public class EditActivityWindow extends javax.swing.JFrame {
 
         AutoCompletion as = new AutoCompletion(anatomicStructureEdit);
         as.setStrict(false);
-        DefaultComboBoxModel instrumentModel = new DefaultComboBoxModel((Object[])asi[2]);
+
+        final DefaultComboBoxModel instrumentModel = new DefaultComboBoxModel((Object[])asi[2]);
+        usedInstrumentList.setLayout(new ListLayout());
         for(Instrument current : activity.getUsedInstrument())
         {
             JComboBox currentEdit = new JComboBox(instrumentModel);
@@ -91,7 +96,16 @@ public class EditActivityWindow extends javax.swing.JFrame {
             currentEdit.setEditable(true);
             usedInstrumentList.add(currentEdit);
         }
-        
+        JButton addInstrumentButton = new JButton("Add Instrument");
+        addInstrumentButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JComboBox currentEdit = new JComboBox(instrumentModel);
+                currentEdit.setEditable(true);
+                usedInstrumentList.add(currentEdit);
+            }
+        });
+        usedInstrumentList.add(addInstrumentButton);
         startTimeEdit.setText(Integer.toString(activity.getActivitytime().getStartTime()));
         endTimeEdit.setText(Integer.toString(activity.getActivitytime().getStopTime()));
         durationEdit.setText(Integer.toString(activity.getActivitytime().getDuration()));
@@ -183,7 +197,6 @@ public class EditActivityWindow extends javax.swing.JFrame {
         bodyPartEdit = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         usedInstrumentList = new javax.swing.JPanel();
-        jComboBox2 = new javax.swing.JComboBox();
         anatomicStructureEdit = new javax.swing.JComboBox();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -245,23 +258,17 @@ public class EditActivityWindow extends javax.swing.JFrame {
 
         bodyPartEdit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jScrollPane1.setHorizontalScrollBar(null);
 
         javax.swing.GroupLayout usedInstrumentListLayout = new javax.swing.GroupLayout(usedInstrumentList);
         usedInstrumentList.setLayout(usedInstrumentListLayout);
         usedInstrumentListLayout.setHorizontalGroup(
             usedInstrumentListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(usedInstrumentListLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jComboBox2, 0, 363, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 384, Short.MAX_VALUE)
         );
         usedInstrumentListLayout.setVerticalGroup(
             usedInstrumentListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(usedInstrumentListLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+            .addGap(0, 90, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(usedInstrumentList);
@@ -277,7 +284,7 @@ public class EditActivityWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(title)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 382, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 399, Short.MAX_VALUE)
                         .addComponent(id))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,14 +296,14 @@ public class EditActivityWindow extends javax.swing.JFrame {
                             .addComponent(usedInstruments))
                         .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
-                            .addComponent(actionEdit, 0, 385, Short.MAX_VALUE)
-                            .addComponent(bodyPartEdit, 0, 385, Short.MAX_VALUE)
-                            .addComponent(stateEdit, 0, 385, Short.MAX_VALUE)
-                            .addComponent(disciplineEdit, javax.swing.GroupLayout.Alignment.LEADING, 0, 385, Short.MAX_VALUE)
-                            .addComponent(typeEdit, javax.swing.GroupLayout.Alignment.LEADING, 0, 385, Short.MAX_VALUE)
-                            .addComponent(positionEdit, javax.swing.GroupLayout.Alignment.LEADING, 0, 385, Short.MAX_VALUE)))
-                    .addComponent(noteEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                            .addComponent(actionEdit, 0, 387, Short.MAX_VALUE)
+                            .addComponent(bodyPartEdit, 0, 387, Short.MAX_VALUE)
+                            .addComponent(stateEdit, 0, 387, Short.MAX_VALUE)
+                            .addComponent(disciplineEdit, javax.swing.GroupLayout.Alignment.LEADING, 0, 387, Short.MAX_VALUE)
+                            .addComponent(typeEdit, javax.swing.GroupLayout.Alignment.LEADING, 0, 387, Short.MAX_VALUE)
+                            .addComponent(positionEdit, javax.swing.GroupLayout.Alignment.LEADING, 0, 387, Short.MAX_VALUE)))
+                    .addComponent(noteEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(startTime)
@@ -304,9 +311,9 @@ public class EditActivityWindow extends javax.swing.JFrame {
                             .addComponent(endTime))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(endTimeEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
-                            .addComponent(durationEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
-                            .addComponent(startTimeEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)))
+                            .addComponent(endTimeEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                            .addComponent(durationEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                            .addComponent(startTimeEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(cancelButton)
                         .addGap(18, 18, 18)
@@ -410,7 +417,6 @@ public class EditActivityWindow extends javax.swing.JFrame {
     private javax.swing.JTextField endTimeEdit;
     private javax.swing.JLabel id;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel note;
     private javax.swing.JScrollPane noteEdit;

@@ -127,12 +127,18 @@ public class Activity extends DefaultModel {
 	public String toXML() {
 		final String NEW_LINE = System.getProperty("line.separator");
 		StringBuilder sb = new StringBuilder("<activity id=\""+id+"\" state=\""+state+"\" discipline=\""+discipline+"\" type=\""+type+"\">"+NEW_LINE);
-		sb.append("\t"+activitytime.toXML()+NEW_LINE);
-		sb.append("\t"+actuator.toXML()+NEW_LINE);
-		sb.append("\t<action>"+action.toXML()+"</action>"+NEW_LINE);
-		sb.append("\t"+usedInstrument.toXML()+NEW_LINE);
-		sb.append("\t<treatedStructure>"+anatomicStructure.toXML()+"</treatedStructure>"+NEW_LINE);
-		sb.append("\t"+note.toXML()+NEW_LINE);
+		if(activitytime!=null)
+			sb.append("\t"+activitytime.toXML()+NEW_LINE);
+		if(actuator!=null)
+			sb.append("\t"+actuator.toXML()+NEW_LINE);
+		if(action!=null)
+			sb.append("\t<action>"+action.toXML()+"</action>"+NEW_LINE);
+		if(usedInstrument!=null)
+			sb.append("\t"+usedInstrument.toXML()+NEW_LINE);
+		if(anatomicStructure!=null)
+			sb.append("\t<treatedStructure>"+anatomicStructure.toXML()+"</treatedStructure>"+NEW_LINE);
+		if(note!=null)
+			sb.append("\t"+note.toXML()+NEW_LINE);
 		sb.append("</activity>"+NEW_LINE);
 		return sb.toString();
 	}
