@@ -3,11 +3,13 @@ package sequence.ui.component.sequence.summarizedSequence;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+
+import sequence.model.Sequence;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
 import sequence.processor.Command;
-import sequence.processor.DisplaySubSequence;
+import sequence.processor.AddSubSequence;
 import sequence.ui.component.sequence.SequenceContainer;
 import sequence.ui.window.MainWindow;
 
@@ -18,8 +20,9 @@ public class SummarizedSequenceController extends Controller implements ActionLi
 	}	
 
 	public void actionPerformed(ActionEvent e) {
-		Command command = new DisplaySubSequence((SequenceContainer) getView().getParent());
-		((MainWindow) getView().getTopLevelAncestor()).getProcessor().Do(command);
+		//Command command = new AddSubSequence((Sequence) getModel(), (SequenceContainer) getView().getParent());
+		//((MainWindow) getView().getTopLevelAncestor()).getProcessor().Do(command);
+		((SequenceContainer) getView().getParent()).addSubSequence((Sequence) getModel());
 	}
 
 	public void mousePressed(MouseEvent e) {

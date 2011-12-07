@@ -7,20 +7,21 @@ import java.util.List;
 import sequence.model.Sequence;
 import sequence.model.activity.Activity;
 import sequence.ui.component.sequence.SequenceContainer;
-import sequence.ui.component.sequence.subSequence.SubSequenceView;
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
 
-public class DisplaySubSequence extends Command {
+public class AddSubSequence extends Command {
 	private SequenceContainer parent;
 	
-	public DisplaySubSequence(SequenceContainer parent)
+	public AddSubSequence(Sequence model, SequenceContainer parent)
 	{
+		this.model=model;
 		this.parent=parent;
-		this.undo=new HideSubSequence(parent, this);
+		this.undo=new RemoveSubSequence(model, parent, this);
 	}
-	public DisplaySubSequence(SequenceContainer parent, HideSubSequence hideSubSequence) {
+	public AddSubSequence(Sequence model, SequenceContainer parent, RemoveSubSequence removeSubSequence) {
+		this.model=model;
 		this.parent=parent;
-		this.undo=hideSubSequence;
+		this.undo=removeSubSequence;
 	}
 	@Override
 	public void Do() {
@@ -39,10 +40,7 @@ public class DisplaySubSequence extends Command {
 				});
 			}
 			Sequence subSequenceModel = new Sequence(((Sequence) view.getModel()).getWorkflowID(), selectedActivities);
-			SubSequenceView subView = parent.getSubSequenceView();
-			subView.setModel(subSequenceModel);
-			if(!subView.isVisible())
-				subView.setVisible(true);
+			parent.initSubSequence(subSequenceModel);
 		}
 	}
 }

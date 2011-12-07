@@ -143,10 +143,11 @@ public class MainWindow extends JFrame {
 				if (!s.getValueIsAdjusting());
 				{
 					for(SequenceContainer current : sequenceContainers) {
-						SubSequenceView subSequence = current.getSubSequenceView();
-						for(int i=0; i<subSequence.getComponentCount() ; i++) {
-							((ActivityRenderingModel)((ActivityView)subSequence.getComponent(i)).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
-							((JComponent)subSequence.getComponent(i)).revalidate();
+						for(SubSequenceView subSequence : current.getSubSequenceViews()) {						
+							for(int i=0; i<subSequence.getComponentCount() ; i++) {
+								((ActivityRenderingModel)((ActivityView)subSequence.getComponent(i)).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
+								((JComponent)subSequence.getComponent(i)).revalidate();
+							}
 						}
 					}
 				}
@@ -170,8 +171,10 @@ public class MainWindow extends JFrame {
 				Object source = actionEvent.getSource();
 				JTextField s = (JTextField) source;
 				for(SequenceContainer current : sequenceContainers) {
-					((SubSequenceRenderingModel)current.getSubSequenceView().getRenderingModel()).setDurationThreshold(Integer.parseInt(s.getText()));
-					current.revalidate();
+					for(SubSequenceView subSequence : current.getSubSequenceViews()) {
+						((SubSequenceRenderingModel)subSequence.getRenderingModel()).setDurationThreshold(Integer.parseInt(s.getText()));
+						current.revalidate();
+					}
 				}
 			}
 		});
@@ -197,12 +200,12 @@ public class MainWindow extends JFrame {
 	}
 	public void removeSequence(SequenceContainer sequenceContainer)
 	{
-		getProcessor().Do(new RemoveSequence((Sequence) sequenceContainer.getSubSequenceView().getModel(), this));
+		getProcessor().Do(new RemoveSequence((Sequence) sequenceContainer.getSummarizedSequenceView().getModel(), this));
 	}
 	public void removeSequence(Sequence model) {
 		for(SequenceContainer sc : sequenceContainers)
 		{
-			if(sc.getSubSequenceView().getModel().equals(model))
+			if(sc.getSummarizedSequenceView().getModel().equals(model))
 			{
 				this.sequenceContainers.remove(sc);
 		        this.mainPane.remove(sc);
