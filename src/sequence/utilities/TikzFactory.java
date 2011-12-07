@@ -6,7 +6,6 @@ import sequence.model.activity.Activity;
 import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
-import sequence.ui.component.sequence.subSequence.SubSequenceView;
 
 public class TikzFactory {
 	final static String NEW_LINE = System.getProperty("line.separator");
