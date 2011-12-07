@@ -8,8 +8,11 @@ import sequence.mvc.Model;
 import sequence.mvc.View;
 import sequence.processor.Command;
 import sequence.processor.DisplaySubSequence;
+import sequence.ui.component.activity.ActivityRenderer;
+import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.SequenceContainer;
 import sequence.ui.window.MainWindow;
+import sequence.utilities.BorderBackgroundDrawer;
 
 public class SummarizedSequenceController extends Controller implements ActionListener  {
 	
