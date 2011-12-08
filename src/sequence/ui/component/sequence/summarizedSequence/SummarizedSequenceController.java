@@ -8,10 +8,7 @@ import sequence.model.Sequence;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
-import sequence.processor.Command;
-import sequence.processor.AddSubSequence;
 import sequence.ui.component.sequence.SequenceContainer;
-import sequence.ui.window.MainWindow;
 
 public class SummarizedSequenceController extends Controller implements ActionListener  {
 	
@@ -20,8 +17,6 @@ public class SummarizedSequenceController extends Controller implements ActionLi
 	}	
 
 	public void actionPerformed(ActionEvent e) {
-		//Command command = new AddSubSequence((Sequence) getModel(), (SequenceContainer) getView().getParent());
-		//((MainWindow) getView().getTopLevelAncestor()).getProcessor().Do(command);
 		((SequenceContainer) getView().getParent()).addSubSequence((Sequence) getModel());
 	}
 
