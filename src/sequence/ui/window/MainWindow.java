@@ -147,8 +147,8 @@ public class MainWindow extends JFrame {
 							for(int i=0 ; i<subSequence.getComponentCount() ; i++) {
 								if(subSequence instanceof SubSequenceContainer) {
 									for(int j=0 ; j<subSequence.getSubSequenceView().getComponentCount() ; j++) {
-										((ActivityRenderingModel)((ActivityView)subSequence.getSubSequenceView().getComponent(i)).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
-										((JComponent)subSequence.getComponent(i)).revalidate();
+										((ActivityRenderingModel)((ActivityView)subSequence.getSubSequenceView().getComponent(j)).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
+										((JComponent)subSequence.getSubSequenceView().getComponent(j)).revalidate();
 									}
 								}
 							}
