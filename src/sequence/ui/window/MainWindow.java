@@ -144,7 +144,7 @@ public class MainWindow extends JFrame {
 				if (!s.getValueIsAdjusting());
 				{
 					for(SequenceContainer current : sequenceContainers) {
-						for(JPanel subSequence : current.getSubSequenceContainers()) {
+						for(SubSequenceContainer subSequence : current.getSubSequenceContainers()) {
 							for(int i=0; i<subSequence.getComponentCount() ; i++) {
 								if(subSequence.getComponent(i) instanceof SubSequenceView) {
 									((ActivityRenderingModel)((ActivityView)subSequence.getComponent(i)).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
