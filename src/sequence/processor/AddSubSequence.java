@@ -7,6 +7,7 @@ import java.util.List;
 import sequence.model.Sequence;
 import sequence.model.activity.Activity;
 import sequence.ui.component.sequence.SequenceContainer;
+import sequence.ui.component.sequence.subSequence.SubSequenceContainer;
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
 
 public class AddSubSequence extends Command {
@@ -40,7 +41,11 @@ public class AddSubSequence extends Command {
 				});
 			}
 			Sequence subSequenceModel = new Sequence(((Sequence) view.getModel()).getWorkflowID(), selectedActivities);
-			parent.initSubSequence(subSequenceModel);
+			SubSequenceContainer subSequence = new SubSequenceContainer(subSequenceModel, parent);
+			parent.add(subSequence);
+			parent.getSubSequenceContainers().add(subSequence);
+			parent.revalidate();
+			parent.repaint();
 		}
 	}
 }

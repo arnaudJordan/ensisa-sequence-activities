@@ -35,6 +35,7 @@ import sequence.processor.SafeProcessor;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.SequenceContainer;
+import sequence.ui.component.sequence.subSequence.SubSequenceContainer;
 import sequence.ui.component.sequence.subSequence.SubSequenceRenderingModel;
 import sequence.ui.component.sequence.subSequence.SubSequenceView;
 import sequence.utilities.Config;
@@ -143,10 +144,12 @@ public class MainWindow extends JFrame {
 				if (!s.getValueIsAdjusting());
 				{
 					for(SequenceContainer current : sequenceContainers) {
-						for(SubSequenceView subSequence : current.getSubSequenceViews()) {						
+						for(JPanel subSequence : current.getSubSequenceContainers()) {
 							for(int i=0; i<subSequence.getComponentCount() ; i++) {
-								((ActivityRenderingModel)((ActivityView)subSequence.getComponent(i)).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
-								((JComponent)subSequence.getComponent(i)).revalidate();
+								if(subSequence.getComponent(i) instanceof SubSequenceView) {
+									((ActivityRenderingModel)((ActivityView)subSequence.getComponent(i)).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
+									((JComponent)subSequence.getComponent(i)).revalidate();
+								}
 							}
 						}
 					}
@@ -171,8 +174,8 @@ public class MainWindow extends JFrame {
 				Object source = actionEvent.getSource();
 				JTextField s = (JTextField) source;
 				for(SequenceContainer current : sequenceContainers) {
-					for(SubSequenceView subSequence : current.getSubSequenceViews()) {
-						((SubSequenceRenderingModel)subSequence.getRenderingModel()).setDurationThreshold(Integer.parseInt(s.getText()));
+					for(SubSequenceContainer subSequence : current.getSubSequenceContainers()) {
+						((SubSequenceRenderingModel)subSequence.getSubSequenceView().getRenderingModel()).setDurationThreshold(Integer.parseInt(s.getText()));
 						current.revalidate();
 					}
 				}
