@@ -37,7 +37,6 @@ import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.SequenceContainer;
 import sequence.ui.component.sequence.subSequence.SubSequenceContainer;
 import sequence.ui.component.sequence.subSequence.SubSequenceRenderingModel;
-import sequence.ui.component.sequence.subSequence.SubSequenceView;
 import sequence.utilities.Config;
 
 public class MainWindow extends JFrame {
@@ -145,10 +144,12 @@ public class MainWindow extends JFrame {
 				{
 					for(SequenceContainer current : sequenceContainers) {
 						for(SubSequenceContainer subSequence : current.getSubSequenceContainers()) {
-							for(int i=0; i<subSequence.getComponentCount() ; i++) {
-								if(subSequence.getComponent(i) instanceof SubSequenceView) {
-									((ActivityRenderingModel)((ActivityView)subSequence.getComponent(i)).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
-									((JComponent)subSequence.getComponent(i)).revalidate();
+							for(int i=0 ; i<subSequence.getComponentCount() ; i++) {
+								if(subSequence instanceof SubSequenceContainer) {
+									for(int j=0 ; j<subSequence.getSubSequenceView().getComponentCount() ; j++) {
+										((ActivityRenderingModel)((ActivityView)subSequence.getSubSequenceView().getComponent(i)).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
+										((JComponent)subSequence.getComponent(i)).revalidate();
+									}
 								}
 							}
 						}
