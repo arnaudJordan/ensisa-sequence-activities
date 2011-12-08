@@ -4,12 +4,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
-
 import sequence.model.Sequence;
 import sequence.ui.component.sequence.SequenceContainer;
 import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuExportController;
@@ -24,7 +23,9 @@ public class SubSequenceContainer extends JPanel {
 		subSequenceView = new SubSequenceView(model, this);
 		new SubSequenceMenuExportController(model, subSequenceView);
 
+		setBorder(BorderFactory.createTitledBorder(""));
 		setLayout(new CustomLayout());
+		
 		
 		JLabel label = new JLabel("Sub sequence :");
 		ImageIcon icon = new ImageIcon("icons/dialog-close.png");
@@ -36,13 +37,10 @@ public class SubSequenceContainer extends JPanel {
 				sc.removeSubSequence((Sequence) subSequenceView.getModel());
 			}
 		});
-		JSeparator separator = new JSeparator();
 
 		add(label);
 		add(button);
-		add(separator);
 		add(subSequenceView);
-		setVisible(true);
 	}
 
 	public SequenceContainer getParent() {
@@ -53,4 +51,8 @@ public class SubSequenceContainer extends JPanel {
 		return subSequenceView;
 	}
 
+	public Dimension getPreferredSize() {
+		int Hinsets = 2*(parent.getInsets().left + parent.getInsets().right);
+		return new Dimension(parent.getWidth() - Hinsets, getLayout().minimumLayoutSize(this).height);
+	}
 }

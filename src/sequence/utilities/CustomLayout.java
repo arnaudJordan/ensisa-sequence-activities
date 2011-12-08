@@ -7,11 +7,11 @@ import java.awt.Insets;
 import java.awt.LayoutManager;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.border.Border;
 
 public class CustomLayout implements LayoutManager {
+	private static final int VGAP = 10;
+	
 	@Override
 	public void addLayoutComponent(String name, Component comp) {
 	}
@@ -21,34 +21,42 @@ public class CustomLayout implements LayoutManager {
 	}
 
 	@Override
-	public Dimension preferredLayoutSize(Container parent) {
-		return minimumLayoutSize(parent);
+	public Dimension preferredLayoutSize(Container target) {
+		return minimumLayoutSize(target);
 	}
 
-	public Dimension minimumLayoutSize(Container parent) {
-		return new Dimension(parent.getWidth(), parent.getComponentCount()*parent.getComponent(0).getHeight());
+	public Dimension minimumLayoutSize(Container target) {
+		int currentHeight = target.getInsets().top;
+		for(int i=0 ; i < target.getComponentCount(); i++) {
+			Component c = target.getComponent(i);
+			if (c.isVisible()) {
+				if(c.getY() < currentHeight)
+					currentHeight += c.getPreferredSize().height + VGAP - (currentHeight - c.getY());
+				else
+					currentHeight += c.getPreferredSize().height + VGAP;
+			}
+		}
+		return new Dimension(target.getWidth(), currentHeight);
 	}
 
 	@Override
-	public void layoutContainer(Container parent) {
-		Insets parentInsets = ((JComponent) parent).getBorder().getBorderInsets(parent);
-		int HMargin = parentInsets.left + parentInsets.right;
-		int currentHeight = parentInsets.top;
-		for(int i=0; i < parent.getComponentCount(); i++)
-		{
-			Component c = parent.getComponent(i);
-			if (c.isVisible())
-			{
+	public void layoutContainer(Container target) {
+		Insets targetInsets = target.getInsets();
+		int HMargin = targetInsets.left + targetInsets.right;
+		int currentHeight = targetInsets.top;
+		for(int i=0 ; i < target.getComponentCount(); i++) {
+			Component c = target.getComponent(i);
+			if (c.isVisible()) {
 				if(c instanceof JButton)
-					c.setBounds(parent.getWidth()-c.getWidth(), parentInsets.top/2, c.getPreferredSize().width, c.getPreferredSize().height);
+					c.setBounds(target.getWidth()-c.getWidth(), targetInsets.top/2, c.getPreferredSize().width, c.getPreferredSize().height);
 				else if(c instanceof JLabel)
-					c.setBounds(HMargin, parentInsets.top, c.getPreferredSize().width, c.getPreferredSize().height);
+					c.setBounds(HMargin, currentHeight, c.getPreferredSize().width, c.getPreferredSize().height);
 				else
 					c.setBounds(HMargin, currentHeight, c.getPreferredSize().width, c.getPreferredSize().height);
-				try {
-					currentHeight+=Math.max(c.getPreferredSize().height, parent.getComponent(i-1).getPreferredSize().height);
-				}
-				catch(Exception e) {}
+				if(c.getY() < currentHeight)
+					currentHeight += c.getPreferredSize().height + VGAP - (currentHeight - c.getY());
+				else
+					currentHeight += c.getPreferredSize().height + VGAP;
 			}
 		}
 	}

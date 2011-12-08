@@ -71,6 +71,6 @@ public class SequenceContainer extends JPanel {
 
 public Dimension getPreferredSize() {
        int Hinsets = 2*(getInsets().left + getInsets().right);
-       return new Dimension(mainWindow.getWidth() - Hinsets, getMinimumSize().height);
+       return new Dimension(mainWindow.getWidth() - Hinsets, getLayout().minimumLayoutSize(this).height);
    }
 }
