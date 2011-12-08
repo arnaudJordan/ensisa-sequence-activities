@@ -47,9 +47,10 @@ public class CustomLayout implements LayoutManager {
 		for(int i=0 ; i < target.getComponentCount(); i++) {
 			Component c = target.getComponent(i);
 			if (c.isVisible()) {
-				if(c instanceof JButton)
-					c.setBounds(target.getWidth()-c.getWidth(), targetInsets.top/2, c.getPreferredSize().width, c.getPreferredSize().height);
-				else if(c instanceof JLabel)
+				if(c instanceof JButton){
+					System.out.println(c.getWidth());
+					c.setBounds(target.getWidth() - (targetInsets.right + targetInsets.left)/2 - c.getWidth()/2, targetInsets.top - c.getPreferredSize().height/2, c.getPreferredSize().width, c.getPreferredSize().height);
+				}else if(c instanceof JLabel)
 					c.setBounds(HMargin, currentHeight, c.getPreferredSize().width, c.getPreferredSize().height);
 				else
 					c.setBounds(HMargin, currentHeight, c.getPreferredSize().width, c.getPreferredSize().height);
