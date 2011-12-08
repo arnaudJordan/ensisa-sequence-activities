@@ -3,10 +3,13 @@ package sequence.utilities;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.LayoutManager;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.border.Border;
 
 public class CustomLayout implements LayoutManager {
 	@Override
@@ -28,19 +31,24 @@ public class CustomLayout implements LayoutManager {
 
 	@Override
 	public void layoutContainer(Container parent) {
-		int currentHeight=0;
+		Insets parentInsets = ((JComponent) parent).getBorder().getBorderInsets(parent);
+		int HMargin = parentInsets.left + parentInsets.right;
+		int currentHeight = parentInsets.top;
 		for(int i=0; i < parent.getComponentCount(); i++)
 		{
 			Component c = parent.getComponent(i);
 			if (c.isVisible())
 			{
 				if(c instanceof JButton)
-					c.setBounds(parent.getWidth()-c.getWidth(), parent.getHeight()-c.getHeight(), c.getWidth(), c.getHeight());
+					c.setBounds(parent.getWidth()-c.getWidth(), parentInsets.top/2, c.getPreferredSize().width, c.getPreferredSize().height);
 				else if(c instanceof JLabel)
-					c.setBounds(0, 0, c.getWidth(), c.getHeight());
+					c.setBounds(HMargin, parentInsets.top, c.getPreferredSize().width, c.getPreferredSize().height);
 				else
-					c.setBounds(0,currentHeight, c.getPreferredSize().width, c.getPreferredSize().height);
-				currentHeight+=c.getPreferredSize().height;
+					c.setBounds(HMargin, currentHeight, c.getPreferredSize().width, c.getPreferredSize().height);
+				try {
+					currentHeight+=Math.max(c.getPreferredSize().height, parent.getComponent(i-1).getPreferredSize().height);
+				}
+				catch(Exception e) {}
 			}
 		}
 	}
