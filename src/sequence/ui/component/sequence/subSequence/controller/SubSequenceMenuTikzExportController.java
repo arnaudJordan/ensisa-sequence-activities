@@ -12,7 +12,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
-import sequence.ui.component.sequence.subSequence.SubSequenceView;
 import sequence.ui.window.MainWindow;
 import sequence.utilities.Config;
 import sequence.utilities.TikzFactory;
