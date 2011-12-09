@@ -31,6 +31,7 @@ ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JFileChooser fc = new JFileChooser();
+		
 		fc.addChoosableFileFilter(new FileNameExtensionFilter("Image File", ImageIO.getWriterFormatNames()));
 		fc.addChoosableFileFilter(new FileNameExtensionFilter("Tex (Tikz)", "tex"));
 		fc.addChoosableFileFilter(new FileNameExtensionFilter("Vectoriel", "svg"));
@@ -41,9 +42,26 @@ ActionListener {
 
 		int returnVal = fc.showSaveDialog(getView());
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			String ext = ((FileNameExtensionFilter) fc.getFileFilter()).getExtensions()[0];
-			String name = fc.getSelectedFile().getPath()+'.'+ext;
-			File f = new File(name);
+			File f = fc.getSelectedFile();
+			String ext= "";
+			if(f.getName().contains("."))
+			{
+				int mid = f.getName().lastIndexOf('.') + 1;
+				ext = f.getName().substring(mid);
+			}
+			else
+			{
+				try
+				{
+					ext = ((FileNameExtensionFilter) fc.getFileFilter()).getExtensions()[0];
+					String name = fc.getSelectedFile().getPath()+'.'+ext;
+					f = new File(name);
+				}
+				catch(Exception ex)
+				{
+					ex.printStackTrace();
+				}
+			}
 			if(f.exists()) {
 				int response = JOptionPane.showConfirmDialog(
 						fc,
@@ -60,12 +78,12 @@ ActionListener {
 			else if(svgExport(f, ext));
 			else if(imageExport(getView().createImage(), ext, f)); 				
 			else
-				JOptionPane.showMessageDialog(fc, "No audio stream selected", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(fc, "No correct file selected", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
 	private boolean svgExport(File f, String ext) {
-		if(!ext.equals("svg")) return false;
+		if(!ext.equalsIgnoreCase("svg")) return false;
 		FileWriter fstream;
 		try {
 			fstream = new FileWriter(f);
@@ -80,10 +98,9 @@ ActionListener {
 	}
 
 	private boolean tikzExport(File f, String ext) {
-		if(!ext.equals("tikz")) return false;
-		FileWriter fstream;
+		if(!ext.equalsIgnoreCase("tex")) return false;
 		try {
-			fstream = new FileWriter(f);
+			FileWriter fstream = new FileWriter(f);
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(TikzFactory.AddHeader(TikzFactory.SequenceToTikz(getView())));
 			out.close();

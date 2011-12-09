@@ -1,17 +1,13 @@
 package sequence.ui.component.sequence.subSequence;
 
 import java.awt.Container;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import sequence.mvc.Model;
 import sequence.mvc.View;
 import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuExportController;
-import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuImageExportController;
 import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuInfoController;
-import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuSVGExportController;
-import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuTikzExportController;
 
 public class SubSequenceView extends View {
 	private static final long serialVersionUID = 1L;

@@ -4,16 +4,13 @@ import java.awt.Container;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import sequence.model.activity.Activity;
 import sequence.mvc.Model;
 import sequence.mvc.View;
-import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuImageExportController;
-import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuSVGExportController;
-import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuTikzExportController;
+import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuExportController;
 
 public class SummarizedSequenceView extends View {
 	private static final long serialVersionUID = 1L;
@@ -30,8 +27,9 @@ public class SummarizedSequenceView extends View {
 	    JMenuItem exportItem = new JMenuItem("Develop");
 	    exportItem.addActionListener(new SummarizedSequenceController(getModel(), this));
 	    
-	    JMenu exportMenu = new JMenu("Export");
-		JMenuItem imageExportMenu = new JMenuItem("to image");
+	    JMenuItem exportMenu = new JMenuItem("Export");
+	    exportMenu.addActionListener(new SubSequenceMenuExportController(getModel(), this));
+		/*JMenuItem imageExportMenu = new JMenuItem("to image");
 		imageExportMenu.addActionListener(new SubSequenceMenuImageExportController(getModel(), this));
 		exportMenu.add(imageExportMenu);
 		
@@ -41,7 +39,7 @@ public class SummarizedSequenceView extends View {
 		
 		JMenuItem tikzExportMenu = new JMenuItem("to tikz");
 		tikzExportMenu.addActionListener(new SubSequenceMenuTikzExportController(getModel(), this));
-		exportMenu.add(tikzExportMenu);
+		exportMenu.add(tikzExportMenu);*/
 		
 		popup.add(exportMenu);
 	    
