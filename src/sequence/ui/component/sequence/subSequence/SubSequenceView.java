@@ -7,6 +7,7 @@ import javax.swing.JPopupMenu;
 
 import sequence.mvc.Model;
 import sequence.mvc.View;
+import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuExportController;
 import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuImageExportController;
 import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuInfoController;
 import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuSVGExportController;
@@ -23,8 +24,10 @@ public class SubSequenceView extends View {
 		setRenderingModel(new SubSequenceRenderingModel());
 		setRenderer(new SubSequenceRenderer(this));
 		popup = new JPopupMenu();
-		JMenu exportMenu = new JMenu("Export");
-		JMenuItem imageExportMenu = new JMenuItem("to image");
+		JMenuItem exportMenu = new JMenuItem("Export");
+		exportMenu.addActionListener(new SubSequenceMenuExportController(getModel(), this));
+		
+		/*JMenuItem imageExportMenu = new JMenuItem("to image");
 		imageExportMenu.addActionListener(new SubSequenceMenuImageExportController(getModel(), this));
 		exportMenu.add(imageExportMenu);
 		
@@ -34,7 +37,7 @@ public class SubSequenceView extends View {
 		
 		JMenuItem tikzExportMenu = new JMenuItem("to tikz");
 		tikzExportMenu.addActionListener(new SubSequenceMenuTikzExportController(getModel(), this));
-		exportMenu.add(tikzExportMenu);
+		exportMenu.add(tikzExportMenu);*/
 		
 		popup.add(exportMenu);
 		
