@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import sequence.model.Sequence;
 import sequence.ui.component.sequence.subSequence.SubSequenceView;
-import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuExportController;
+import sequence.ui.component.sequence.subSequence.controller.SubSequenceController;
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceController;
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
 import sequence.ui.window.MainWindow;
@@ -29,7 +29,7 @@ public class SequenceContainer extends JPanel {
 		summarizedSequenceView = new SummarizedSequenceView(sequence, this);
 		new SummarizedSequenceController(sequence, summarizedSequenceView);
 		subSequenceView = new SubSequenceView(sequence, this);
-		new SubSequenceMenuExportController(sequence, subSequenceView);
+		new SubSequenceController(sequence, subSequenceView);
 		subSequenceView.setVisible(false);
 		
 		setBackground(Color.WHITE);
