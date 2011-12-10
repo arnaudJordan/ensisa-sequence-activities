@@ -43,6 +43,13 @@ ActionListener {
 		int returnVal = fc.showSaveDialog(getView());
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File f = fc.getSelectedFile();
+			config.setLastOpenedDirectory(fc.getCurrentDirectory());
+			try {
+				Config.serialize(config);
+			}
+			catch (java.io.IOException ex) {
+				ex.printStackTrace();
+			}
 			String ext= "";
 			if(f.getName().contains("."))
 			{
