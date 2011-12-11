@@ -17,22 +17,19 @@ public class ActivityController extends Controller {
 		if(e.getButton() == LEFT_MOUSE_BUTTON) {
 			Container parent = getView().getParent();
 			if(parent != null) {
-				ActivityRenderingModel clickedActivityRenderingModel = (ActivityRenderingModel)getView().getRenderingModel();
-				if(clickedActivityRenderingModel.isTransparent()) {
-					for(int i=0 ; i<parent.getComponentCount() ; i++) {
-						ActivityRenderingModel currentActivityRenderingModel = ((ActivityRenderingModel)((View)parent.getComponent(i)).getRenderingModel());
-						currentActivityRenderingModel.setOpaque();
-					}
+				ActivityView view = (ActivityView) getView();
+				if(view.isSelected()) {
+					for(int i=0 ; i<parent.getComponentCount() ; i++)
+						view.deselect();
 				} else {
 					Activity clickedActivity = (Activity)getView().getModel();
 					for(int i=0 ; i<parent.getComponentCount() ; i++) {
 						Activity currentActivity = (Activity)((View)parent.getComponent(i)).getModel();
-						ActivityRenderingModel currentActivityRenderingModel = ((ActivityRenderingModel)((View)parent.getComponent(i)).getRenderingModel());
-						if(currentActivity != null && currentActivityRenderingModel != null
+						if(currentActivity != null
 								&& (!currentActivity.getAction().equals(clickedActivity.getAction())
 										|| !currentActivity.getTreatedStructure().equals(clickedActivity.getTreatedStructure())
 										|| !currentActivity.getUsedInstrument().equals(clickedActivity.getUsedInstrument())))
-							currentActivityRenderingModel.setTransparent();
+							((ActivityView) parent.getComponent(i)).select();
 					}
 				}
 			}
