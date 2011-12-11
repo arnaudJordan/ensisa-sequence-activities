@@ -35,7 +35,6 @@ import sequence.processor.SafeProcessor;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.SequenceContainer;
-import sequence.ui.component.sequence.subSequence.SubSequenceContainer;
 import sequence.ui.component.sequence.subSequence.SubSequenceRenderingModel;
 import sequence.utilities.Config;
 
@@ -119,7 +118,7 @@ public class MainWindow extends JFrame {
 				parser.parse(file, sequenceHandler);				
 				
 				Sequence sequence = sequenceHandler.getSequence();
-				addSequence(sequence);
+				add(sequence);
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}
@@ -143,12 +142,12 @@ public class MainWindow extends JFrame {
 				if (!s.getValueIsAdjusting());
 				{
 					for(SequenceContainer current : sequenceContainers) {
-						for(SubSequenceContainer subSequence : current.getSubSequenceContainers()) {
+						for(SequenceContainer subSequence : current.getChilds()) {
 							for(int i=0 ; i<subSequence.getComponentCount() ; i++) {
-								if(subSequence instanceof SubSequenceContainer) {
-									for(int j=0 ; j<subSequence.getSubSequenceView().getComponentCount() ; j++) {
-										((ActivityRenderingModel)((ActivityView)subSequence.getSubSequenceView().getComponent(j)).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
-										((JComponent)subSequence.getSubSequenceView().getComponent(j)).revalidate();
+								if(subSequence instanceof SequenceContainer) {
+									for(int j=0 ; j<subSequence.getView().getComponentCount() ; j++) {
+										((ActivityRenderingModel)((ActivityView)subSequence.getView().getComponent(j)).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
+										((JComponent)subSequence.getView().getComponent(j)).revalidate();
 									}
 								}
 							}
@@ -175,8 +174,8 @@ public class MainWindow extends JFrame {
 				Object source = actionEvent.getSource();
 				JTextField s = (JTextField) source;
 				for(SequenceContainer current : sequenceContainers) {
-					for(SubSequenceContainer subSequence : current.getSubSequenceContainers()) {
-						((SubSequenceRenderingModel)subSequence.getSubSequenceView().getRenderingModel()).setDurationThreshold(Integer.parseInt(s.getText()));
+					for(SequenceContainer subSequence : current.getChilds()) {
+						((SubSequenceRenderingModel)subSequence.getView().getRenderingModel()).setDurationThreshold(Integer.parseInt(s.getText()));
 						current.revalidate();
 					}
 				}
@@ -198,22 +197,22 @@ public class MainWindow extends JFrame {
 	public List<SequenceContainer> getSequenceContainers() {
 		return sequenceContainers;
 	}
-	public void addSequence(Sequence sequence)
+	public void add(Sequence sequence)
 	{
 		getProcessor().Do(new AddSequence(sequence, this));
 	}
-	public void removeSequence(SequenceContainer sequenceContainer)
+	public void remove(SequenceContainer sequenceContainer)
 	{
-		getProcessor().Do(new RemoveSequence((Sequence) sequenceContainer.getSummarizedSequenceView().getModel(), this));
+		getProcessor().Do(new RemoveSequence((Sequence) sequenceContainer.getView().getModel(), this));
 	}
-	public void removeSequence(Sequence model) {
+	public void remove(Sequence sequence) {
 		for(SequenceContainer sc : sequenceContainers)
 		{
-			if(sc.getSummarizedSequenceView().getModel().equals(model))
+			if(sc.getView().getModel().equals(sequence))
 			{
 				this.sequenceContainers.remove(sc);
 		        this.mainPane.remove(sc);
-		        config.removeOpenedFile(model.getFile());
+		        config.removeOpenedFile(sequence.getFile());
 		        try {
 					Config.serialize(config);
 				} catch (IOException e) {

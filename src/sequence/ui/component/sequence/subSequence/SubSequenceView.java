@@ -1,16 +1,11 @@
 package sequence.ui.component.sequence.subSequence;
 
-import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import sequence.mvc.Model;
 import sequence.mvc.View;
-import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuExportController;
 import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuImageExportController;
 import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuInfoController;
 import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuSVGExportController;
@@ -18,13 +13,13 @@ import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuTikz
 
 public class SubSequenceView extends View {
 	private static final long serialVersionUID = 1L;
-	private Container parent;
+	private View summarizedView;
 	private JPopupMenu popup;
 
-	public SubSequenceView(Model model, Container parent) {
+	public SubSequenceView(Model model, View summarizedView) {
 		super(model);
-		this.parent = parent;
 		setRenderingModel(new SubSequenceRenderingModel());
+		this.summarizedView = summarizedView;
 		setRenderer(new SubSequenceRenderer(this));
 		popup = new JPopupMenu();
 		JMenu exportMenu = new JMenu("Export");
@@ -47,10 +42,10 @@ public class SubSequenceView extends View {
 	    popup.add(infoItem);
 	}
 	
-	public Container getParent() {
-		return parent;
+	public View getSummarizedView() {
+		return summarizedView;
 	}
-	
+
 	public JPopupMenu getPopup() {
 		return popup;
 	}

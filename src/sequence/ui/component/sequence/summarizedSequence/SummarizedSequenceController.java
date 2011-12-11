@@ -17,7 +17,7 @@ public class SummarizedSequenceController extends Controller implements ActionLi
 	}	
 
 	public void actionPerformed(ActionEvent e) {
-		((SequenceContainer) getView().getParent()).addSubSequence((Sequence) getModel());
+		((SequenceContainer) getView().getParent()).add((Sequence) getModel());
 	}
 
 	public void mousePressed(MouseEvent e) {

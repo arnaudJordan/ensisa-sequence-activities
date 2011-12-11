@@ -1,6 +1,5 @@
 package sequence.ui.component.sequence.summarizedSequence;
 
-import java.awt.Container;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +16,11 @@ import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuTikz
 
 public class SummarizedSequenceView extends View {
 	private static final long serialVersionUID = 1L;
-	private Container parent;
 	private List<Activity> selectedActivities;
 	private JPopupMenu popup;
 
-	public SummarizedSequenceView(Model model, Container parent) {
+	public SummarizedSequenceView(Model model) {
 		super(model);
-		this.parent = parent;
 		this.selectedActivities = new ArrayList<Activity>();		
 		setRenderer(new SummarizedSequenceRenderer(this));
 		popup = new JPopupMenu();
@@ -50,10 +47,6 @@ public class SummarizedSequenceView extends View {
 	
 	public JPopupMenu getPopup() {
 		return popup;
-	}
-
-	public Container getParent() {
-		return parent;
 	}
 
 	public List<Activity> getSelectedActivities() {

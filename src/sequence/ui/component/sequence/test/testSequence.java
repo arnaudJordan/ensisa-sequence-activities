@@ -9,7 +9,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
-import sequence.ui.component.sequence.subSequence.SubSequenceView;
+import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
 
 public class testSequence extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -25,7 +25,7 @@ public class testSequence extends JFrame {
 			parser.parse(parsedFile, sequenceHandler);
 			
 			Sequence model = new Sequence(sequenceHandler.getSequence());
-			SubSequenceView view = new SubSequenceView(model, this);
+			SummarizedSequenceView view = new SummarizedSequenceView(model);
 
 			this.add(view);
 			this.pack();

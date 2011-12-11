@@ -7,26 +7,27 @@ import java.util.List;
 import sequence.model.Sequence;
 import sequence.model.activity.Activity;
 import sequence.ui.component.sequence.SequenceContainer;
-import sequence.ui.component.sequence.subSequence.SubSequenceContainer;
+import sequence.ui.component.sequence.subSequence.SubSequenceView;
+import sequence.ui.component.sequence.subSequence.controller.SubSequenceController;
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
 
 public class AddSubSequence extends Command {
-	private SequenceContainer parent;
+	private SequenceContainer parent;;
 	
-	public AddSubSequence(Sequence model, SequenceContainer parent)
+	public AddSubSequence(Sequence sequence, SequenceContainer parent)
 	{
-		this.model=model;
+		this.model=sequence;
 		this.parent=parent;
-		this.undo=new RemoveSubSequence(model, parent, this);
+		this.undo=new RemoveSubSequence(sequence, parent, this);
 	}
-	public AddSubSequence(Sequence model, SequenceContainer parent, RemoveSubSequence removeSubSequence) {
-		this.model=model;
+	public AddSubSequence(Sequence sequence, SequenceContainer parent, RemoveSubSequence removeSubSequence) {
+		this.model=sequence;
 		this.parent=parent;
 		this.undo=removeSubSequence;
 	}
 	@Override
 	public void Do() {
-		SummarizedSequenceView view = parent.getSummarizedSequenceView();
+		SummarizedSequenceView view = (SummarizedSequenceView) parent.getView();
 		List<Activity> selectedActivities = view.getSelectedActivities();
 		if(!selectedActivities.isEmpty()) {
 			if(selectedActivities.size() == 1) {
@@ -41,9 +42,11 @@ public class AddSubSequence extends Command {
 				});
 			}
 			Sequence subSequenceModel = new Sequence(((Sequence) view.getModel()).getWorkflowID(), selectedActivities);
-			SubSequenceContainer subSequence = new SubSequenceContainer(subSequenceModel, parent);
+			SubSequenceView subView = new SubSequenceView(subSequenceModel, view);
+			new SubSequenceController(subSequenceModel, subView);
+			SequenceContainer subSequence = new SequenceContainer(subView, "Sub sequence", parent);
 			parent.add(subSequence);
-			parent.getSubSequenceContainers().add(subSequence);
+			parent.getChilds().add(subSequence);
 			parent.revalidate();
 			parent.repaint();
 		}

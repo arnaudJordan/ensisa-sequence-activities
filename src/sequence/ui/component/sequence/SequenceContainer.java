@@ -1,5 +1,6 @@
 package sequence.ui.component.sequence;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,66 +12,86 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import sequence.model.Sequence;
+import sequence.mvc.View;
 import sequence.processor.AddSubSequence;
 import sequence.processor.RemoveSubSequence;
-import sequence.ui.component.sequence.subSequence.SubSequenceContainer;
-import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceController;
-import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
 import sequence.ui.window.MainWindow;
 import sequence.utilities.CustomLayout;
 
 public class SequenceContainer extends JPanel {
    private static final long serialVersionUID = 1L;
-   private MainWindow mainWindow;
-   private SummarizedSequenceView summarizedSequenceView;
-   private List<SubSequenceContainer> subSequenceContainers;
+   private View view;
+   private List<SequenceContainer> childs;
    
-   public SequenceContainer(final Sequence sequence, final MainWindow mainWindow)
-   {
-       this.mainWindow = mainWindow;
-       summarizedSequenceView = new SummarizedSequenceView(sequence, this);
-       new SummarizedSequenceController(sequence, summarizedSequenceView);
+   public SequenceContainer(final View view, final String label, final SequenceContainer parent) {
+       this(view, "", label, parent);
+   }
+   
+   public SequenceContainer(final View view, final String title, final String label, final MainWindow parent) {
+       this.view = view;
+       childs = new ArrayList<SequenceContainer>();
        
-       subSequenceContainers = new ArrayList<SubSequenceContainer>();
-       
-       //setBackground(Color.WHITE);
-       setBorder(BorderFactory.createTitledBorder(((Sequence)summarizedSequenceView.getModel()).getWorkflowID()));
+       setBackground(Color.WHITE);
+       setBorder(BorderFactory.createTitledBorder(title));
        setLayout(new CustomLayout());
        
-       JLabel label = new JLabel("Summarized sequence :");
+       JLabel l = new JLabel(label);
        ImageIcon icon = new ImageIcon("icons/dialog-close.png");
        JButton button = new JButton(icon);
        button.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
        final SequenceContainer sc = this;
        button.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               mainWindow.removeSequence(sc);
+               parent.remove(sc);
            }
        });
-       add(label);
+       add(l);
        add(button);
-       add(summarizedSequenceView);
+       super.add(this.view);
    }
    
-   public void addSubSequence(Sequence model) {
-	   mainWindow.getProcessor().Do(new AddSubSequence((Sequence) model, this));
+   public SequenceContainer(final View view, final String title, final String label, final SequenceContainer parent) {
+       this.view = view;
+       childs = new ArrayList<SequenceContainer>();
+       
+       setBackground(Color.WHITE);
+       setBorder(BorderFactory.createTitledBorder(title));
+       setLayout(new CustomLayout());
+       
+       JLabel l = new JLabel(label);
+       ImageIcon icon = new ImageIcon("icons/dialog-close.png");
+       JButton button = new JButton(icon);
+       button.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
+       button.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent e) {
+               parent.remove((Sequence) view.getModel());
+           }
+       });
+       add(l);
+       add(button);
+       super.add(this.view);
    }
    
-   public void removeSubSequence(Sequence model) {
-	   mainWindow.getProcessor().Do(new RemoveSubSequence((Sequence) model, this));	
+   public void add(Sequence sequence) {
+	   ((MainWindow) getTopLevelAncestor()).getProcessor().Do(new AddSubSequence(sequence, this));
    }
-   
-   public SummarizedSequenceView getSummarizedSequenceView() {
-       return summarizedSequenceView;
-   }
-   
-   public List<SubSequenceContainer> getSubSequenceContainers() {
-	   return subSequenceContainers;
-}
 
-public Dimension getPreferredSize() {
-       int Hinsets = 2*(getInsets().left + getInsets().right);
-       return new Dimension(mainWindow.getWidth() - Hinsets, getLayout().minimumLayoutSize(this).height);
+   public void remove(Sequence sequence) {
+	   ((MainWindow) getTopLevelAncestor()).getProcessor().Do(new RemoveSubSequence(sequence, this));	
+   }
+
+   public View getView() {
+	   return view;
+   }
+
+   public List<SequenceContainer> getChilds() {
+	   return childs;
+   }
+
+   public Dimension getPreferredSize() {
+	   int Hinsets = 2*(getInsets().left + getInsets().right);
+	   return new Dimension(getParent().getWidth() - Hinsets, getLayout().minimumLayoutSize(this).height);
    }
 }
