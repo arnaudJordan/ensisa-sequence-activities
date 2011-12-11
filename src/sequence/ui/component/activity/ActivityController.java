@@ -31,6 +31,7 @@ public class ActivityController extends Controller {
 										|| !currentActivity.getUsedInstrument().equals(clickedActivity.getUsedInstrument())))
 							((ActivityView) parent.getComponent(i)).select();
 					}
+					parent.repaint();
 				}
 			}
 		}
