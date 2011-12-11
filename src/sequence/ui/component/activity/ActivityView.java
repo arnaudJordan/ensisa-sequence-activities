@@ -32,17 +32,17 @@ public class ActivityView extends View implements Timeable, Scaleable {
 	    JMenuItem editItem = new JMenuItem("Edit");
 	    editItem.addActionListener(new ActivityMenuEditController(model, this));
 	    popup.add(editItem);
-	    selected = false;
+	    selected = true;
 	}
 	
 	public void select() {
 		selected = true;
-		((ActivityRenderingModel) getRenderingModel()).setTransparent();
+		((ActivityRenderingModel) getRenderingModel()).setOpaque();
 	}
 	
 	public void deselect() {
 		selected = false;
-		((ActivityRenderingModel) getRenderingModel()).setOpaque();
+		((ActivityRenderingModel) getRenderingModel()).setTransparent();
 	}
 
 	public boolean isSelected() {

@@ -17,10 +17,9 @@ public class ActivityController extends Controller {
 		if(e.getButton() == LEFT_MOUSE_BUTTON) {
 			Container parent = getView().getParent();
 			if(parent != null) {
-				ActivityView view = (ActivityView) getView();
-				if(view.isSelected()) {
+				if(!((ActivityView) getView()).isSelected()) {
 					for(int i=0 ; i<parent.getComponentCount() ; i++)
-						view.deselect();
+						((ActivityView) parent.getComponent(i)).select();
 				} else {
 					Activity clickedActivity = (Activity)getView().getModel();
 					for(int i=0 ; i<parent.getComponentCount() ; i++) {
@@ -29,10 +28,10 @@ public class ActivityController extends Controller {
 								&& (!currentActivity.getAction().equals(clickedActivity.getAction())
 										|| !currentActivity.getTreatedStructure().equals(clickedActivity.getTreatedStructure())
 										|| !currentActivity.getUsedInstrument().equals(clickedActivity.getUsedInstrument())))
-							((ActivityView) parent.getComponent(i)).select();
+							((ActivityView) parent.getComponent(i)).deselect();
 					}
-					parent.repaint();
 				}
+				parent.repaint();
 			}
 		}
 	}
