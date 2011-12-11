@@ -5,7 +5,7 @@ import java.awt.event.MouseEvent;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
-import sequence.ui.component.activity.ActivityRenderingModel;
+import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.subSequence.SubSequenceView;
 
 public class SubSequenceController extends Controller {
@@ -16,11 +16,8 @@ public class SubSequenceController extends Controller {
 
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == LEFT_MOUSE_BUTTON) {
-			ActivityRenderingModel currentActivityRenderingModel;
-			for(int i=0 ; i<getView().getComponentCount() ; i++) {
-				currentActivityRenderingModel = ((ActivityRenderingModel)((View)getView().getComponent(i)).getRenderingModel());
-				currentActivityRenderingModel.setOpaque();
-			}
+			for(int i=0 ; i<getView().getComponentCount() ; i++)
+				((ActivityView) getView().getComponent(i)).deselect();
 		}
 	}
 

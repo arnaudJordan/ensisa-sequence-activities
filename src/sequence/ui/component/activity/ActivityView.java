@@ -15,6 +15,7 @@ import sequence.utilities.Timeable;
 public class ActivityView extends View implements Timeable, Scaleable {
 	private static final long serialVersionUID = 1L;
 	public JPopupMenu popup;
+	private boolean selected;
 
 	public ActivityView(Model model) {
 		super(model);
@@ -31,6 +32,21 @@ public class ActivityView extends View implements Timeable, Scaleable {
 	    JMenuItem editItem = new JMenuItem("Edit");
 	    editItem.addActionListener(new ActivityMenuEditController(model, this));
 	    popup.add(editItem);
+	    selected = false;
+	}
+	
+	public void select() {
+		selected = true;
+		((ActivityRenderingModel) getRenderingModel()).setTransparent();
+	}
+	
+	public void deselect() {
+		selected = false;
+		((ActivityRenderingModel) getRenderingModel()).setOpaque();
+	}
+
+	public boolean isSelected() {
+		return selected;
 	}
 
 	@Override
