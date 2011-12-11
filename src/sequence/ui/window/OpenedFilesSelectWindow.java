@@ -6,8 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.swing.DefaultListCellRenderer;
@@ -21,11 +19,7 @@ import javax.swing.JScrollPane;
 
 
 import sequence.model.Sequence;
-import sequence.mvc.Controller;
-import sequence.mvc.Model;
-import sequence.mvc.View;
 import sequence.ui.component.sequence.SequenceContainer;
-import sequence.ui.component.sequence.subSequence.SubSequenceView;
 
 public class OpenedFilesSelectWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -43,7 +37,7 @@ public class OpenedFilesSelectWindow extends JFrame {
 		DefaultListModel listModel = new DefaultListModel();
 		for(SequenceContainer current : list)
 		{
-			listModel.addElement(current.getSummarizedSequenceView().getModel());
+			listModel.addElement(current.getView().getModel());
 		}
 		
 		class MyCellRenderer extends DefaultListCellRenderer{

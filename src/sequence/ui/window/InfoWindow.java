@@ -41,7 +41,7 @@ public class InfoWindow extends JFrame {
 		
 		for(SequenceContainer current : list)
 		{
-			Sequence sequence = (Sequence) current.getSummarizedSequenceView().getModel();
+			Sequence sequence = (Sequence) current.getView().getModel();
 			createTab(sequence);
 		}
 		
