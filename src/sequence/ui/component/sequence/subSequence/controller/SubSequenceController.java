@@ -17,7 +17,7 @@ public class SubSequenceController extends Controller {
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == LEFT_MOUSE_BUTTON) {
 			for(int i=0 ; i<getView().getComponentCount() ; i++)
-				((ActivityView) getView().getComponent(i)).deselect();
+				((ActivityView) getView().getComponent(i)).select();
 			getView().repaint();
 		}
 	}
