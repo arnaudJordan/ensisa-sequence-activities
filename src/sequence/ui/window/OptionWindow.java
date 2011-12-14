@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -25,7 +26,8 @@ public class OptionWindow extends JFrame {
 		super("Option");
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		initComponents();
-		
+		final LookAndFeel oldLaf = UIManager.getLookAndFeel();
+
 		for(int i=0; i< UIManager.getInstalledLookAndFeels().length; i++)
 			jComboBox1.addItem(UIManager.getInstalledLookAndFeels()[i].getName());
 		jComboBox1.setSelectedItem(UIManager.getLookAndFeel().getName());
@@ -35,15 +37,7 @@ public class OptionWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int index = ((JComboBox)e.getSource()).getSelectedIndex();
 				LookAndFeelInfo laf =UIManager.getInstalledLookAndFeels()[index];
-				try {
-					UIManager.setLookAndFeel(laf.getClassName());
-					((MainWindow) parent).getConfig().setStyle(laf.getClassName());
-					Config.serialize(((MainWindow) parent).getConfig());
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-				SwingUtilities.updateComponentTreeUI(parent);
-				SwingUtilities.updateComponentTreeUI(jFrame);
+				changeLookAndFeel(parent, jFrame, laf.getClassName());
 			}
 		});
 		
@@ -55,13 +49,25 @@ public class OptionWindow extends JFrame {
 		});
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				changeLookAndFeel(parent, jFrame, oldLaf.getClass().getName());
 				jFrame.setVisible(false);
 			}
 		});
 		
 		this.setVisible(true);
 	}
-	
+	private void changeLookAndFeel(final JFrame parent,
+			final JFrame jFrame, String laf) {
+		try {
+			UIManager.setLookAndFeel(laf);
+			((MainWindow) parent).getConfig().setStyle(laf);
+			Config.serialize(((MainWindow) parent).getConfig());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		SwingUtilities.updateComponentTreeUI(parent);
+		SwingUtilities.updateComponentTreeUI(jFrame);
+	}
 	private void initComponents() {
 
         styleLabel = new javax.swing.JLabel();
