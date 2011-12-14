@@ -19,7 +19,5 @@ public class BackgroundDrawer {
 	{
 		g.setColor(color);
 		g.fillRect(0, 0, width, height);
-		
 	}
-
 }
