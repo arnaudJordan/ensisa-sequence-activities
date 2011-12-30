@@ -25,14 +25,13 @@ import sequence.processor.Processor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
+import javax.swing.JPanel;
 import sequence.model.Position;
 import sequence.model.activity.AnatomicStructure;
 import sequence.model.activity.BodyPart;
 import sequence.model.activity.Instrument;
 import sequence.model.activity.UsedInstruments;
 import sequence.utilities.ListLayout;
-import sequence.utilities.TimeLayout;
 /**
  *
  * @author jordan
@@ -70,7 +69,7 @@ public class EditActivityWindow extends javax.swing.JFrame {
         bodyPartEdit.setModel(bodyPartModel);
         bodyPartEdit.setSelectedIndex(bodyPartModel.getIndexOf(activity.getActuator().getUsedbodypart()));
         bodyPartEdit.setEditable(true);
-        Object[] asi = (Object[]) sequence.ActionsStructuresInstruments();
+        final Object[] asi = (Object[]) sequence.ActionsStructuresInstruments();
         DefaultComboBoxModel actionModel = new DefaultComboBoxModel((Object[])asi[0]);
         actionEdit.setModel(actionModel);
         actionEdit.setSelectedItem(activity.getAction());
@@ -87,22 +86,49 @@ public class EditActivityWindow extends javax.swing.JFrame {
         AutoCompletion as = new AutoCompletion(anatomicStructureEdit);
         as.setStrict(false);
 
-        final DefaultComboBoxModel instrumentModel = new DefaultComboBoxModel((Object[])asi[2]);
         usedInstrumentList.setLayout(new ListLayout());
         for(Instrument current : activity.getUsedInstrument())
         {
+            final JPanel instrumentPanel = new JPanel();
+            final DefaultComboBoxModel instrumentModel = new DefaultComboBoxModel((Object[])asi[2]);
             JComboBox currentEdit = new JComboBox(instrumentModel);
             currentEdit.setSelectedItem(current);
             currentEdit.setEditable(true);
-            usedInstrumentList.add(currentEdit);
+            
+            instrumentPanel.add(currentEdit);
+            JButton closeButton = new JButton("Close");
+            closeButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    usedInstrumentList.remove(instrumentPanel);
+                    usedInstrumentList.revalidate();
+                    usedInstrumentList.repaint();
+                }
+            });
+            instrumentPanel.add(closeButton);
+            usedInstrumentList.add(instrumentPanel);
         }
         JButton addInstrumentButton = new JButton("Add Instrument");
         addInstrumentButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                final JPanel instrumentPanel = new JPanel();
+                final DefaultComboBoxModel instrumentModel = new DefaultComboBoxModel((Object[])asi[2]);
                 JComboBox currentEdit = new JComboBox(instrumentModel);
                 currentEdit.setEditable(true);
-                usedInstrumentList.add(currentEdit);
+            
+                instrumentPanel.add(currentEdit);
+                JButton closeButton = new JButton("Remove");
+                closeButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    usedInstrumentList.remove(instrumentPanel);
+                    usedInstrumentList.revalidate();
+                    usedInstrumentList.repaint();
+                 }
+                });
+                instrumentPanel.add(closeButton);
+                usedInstrumentList.add(instrumentPanel);
             }
         });
         usedInstrumentList.add(addInstrumentButton);
@@ -137,10 +163,18 @@ public class EditActivityWindow extends javax.swing.JFrame {
                 for(int i=0; i<usedInstrumentList.getComponentCount(); i++)
                 {
                     Component current = usedInstrumentList.getComponent(i);
-                    if(current instanceof javax.swing.JComboBox)
+                    if(current instanceof JPanel)
                     {
-                        JComboBox box=(javax.swing.JComboBox) current;
-                        newUsedInstrument.addInstrument(new Instrument(box.getSelectedItem().toString()));
+                        JPanel panel = (JPanel) current;
+                        for(int j=0; j<panel.getComponentCount(); j++)
+                        {
+                            Component curre = panel.getComponent(j);
+                            if(curre instanceof JComboBox)
+                            {
+                                JComboBox box=(JComboBox) curre;
+                                newUsedInstrument.addInstrument(new Instrument(box.getSelectedItem().toString()));
+                            }
+                        }
                     }
                 }
                 newActivity.setUsedInstrument(newUsedInstrument);
