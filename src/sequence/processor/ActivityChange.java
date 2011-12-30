@@ -32,7 +32,9 @@ public class ActivityChange extends Command {
 		oldmodel.setDiscipline(newModel.getDiscipline());
 		oldmodel.setActuator(newModel.getActuator());
 		oldmodel.setAction(newModel.getAction());
+		oldmodel.setUsedInstrument(newModel.getUsedInstrument());
 		oldmodel.setTreatedStructure(newModel.getTreatedStructure());
 		oldmodel.setNote(newModel.getNote());
+		oldmodel.setActivitytime(newModel.getActivitytime());
 	}
 }

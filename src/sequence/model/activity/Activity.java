@@ -71,7 +71,9 @@ public class Activity extends DefaultModel {
 	public Activitytime getActivitytime() {
 		return activitytime;
 	}
-
+	public void setActivitytime(Activitytime activitytime) {
+		this.activitytime=activitytime;
+	}
 	public Actuator getActuator() {
 		return actuator;
 	}
