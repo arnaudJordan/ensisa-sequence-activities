@@ -14,7 +14,7 @@ public class SubSequenceRenderingModel extends DefaultModel implements Rendering
 	}
 	
 	public SubSequenceRenderingModel(int durationThreshold) {
-		setDurationThreshold(durationThreshold);
+		this.durationThreshold = durationThreshold;
 	}
 
 	public void setDurationThreshold(int durationThreshold) {

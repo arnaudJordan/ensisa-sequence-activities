@@ -32,11 +32,11 @@ public class ActivityRenderingModel extends DefaultModel implements RenderingMod
 	}
 	
 	public ActivityRenderingModel(Color color, int transparencyAlpha, int height, float Hscale, float Vscale) {
-		setColor(color);
-		setTransparencyAlpha(transparencyAlpha);
-		setHeight(height);
-		setHScale(Hscale);
-		setVScale(Vscale);
+		this.color = color;
+		this.transparencyAlpha = transparencyAlpha;
+		this.height = height;
+		this.Hscale = Hscale;
+		this.Vscale = Vscale;
 	}
 	
 	public void setColor(Color color) {
