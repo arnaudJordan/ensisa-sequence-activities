@@ -25,14 +25,13 @@ import sequence.processor.Processor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
+import javax.swing.JPanel;
 import sequence.model.Position;
 import sequence.model.activity.AnatomicStructure;
 import sequence.model.activity.BodyPart;
 import sequence.model.activity.Instrument;
 import sequence.model.activity.UsedInstruments;
 import sequence.utilities.ListLayout;
-import sequence.utilities.TimeLayout;
 /**
  *
  * @author jordan
@@ -91,18 +90,46 @@ public class EditActivityWindow extends javax.swing.JFrame {
         usedInstrumentList.setLayout(new ListLayout());
         for(Instrument current : activity.getUsedInstrument())
         {
+            final JPanel instrumentPanel = new JPanel();
+            
             JComboBox currentEdit = new JComboBox(instrumentModel);
             currentEdit.setSelectedItem(current);
             currentEdit.setEditable(true);
-            usedInstrumentList.add(currentEdit);
+            
+            instrumentPanel.add(currentEdit);
+            JButton closeButton = new JButton("Close");
+            closeButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    usedInstrumentList.remove(instrumentPanel);
+                    usedInstrumentList.revalidate();
+                    usedInstrumentList.repaint();
+                }
+            });
+            instrumentPanel.add(closeButton);
+            usedInstrumentList.add(instrumentPanel);
         }
         JButton addInstrumentButton = new JButton("Add Instrument");
         addInstrumentButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
+                final JPanel instrumentPanel = new JPanel();
+            
                 JComboBox currentEdit = new JComboBox(instrumentModel);
                 currentEdit.setEditable(true);
-                usedInstrumentList.add(currentEdit);
+            
+                instrumentPanel.add(currentEdit);
+                JButton closeButton = new JButton("Remove");
+                closeButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    usedInstrumentList.remove(instrumentPanel);
+                    usedInstrumentList.revalidate();
+                    usedInstrumentList.repaint();
+                 }
+                });
+                instrumentPanel.add(closeButton);
+                usedInstrumentList.add(instrumentPanel);
             }
         });
         usedInstrumentList.add(addInstrumentButton);
