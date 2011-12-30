@@ -31,8 +31,8 @@ public class ListLayout implements LayoutManager {
 			Component c = parent.getComponent(i);
 			if (c.isVisible())
 			{
-					c.setBounds(0,currentHeight, c.getPreferredSize().width, c.getPreferredSize().height);
-					currentHeight+=c.getPreferredSize().height;
+				c.setBounds(0,currentHeight, c.getPreferredSize().width, c.getPreferredSize().height);
+				currentHeight+=c.getHeight();
 			}
 		}
 	}
