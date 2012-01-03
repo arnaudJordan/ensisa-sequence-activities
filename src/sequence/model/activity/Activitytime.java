@@ -26,6 +26,12 @@ public class Activitytime {
 		this.duration = duration;
 	}
 	
+	public boolean equals(Object o) {
+		if(this == o) return true;
+		if(!(o instanceof Activitytime)) return false;
+	    return (this.duration == ((Activitytime)o).duration && this.startTime == ((Activitytime)o).startTime && this.stopTime == ((Activitytime)o).stopTime);
+	}
+	
 	@Override
 	public String toString() {
 		return "Activitytime [startTime=" + startTime + ", stopTime="

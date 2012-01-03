@@ -11,6 +11,12 @@ public class Note {
 		return note;
 	}
 	
+	public boolean equals(Object o) {
+		if(this == o) return true;
+		if(!(o instanceof Note)) return false;
+		return this.note.equals(((Note)o).note);
+	}
+	
 	@Override
 	public String toString() {
 		return "Note [note=" + note + "]";

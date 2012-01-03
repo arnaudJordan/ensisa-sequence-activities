@@ -21,7 +21,6 @@ public class ActivityView extends View implements Timeable, Scaleable {
 		super(model);
 		setRenderer(new ActivityContractedRenderer(this));
 		setRenderingModel(new ActivityRenderingModel());
-		setToolTipText(((Activity) model).toToolTip());
 		popup = new JPopupMenu();
 	    JMenuItem colorItem = new JMenuItem("Color");
 	    colorItem.addActionListener(new ActivityMenuColorController(model, this));
@@ -72,5 +71,10 @@ public class ActivityView extends View implements Timeable, Scaleable {
 	@Override
 	public float getVScale() {
 		return ((ActivityRenderingModel) getRenderingModel()).getVScale();
+	}
+	
+	public void modelChanged(Model m) {
+		setToolTipText(((Activity) getModel()).toToolTip());
+		repaint();
 	}
 }

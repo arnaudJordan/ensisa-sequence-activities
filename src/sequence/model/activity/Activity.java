@@ -3,7 +3,6 @@ package sequence.model.activity;
 import sequence.model.Actuator;
 import sequence.model.Note;
 import sequence.mvc.DefaultModel;
-import sequence.mvc.Model;
 
 public class Activity extends DefaultModel {
 	private final int id;
@@ -40,8 +39,9 @@ public class Activity extends DefaultModel {
 		this.usedInstrument=activity.getUsedInstrument();
 	}
 	public void setState(String state) {
+		if(this.state == state) return;
 		this.state=state;
-		
+		this.modelChange();
 	}
 
 	public Note getNote() {
@@ -49,7 +49,9 @@ public class Activity extends DefaultModel {
 	}
 
 	public void setNote(Note note) {
+		if(this.note == note) return;
 		this.note = note;
+		this.modelChange();
 	}
 
 	public int getId() {
@@ -72,7 +74,9 @@ public class Activity extends DefaultModel {
 		return activitytime;
 	}
 	public void setActivitytime(Activitytime activitytime) {
+		if(this.activitytime == activitytime) return;
 		this.activitytime=activitytime;
+		this.modelChange();
 	}
 	public Actuator getActuator() {
 		return actuator;
@@ -82,8 +86,10 @@ public class Activity extends DefaultModel {
 		return action;
 	}
         
-        public void setUsedInstrument(UsedInstruments usedInstruments) {
+    public void setUsedInstrument(UsedInstruments usedInstruments) {
+        if(this.usedInstrument == usedInstruments) return;
 		this.usedInstrument=usedInstruments;
+		this.modelChange();
 	}
 
 	public UsedInstruments getUsedInstrument() {
@@ -95,16 +101,21 @@ public class Activity extends DefaultModel {
 	}
 
 	public void setActuator(Actuator actuator) {
+		if(this.actuator == actuator) return;
 		this.actuator=actuator;
+		this.modelChange();
 	}
 	
 	public void setTreatedStructure(AnatomicStructure anatomicStructure) {
+		if(this.anatomicStructure == anatomicStructure) return;
 		this.anatomicStructure=anatomicStructure;
-		
+		this.modelChange();
 	}
 	
 	public void setAction(Action action) {
+		if(this.action == action) return;
 		this.action=action;
+		this.modelChange();
 	}
 	
 	
@@ -146,10 +157,14 @@ public class Activity extends DefaultModel {
 	}
 
 	public void setType(int type) {
+		if(this.type == type) return;
 		this.type=type;
+		this.modelChange();
 	}
 
 	public void setDiscipline(int discipline) {
+		if(this.discipline == discipline) return;
 		this.discipline=discipline;
+		this.modelChange();
 	}
 }

@@ -23,6 +23,12 @@ public class Actuator {
 		this.usedbodypart = usedbodypart;
 	}
 	
+	public boolean equals(Object o) {
+		if(this == o) return true;
+		if(!(o instanceof Actuator)) return false;
+		return (this.position.equals(((Actuator)o).position) && this.usedbodypart.equals(((Actuator)o).usedbodypart));
+	}
+	
 	@Override
 	public String toString() {
 		return "Actuator [position=" + position + ", usedbodypart="
