@@ -2,7 +2,6 @@ package sequence.ui.component.sequence.subSequence.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -83,7 +82,7 @@ ActionListener {
 			}
 			if(tikzExport(f, ext));
 			else if(svgExport(f, ext));
-			else if(imageExport(getView().createImage(), ext, f)); 				
+			else if(imageExport(ext, f)); 				
 			else
 				JOptionPane.showMessageDialog(fc, "No correct file selected", "Error", JOptionPane.ERROR_MESSAGE);
 		}
@@ -118,7 +117,7 @@ ActionListener {
 		return false;
 	}
 	
-	private boolean imageExport(BufferedImage createImage, String ext, File f)
+	private boolean imageExport(String ext, File f)
 	{
 		for(int i=0; i<ImageIO.getWriterFormatNames().length; i++)
 		{

@@ -85,58 +85,13 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				EventQueue.invokeLater(new Runnable(){
 					public void run(){
-						new OpenedFilesSelectWindow(((MainWindow) parent).getSequenceContainers(), fc);
+						new OpenedFilesSelectWindow(((MainWindow) parent).getSequenceContainers(), (MainWindow) parent);
 					}
 				});
 			}
 		});
 
 		file.add(save);
-		
-		
-		JMenu export = new JMenu("Export");
-		export.setMnemonic('E');
-		
-		JMenuItem imageExport = new JMenuItem("to image");
-		imageExport.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				EventQueue.invokeLater(new Runnable(){
-					public void run(){
-						new OpenedFilesSelectWindow(((MainWindow) parent).getSequenceContainers(), fc);
-					}
-				});
-			}
-		});
-		export.add(imageExport);
-		
-		JMenuItem svgExport = new JMenuItem("to svg");
-		svgExport.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				EventQueue.invokeLater(new Runnable(){
-					public void run(){
-						new OpenedFilesSelectWindow(((MainWindow) parent).getSequenceContainers(), fc);
-					}
-				});
-			}
-		});
-		export.add(svgExport);
-		
-		JMenuItem tikzExport = new JMenuItem("to tikz");
-		tikzExport.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				EventQueue.invokeLater(new Runnable(){
-					public void run(){
-						new OpenedFilesSelectWindow(((MainWindow) parent).getSequenceContainers(), fc);
-					}
-				});
-			}
-		});
-		export.add(tikzExport);
-		
-		file.add(export);
 
 
 		JMenuItem quit = new JMenuItem("Quit");

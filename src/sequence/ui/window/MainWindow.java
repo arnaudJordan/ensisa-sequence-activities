@@ -27,6 +27,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import sequence.model.Sequence;
+import sequence.mvc.View;
 import sequence.parser.SequenceHandler;
 import sequence.processor.AddSequence;
 import sequence.processor.Processor;
@@ -237,5 +238,12 @@ public class MainWindow extends JFrame {
 	public JPanel getMainPane() {
 		return mainPane;
 	}
-	
+	public View getSequenceContainers(Sequence selectedSequence) {
+		for(SequenceContainer s : sequenceContainers)
+		{
+			if(s.getView().getModel().equals(selectedSequence))
+				return s.getView();
+		}
+		return null;
+	}
 }
