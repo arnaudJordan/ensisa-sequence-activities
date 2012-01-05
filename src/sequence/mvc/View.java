@@ -88,4 +88,10 @@ public abstract class View extends JComponent implements ModelListener {
 		this.paint(image.getGraphics());
 		return image;
 	}
+	public BufferedImage createImage(int width, int height)
+	{
+		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
+		this.paint(image.getGraphics());
+		return image;
+	}
 }
