@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -16,131 +14,288 @@ import sequence.model.activity.Activity;
 import sequence.model.activity.AnatomicStructure;
 import sequence.model.activity.BodyPart;
 import sequence.model.activity.Instrument;
-import sequence.model.activity.UsedInstruments;
 import sequence.model.location.Location;
 import sequence.mvc.DefaultModel;
 import sequence.mvc.Model;
-
+/**
+ * The Sequence model.
+ */
 public class Sequence extends DefaultModel implements Iterable<Activity>, Model {
+	
+	/** The file. */
 	private File file;
+	
+	/** The workflow id. */
 	private final String workflowID;
+	
+	/** The activities. */
 	private List<Activity> activities;
+	
+	/** The phases. */
 	private Phases phases;
+	
+	/** The patient. */
 	private Patient patient;
+	
+	/** The location. */
 	private Location location;
+	
+	/** The date. */
 	private Date date;
+	
+	/** The discipline. */
 	private Discipline discipline;
 	
 	
+	/**
+	 * Instantiates a new sequence.
+	 *
+	 * @param workflowID the workflow id
+	 */
 	public Sequence(String workflowID) {
 		this.activities=new ArrayList<Activity>();
 		this.workflowID=workflowID;
 	}
+	
+	/**
+	 * Instantiates a new sequence.
+	 *
+	 * @param workflowID the workflow id
+	 * @param file the file
+	 */
 	public Sequence(String workflowID, File file) {
 		this.activities=new ArrayList<Activity>();
 		this.workflowID=workflowID;
 		this.file=file;
 	}
 	
+	/**
+	 * Instantiates a new sequence.
+	 *
+	 * @param sequence the sequence
+	 */
 	public Sequence(Sequence sequence) {
 		this.activities=sequence.activities;
 		this.workflowID=sequence.workflowID;
 	}
 	
+	/**
+	 * Instantiates a new sequence.
+	 *
+	 * @param workflowID the workflow id
+	 * @param activities the activities
+	 */
 	public Sequence(String workflowID, List<Activity> activities) {
 		this.activities=activities;
 		this.workflowID=workflowID;
 	}
 	
 	
+	/**
+	 * Gets the workflow id.
+	 *
+	 * @return the workflow id
+	 */
 	public String getWorkflowID() {
 		return workflowID;
 	}
 
+	/**
+	 * Gets the file.
+	 *
+	 * @return the file
+	 */
 	public File getFile() {
 		return file;
 	}
+	
+	/**
+	 * Size.
+	 *
+	 * @return the int
+	 */
 	public int size() {
 		return activities.size();
 	}
 
+	/**
+	 * Checks if is empty.
+	 *
+	 * @return true, if is empty
+	 */
 	public boolean isEmpty() {
 		return activities.isEmpty();
 	}
 
+	/**
+	 * Clear.
+	 */
 	public void clear() {
 		activities.clear();
 	}
 
+	/**
+	 * Contains.
+	 *
+	 * @param o the o
+	 * @return true, if successful
+	 */
 	public boolean contains(Object o) {
 		return activities.contains(o);
 	}
 
+	/**
+	 * Index of.
+	 *
+	 * @param o the o
+	 * @return the int
+	 */
 	public int indexOf(Object o) {
 		return activities.indexOf(o);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Iterable#iterator()
+	 */
+	@Override
 	public Iterator<Activity> iterator() {
 		return activities.iterator();
 	}
 
+	/**
+	 * Gets the.
+	 *
+	 * @param index the index
+	 * @return the activity
+	 */
 	public Activity get(int index) {
 		return activities.get(index);
 	}
+	
+	/**
+	 * Gets the last activity.
+	 *
+	 * @return the last activity
+	 */
 	public Activity getLastActivity() {
 		return activities.get(this.size()-1);
 	}
 	
+	/**
+	 * Adds the activity.
+	 *
+	 * @param activity the activity
+	 */
 	public void addActivity(Activity activity) {
 		this.activities.add(activity);
 	}
 
+	/**
+	 * Sets the patient.
+	 *
+	 * @param patient the new patient
+	 */
 	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
 
+	/**
+	 * Gets the patient.
+	 *
+	 * @return the patient
+	 */
 	public Patient getPatient() {
 		return patient;
 	}
 
+	/**
+	 * Sets the location.
+	 *
+	 * @param location the new location
+	 */
 	public void setLocation(Location location) {
 		this.location = location;
 	}
 
+	/**
+	 * Gets the location.
+	 *
+	 * @return the location
+	 */
 	public Location getLocation() {
 		return location;
 	}
 
+	/**
+	 * Gets the date.
+	 *
+	 * @return the date
+	 */
 	public Date getDate() {
 		return date;
 	}
 
+	/**
+	 * Sets the date.
+	 *
+	 * @param date the new date
+	 */
 	public void setDate(Date date) {
 		this.date = date;
 	}
 
+	/**
+	 * Sets the phases.
+	 *
+	 * @param phases the new phases
+	 */
 	public void setPhases(Phases phases) {
 		this.phases = phases;
 	}
 
+	/**
+	 * Gets the phases.
+	 *
+	 * @return the phases
+	 */
 	public Phases getPhases() {
 		return phases;
 	}
 
+	/**
+	 * Gets the discipline.
+	 *
+	 * @return the discipline
+	 */
 	public Discipline getDiscipline() {
 		return discipline;
 	}
 
+	/**
+	 * Sets the discipline.
+	 *
+	 * @param discipline the new discipline
+	 */
 	public void setDiscipline(Discipline discipline) {
 		this.discipline = discipline;
 	}
 	
+	/**
+	 * Complete duration.
+	 *
+	 * @return the int
+	 */
 	public int completeDuration()
 	{
 		if(getDate()==null) return 0;
 		return getDate().getDuration();
 	}
 
+	/**
+	 * Complete work duration.
+	 *
+	 * @return the int
+	 */
 	public int completeWorkDuration()
 	{
 		int duration =0;
@@ -151,6 +306,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return duration;
 	}
 	
+	/**
+	 * Phase duration.
+	 *
+	 * @return the list
+	 */
 	public List<Integer> phaseDuration()
 	{
 		List<Integer> phasesDuration = new ArrayList<Integer>();
@@ -165,6 +325,12 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return phasesDuration;
 	}
 	
+	/**
+	 * Gets the activities in phase.
+	 *
+	 * @param phase the phase
+	 * @return the activities in phase
+	 */
 	public List<Activity> getActivitiesInPhase(Phase phase) {
 		List<Activity> activities = new ArrayList<Activity>();
 		Iterator<Activity> it = this.activities.iterator();
@@ -180,6 +346,12 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return activities;
 	}
 	
+	/**
+	 * Gets the phase of activity.
+	 *
+	 * @param activity the activity
+	 * @return the phase of activity
+	 */
 	public Phase getPhaseOfActivity(Activity activity) {
 		for(Phase current : phases) {
 			if(current.getDate() <= activity.getActivitytime().getStartTime()
@@ -189,15 +361,31 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return null;
 	}
 	
+	/**
+	 * Activity number.
+	 *
+	 * @return the int
+	 */
 	public int activityNumber()
 	{
 		return activities.size();
 	}
 	
+	/**
+	 * Mean activity duration.
+	 *
+	 * @return the int
+	 */
 	public int meanActivityDuration()
 	{
 		return completeDuration()/activityNumber();
 	}
+	
+	/**
+	 * States.
+	 *
+	 * @return the object[]
+	 */
 	public Object[] states()
 	{
 		Set<String> set = new HashSet<String>();
@@ -207,6 +395,12 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		}
 		return set.toArray();
 	}
+	
+	/**
+	 * Disciplines.
+	 *
+	 * @return the object[]
+	 */
 	public Object[] disciplines()
 	{
 		Set<Integer> set = new HashSet<Integer>();
@@ -216,6 +410,12 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		}
 		return set.toArray();
 	}
+	
+	/**
+	 * Types.
+	 *
+	 * @return the object[]
+	 */
 	public Object[] types()
 	{
 		Set<Integer> set = new HashSet<Integer>();
@@ -226,11 +426,22 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return set.toArray();
 	}
 	
+	/**
+	 * Action structure instrument number.
+	 *
+	 * @return the int[]
+	 */
 	public int[] ActionStructureInstrumentNumber()
 	{
 		Object[] tab = ActionsStructuresInstruments();
 		return new int[]{((Object[]) tab[0]).length, ((Object[]) tab[1]).length,((Object[]) tab[2]).length};
 	}
+	
+	/**
+	 * Actions structures instruments.
+	 *
+	 * @return the object[]
+	 */
 	public Object[] ActionsStructuresInstruments()
 	{
 		List<Action> actions = new ArrayList<Action>();
@@ -262,6 +473,12 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		});*/
 		return new Object[]{actions.toArray(), anatomicStructures.toArray(),instruments.toArray()};
 	}
+	
+	/**
+	 * Positions.
+	 *
+	 * @return the object[]
+	 */
 	public Object[] Positions()
 	{
 		List<Position> positions = new ArrayList<Position>();
@@ -276,6 +493,12 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		});
 */		return positions.toArray();
 	}
+	
+	/**
+	 * Body parts.
+	 *
+	 * @return the object[]
+	 */
 	public Object[] BodyParts()
 	{
 		List<BodyPart> bodyParts = new ArrayList<BodyPart>();
@@ -291,6 +514,12 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return bodyParts.toArray();
 	}
 	
+	/**
+	 * To file.
+	 *
+	 * @param file the file
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void toFile(File file) throws IOException
 	{
 		FileWriter fw = new FileWriter(file);
@@ -300,6 +529,9 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		fw.close();
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Sequence [workflowID=" + workflowID + ", activities="
@@ -308,6 +540,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 				+ discipline + "]";
 	}
 	
+	/**
+	 * Return sequence in XML format.
+	 *
+	 * @return the XML string
+	 */
 	public String toXML() {
 		final String NEW_LINE = System.getProperty("line.separator");
 		StringBuilder sb = new StringBuilder("<rec_workflow workflowID=\""+workflowID+"\" ver=\"0.2\" rec_type=\"LIVE\">");
