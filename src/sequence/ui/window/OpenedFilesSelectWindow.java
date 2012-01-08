@@ -152,7 +152,7 @@ public class OpenedFilesSelectWindow extends JFrame {
 		
 		fc.addChoosableFileFilter(new FileNameExtensionFilter("Image File", ImageIO.getWriterFormatNames()));
 		fc.addChoosableFileFilter(new FileNameExtensionFilter("Tex (Tikz)", "tex"));
-		fc.addChoosableFileFilter(new FileNameExtensionFilter("Vectoriel", "svg"));
+		fc.addChoosableFileFilter(new FileNameExtensionFilter("Vectorial", "svg"));
 		fc.addChoosableFileFilter(new FileNameExtensionFilter("XML", "xml"));
 		
 		Config config = parent.getConfig();
