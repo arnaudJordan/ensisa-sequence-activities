@@ -1,14 +1,20 @@
 package sequence.model;
+
+import sequence.mvc.Model;
+import sequence.mvc.ModelListener;
+
 /**
  * The Phase model.
  */
-public class Phase {
+public class Phase implements Model {
 	
 	/** The date. */
 	private final int date;
 	
 	/** The name. */
 	private String name;
+
+	private int stopTime = 0;
 	
 	/**
 	 * Instantiates a new phase.
@@ -72,5 +78,27 @@ public class Phase {
 	 */
 	public String toXML() {
 		return "<value time=\""+date+"\">"+name+"</value>";
+	}
+
+	@Override
+	public void addModelListener(ModelListener l) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void removeModelListener(ModelListener l) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void modelChange() {
+		// TODO Auto-generated method stub
+	}
+
+	public void setStopTime(int stopTime) {
+		this.stopTime=stopTime;	
+	}
+	public int getStopTime() {
+		return this.stopTime;	
 	}
 }

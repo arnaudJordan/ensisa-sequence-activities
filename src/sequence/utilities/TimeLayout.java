@@ -34,6 +34,8 @@ public class TimeLayout implements LayoutManager {
 
 	@Override
 	public Dimension minimumLayoutSize(Container parent) {
+		if(parent.getComponentCount()==0) return new Dimension(0,0);
+		
 		int currentHeight = 0;
 		int parentWidth = parent.getWidth();
 		int initTime = 0;
@@ -76,6 +78,8 @@ public class TimeLayout implements LayoutManager {
 
 	@Override
 	public void layoutContainer(Container parent) {
+		if(parent.getComponentCount()==0) return;
+		
 		int currentHeight = 0;
 		int parentWidth = parent.getWidth();
 

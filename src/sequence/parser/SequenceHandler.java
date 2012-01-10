@@ -168,7 +168,12 @@ public class SequenceHandler extends DefaultHandler {
 		{
 			try{
 				int time = Integer.parseInt(attributes.getValue("time"));
+				if(sequence.getPhases().getLastPhase()!=null)
+				{
+					sequence.getPhases().getLastPhase().setStopTime(time);
+				}
 				sequence.getPhases().add(new Phase(time));
+				
 			}catch(Exception e){
 				throw new SAXException(e);
 			}

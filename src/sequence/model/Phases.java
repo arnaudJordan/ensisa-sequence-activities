@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import sequence.mvc.Model;
+import sequence.mvc.ModelListener;
+
 /**
  * The Phases model.
  */
-public class Phases implements Iterable<Phase> {
+public class Phases implements Iterable<Phase>, Model {
 	
 	/** The phases. */
 	private List<Phase> phases;
@@ -82,7 +85,9 @@ public class Phases implements Iterable<Phase> {
 	 * @return the last phase
 	 */
 	public Phase getLastPhase() {
-		return phases.get(phases.size()-1);
+		if(phases.size()>0)
+			return phases.get(phases.size()-1);
+		return null;
 	}
 
 	/* (non-Javadoc)
@@ -105,6 +110,24 @@ public class Phases implements Iterable<Phase> {
 			sb.append("\t"+p.toXML()+NEW_LINE);
 		sb.append("</state>");
 		return sb.toString();
+	}
+
+	@Override
+	public void addModelListener(ModelListener l) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeModelListener(ModelListener l) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void modelChange() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
