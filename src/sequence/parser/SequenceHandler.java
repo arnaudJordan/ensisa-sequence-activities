@@ -368,6 +368,10 @@ public class SequenceHandler extends DefaultHandler {
 		if(endElementInActivity(qName))
 			return true;
 		if(qName.equals("state")){
+			if(sequence.getPhases().getLastPhase()!=null)
+			{
+				sequence.getPhases().getLastPhase().setStopTime(sequence.getLastActivity().getActivitytime().getStopTime());
+			}
 			buffer = null;
 			inState = false;
 			return true;

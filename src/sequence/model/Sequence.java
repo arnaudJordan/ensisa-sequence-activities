@@ -21,7 +21,7 @@ import sequence.mvc.Model;
  * The Sequence model.
  */
 public class Sequence extends DefaultModel implements Iterable<Activity>, Model {
-	
+
 	/** The file. */
 	private File file;
 	
@@ -259,7 +259,7 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	 * @return the phases
 	 */
 	public Phases getPhases() {
-		return phases;
+		return this.phases;
 	}
 
 	/**
@@ -534,10 +534,10 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	 */
 	@Override
 	public String toString() {
-		return "Sequence [workflowID=" + workflowID + ", activities="
-				+ activities + ", phases=" + phases + ", patient=" + patient
-				+ ", location=" + location + ", date=" + date + ", discipline="
-				+ discipline + "]";
+		return "Sequence [file=" + file + ", workflowID=" + workflowID
+				+ ", activities=" + activities + ", phases=" + phases
+				+ ", patient=" + patient + ", location=" + location + ", date="
+				+ date + ", discipline=" + discipline + "]";
 	}
 	
 	/**
