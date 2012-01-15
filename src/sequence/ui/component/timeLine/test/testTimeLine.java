@@ -31,7 +31,6 @@ public class testTimeLine extends JFrame {
 
 			Sequence sequence = sequenceHandler.getSequence();
 			Phases model = sequence.getPhases();
-			System.out.println(model);
 			TimeLineView view = new TimeLineView(model);
 
 			this.add(view);
