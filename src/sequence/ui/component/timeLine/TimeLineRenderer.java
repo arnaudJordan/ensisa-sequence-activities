@@ -36,7 +36,7 @@ public class TimeLineRenderer extends DefaultRenderer implements Renderer {
 		Phases phases = (Phases)getView().getModel();
 		if(phases.size()>0)
 		{
-			int sequenceSize = phases.getLastPhase().getDate() - phases.get(0).getDate()+50;
+			int sequenceSize = phases.getLastPhase().getStopTime() - phases.get(0).getDate();
 			scale = (float) (getView().getSize().getWidth()/sequenceSize);
 		}
 	}
