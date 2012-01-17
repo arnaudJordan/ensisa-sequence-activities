@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class TimeIndicatorDrawer {
-	private final int TICKWIDTH = 5;
+	private final int TICKWIDTH = 2;
 	private Color color;
 	public TimeIndicatorDrawer() {
 		this.color=Color.BLACK;
@@ -20,7 +20,7 @@ public class TimeIndicatorDrawer {
 	{
 		g.setColor(color);
 		g.fillRect(0, 0, TICKWIDTH, height);
-		g.fillRect(0, 0, width, height/2);
+		g.fillRect(0, 0, width, TICKWIDTH);
 		g.fillRect(width-TICKWIDTH, 0, TICKWIDTH, height);
 	}
 }
