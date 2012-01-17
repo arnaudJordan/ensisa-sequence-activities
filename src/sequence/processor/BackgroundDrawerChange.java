@@ -1,7 +1,7 @@
 package sequence.processor;
 
 import sequence.ui.component.activity.ActivityRenderer;
-import sequence.utilities.BackgroundDrawer;
+import sequence.ui.utilities.drawer.BackgroundDrawer;
 
 public class BackgroundDrawerChange extends Command {
 	private ActivityRenderer activityRenderer;

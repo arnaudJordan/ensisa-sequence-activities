@@ -31,7 +31,7 @@ import sequence.model.activity.AnatomicStructure;
 import sequence.model.activity.BodyPart;
 import sequence.model.activity.Instrument;
 import sequence.model.activity.UsedInstruments;
-import sequence.utilities.ListLayout;
+import sequence.ui.utilities.ListLayout;
 /**
  *
  * @author jordan

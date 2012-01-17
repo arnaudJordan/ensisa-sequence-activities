@@ -25,7 +25,7 @@ public class testTimeLine extends JFrame {
 		SAXParser parser;
 		try {
 			parser = factory.newSAXParser();
-			File parsedFile = new File("src/data.xml");
+			File parsedFile = new File("C:\\Documents and Settings\\voegtlin\\Bureau\\data.xml");
 			SequenceHandler sequenceHandler = new SequenceHandler();
 			parser.parse(parsedFile, sequenceHandler);
 

@@ -11,8 +11,8 @@ import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.activity.ActivitySummarizedController;
 import sequence.ui.component.sequence.SequenceContainer;
+import sequence.ui.utilities.TimeLayout;
 import sequence.utilities.ColorFactory;
-import sequence.utilities.TimeLayout;
 
 public class SummarizedSequenceRenderer extends DefaultRenderer implements Renderer {
 	private float scale;

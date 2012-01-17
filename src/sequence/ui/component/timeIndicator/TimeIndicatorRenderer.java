@@ -7,7 +7,7 @@ import sequence.model.Phase;
 import sequence.mvc.DefaultRenderer;
 import sequence.mvc.Renderer;
 import sequence.mvc.View;
-import sequence.utilities.TimeIndicatorDrawer;
+import sequence.ui.utilities.drawer.TimeIndicatorDrawer;
 
 public class TimeIndicatorRenderer extends DefaultRenderer implements Renderer {
 	protected TimeIndicatorDrawer tid;

@@ -8,8 +8,8 @@ import sequence.mvc.Model;
 import sequence.mvc.View;
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceController;
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
-import sequence.utilities.BackgroundDrawer;
-import sequence.utilities.BorderBackgroundDrawer;
+import sequence.ui.utilities.drawer.BackgroundDrawer;
+import sequence.ui.utilities.drawer.BorderBackgroundDrawer;
 
 public class ActivitySummarizedController extends SummarizedSequenceController {
 	

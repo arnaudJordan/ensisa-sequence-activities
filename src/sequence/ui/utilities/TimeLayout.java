@@ -1,4 +1,4 @@
-package sequence.utilities;
+package sequence.ui.utilities;
 
 import java.awt.Component;
 import java.awt.Container;
@@ -6,6 +6,9 @@ import java.awt.Dimension;
 import java.awt.LayoutManager;
 import java.util.ArrayList;
 import java.util.List;
+
+import sequence.utilities.Scaleable;
+import sequence.utilities.Timeable;
 /**
  * Place elements of a <code>Container</code> 
  * in fonction of their time and their scale.

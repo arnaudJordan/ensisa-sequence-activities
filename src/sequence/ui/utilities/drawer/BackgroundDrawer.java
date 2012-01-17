@@ -1,15 +1,14 @@
-package sequence.utilities;
+package sequence.ui.utilities.drawer;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class TimeIndicatorDrawer {
-	private final int TICKWIDTH = 5;
+public class BackgroundDrawer {
 	private Color color;
-	public TimeIndicatorDrawer() {
+	public BackgroundDrawer() {
 		this.color=Color.BLACK;
 	}
-	public TimeIndicatorDrawer(Color color) {
+	public BackgroundDrawer(Color color) {
 		this.color=color;
 	}
 	public void Draw(Graphics2D g, int width, int height)
@@ -19,8 +18,6 @@ public class TimeIndicatorDrawer {
 	public void Draw(Graphics2D g, int width, int height, Color color)
 	{
 		g.setColor(color);
-		g.fillRect(0, 0, TICKWIDTH, height);
-		g.fillRect(0, 0, width, height/2);
-		g.fillRect(width-TICKWIDTH, 0, TICKWIDTH, height);
+		g.fillRect(0, 0, width, height);
 	}
 }

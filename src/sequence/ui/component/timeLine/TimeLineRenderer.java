@@ -10,7 +10,7 @@ import sequence.mvc.Renderer;
 import sequence.mvc.View;
 import sequence.ui.component.timeIndicator.TimeIndicatorRenderingModel;
 import sequence.ui.component.timeIndicator.TimeIndicatorView;
-import sequence.utilities.TimeLayout;
+import sequence.ui.utilities.TimeLayout;
 
 public class TimeLineRenderer extends DefaultRenderer implements Renderer {
 	private float scale = 1;

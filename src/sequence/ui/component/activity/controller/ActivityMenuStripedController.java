@@ -9,9 +9,9 @@ import sequence.mvc.Model;
 import sequence.mvc.View;
 import sequence.processor.BackgroundDrawerChange;
 import sequence.ui.component.activity.ActivityRenderer;
+import sequence.ui.utilities.drawer.BackgroundDrawer;
+import sequence.ui.utilities.drawer.StripedBackgroundDrawer;
 import sequence.ui.window.MainWindow;
-import sequence.utilities.BackgroundDrawer;
-import sequence.utilities.StripedBackgroundDrawer;
 
 public class ActivityMenuStripedController extends Controller implements
 		ActionListener {

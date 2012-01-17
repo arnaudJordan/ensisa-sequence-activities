@@ -10,7 +10,7 @@ import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityController;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
-import sequence.utilities.TimeLayout;
+import sequence.ui.utilities.TimeLayout;
 
 public class SubSequenceRenderer extends DefaultRenderer implements Renderer {
 	
