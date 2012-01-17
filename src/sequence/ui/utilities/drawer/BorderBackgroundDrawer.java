@@ -1,4 +1,4 @@
-package sequence.utilities;
+package sequence.ui.utilities.drawer;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

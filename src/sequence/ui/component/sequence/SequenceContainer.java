@@ -18,8 +18,8 @@ import sequence.mvc.View;
 import sequence.processor.AddSubSequence;
 import sequence.processor.RemoveSubSequence;
 import sequence.ui.component.timeLine.TimeLineView;
+import sequence.ui.utilities.CustomLayout;
 import sequence.ui.window.MainWindow;
-import sequence.utilities.CustomLayout;
 
 public class SequenceContainer extends JPanel {
    private static final long serialVersionUID = 1L;

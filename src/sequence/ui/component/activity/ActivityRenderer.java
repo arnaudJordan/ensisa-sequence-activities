@@ -7,7 +7,7 @@ import sequence.model.activity.Activity;
 import sequence.mvc.DefaultRenderer;
 import sequence.mvc.Renderer;
 import sequence.mvc.View;
-import sequence.utilities.BackgroundDrawer;
+import sequence.ui.utilities.drawer.BackgroundDrawer;
 
 public class ActivityRenderer extends DefaultRenderer implements Renderer {
 	protected BackgroundDrawer bd;

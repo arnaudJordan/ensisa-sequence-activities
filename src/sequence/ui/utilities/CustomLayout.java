@@ -1,4 +1,4 @@
-package sequence.utilities;
+package sequence.ui.utilities;
 
 import java.awt.Component;
 import java.awt.Container;
