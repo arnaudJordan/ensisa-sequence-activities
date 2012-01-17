@@ -13,7 +13,8 @@ import sequence.ui.component.timeIndicator.TimeIndicatorView;
 import sequence.utilities.TimeLayout;
 
 public class TimeLineRenderer extends DefaultRenderer implements Renderer {
-	private float scale=1;
+	private float scale = 1;
+	private int height = 10;
 	
 	public TimeLineRenderer(View view) {
 		super(view);
@@ -57,6 +58,6 @@ public class TimeLineRenderer extends DefaultRenderer implements Renderer {
 	
 	public Dimension getPreferredSize() {
 		int Hinsets = 2*(getView().getParent().getInsets().left + getView().getParent().getInsets().right);
-    	return new Dimension(getView().getParent().getWidth() - Hinsets, (int) getView().getLayout().minimumLayoutSize(getView()).getHeight());
+    	return new Dimension(getView().getParent().getWidth() - Hinsets, height);
     }
 }
