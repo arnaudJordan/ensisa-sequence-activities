@@ -13,12 +13,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import sequence.model.Phase;
 import sequence.model.Sequence;
 import sequence.mvc.View;
 import sequence.processor.AddSubSequence;
 import sequence.processor.RemoveSubSequence;
-import sequence.ui.component.timeIndicator.TimeIndicatorView;
+import sequence.ui.component.timeLine.TimeLineView;
 import sequence.ui.window.MainWindow;
 import sequence.utilities.CustomLayout;
 
@@ -51,6 +50,7 @@ public class SequenceContainer extends JPanel {
        });
        add(l);
        add(button);
+       add(new TimeLineView(((Sequence) view.getModel()).getPhases()));
        super.add(this.view);
    }
    
