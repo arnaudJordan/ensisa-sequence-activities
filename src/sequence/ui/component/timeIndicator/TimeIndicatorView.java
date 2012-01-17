@@ -13,6 +13,7 @@ public class TimeIndicatorView extends View implements Timeable, Scaleable {
 		super(model);
 		setRenderer(new TimeIndicatorRenderer(this));
 		setRenderingModel(new TimeIndicatorRenderingModel());
+		setToolTipText(((Phase) model).getName());
 	}
 
 	@Override
