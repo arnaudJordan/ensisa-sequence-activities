@@ -44,7 +44,7 @@ public class TimeIndicatorRenderer extends DefaultRenderer implements Renderer {
 		Phase phase = (Phase) ((TimeIndicatorView)getView()).getModel();
 		TimeIndicatorRenderingModel renderingModel = ((TimeIndicatorRenderingModel)getView().getRenderingModel());
 		if(phase != null && renderingModel != null)
-			return new Dimension((int)(((TimeIndicatorView) this.getView()).getDuration()* renderingModel.getHScale()), (int)(((TimeIndicatorRenderingModel)getView().getRenderingModel()).getHeight() * renderingModel.getVScale()));
+			return new Dimension((int)(((TimeIndicatorView) this.getView()).getDuration()* renderingModel.getHScale()) + 1, (int)(((TimeIndicatorRenderingModel)getView().getRenderingModel()).getHeight() * renderingModel.getVScale()));
 		return super.getPreferredSize();
 	}
 
