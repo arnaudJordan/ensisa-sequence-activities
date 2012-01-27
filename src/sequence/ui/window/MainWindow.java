@@ -229,6 +229,8 @@ public class MainWindow extends JFrame {
 	}
 	
 	public static void main(String[] args) {
+		System.setProperty("awt.useSystemAAFontSettings","on");
+		System.setProperty("swing.aatext", "true");
 		EventQueue.invokeLater(new Runnable(){
 			public void run(){
 				new MainWindow("Sequence activities");
