@@ -14,7 +14,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,10 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -40,7 +36,11 @@ import sequence.model.activity.Activity;
  */
 public class InfoSequenceWindow extends javax.swing.JFrame {
 
-    /** Creates new form InfoActivityWindow */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/** Creates new form InfoActivityWindow */
     public InfoSequenceWindow() {
         initComponents();
     }
@@ -158,7 +158,7 @@ public class InfoSequenceWindow extends javax.swing.JFrame {
             }
         });
 
-        title.setFont(new java.awt.Font("Tahoma", 1, 14));
+        title.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         title.setText("Informartion about sequence");
 
         id.setText("id");
@@ -259,6 +259,8 @@ public class InfoSequenceWindow extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Data", jPanel1);
+
+        graphicsPane.setLayout(new javax.swing.BoxLayout(graphicsPane, javax.swing.BoxLayout.Y_AXIS));
         jTabbedPane1.addTab("Graphics", graphicsPane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -268,11 +270,11 @@ public class InfoSequenceWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(okButton)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(title)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(id)))
                 .addContainerGap())
         );
@@ -284,7 +286,7 @@ public class InfoSequenceWindow extends javax.swing.JFrame {
                     .addComponent(title)
                     .addComponent(id))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addGap(18, 18, 18)
                 .addComponent(okButton)
                 .addContainerGap())

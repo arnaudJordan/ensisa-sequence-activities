@@ -34,7 +34,7 @@ public class InfoWindow extends JFrame {
 	public InfoWindow(String title, List<SequenceContainer> list) throws HeadlessException {
 		super(title);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		this.setPreferredSize(new Dimension(300, 300));
+		this.setPreferredSize(new Dimension(600, 600));
 		
 		jTabbedPane = new JTabbedPane();
 		add(jTabbedPane);
@@ -97,8 +97,11 @@ public class InfoWindow extends JFrame {
         plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 12));
         plot.setCircular(false);
         plot.setLabelGap(0.02);
-       
-        pane.add(new ChartPanel(chart));
+        
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(500, 270));
+        chartPanel.setMinimumSize(new Dimension(500, 270));
+        pane.add(chartPanel);
 		
 		JButton closeButton = new JButton();
 		closeButton.setText("Close");
@@ -113,6 +116,7 @@ public class InfoWindow extends JFrame {
 		pane.add(closeButton);
 		
 		jTabbedPane.addTab(sequence.getWorkflowID(), pane);
+		pack();
 	}
 
 }
