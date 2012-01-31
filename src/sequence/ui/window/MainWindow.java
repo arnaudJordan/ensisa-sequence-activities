@@ -37,6 +37,7 @@ import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.SequenceContainer;
 import sequence.ui.component.sequence.subSequence.SubSequenceRenderingModel;
+import sequence.ui.utilities.WindowController;
 import sequence.utilities.Config;
 
 public class MainWindow extends JFrame {
@@ -55,6 +56,8 @@ public class MainWindow extends JFrame {
 	public MainWindow(String title) throws HeadlessException {
 		super(title);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.addWindowListener(new WindowController(this));
+		
 		//this.setExtendedState(Frame.MAXIMIZED_BOTH);
 		this.setPreferredSize(new Dimension(800, 600));
 
@@ -80,50 +83,8 @@ public class MainWindow extends JFrame {
 		this.setupScaleSlider();
 		this.setupThresholdField();
 		
-		this.init();
 		this.pack();
 		this.setVisible(true);
-	}
-	public void init()
-	{
-		
-		String laf = getConfig().getStyle();
-		if(laf!=null)
-		try {
-			UIManager.setLookAndFeel(laf);
-			SwingUtilities.updateComponentTreeUI(this);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		else
-		{
-			for (UIManager.LookAndFeelInfo lf : UIManager.getInstalledLookAndFeels())
-			{
-				if ("Nimbus".equals(lf.getName()))
-					try
-					{
-						UIManager.setLookAndFeel(lf.getClassName());
-					}
-					catch (Exception e) {}
-			}
-			SwingUtilities.updateComponentTreeUI(this);
-		}
-		
-		List<File> lastOpenedFiles = getConfig().getLastOpenedFiles();
-		for(File file:lastOpenedFiles)
-		{
-			try{
-				SAXParserFactory factory = SAXParserFactory.newInstance();
-				SAXParser parser = factory.newSAXParser();
-				SequenceHandler sequenceHandler = new SequenceHandler(file);
-				parser.parse(file, sequenceHandler);				
-				
-				Sequence sequence = sequenceHandler.getSequence();
-				add(sequence);
-			}catch(Exception ex){
-				ex.printStackTrace();
-			}
-		}
 	}
 	
 	private void setupScaleSlider()

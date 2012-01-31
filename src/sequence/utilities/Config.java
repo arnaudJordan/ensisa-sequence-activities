@@ -1,5 +1,6 @@
 package sequence.utilities;
 
+import java.awt.Dimension;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -16,6 +17,8 @@ public class Config implements Serializable{
 	private File lastOpenedDirectory;
 	private List<File> lastOpenedFiles;
 	private String style;
+	private Dimension windowSize;
+	private int extendedState;
 	
 	public Config()
 	{
@@ -47,10 +50,21 @@ public class Config implements Serializable{
 	public void setStyle(String string) {
 		this.style = string;
 	}
+	public Dimension getWindowSize() {
+		return windowSize;
+	}
+	public void setWindowSize(Dimension windowSize) {
+		this.windowSize = windowSize;
+	}
 	public void removeOpenedFile(File file) {
 		this.lastOpenedFiles.remove(file);
 	}
-	
+	public void setExtendedState(int extendedState) {
+		this.extendedState = extendedState;
+	}
+	public int getExtendedState() {
+		return this.extendedState;
+	}
 	static public void serialize(Config config) throws IOException
 	{
 		FileOutputStream configFile = new FileOutputStream(FILENAME);
@@ -64,5 +78,5 @@ public class Config implements Serializable{
 		FileInputStream configFile = new FileInputStream(FILENAME);
 		ObjectInputStream ois = new ObjectInputStream(configFile);
 		return ((Config) ois.readObject());
-	}
+	}	
 }
