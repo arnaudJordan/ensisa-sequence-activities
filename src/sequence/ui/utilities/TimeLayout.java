@@ -15,12 +15,13 @@ import sequence.utilities.Timeable;
  * Elements must implement <code>Timeable</code> and <code>Scaleable</code>.
  *
  * @see java.awt.LayoutManager
- *
+ * @see Timeable
+ * @see Scaleable
+ * 
  * @author      Arnaud Jordan
  */
 public class TimeLayout implements LayoutManager {
 	private static final int VGAP = 10;
-	private static final int MARGIN = 10;
 
 	@Override
 	public void addLayoutComponent(String name, Component comp) {
@@ -37,17 +38,16 @@ public class TimeLayout implements LayoutManager {
 
 	@Override
 	public Dimension minimumLayoutSize(Container parent) {
+		//If there are no component size is 0.
 		if(parent.getComponentCount()==0) return new Dimension(0,0);
 		
 		int currentHeight = 0;
 		int parentWidth = parent.getWidth();
-		int initTime = 0;
-		if (parent.getComponentCount() > 1)
-			initTime = ((Timeable) parent.getComponent(0)).getStartTime();
+		int initTime = ((Timeable) parent.getComponent(0)).getStartTime();
 
 		List<Integer> levelsLastPosition = new ArrayList<Integer>();
 		levelsLastPosition.add(0);
-		for (int i=0 ; i < parent.getComponentCount() ; i++) {
+		for(int i=0; i < parent.getComponentCount(); i++) {
 			Component c = parent.getComponent(i);
 			if (c.isVisible()) {
 				float scale = ((Scaleable) c).getHScale();
@@ -75,7 +75,8 @@ public class TimeLayout implements LayoutManager {
 				}
 			}
 		}
-		currentHeight += 2 * parent.getComponent(0).getHeight() + VGAP + MARGIN;
+		//currentHeight += 2 * parent.getComponent(0).getHeight() + VGAP + MARGIN;
+		currentHeight += (parent.getComponent(0).getHeight() + VGAP) * levelsLastPosition.size();
 		return new Dimension(parentWidth, currentHeight);
 	}
 
@@ -86,13 +87,11 @@ public class TimeLayout implements LayoutManager {
 		int currentHeight = 0;
 		int parentWidth = parent.getWidth();
 
-		int initTime = 0;
-		if (parent.getComponentCount() > 1)
-			initTime = ((Timeable) parent.getComponent(0)).getStartTime();
+		int initTime = ((Timeable) parent.getComponent(0)).getStartTime();
 
 		List<Integer> levelsLastPosition = new ArrayList<Integer>();
 		levelsLastPosition.add(0);
-		for (int i=0; i < parent.getComponentCount(); i++) {
+		for(int i=0; i < parent.getComponentCount(); i++) {
 			Component c = parent.getComponent(i);
 			if (c.isVisible()) {
 				float scale = ((Scaleable) c).getHScale();
