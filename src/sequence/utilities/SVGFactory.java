@@ -9,8 +9,24 @@ import sequence.ui.component.activity.ActivityContractedRenderer;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 
+/**
+ * A factory for creating SVG graphics from <code>View</code>.
+ * Only <code>ActivityView</code> are convert to SVG.
+ * 
+ * @see sequence.mvc.View
+ * @see sequence.ui.component.activity.ActivityView
+ */
 public class SVGFactory {
+	
+	/** The Constant NEW_LINE. */
 	final static String NEW_LINE = System.getProperty("line.separator");
+	
+	/**
+	 * Activity to SVG.
+	 *
+	 * @param view the view
+	 * @return the SVG result
+	 */
 	public static String ActivityToSVG(View view)
 	{
 		
@@ -26,6 +42,13 @@ public class SVGFactory {
 		sb.append(SequenceActivityToSVG(view));
 		return sb.toString();
 	}
+	
+	/**
+	 * Sequence activity to SVG.
+	 *
+	 * @param view the view
+	 * @return the SVG result
+	 */
 	private static String SequenceActivityToSVG(View view)
 	{
 		
@@ -46,6 +69,13 @@ public class SVGFactory {
 		sb.append(NEW_LINE);
 		return sb.toString();
 	}
+	
+	/**
+	 * Sequence to SVG.
+	 *
+	 * @param view the view
+	 * @return the SVG result
+	 */
 	public static String SequenceToSVG(View view)
 	{
 		
@@ -68,11 +98,18 @@ public class SVGFactory {
 		}
 		return sb.toString();
 	}
-	public static String AddHeader(String s)
+	
+	/**
+	 * Adds the header.
+	 *
+	 * @param content the content
+	 * @return the content with header
+	 */
+	public static String AddHeader(String content)
 	{
 		StringBuilder sb = new StringBuilder("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 		sb.append(NEW_LINE);
-		sb.append(s);
+		sb.append(content);
 		sb.append("</svg>");
 		return sb.toString();
 	}
