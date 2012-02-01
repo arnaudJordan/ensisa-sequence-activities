@@ -20,15 +20,27 @@ public class ActivitySummarizedController extends SummarizedSequenceController {
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == LEFT_MOUSE_BUTTON) {
 			List<Activity> selectedActivities = ((SummarizedSequenceView) getView().getParent()).getSelectedActivities();
-			if((e.getModifiers() & CTRL) == 0) {
-				SummarizedSequenceView parent = (SummarizedSequenceView) e.getComponent().getParent();
+			SummarizedSequenceView parent = (SummarizedSequenceView) e.getComponent().getParent();
+			Activity activity = (Activity) ((ActivityView) e.getComponent()).getModel();
+			if((e.getModifiers() & SHIFT) == SHIFT && !selectedActivities.isEmpty()) {
+				int beginIndex = selectedActivities.get(selectedActivities.size()-1).getId();
+				int endIndex = activity.getId();
+				if(beginIndex > endIndex) {
+					endIndex = beginIndex;
+					beginIndex = activity.getId();
+				}
+				for(int i=beginIndex; i<endIndex; i++) {
+					if(!selectedActivities.contains(((View) parent.getComponent(i)).getModel())) {
+						((ActivityRenderer) ((View) parent.getComponent(i)).getRenderer()).setBackgroundDrawer(new BorderBackgroundDrawer());
+						selectedActivities.add((Activity) ((ActivityView) parent.getComponent(i)).getModel());
+					}
+				}
+			} else if((e.getModifiers() & CTRL) == 0) {
 				for(int i=0; i<parent.getComponentCount(); i++)
 					((ActivityRenderer) ((View) parent.getComponent(i)).getRenderer()).setBackgroundDrawer(new BackgroundDrawer());
 				selectedActivities.clear();
 			}
-			Activity activity = (Activity) ((ActivityView) e.getComponent()).getModel();
-			if(!selectedActivities.contains(activity))
-			{
+			if(!selectedActivities.contains(activity)) {
 				((ActivityRenderer) ((ActivityView) e.getComponent()).getRenderer()).setBackgroundDrawer(new BorderBackgroundDrawer());
 				selectedActivities.add(activity);
 			}

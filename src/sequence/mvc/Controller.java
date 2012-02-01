@@ -15,6 +15,7 @@ public class Controller implements KeyListener, MouseListener, MouseMotionListen
     public static final int MIDDLE_MOUSE_BUTTON = MouseEvent.BUTTON2;
     public static final int RIGHT_MOUSE_BUTTON  = MouseEvent.BUTTON3;
     public static final int CTRL  = InputEvent.CTRL_MASK;
+    public static final int SHIFT  = InputEvent.SHIFT_MASK;
 	
 	private Model model;
     private View view;
