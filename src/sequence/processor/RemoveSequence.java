@@ -21,8 +21,5 @@ public class RemoveSequence extends Command {
 	@Override
 	public void Do() {
         this.mainWindow.remove((Sequence) this.model);
-        this.mainWindow.getMainPane().revalidate();
-        this.mainWindow.getMainPane().repaint();
 	}
-
 }

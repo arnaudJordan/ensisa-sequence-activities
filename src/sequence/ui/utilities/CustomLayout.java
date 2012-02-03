@@ -81,9 +81,9 @@ public class CustomLayout implements LayoutManager {
 				if(c instanceof JButton){
 					c.setBounds(target.getWidth() - c.getWidth() - strokeSize, topMargin, c.getPreferredSize().width, c.getPreferredSize().height);
 				}else if(c instanceof JLabel)
-					c.setBounds(leftMargin, currentHeight, HMargin + c.getPreferredSize().width, c.getPreferredSize().height);
+					c.setBounds(leftMargin, currentHeight, c.getPreferredSize().width, c.getPreferredSize().height);
 				else
-					c.setBounds(leftMargin, currentHeight, HMargin + c.getPreferredSize().width, c.getPreferredSize().height);
+					c.setBounds(leftMargin, currentHeight, c.getPreferredSize().width - HMargin, c.getPreferredSize().height);
 				if(c.getY() < currentHeight)
 					currentHeight += c.getPreferredSize().height + VGAP - (currentHeight - c.getY());
 				else

@@ -30,26 +30,17 @@ public class SequenceContainer extends JPanel {
        this(view, "", label, parent);
    }
    
-   public SequenceContainer(final View view, final String title, final String label, final MainWindow parent) {
+   public SequenceContainer(final View view, final String label) {
        this.view = view;
        childs = new ArrayList<SequenceContainer>();
        
        setBackground(Color.WHITE);
-       setBorder(BorderFactory.createTitledBorder(title));
+       setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
        setLayout(new CustomLayout());
        
        JLabel l = new JLabel(label);
-       ImageIcon icon = new ImageIcon("icons/dialog-close.png");
-       JButton button = new JButton(icon);
-       button.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
-       final SequenceContainer sc = this;
-       button.addActionListener(new ActionListener() {
-           public void actionPerformed(ActionEvent e) {
-               parent.remove(sc);
-           }
-       });
+       
        add(l);
-       add(button);
        add(new TimeLineView(((Sequence) view.getModel()).getPhases()));
        super.add(this.view);
    }
@@ -93,7 +84,6 @@ public class SequenceContainer extends JPanel {
    }
 
    public Dimension getPreferredSize() {
-	   int Hinsets = 2*(getInsets().left + getInsets().right);
-	   return new Dimension(getParent().getWidth() - Hinsets, getLayout().minimumLayoutSize(this).height);
+	   return new Dimension(getParent().getWidth(), getLayout().minimumLayoutSize(this).height);
    }
 }
