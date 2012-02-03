@@ -232,7 +232,15 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	 * @return the date
 	 */
 	public Date getDate() {
+		if(date==null) generateDate();
 		return date;
+	}
+
+	private void generateDate() {
+		this.date=new Date();
+		this.date.setStartTime(get(0).getActivitytime().getStartTime());
+		this.date.setStopTime(get(size()-1).getActivitytime().getStopTime());
+		this.date.setDuration(this.date.getStopTime()-this.date.getStartTime());
 	}
 
 	/**
@@ -287,7 +295,6 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	 */
 	public int completeDuration()
 	{
-		if(getDate()==null) return 0;
 		return getDate().getDuration();
 	}
 
