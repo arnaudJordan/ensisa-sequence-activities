@@ -13,14 +13,7 @@ package sequence.ui.window;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -151,6 +144,8 @@ public class InfoSequenceWindow extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         graphicsPane = new javax.swing.JPanel();
 
+        setTitle("Sequence information");
+
         okButton.setText("OK");
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,8 +254,6 @@ public class InfoSequenceWindow extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Data", jPanel1);
-
-        graphicsPane.setLayout(new javax.swing.BoxLayout(graphicsPane, javax.swing.BoxLayout.Y_AXIS));
         jTabbedPane1.addTab("Graphics", graphicsPane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
