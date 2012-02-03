@@ -10,12 +10,27 @@ import sequence.model.activity.Activity;
 import sequence.model.activity.AnatomicStructure;
 import sequence.model.activity.UsedInstruments;
 
+/**
+ * A factory for creating Color of each <code>ActivityView</code>.
+ * 
+ * @see sequence.ui.component.activity.ActivityView
+ */
 public class ColorFactory {
 
+	/** The actions. */
 	private List<Action> actions;
+	
+	/** The anatomic structures. */
 	private List<AnatomicStructure> anatomicStructures;
+	
+	/** The used instruments. */
 	private List<UsedInstruments> usedInstruments;
 	
+	/**
+	 * Instantiates a new color factory.
+	 *
+	 * @param sequence the sequence
+	 */
 	public ColorFactory(Sequence sequence) {
 		actions = new ArrayList<Action>();
 		anatomicStructures = new ArrayList<AnatomicStructure>();
@@ -33,6 +48,12 @@ public class ColorFactory {
 		Collections.shuffle(usedInstruments);
 	}
 	
+	/**
+	 * Creates a new Color object.
+	 *
+	 * @param activity the activity
+	 * @return the color
+	 */
 	public Color createColor(Activity activity) {
 		int red = 255 / actions.size() * actions.indexOf(activity.getAction());
 		int green = 255 / anatomicStructures.size() * anatomicStructures.indexOf(activity.getTreatedStructure());
@@ -40,6 +61,13 @@ public class ColorFactory {
 		return new Color(red, green, blue);
 	}
 	
+	/**
+	 * Sets the alpha.
+	 *
+	 * @param color the color
+	 * @param alpha the alpha
+	 * @return the color
+	 */
 	public static Color setAlpha(Color color, int alpha) {
 		return new Color(color.getRed(), color.getGreen(), color.getBlue(), alpha);
 	}
