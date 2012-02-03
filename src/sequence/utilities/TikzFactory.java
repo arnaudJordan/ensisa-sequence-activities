@@ -7,17 +7,51 @@ import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 
+/**
+ * A factory for creating Tikz graphics from <code>View</code>.
+ * Only <code>ActivityView</code> are convert to Tikz.
+ * 
+ * @see sequence.mvc.View
+ * @see sequence.ui.component.activity.ActivityView
+ */
 public class TikzFactory {
+	
+	/** The Constant NEW_LINE. */
 	final static String NEW_LINE = System.getProperty("line.separator");
-	final static double HSCALE = 0.1;
-	final static double VSCALE = 0.2;
+	
+	/** The Constant HSCALE. */
+	final static double HSCALE = 0.045;
+	
+	/** The Constant FIRSTHSCALE. */
+	final static int FIRSTHSCALE = 8;
+	
+	/** The Constant VSCALE. */
+	final static double VSCALE = 0.04;
+	
+	/** The Constant DefaultHscale. */
 	final static int DefaultHscale = 4;
+	
+	/** The Constant DefaultVscale. */
 	final static int DefaultVscale = 10;
-	final static int PDFHeight = 800;
-	final static int PDFWidth = 600;
-	final static int HMARGIN = 60;
+	
+	/** The Constant PDFHeight. */
+	final static int PDFHeight = 3508;
+	
+	/** The Constant PDFWidth. */
+	final static int PDFWidth = 2480;
+	
+	/** The Constant HMARGIN. */
+	final static int HMARGIN = 30;
+	
+	/** The Constant VMARGIN. */
 	final static int VMARGIN = 40;
 	
+	/**
+	 * Activity to tikz.
+	 *
+	 * @param view the view
+	 * @return the tikz result
+	 */
 	public static String ActivityToTikz(View view)
 	{
 		StringBuilder sb = new StringBuilder();
@@ -27,16 +61,31 @@ public class TikzFactory {
 		sb.append("\\draw[draw=none,fill="+id+"] (0,.8) rectangle ("+view.getWidth()+",1.1);");
 		return sb.toString();
 	}
+	
+	/**
+	 * Sequence activity to tikz.
+	 *
+	 * @param elementView the element view
+	 * @param containerView the container view
+	 * @return the tikz result
+	 */
 	private static String SequenceActivityToTikz(View elementView, View containerView) {
 		StringBuilder sb = new StringBuilder();
-		float Hscale=4;//sequenceView.getWidth()/(PDFWidth-HMARGIN);
-		float Vscale=1;//sequenceView.getHeight()/(PDFHeight-VMARGIN);
+		float Hscale=(PDFWidth-HMARGIN)/containerView.getWidth();
+		float Vscale=1;
 		int id=0;
 		if(elementView.getModel() instanceof Activity)
 			id=((Activity) elementView.getModel()).getId();
-		sb.append("\\draw[draw=none,fill=color"+id+"] ("+elementView.getX()/(Hscale)+","+(containerView.getHeight()-elementView.getY())/Vscale+") rectangle ("+(elementView.getX()+elementView.getWidth())/Hscale+","+(containerView.getHeight()-elementView.getY()-elementView.getHeight())/Vscale+");");
+		sb.append("\\draw[draw=none,fill=color"+id+"] ("+elementView.getX()*Hscale/(FIRSTHSCALE)+","+(containerView.getHeight()-elementView.getY())/Vscale+") rectangle ("+(elementView.getX()+elementView.getWidth())*Hscale/(FIRSTHSCALE)+","+(containerView.getHeight()-elementView.getY()-elementView.getHeight())/Vscale+");");
 		return sb.toString();
 	}
+	
+	/**
+	 * Sequence to tikz.
+	 *
+	 * @param view the view
+	 * @return the tikz result
+	 */
 	public static String SequenceToTikz(View view)
 	{
 		StringBuilder sb = new StringBuilder();
@@ -63,12 +112,16 @@ public class TikzFactory {
 	}
 	
 	
-	public static String AddHeader(String s)
+	/**
+	 * Adds the header.
+	 *
+	 * @param content the content
+	 * @return the content with header
+	 */
+	public static String AddHeader(String content)
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append("\\documentclass{article}");
-		sb.append(NEW_LINE);
-		sb.append("\\usepackage[paperwidth="+PDFWidth+"px, paperheight="+PDFHeight+"px]{geometry}");
 		sb.append(NEW_LINE);
 		sb.append("\\usepackage{tikz}");
 		sb.append(NEW_LINE);
@@ -76,7 +129,7 @@ public class TikzFactory {
 		sb.append(NEW_LINE);
 		sb.append("\\begin{tikzpicture}[yscale="+VSCALE+", xscale="+HSCALE+"] ");
 		sb.append(NEW_LINE);
-		sb.append(s);
+		sb.append(content);
 		sb.append(NEW_LINE);
 		sb.append("\\end{scope}");
 		sb.append(NEW_LINE);
@@ -85,6 +138,13 @@ public class TikzFactory {
 		sb.append("\\end{document}");
 		return sb.toString();
 	}
+	
+	/**
+	 * Tikz color.
+	 *
+	 * @param activityView the activity view
+	 * @return the string
+	 */
 	private static String TikzColor(ActivityView activityView)
 	{
 		StringBuilder sb = new StringBuilder();
