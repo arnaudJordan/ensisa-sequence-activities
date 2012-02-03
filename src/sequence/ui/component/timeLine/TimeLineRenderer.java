@@ -57,7 +57,6 @@ public class TimeLineRenderer extends DefaultRenderer implements Renderer {
 	}
 	
 	public Dimension getPreferredSize() {
-		int Hinsets = 2*(getView().getParent().getInsets().left + getView().getParent().getInsets().right);
-    	return new Dimension(getView().getParent().getWidth() - Hinsets, height);
+		return new Dimension(getView().getParent().getWidth(), height);
     }
 }
