@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.JComponent;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -42,7 +42,7 @@ public class MainWindow extends JFrame {
 	private Processor processor;
 	
 	/* Window elements */
-	private JPanel mainPane;
+	private JDesktopPane mainPane;
 	private JSlider scaleSlider;
 	private JTextField thresholdField;
 
@@ -65,9 +65,8 @@ public class MainWindow extends JFrame {
 		this.setJMenuBar(new MenuBar(this));
 
 		this.sequenceContainers = new ArrayList<SequenceContainer>();
-		this.mainPane=new JPanel();
+		this.mainPane=new JDesktopPane();
 		
-		this.getMainPane().setLayout(new BoxLayout(this.getMainPane(), BoxLayout.PAGE_AXIS));
 		JScrollPane scrollPane = new JScrollPane(this.getMainPane());
 		scrollPane.setWheelScrollingEnabled(true);
 		//scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -132,6 +131,7 @@ public class MainWindow extends JFrame {
 					for(SequenceContainer subSequence : current.getChilds()) {
 						((SubSequenceRenderingModel)subSequence.getView().getRenderingModel()).setDurationThreshold(Integer.parseInt(s.getText()));
 						current.revalidate();
+						current.repaint();
 					}
 				}
 			}
@@ -191,7 +191,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 	}
-	public JPanel getMainPane() {
+	public JDesktopPane getMainPane() {
 		return mainPane;
 	}
 	public View getSequenceContainers(Sequence selectedSequence) {
