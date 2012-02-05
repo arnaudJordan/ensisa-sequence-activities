@@ -38,7 +38,7 @@ public class InfoSequencePanel extends javax.swing.JPanel {
             sex.setText("female");
         else
             sex.setText("male");
-        actuator.setText(sequence.getPatient().getPosotion().getPosition());
+        actuator.setText(sequence.getPatient().getPosition().getPosition());
         note.setText(sequence.getPatient().getNote().getNote());
         chartPanel.add(createChart(sequence));
         chartPanel.validate();
