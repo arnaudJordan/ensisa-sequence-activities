@@ -60,7 +60,7 @@ public class Patient {
 	 *
 	 * @return the posotion
 	 */
-	public Position getPosotion() {
+	public Position getPosition() {
 		return position;
 	}
 	
