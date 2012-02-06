@@ -107,7 +107,7 @@ public class Patient {
 	 */
 	public String toXML() {
 		final String NEW_LINE = System.getProperty("line.separator");
-		StringBuilder sb = new StringBuilder("<patient>");
+		StringBuilder sb = new StringBuilder("<patient>"+NEW_LINE);
 		sb.append("\t<age>"+age+"</age>"+NEW_LINE);
 		if(sex==Sex.male)
 			sb.append("\t<sex>M</sex>"+NEW_LINE);

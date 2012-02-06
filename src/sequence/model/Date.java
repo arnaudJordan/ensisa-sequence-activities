@@ -106,7 +106,18 @@ public class Date {
 	 * @return the XML string
 	 */
 	public String toXML() {
-		return "<date>"+date.get(Calendar.YEAR)+"-"+date.get(Calendar.MONTH)+"-"+date.get(Calendar.DAY_OF_MONTH)+"</date>";
+		final String NEW_LINE = System.getProperty("line.separator");
+		StringBuilder sb = new StringBuilder("<rec_date>"+NEW_LINE);
+		if(date!=null)
+			sb.append("\t<date>"+date.get(Calendar.YEAR)+"-"+date.get(Calendar.MONTH)+"-"+date.get(Calendar.DAY_OF_MONTH)+"</date>"+NEW_LINE);
+		if(startTime!=0)
+			sb.append("\t<starttime>"+startTime+"</starttime>"+NEW_LINE);
+		if(stopTime!=0)
+			sb.append("\t<stoptime>"+stopTime+"</stoptime>"+NEW_LINE);
+		if(duration!=0)
+			sb.append("\t<duration>"+duration+"</duration>"+NEW_LINE);
+		sb.append("</rec_date>"+NEW_LINE);
+		return sb.toString();
 	}
 
 }

@@ -529,8 +529,10 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	 */
 	public void toFile(File file) throws IOException
 	{
+		final String NEW_LINE = System.getProperty("line.separator");
 		FileWriter fw = new FileWriter(file);
-		fw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?><iccas xmlns=\"http://www.iccas.de/projects/workflow\">");
+		fw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"+NEW_LINE);
+		fw.write("<iccas xmlns=\"http://www.iccas.de/projects/workflow\">"+NEW_LINE);
 		fw.write(this.toXML());
 		fw.write("</iccas>");
 		fw.close();
@@ -554,7 +556,7 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	 */
 	public String toXML() {
 		final String NEW_LINE = System.getProperty("line.separator");
-		StringBuilder sb = new StringBuilder("<rec_workflow workflowID=\""+workflowID+"\" ver=\"0.2\" rec_type=\"LIVE\">");
+		StringBuilder sb = new StringBuilder("<rec_workflow workflowID=\""+workflowID+"\" ver=\"0.2\" rec_type=\"LIVE\">"+NEW_LINE);
 		if(discipline!=null)
 			sb.append("\t"+discipline.toXML()+NEW_LINE);
 		if(patient!=null)
@@ -567,7 +569,7 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 			sb.append("\t"+a.toXML()+NEW_LINE);
 		if(phases!=null)
 			sb.append("\t"+phases.toXML()+NEW_LINE);
-		sb.append("</rec_workflow>");
+		sb.append("</rec_workflow>"+NEW_LINE);
 		return sb.toString();
 	}
 }
