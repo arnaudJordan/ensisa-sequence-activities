@@ -32,6 +32,7 @@ import sequence.model.location.City;
 import sequence.model.location.Country;
 import sequence.model.location.Institution;
 import sequence.model.location.Location;
+import sequence.model.location.Operatingtheatre;
 import sequence.utilities.Sex;
 
 
@@ -581,6 +582,12 @@ public class SequenceHandler extends DefaultHandler {
 		if(qName.equals("institution"))
 		{
 			sequence.getLocation().setInstitution(new Institution(buffer.toString()));
+			buffer=null;
+			return true;
+		}
+		if(qName.equals("operatingtheatre"))
+		{
+			sequence.getLocation().setOperatingtheatre(new Operatingtheatre(buffer.toString()));
 			buffer=null;
 			return true;
 		}
