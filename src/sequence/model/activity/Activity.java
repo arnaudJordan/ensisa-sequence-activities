@@ -7,7 +7,7 @@ import sequence.mvc.DefaultModel;
 /**
  * The Activity model.
  */
-public class Activity extends DefaultModel {
+public class Activity extends DefaultModel implements Comparable<Activity> {
 	
 	/** The id. */
 	private final int id;
@@ -326,5 +326,10 @@ public class Activity extends DefaultModel {
 		if(this.discipline == discipline) return;
 		this.discipline=discipline;
 		this.modelChange();
+	}
+
+	@Override
+	public int compareTo(Activity o) {
+		return new Integer(id).compareTo(o.getId());
 	}
 }

@@ -42,7 +42,7 @@ public class InfoWindow extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setTitle("Sequences information");
-        setPreferredSize(new java.awt.Dimension(600, 700));
+        setPreferredSize(new java.awt.Dimension(600, 800));
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -57,14 +57,14 @@ public class InfoWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(391, Short.MAX_VALUE)
+                .addContainerGap(462, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addContainerGap())
