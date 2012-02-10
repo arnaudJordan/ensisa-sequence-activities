@@ -187,7 +187,22 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	 * @param activity the activity
 	 */
 	public void addActivity(Activity activity) {
-		this.activities.add(activity);
+		activities.add(activity);
+	}
+	
+	public void addActivitySorted(Activity activity) {
+		int index = 0;
+		while (index < size()
+				&& activity.getId() > activities.get(index).getId()) {
+			index++;
+		}
+		activities.add(index, activity);
+		modelChange();
+	}
+	
+	public void removeActivity(Activity activity) {
+		activities.remove(activity);
+		modelChange();
 	}
 
 	/**
