@@ -1,4 +1,4 @@
-package sequence.processor;
+package sequence.processor.command;
 
 import sequence.model.Sequence;
 import sequence.ui.window.MainWindow;

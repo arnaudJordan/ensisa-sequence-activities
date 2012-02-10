@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
-import sequence.processor.BackgroundDrawerChange;
+import sequence.processor.command.BackgroundDrawerChange;
 import sequence.ui.component.activity.ActivityRenderer;
 import sequence.ui.utilities.drawer.BackgroundDrawer;
 import sequence.ui.utilities.drawer.StripedBackgroundDrawer;

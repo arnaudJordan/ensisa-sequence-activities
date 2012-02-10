@@ -20,8 +20,9 @@ import sequence.model.Note;
 import sequence.model.Sequence;
 import sequence.model.activity.Action;
 import sequence.model.activity.Activity;
-import sequence.processor.ActivityChange;
 import sequence.processor.Processor;
+import sequence.processor.command.ActivityChange;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;

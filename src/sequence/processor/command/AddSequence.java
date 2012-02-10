@@ -1,4 +1,4 @@
-package sequence.processor;
+package sequence.processor.command;
 
 import java.awt.Component;
 import java.awt.Dimension;

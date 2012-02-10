@@ -1,4 +1,4 @@
-package sequence.processor;
+package sequence.processor.command;
 
 import java.awt.Color;
 import sequence.ui.component.activity.ActivityRenderingModel;

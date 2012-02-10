@@ -1,4 +1,4 @@
-package sequence.processor;
+package sequence.processor.command;
 
 import sequence.ui.component.activity.ActivityRenderer;
 import sequence.ui.utilities.drawer.BackgroundDrawer;
