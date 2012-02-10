@@ -1,4 +1,4 @@
-package sequence.processor;
+package sequence.processor.command;
 
 import java.util.Collections;
 import java.util.Comparator;

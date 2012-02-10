@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 
 import sequence.model.Sequence;
 import sequence.mvc.View;
-import sequence.processor.AddSubSequence;
-import sequence.processor.RemoveSubSequence;
+import sequence.processor.command.AddSubSequence;
+import sequence.processor.command.RemoveSubSequence;
 import sequence.ui.component.timeLine.TimeLineView;
 import sequence.ui.utilities.CustomLayout;
 import sequence.ui.window.MainWindow;

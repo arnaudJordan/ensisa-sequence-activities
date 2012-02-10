@@ -11,7 +11,7 @@ import sequence.model.activity.Activity;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
-import sequence.processor.RemoveActivity;
+import sequence.processor.command.RemoveActivity;
 import sequence.ui.window.MainWindow;
 
 public class ActivityMenuDeleteController extends Controller implements

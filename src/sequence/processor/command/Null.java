@@ -1,4 +1,4 @@
-package sequence.processor;
+package sequence.processor.command;
 
 public class Null extends Command {
 

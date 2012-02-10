@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package sequence.processor;
+package sequence.processor.command;
 
 import sequence.model.activity.Activity;
 
