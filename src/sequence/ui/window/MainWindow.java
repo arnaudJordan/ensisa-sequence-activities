@@ -130,8 +130,6 @@ public class MainWindow extends JFrame {
 				for(SequenceContainer current : sequenceContainers) {
 					for(SequenceContainer subSequence : current.getChilds()) {
 						((SubSequenceRenderingModel)subSequence.getView().getRenderingModel()).setDurationThreshold(Integer.parseInt(s.getText()));
-						current.revalidate();
-						current.repaint();
 					}
 				}
 			}

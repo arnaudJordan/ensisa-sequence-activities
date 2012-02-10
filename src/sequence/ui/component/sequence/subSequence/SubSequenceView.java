@@ -1,11 +1,11 @@
 package sequence.ui.component.sequence.subSequence;
 
-import java.awt.Container;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import sequence.mvc.Model;
 import sequence.mvc.View;
+import sequence.ui.component.sequence.SequenceContainer;
 import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuExportController;
 import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuInfoController;
 
@@ -53,5 +53,7 @@ public class SubSequenceView extends View {
 	public void modelChanged(Model m) {
 		removeAll();
 		((SubSequenceRenderer)getRenderer()).initialize();
+		((SequenceContainer) getSummarizedView().getParent()).revalidate();
+		getSummarizedView().getParent().repaint();
 	}
 }

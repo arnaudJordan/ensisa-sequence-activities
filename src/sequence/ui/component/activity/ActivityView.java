@@ -7,6 +7,7 @@ import sequence.model.activity.Activity;
 import sequence.mvc.Model;
 import sequence.mvc.View;
 import sequence.ui.component.activity.controller.ActivityMenuColorController;
+import sequence.ui.component.activity.controller.ActivityMenuDeleteController;
 import sequence.ui.component.activity.controller.ActivityMenuEditController;
 import sequence.ui.component.activity.controller.ActivityMenuStripedController;
 import sequence.utilities.Scaleable;
@@ -31,6 +32,9 @@ public class ActivityView extends View implements Timeable, Scaleable {
 	    JMenuItem editItem = new JMenuItem("Edit");
 	    editItem.addActionListener(new ActivityMenuEditController(model, this));
 	    popup.add(editItem);
+	    JMenuItem deleteItem = new JMenuItem("Delete");
+	    deleteItem.addActionListener(new ActivityMenuDeleteController(model, this));
+	    popup.add(deleteItem);
 	    selected = true;
 	}
 	
