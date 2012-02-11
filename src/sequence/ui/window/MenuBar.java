@@ -3,13 +3,19 @@ package sequence.ui.window;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.io.File;
+import java.util.Enumeration;
+
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.SAXParser;
@@ -22,9 +28,18 @@ import sequence.utilities.Config;
 
 public class MenuBar extends JMenuBar {
 	private static final long serialVersionUID = 1L;
+	private JMenu windowMenu;
+	private ButtonGroup frameMenuItemGroup;
 
-	public MenuBar(final JFrame parent) {
+	public MenuBar(final MainWindow parent) {
 		super();
+		createFileMenu(parent);
+		createEditMenu(parent);
+		createWindowMenu(parent);
+		createHelpMenu(parent);
+	}
+
+	private void createFileMenu(final MainWindow parent) {
 		JMenu file = new JMenu("File");
 
 		JMenuItem open = new JMenuItem("Open");
@@ -35,7 +50,7 @@ public class MenuBar extends JMenuBar {
 
 		FileNameExtensionFilter filter= new FileNameExtensionFilter("XML file", "XML", "xml");
 		fc.setFileFilter(filter);
-		final Config config = ((MainWindow) parent).getConfig();
+		final Config config = parent.getConfig();
 		if(config.getLastOpenedDirectory() !=null)
 			fc.setCurrentDirectory(config.getLastOpenedDirectory());
 		fc.setMultiSelectionEnabled(true);
@@ -64,7 +79,7 @@ public class MenuBar extends JMenuBar {
 							parser.parse(parsedFile, sequenceHandler);
 							
 							Sequence sequence = sequenceHandler.getSequence();
-							((MainWindow) parent).add(sequence);
+							parent.add(sequence);
 						}catch(Exception ex){
 							ex.printStackTrace();
 							JOptionPane.showMessageDialog(parent, ex.toString(), ex.getClass().toString(), JOptionPane.ERROR_MESSAGE);
@@ -85,7 +100,7 @@ public class MenuBar extends JMenuBar {
 			public void actionPerformed(ActionEvent e) {
 				EventQueue.invokeLater(new Runnable(){
 					public void run(){
-						new OpenedFilesSelectWindow(((MainWindow) parent).getSequenceContainers(), (MainWindow) parent);
+						new OpenedFilesSelectWindow(parent.getSequenceContainers(), parent);
 					}
 				});
 			}
@@ -105,7 +120,9 @@ public class MenuBar extends JMenuBar {
 		file.add(quit);
 
 		add(file);
-		
+	}
+
+	private void createEditMenu(final MainWindow parent) {
 		JMenu edit = new JMenu("Edit");
 		JMenuItem undo = new JMenuItem("Undo");
         undo.setMnemonic('Z');
@@ -113,7 +130,7 @@ public class MenuBar extends JMenuBar {
 
         undo.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                        ((MainWindow) parent).getProcessor().Undo();
+                	parent.getProcessor().Undo();
                 }
         });
         edit.add(undo);
@@ -123,12 +140,61 @@ public class MenuBar extends JMenuBar {
 
         redo.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                        ((MainWindow) parent).getProcessor().Redo();
+                	parent.getProcessor().Redo();
                 }
         });
         edit.add(redo);
 
 		add(edit);
+	}
+	
+	private void createWindowMenu(final MainWindow parent) {
+		windowMenu = new JMenu("Window");
+		
+		JMenuItem cascade = new JMenuItem("Cascade");
+		cascade.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				parent.getMainPane().cascadeFrames();
+			}
+		});
+		windowMenu.add(cascade);
+		
+		JMenuItem tile = new JMenuItem("Tile");
+		tile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				parent.getMainPane().tileFrames();
+			}
+		});
+		windowMenu.add(tile);
+		windowMenu.addSeparator();
+		
+		JMenuItem close = new JMenuItem("Close");
+		close.setMnemonic('W');
+		close.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.Event.CTRL_MASK));
+
+		close.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JInternalFrame f = parent.getMainPane().getSelectedFrame();
+				if(f!=null)
+					f.doDefaultCloseAction();
+			}
+		});
+		windowMenu.add(close);
+		
+		JMenuItem closeAll = new JMenuItem("Close all");
+		closeAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JInternalFrame[] f = parent.getMainPane().getAllFrames();
+				for(int i=0; i<f.length; i++)
+					f[i].doDefaultCloseAction();
+			}
+		});
+		windowMenu.add(closeAll);
+		
+		add(windowMenu);
+	}
+
+	private void createHelpMenu(final MainWindow parent) {
 		JMenu help = new JMenu("Help");
 
 		JMenuItem info = new JMenuItem("File Information");
@@ -137,10 +203,10 @@ public class MenuBar extends JMenuBar {
 
 		info.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(((MainWindow) parent).getSequenceContainers()!=null)
+				if(parent.getSequenceContainers()!=null)
 					EventQueue.invokeLater(new Runnable(){
 						public void run(){
-							new InfoWindow(((MainWindow) parent).getSequenceContainers()).setVisible(true);
+							new InfoWindow(parent.getSequenceContainers()).setVisible(true);
 						}
 					});
 			}
@@ -153,7 +219,7 @@ public class MenuBar extends JMenuBar {
 
 		option.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(((MainWindow) parent).getSequenceContainers()!=null)
+				if(parent.getSequenceContainers()!=null)
 					EventQueue.invokeLater(new Runnable(){
 						public void run(){
 							new OptionWindow(parent);
@@ -167,5 +233,64 @@ public class MenuBar extends JMenuBar {
 		add(help);
 	}
 
+	
+	public void addFrameMenuItem(final JInternalFrame frame) {
+		if(frameMenuItemGroup == null) {
+			windowMenu.addSeparator();
+			frameMenuItemGroup = new ButtonGroup();
+		}
+		FrameMenuItem item = new FrameMenuItem(frame);
+		item.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				try {
+					frame.setSelected(true);
+				} catch (PropertyVetoException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		item.setIcon(frame.getFrameIcon());
+		frameMenuItemGroup.add(item);
+		windowMenu.add(item);
+	}
+	
+	public void removeFrameMenuItem(final JInternalFrame frame) {
+		Enumeration<AbstractButton> items = frameMenuItemGroup.getElements();
+		FrameMenuItem item = null;
+		while(items.hasMoreElements()) {
+			item = (FrameMenuItem) items.nextElement();
+			if(item.getFrame() == frame)
+				break;
+		}
+		frameMenuItemGroup.remove(item);
+		windowMenu.remove(item);
+		if(frameMenuItemGroup.getButtonCount() == 0) {
+			windowMenu.remove(windowMenu.getMenuComponentCount()-1);
+			frameMenuItemGroup = null;
+		}
+	}
+	
+	public void selectFrameMenuItem(final JInternalFrame frame) {
+		Enumeration<AbstractButton> items = frameMenuItemGroup.getElements();
+		FrameMenuItem item = null;
+		while(items.hasMoreElements()) {
+			item = (FrameMenuItem) items.nextElement();
+			if(item.getFrame() == frame)
+				break;
+		}
+		frameMenuItemGroup.setSelected(item.getModel(), true);
+	}
+	
+	class FrameMenuItem extends JRadioButtonMenuItem {
+		private JInternalFrame frame;
 
+		public FrameMenuItem(JInternalFrame frame) {
+			super(frame.getTitle());
+			this.frame = frame;
+		}
+
+		public JInternalFrame getFrame() {
+			return frame;
+		}
+	}
 }
