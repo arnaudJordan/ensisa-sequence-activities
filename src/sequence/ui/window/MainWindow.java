@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComponent;
-import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,6 +29,7 @@ import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.SequenceContainer;
 import sequence.ui.component.sequence.subSequence.SubSequenceRenderingModel;
+import sequence.ui.utilities.MDIDesktopPane;
 import sequence.ui.utilities.WindowController;
 import sequence.utilities.Config;
 
@@ -42,7 +42,7 @@ public class MainWindow extends JFrame {
 	private Processor processor;
 	
 	/* Window elements */
-	private JDesktopPane mainPane;
+	private MDIDesktopPane mainPane;
 	private JSlider scaleSlider;
 	private JTextField thresholdField;
 
@@ -62,14 +62,13 @@ public class MainWindow extends JFrame {
 			setConfig(new Config());
 		}
 
-		this.setJMenuBar(new MenuBar(this));
-
 		this.sequenceContainers = new ArrayList<SequenceContainer>();
-		this.mainPane=new JDesktopPane();
+		this.mainPane = new MDIDesktopPane();
+		
+		this.setJMenuBar(new MenuBar(this));
 		
 		JScrollPane scrollPane = new JScrollPane(this.getMainPane());
 		scrollPane.setWheelScrollingEnabled(true);
-		//scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		this.add(scrollPane);
 		
 		this.setupScaleSlider();
@@ -189,7 +188,7 @@ public class MainWindow extends JFrame {
 			}
 		});
 	}
-	public JDesktopPane getMainPane() {
+	public MDIDesktopPane getMainPane() {
 		return mainPane;
 	}
 	public View getSequenceContainers(Sequence selectedSequence) {
