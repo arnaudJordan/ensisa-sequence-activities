@@ -41,8 +41,8 @@ public class ActivityContractedRenderer extends ActivityRenderer {
 		}
 		else
 			this.contracted = false;
-		g.setColor(Color.WHITE);
-		g.drawString(String.valueOf(activity.getId()), (int) getView().getSize().getWidth()/2, (int) getView().getSize().getHeight()/2);
+		//g.setColor(Color.WHITE);
+		//g.drawString(String.valueOf(activity.getId()), (int) getView().getSize().getWidth()/2, (int) getView().getSize().getHeight()/2);
 	}
 	private void drawCutMark(Graphics2D g, int middle)
 	{
