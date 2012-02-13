@@ -1,7 +1,9 @@
 package sequence.processor.command;
 
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.WindowConstants;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 
@@ -34,6 +36,7 @@ public class AddSequence extends Command {
 		MDIDesktopPane mainPane = mainWindow.getMainPane();
 		final SequenceContainer sc = new SequenceContainer(view, "Summarized sequence");
 		final JInternalFrame f = new JInternalFrame(((Sequence) model).getWorkflowID(), true, true, true, true);
+		f.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		f.addInternalFrameListener(new InternalFrameListener() {
 			@Override
 			public void internalFrameOpened(InternalFrameEvent arg0) {
@@ -50,6 +53,13 @@ public class AddSequence extends Command {
 			}
 			@Override
 			public void internalFrameClosing(InternalFrameEvent arg0) {
+				int response = JOptionPane.showConfirmDialog(f,
+						"Are you sur you want to close this sequence?",
+						"Close sequence", JOptionPane.YES_NO_OPTION,
+						JOptionPane.WARNING_MESSAGE);
+				if (response == JOptionPane.NO_OPTION)
+					return;
+				f.dispose();
 				mainWindow.remove(sc);
 				((MenuBar) mainWindow.getJMenuBar()).removeFrameMenuItem(f);
 			}
