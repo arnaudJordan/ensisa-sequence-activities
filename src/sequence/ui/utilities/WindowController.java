@@ -6,8 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -27,31 +25,7 @@ public class WindowController implements WindowListener {
 	
 	@Override
 	public void windowOpened(WindowEvent e) {
-		Config config =this.window.getConfig();
-		this.window.setSize(config.getWindowSize());
-		this.window.setExtendedState(config.getExtendedState());
-		String laf = config.getStyle();
-		if(laf!=null)
-		try {
-			UIManager.setLookAndFeel(laf);
-			SwingUtilities.updateComponentTreeUI(window);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		else
-		{
-			for (UIManager.LookAndFeelInfo lf : UIManager.getInstalledLookAndFeels())
-			{
-				if ("Nimbus".equals(lf.getName()))
-					try
-					{
-						UIManager.setLookAndFeel(lf.getClassName());
-					}
-					catch (Exception e1) {}
-			}
-			SwingUtilities.updateComponentTreeUI(window);
-		}
-		
+		Config config = this.window.getConfig();
 		List<File> lastOpenedFiles = config.getLastOpenedFiles();
 		for(File file:lastOpenedFiles)
 		{

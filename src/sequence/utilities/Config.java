@@ -11,6 +11,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.UIManager;
+
 /**
  * The Class Config. It save the state of the application to be serialized and deserialized.
  */
@@ -43,6 +45,14 @@ public class Config implements Serializable{
 	public Config()
 	{
 		this.lastOpenedFiles = new ArrayList<File>();
+		setWindowSize(new Dimension(800, 600));
+		for (UIManager.LookAndFeelInfo laf : UIManager.getInstalledLookAndFeels()) {
+			if (laf.getName().equals("Nimbus"))
+				try {
+					setStyle(laf.getClassName());
+				} catch (Exception e) {
+				}
+		}
 	}
 	
 	/**
