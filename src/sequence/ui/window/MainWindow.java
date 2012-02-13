@@ -1,7 +1,6 @@
 package sequence.ui.window;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
@@ -17,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import sequence.model.Sequence;
@@ -43,6 +44,7 @@ public class MainWindow extends JFrame {
 	
 	/* Window elements */
 	private MDIDesktopPane mainPane;
+	private JPanel toolPane;
 	private JSlider scaleSlider;
 	private JTextField thresholdField;
 
@@ -50,18 +52,16 @@ public class MainWindow extends JFrame {
 		super(title);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.addWindowListener(new WindowController(this));
-		
-		//this.setExtendedState(Frame.MAXIMIZED_BOTH);
-		this.setPreferredSize(new Dimension(800, 600));
 
 		this.processor=new SafeProcessor();
 		try {
 			setConfig(Config.deserialize());
 		}catch(Exception e){
-			e.printStackTrace();
 			setConfig(new Config());
 		}
-
+		this.setPreferredSize(config.getWindowSize());
+		this.setLookAndFeel();
+		
 		this.sequenceContainers = new ArrayList<SequenceContainer>();
 		this.mainPane = new MDIDesktopPane();
 		
@@ -70,6 +70,8 @@ public class MainWindow extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(this.getMainPane());
 		scrollPane.setWheelScrollingEnabled(true);
 		this.add(scrollPane);
+		
+		this.toolPane = new JPanel();
 		
 		this.setupScaleSlider();
 		this.setupThresholdField();
@@ -138,6 +140,15 @@ public class MainWindow extends JFrame {
 		this.add(thresholdFieldPane, BorderLayout.PAGE_START);
 	}
 
+	private void setLookAndFeel() {
+		try {
+			UIManager.setLookAndFeel(config.getStyle());
+			SwingUtilities.updateComponentTreeUI(this);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
 	public Config getConfig() {
 		return config;
 	}
