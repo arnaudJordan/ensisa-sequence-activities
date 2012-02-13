@@ -14,7 +14,6 @@ import com.jidesoft.swing.AutoCompletion;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import sequence.model.Actuator;
 import sequence.model.Note;
 import sequence.model.Sequence;
@@ -26,6 +25,7 @@ import sequence.processor.command.ActivityChange;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import sequence.model.Position;
 import sequence.model.activity.AnatomicStructure;
@@ -37,16 +37,15 @@ import sequence.ui.utilities.ListLayout;
  *
  * @author jordan
  */
-public class EditActivityWindow extends javax.swing.JFrame {
-    private Sequence sequence;
+public class EditActivityWindow extends javax.swing.JDialog {
 
     /** Creates new form EditActivityWindow */
     public EditActivityWindow() {
+    	setModalityType(DEFAULT_MODALITY_TYPE);
         initComponents();
     }
     public EditActivityWindow(final MainWindow mainWindow, final Activity activity, final Sequence sequence) {
-        this.sequence=sequence;
-        initComponents();
+    	this(); ;
         
         id.setText(Integer.toString(activity.getId()));
         DefaultComboBoxModel stateModel = new DefaultComboBoxModel(sequence.states());
@@ -138,12 +137,12 @@ public class EditActivityWindow extends javax.swing.JFrame {
         durationEdit.setText(Integer.toString(activity.getActivitytime().getDuration()));
         noteText.setText(activity.getNote().getNote());
         
-        final JFrame frame = this;
+        final JDialog dialog = this;
         cancelButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
+                dialog.setVisible(false);
             }
         });
         
@@ -188,7 +187,7 @@ public class EditActivityWindow extends javax.swing.JFrame {
                 newActivity.getActivitytime().setStopTime(Integer.parseInt(startTimeEdit.getText()));
                 proc.Do(new ActivityChange(activity, newActivity));
                 mainWindow.repaint();
-                frame.setVisible(false);
+                dialog.setVisible(false);
             }
         });
         pack();
@@ -350,9 +349,9 @@ public class EditActivityWindow extends javax.swing.JFrame {
                             .addComponent(durationEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
                             .addComponent(startTimeEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(cancelButton)
+                        .addComponent(saveButton)
                         .addGap(18, 18, 18)
-                        .addComponent(saveButton))
+                        .addComponent(cancelButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(anatomicStructure)
@@ -417,8 +416,8 @@ public class EditActivityWindow extends javax.swing.JFrame {
                     .addComponent(endTimeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveButton)
-                    .addComponent(cancelButton))
+                    .addComponent(cancelButton)
+                    .addComponent(saveButton))
                 .addGap(12, 12, 12))
         );
 
@@ -426,16 +425,16 @@ public class EditActivityWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
+	 * @param args the command line arguments
+	 */
+	public static void main(String args[]) {
+		java.awt.EventQueue.invokeLater(new Runnable() {
 
-            public void run() {
-                new EditActivityWindow().setVisible(true);
-            }
-        });
-    }
+			public void run() {
+				new EditActivityWindow().setVisible(true);
+			}
+		});
+	}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel action;
     private javax.swing.JComboBox actionEdit;

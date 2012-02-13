@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
@@ -12,7 +13,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import sequence.utilities.Config;
 
-public class OptionWindow extends JFrame {
+public class OptionWindow extends JDialog {
 	private static final long serialVersionUID = 1L;
 	
 	private javax.swing.JButton cancelButton;
@@ -23,7 +24,7 @@ public class OptionWindow extends JFrame {
 
 	public OptionWindow(final JFrame parent)
 	{
-		super("Option");
+		super(parent, "Option", true);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		initComponents();
 		final LookAndFeel oldLaf = UIManager.getLookAndFeel();
@@ -32,32 +33,32 @@ public class OptionWindow extends JFrame {
 			jComboBox1.addItem(UIManager.getInstalledLookAndFeels()[i].getName());
 		jComboBox1.setSelectedItem(UIManager.getLookAndFeel().getName());
 		
-		final JFrame jFrame = this;
+		final JDialog dialog = this;
 		jComboBox1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = ((JComboBox)e.getSource()).getSelectedIndex();
 				LookAndFeelInfo laf =UIManager.getInstalledLookAndFeels()[index];
-				changeLookAndFeel(parent, jFrame, laf.getClassName());
+				changeLookAndFeel(parent, dialog, laf.getClassName());
 			}
 		});
 		
 		
 		saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				jFrame.setVisible(false);
+				dialog.setVisible(false);
 			}
 		});
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				changeLookAndFeel(parent, jFrame, oldLaf.getClass().getName());
-				jFrame.setVisible(false);
+				changeLookAndFeel(parent, dialog, oldLaf.getClass().getName());
+				dialog.setVisible(false);
 			}
 		});
 		
 		this.setVisible(true);
 	}
 	private void changeLookAndFeel(final JFrame parent,
-			final JFrame jFrame, String laf) {
+			final JDialog dialog, String laf) {
 		try {
 			UIManager.setLookAndFeel(laf);
 			((MainWindow) parent).getConfig().setStyle(laf);
@@ -66,7 +67,7 @@ public class OptionWindow extends JFrame {
 			ex.printStackTrace();
 		}
 		SwingUtilities.updateComponentTreeUI(parent);
-		SwingUtilities.updateComponentTreeUI(jFrame);
+		SwingUtilities.updateComponentTreeUI(dialog);
 	}
 	private void initComponents() {
 
@@ -94,9 +95,9 @@ public class OptionWindow extends JFrame {
                     .addComponent(jComboBox1, 0, 206, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(cancelButton)
+                        .addComponent(saveButton)
                         .addGap(18, 18, 18)
-                        .addComponent(saveButton)))
+                        .addComponent(cancelButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -110,8 +111,8 @@ public class OptionWindow extends JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveButton)
-                    .addComponent(cancelButton))
+                    .addComponent(cancelButton)
+                    .addComponent(saveButton))
                 .addContainerGap())
         );
 

@@ -15,6 +15,7 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -29,7 +30,7 @@ import sequence.utilities.Config;
 import sequence.utilities.SVGFactory;
 import sequence.utilities.TikzFactory;
 
-public class OpenedFilesSelectWindow extends JFrame {
+public class OpenedFilesSelectWindow extends JDialog {
 	private static final long serialVersionUID = 1L;
 	
     private JButton saveButton;
@@ -41,7 +42,7 @@ public class OpenedFilesSelectWindow extends JFrame {
 	private Sequence selectedSequence;
 
 	public OpenedFilesSelectWindow(List<SequenceContainer> list, final MainWindow parent) throws HeadlessException {
-		super("Select file");
+		super(parent, "Select file", true);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.parent=parent;
 		initComponents();
@@ -82,10 +83,10 @@ public class OpenedFilesSelectWindow extends JFrame {
 		jList.setCellRenderer(new MyCellRenderer());
 		jList.setModel(listModel);
 		
-		final JFrame jFrame = this;
+		final JDialog dialog = this;
 		saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				jFrame.setVisible(false);
+				dialog.setVisible(false);
 				int returnVal = fc.showSaveDialog(parent);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					File f = fc.getSelectedFile();
@@ -141,7 +142,7 @@ public class OpenedFilesSelectWindow extends JFrame {
 		
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				jFrame.setVisible(false);
+				dialog.setVisible(false);
 			}
 		});
 		this.setVisible(true);
@@ -240,9 +241,9 @@ public class OpenedFilesSelectWindow extends JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(scrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cancelButton)
+                        .addComponent(saveButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                        .addComponent(saveButton)))
+                        .addComponent(cancelButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -252,8 +253,8 @@ public class OpenedFilesSelectWindow extends JFrame {
                 .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveButton)
-                    .addComponent(cancelButton))
+                    .addComponent(cancelButton)
+                    .addComponent(saveButton))
                 .addContainerGap())
         );
 

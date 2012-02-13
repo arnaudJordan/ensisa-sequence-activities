@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
 
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -31,7 +31,7 @@ import sequence.model.activity.AnatomicStructure;
  *
  * @author jordan
  */
-public class InfoSequenceWindow extends javax.swing.JFrame {
+public class InfoSequenceWindow extends javax.swing.JDialog {
 
 	/**
 	 * 
@@ -39,11 +39,12 @@ public class InfoSequenceWindow extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
 	/** Creates new form InfoActivityWindow */
 	public InfoSequenceWindow() {
+		setModalityType(DEFAULT_MODALITY_TYPE);
 		initComponents();
 	}
 	public InfoSequenceWindow(Sequence sequence)
 	{
-		initComponents();
+		this();
 		setSize(600, 550);
 		id.setText(sequence.getWorkflowID());
 		completeDuration.setText(Integer.toString(sequence.completeDuration()));
@@ -60,11 +61,11 @@ public class InfoSequenceWindow extends javax.swing.JFrame {
 		graphicsPane.add(createZoneChart(sequence));
 		
 
-		final JFrame frame = this;
+		final JDialog dialog = this;
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
+				dialog.setVisible(false);
 			}
 		});
 	}
