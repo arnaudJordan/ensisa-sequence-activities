@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -72,6 +71,8 @@ public class MainWindow extends JFrame {
 		this.add(scrollPane);
 		
 		this.toolPane = new JPanel();
+		this.toolPane.setLayout(new BorderLayout());
+		this.add(toolPane, BorderLayout.PAGE_END);
 		
 		this.setupScaleSlider();
 		this.setupThresholdField();
@@ -113,7 +114,7 @@ public class MainWindow extends JFrame {
 		});
 
 		scaleSliderPane.add(this.scaleSlider);
-		this.add(scaleSliderPane, BorderLayout.PAGE_END);
+		toolPane.add(scaleSliderPane, BorderLayout.EAST);
 	}
 	
 	private void setupThresholdField()
@@ -137,15 +138,13 @@ public class MainWindow extends JFrame {
 		});
 		thresholdFieldPane.add(thresholdFieldLabel);
 		thresholdFieldPane.add(this.thresholdField);
-		this.add(thresholdFieldPane, BorderLayout.PAGE_START);
+		toolPane.add(thresholdFieldPane, BorderLayout.WEST);
 	}
 
 	private void setLookAndFeel() {
 		try {
 			UIManager.setLookAndFeel(config.getStyle());
-			SwingUtilities.updateComponentTreeUI(this);
-		} catch (Exception ex) {
-			ex.printStackTrace();
+		} catch (Exception e) {
 		}
 	}
 	
