@@ -12,16 +12,17 @@ import sequence.ui.component.sequence.SequenceContainer;
  *
  * @author arnaud
  */
-public class InfoWindow extends javax.swing.JFrame {
+public class InfoWindow extends javax.swing.JDialog {
 
     /**
      * Creates new form InfoWindow2
      */
     public InfoWindow() {
+    	setModalityType(DEFAULT_MODALITY_TYPE);
         initComponents();
     }
     public InfoWindow(List<SequenceContainer> list) {
-        initComponents();
+        this();
         for(SequenceContainer current : list)
 	{
         	Sequence sequence = (Sequence) current.getView().getModel();
