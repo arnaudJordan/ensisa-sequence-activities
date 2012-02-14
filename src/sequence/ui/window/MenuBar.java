@@ -28,7 +28,6 @@ import sequence.ui.component.activity.ActivityRenderer;
 import sequence.ui.utilities.drawer.BackgroundDrawer;
 import sequence.ui.utilities.drawer.StripedBackgroundDrawer;
 import sequence.utilities.Config;
-import sequence.utilities.EventDispatcher;
 
 
 public class MenuBar extends JMenuBar {
@@ -186,6 +185,16 @@ public class MenuBar extends JMenuBar {
 		activitiesStyleGroup.add(stripped);
 
 		options.add(activitiesStyle);
+		
+		JMenu threshold = new JMenu("Minimal duration threshold");
+		threshold.add(parent.getThresholdField());
+		
+		options.add(threshold);
+		
+		JMenu zoom = new JMenu("Zoom");
+		zoom.add(parent.getScaleSlider());
+		
+		options.add(zoom);		
 		
 		JMenuItem windowStyle = new JMenuItem("Window style");
 
