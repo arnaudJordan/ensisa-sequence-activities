@@ -1,9 +1,12 @@
 package sequence.ui.window;
 
+import java.awt.AWTEvent;
 import java.awt.EventQueue;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -87,26 +90,19 @@ public class MainWindow extends JFrame {
 		this.scaleSlider.setPaintTicks(true);
 		this.scaleSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent changeEvent) {
-				Object source = changeEvent.getSource();
-				JSlider s = (JSlider) source;
-				if (!s.getValueIsAdjusting())
-					;
-				{
-					for (SequenceContainer current : sequenceContainers) {
-						for (SequenceContainer subSequence : current
-								.getChilds()) {
-							for (int i = 0; i < subSequence.getComponentCount(); i++) {
-								if (subSequence instanceof SequenceContainer) {
-									for (int j = 0; j < subSequence.getView()
-											.getComponentCount(); j++) {
-										((ActivityRenderingModel) ((ActivityView) subSequence
-												.getView().getComponent(j))
-												.getRenderingModel())
-												.setScale((float) (scaleSlider
-														.getValue()) / 100);
-										((JComponent) subSequence.getView()
-												.getComponent(j)).revalidate();
-									}
+				for (SequenceContainer current : sequenceContainers) {
+					for (SequenceContainer subSequence : current.getChilds()) {
+						for (int i = 0; i < subSequence.getComponentCount(); i++) {
+							if (subSequence instanceof SequenceContainer) {
+								for (int j = 0; j < subSequence.getView()
+										.getComponentCount(); j++) {
+									((ActivityRenderingModel) ((ActivityView) subSequence
+											.getView().getComponent(j))
+											.getRenderingModel())
+											.setScale((float) (scaleSlider
+													.getValue()) / 100);
+									((JComponent) subSequence.getView()
+											.getComponent(j)).revalidate();
 								}
 							}
 						}
@@ -122,20 +118,31 @@ public class MainWindow extends JFrame {
 		this.thresholdField = new JTextField("0", 2);
 		this.thresholdField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
-				Object source = actionEvent.getSource();
-				JTextField s = (JTextField) source;
-				for (SequenceContainer current : sequenceContainers) {
-					for (SequenceContainer subSequence : current.getChilds()) {
-						((SubSequenceRenderingModel) subSequence.getView()
-								.getRenderingModel())
-								.setDurationThreshold(Integer.parseInt(s
-										.getText()));
-					}
-				}
-				SubSequenceRenderingModel.CURRENT_DURATION_THRESHOLD = Integer
-						.parseInt(s.getText());
+				updateThresholdField(actionEvent);
 			}
 		});
+		this.thresholdField.addFocusListener(new FocusListener() {
+			public void focusLost(FocusEvent focusEvent) {
+				updateThresholdField(focusEvent);
+			}
+			public void focusGained(FocusEvent focusEvent) {
+			}
+		});
+	}
+	
+	private void updateThresholdField(AWTEvent e) {
+		Object source = e.getSource();
+		JTextField s = (JTextField) source;
+		for (SequenceContainer current : sequenceContainers) {
+			for (SequenceContainer subSequence : current.getChilds()) {
+				((SubSequenceRenderingModel) subSequence.getView()
+						.getRenderingModel())
+						.setDurationThreshold(Integer.parseInt(s
+								.getText()));
+			}
+		}
+		SubSequenceRenderingModel.CURRENT_DURATION_THRESHOLD = Integer
+				.parseInt(s.getText());
 	}
 
 	private void setLookAndFeel() {
