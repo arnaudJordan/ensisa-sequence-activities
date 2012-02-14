@@ -47,6 +47,7 @@ public class WindowController implements WindowListener {
 	public void windowClosing(WindowEvent e) {
 		Config config = this.window.getConfig();
 		config.setWindowSize(this.window.getSize());
+		config.setWindowLocation(this.window.getLocation());
 		config.setExtendedState(this.window.getExtendedState());
 		try {
 			Config.serialize(this.window.getConfig());

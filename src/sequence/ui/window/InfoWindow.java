@@ -4,9 +4,9 @@
  */
 package sequence.ui.window;
 
-import java.util.List;
 import sequence.model.Sequence;
 import sequence.ui.component.sequence.SequenceContainer;
+import sequence.ui.utilities.ComponentLocation;
 
 /**
  *
@@ -21,13 +21,14 @@ public class InfoWindow extends javax.swing.JDialog {
     	setModalityType(DEFAULT_MODALITY_TYPE);
         initComponents();
     }
-    public InfoWindow(List<SequenceContainer> list) {
+    public InfoWindow(final MainWindow parent) {
         this();
-        for(SequenceContainer current : list)
-	{
-        	Sequence sequence = (Sequence) current.getView().getModel();
-		jTabbedPane1.addTab(sequence.getWorkflowID(), new InfoSequencePanel(sequence));
-	}
+        ComponentLocation.setLocation(parent, this);
+		for (SequenceContainer current : parent.getSequenceContainers()) {
+			Sequence sequence = (Sequence) current.getView().getModel();
+			jTabbedPane1.addTab(sequence.getWorkflowID(),
+					new InfoSequencePanel(sequence));
+		}
     }
 
     /**

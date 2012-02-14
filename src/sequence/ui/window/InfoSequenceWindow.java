@@ -10,6 +10,7 @@
  */
 package sequence.ui.window;
 
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -26,6 +27,7 @@ import sequence.model.Sequence;
 import sequence.model.activity.Action;
 import sequence.model.activity.Activity;
 import sequence.model.activity.AnatomicStructure;
+import sequence.ui.utilities.ComponentLocation;
 
 /**
  *
@@ -42,10 +44,12 @@ public class InfoSequenceWindow extends javax.swing.JDialog {
 		setModalityType(DEFAULT_MODALITY_TYPE);
 		initComponents();
 	}
-	public InfoSequenceWindow(Sequence sequence)
+	public InfoSequenceWindow(Container parent, Sequence sequence)
 	{
 		this();
 		setSize(600, 550);
+		ComponentLocation.setLocation(parent, this);
+		
 		id.setText(sequence.getWorkflowID());
 		completeDuration.setText(Integer.toString(sequence.completeDuration()));
 		workDuration.setText(Integer.toString(sequence.completeWorkDuration()));

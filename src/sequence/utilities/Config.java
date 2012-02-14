@@ -1,6 +1,8 @@
 package sequence.utilities;
 
 import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -36,6 +38,9 @@ public class Config implements Serializable{
 	/** The window size. */
 	private Dimension windowSize;
 	
+	/** The window left top corner location. */
+	private Point windowLocation;
+	
 	/** The extended state. */
 	private int extendedState;
 	
@@ -46,6 +51,9 @@ public class Config implements Serializable{
 	{
 		this.lastOpenedFiles = new ArrayList<File>();
 		setWindowSize(new Dimension(800, 600));
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		setWindowLocation(new Point(screenSize.width / 2 - windowSize.width / 2, 
+				screenSize.height / 2 - windowSize.height / 2));
 		for (UIManager.LookAndFeelInfo laf : UIManager.getInstalledLookAndFeels()) {
 			if (laf.getName().equals("Nimbus"))
 				try {
@@ -137,6 +145,24 @@ public class Config implements Serializable{
 	 */
 	public void setWindowSize(Dimension windowSize) {
 		this.windowSize = windowSize;
+	}
+	
+	/**
+	 * Gets the window top left corner location.
+	 *
+	 * @return the window top left corner location
+	 */
+	public Point getWindowLocation() {
+		return windowLocation;
+	}
+	
+	/**
+	 * Sets the window top left corner location.
+	 *
+	 * @param windowLocation the new window top left corner location
+	 */
+	public void setWindowLocation(Point windowLocation) {
+		this.windowLocation = windowLocation;
 	}
 	
 	/**

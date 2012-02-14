@@ -17,7 +17,7 @@ public class SubSequenceMenuInfoController extends Controller implements ActionL
 	public void actionPerformed(ActionEvent e) {
 		EventQueue.invokeLater(new Runnable(){
 			public void run(){
-				new InfoSequenceWindow((Sequence) getView().getModel()).setVisible(true);
+				new InfoSequenceWindow(getView().getTopLevelAncestor(), (Sequence) getView().getModel()).setVisible(true);
 			}
 		});
 	}
