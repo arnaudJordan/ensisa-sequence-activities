@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 
 public class BackgroundDrawer {
 	private Color color;
+	
 	public BackgroundDrawer() {
 		this.color=Color.BLACK;
 	}

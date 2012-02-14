@@ -10,11 +10,13 @@ import sequence.mvc.View;
 import sequence.ui.utilities.drawer.BackgroundDrawer;
 
 public class ActivityRenderer extends DefaultRenderer implements Renderer {
+	public static BackgroundDrawer CURRENT_BACKGROUND_DRAWER = new BackgroundDrawer();
+	
 	protected BackgroundDrawer bd;
 	
 	public ActivityRenderer(View view) {
 		super(view);
-		this.bd=new BackgroundDrawer();
+		this.bd=CURRENT_BACKGROUND_DRAWER;
 	}
 
 	public void renderView(Graphics2D g) {
