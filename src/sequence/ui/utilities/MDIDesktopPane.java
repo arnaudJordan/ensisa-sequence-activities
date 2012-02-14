@@ -150,7 +150,9 @@ public class MDIDesktopPane extends JDesktopPane {
             y = y + frameHeight;
         }*/
         for(JInternalFrame f : frames) {
-        	frameHeight = f.getHeight();
+            frameHeight = f.getPreferredSize().height;
+            f.setSize(frameWidth,frameHeight);
+            frameHeight = f.getPreferredSize().height;
             f.setSize(frameWidth,frameHeight);
             f.setLocation(0,y);
             y = y + frameHeight;
