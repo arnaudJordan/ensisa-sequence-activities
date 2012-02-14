@@ -272,7 +272,7 @@ public class MenuBar extends JMenuBar {
 				if(parent.getSequenceContainers()!=null)
 					EventQueue.invokeLater(new Runnable(){
 						public void run(){
-							new InfoWindow(parent.getSequenceContainers()).setVisible(true);
+							new InfoWindow(parent).setVisible(true);
 						}
 					});
 			}

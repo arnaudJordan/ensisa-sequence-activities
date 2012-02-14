@@ -26,6 +26,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import sequence.model.Sequence;
 import sequence.ui.component.sequence.SequenceContainer;
+import sequence.ui.utilities.ComponentLocation;
 import sequence.utilities.Config;
 import sequence.utilities.SVGFactory;
 import sequence.utilities.TikzFactory;
@@ -43,10 +44,11 @@ public class OpenedFilesSelectWindow extends JDialog {
 
 	public OpenedFilesSelectWindow(List<SequenceContainer> list, final MainWindow parent) throws HeadlessException {
 		super(parent, "Select file", true);
-		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.parent=parent;
 		initComponents();
 		initFileChooser();
+		ComponentLocation.setLocation(parent, this);
 		
 		DefaultListModel listModel = new DefaultListModel();
 		for(SequenceContainer current : list)

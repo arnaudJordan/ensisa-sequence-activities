@@ -53,8 +53,8 @@ public class AddSequence extends Command {
 			}
 			@Override
 			public void internalFrameClosing(InternalFrameEvent arg0) {
-				int response = JOptionPane.showConfirmDialog(f,
-						"Are you sur you want to close this sequence?",
+				int response = JOptionPane.showConfirmDialog(mainWindow,
+						"Are you sur you want to close the sequence '"+f.getTitle()+"'?",
 						"Close sequence", JOptionPane.YES_NO_OPTION,
 						JOptionPane.WARNING_MESSAGE);
 				if (response == JOptionPane.NO_OPTION)

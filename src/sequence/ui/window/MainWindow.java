@@ -60,6 +60,7 @@ public class MainWindow extends JFrame {
 			setConfig(new Config());
 		}
 		this.setPreferredSize(config.getWindowSize());
+		this.setLocation(config.getWindowLocation());
 		this.setLookAndFeel();
 		
 		this.sequenceContainers = new ArrayList<SequenceContainer>();
@@ -73,7 +74,7 @@ public class MainWindow extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(this.getMainPane());
 		scrollPane.setWheelScrollingEnabled(true);
 		this.add(scrollPane);
-		
+
 		this.pack();
 		this.setVisible(true);
 	}

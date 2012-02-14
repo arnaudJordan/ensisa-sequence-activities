@@ -32,6 +32,7 @@ import sequence.model.activity.AnatomicStructure;
 import sequence.model.activity.BodyPart;
 import sequence.model.activity.Instrument;
 import sequence.model.activity.UsedInstruments;
+import sequence.ui.utilities.ComponentLocation;
 import sequence.ui.utilities.ListLayout;
 /**
  *
@@ -46,7 +47,8 @@ public class EditActivityWindow extends javax.swing.JDialog {
     }
     public EditActivityWindow(final MainWindow mainWindow, final Activity activity, final Sequence sequence) {
     	this(); ;
-        
+    	ComponentLocation.setLocation(mainWindow, this);
+    	
         id.setText(Integer.toString(activity.getId()));
         DefaultComboBoxModel stateModel = new DefaultComboBoxModel(sequence.states());
         stateEdit.setModel(stateModel);

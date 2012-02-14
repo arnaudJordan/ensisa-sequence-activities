@@ -58,10 +58,9 @@ public class SequenceContainer extends JPanel {
        ImageIcon icon = new ImageIcon("icons/dialog-close.png");
        JButton button = new JButton(icon);
        button.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
-       final SequenceContainer sc = this;
        button.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-        	   int response = JOptionPane.showConfirmDialog(sc,
+        	   int response = JOptionPane.showConfirmDialog(getTopLevelAncestor(),
 						"Are you sur you want to close this sub sequence?",
 						"Close sub sequence", JOptionPane.YES_NO_OPTION,
 						JOptionPane.WARNING_MESSAGE);

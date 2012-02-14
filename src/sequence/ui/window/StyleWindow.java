@@ -11,6 +11,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import sequence.ui.utilities.ComponentLocation;
 import sequence.utilities.Config;
 
 public class StyleWindow extends JDialog {
@@ -25,8 +26,9 @@ public class StyleWindow extends JDialog {
 	public StyleWindow(final JFrame parent)
 	{
 		super(parent, "Style", true);
-		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		initComponents();
+		ComponentLocation.setLocation(parent, this);
 		final LookAndFeel oldLaf = UIManager.getLookAndFeel();
 
 		for(int i=0; i< UIManager.getInstalledLookAndFeels().length; i++)
@@ -54,7 +56,6 @@ public class StyleWindow extends JDialog {
 				dialog.setVisible(false);
 			}
 		});
-		
 		this.setVisible(true);
 	}
 	private void changeLookAndFeel(final JFrame parent,
