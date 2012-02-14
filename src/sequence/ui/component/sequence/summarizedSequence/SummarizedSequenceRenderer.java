@@ -10,7 +10,6 @@ import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.activity.ActivitySummarizedController;
-import sequence.ui.component.sequence.SequenceContainer;
 import sequence.ui.utilities.TimeLayout;
 import sequence.utilities.ColorFactory;
 
@@ -58,7 +57,6 @@ public class SummarizedSequenceRenderer extends DefaultRenderer implements Rende
 	}
 	
 	public Dimension getPreferredSize() {
-		int Hinsets = 2*(getView().getParent().getInsets().left + getView().getParent().getInsets().right);
-    	return new Dimension(getView().getParent().getWidth() - Hinsets, (int) getView().getLayout().minimumLayoutSize(getView()).getHeight());
+		return new Dimension(getView().getParent().getWidth(), (int) getView().getLayout().minimumLayoutSize(getView()).getHeight());
     }
 }
