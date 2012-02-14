@@ -1,6 +1,5 @@
 package sequence.ui.window;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
@@ -11,8 +10,6 @@ import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
@@ -43,7 +40,6 @@ public class MainWindow extends JFrame {
 	
 	/* Window elements */
 	private MDIDesktopPane mainPane;
-	private JPanel toolPane;
 	private JSlider scaleSlider;
 	private JTextField thresholdField;
 
@@ -64,81 +60,75 @@ public class MainWindow extends JFrame {
 		this.sequenceContainers = new ArrayList<SequenceContainer>();
 		this.mainPane = new MDIDesktopPane();
 		
+		this.setupScaleSlider();
+		this.setupThresholdField();
+		
 		this.setJMenuBar(new MenuBar(this));
 		
 		JScrollPane scrollPane = new JScrollPane(this.getMainPane());
 		scrollPane.setWheelScrollingEnabled(true);
 		this.add(scrollPane);
 		
-		this.toolPane = new JPanel();
-		this.toolPane.setLayout(new BorderLayout());
-		this.add(toolPane, BorderLayout.PAGE_END);
-		
-		this.setupScaleSlider();
-		this.setupThresholdField();
-		
 		this.pack();
 		this.setVisible(true);
 	}
 	
-	private void setupScaleSlider()
-	{
-		JPanel scaleSliderPane = new JPanel();
-		
-		this.scaleSlider = new JSlider(JSlider.HORIZONTAL,100,300,100);
+	private void setupScaleSlider() {
+		this.scaleSlider = new JSlider(JSlider.HORIZONTAL, 100, 300, 100);
 		this.scaleSlider.setMajorTickSpacing(100);
 		this.scaleSlider.setPaintLabels(true);
 		this.scaleSlider.setPaintTicks(true);
-		this.scaleSlider.addChangeListener(new ChangeListener()
-		{
-			public void stateChanged(ChangeEvent changeEvent)
-			{
+		this.scaleSlider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent changeEvent) {
 				Object source = changeEvent.getSource();
 				JSlider s = (JSlider) source;
-				if (!s.getValueIsAdjusting());
+				if (!s.getValueIsAdjusting())
+					;
 				{
-					for(SequenceContainer current : sequenceContainers) {
-						for(SequenceContainer subSequence : current.getChilds()) {
-							for(int i=0 ; i<subSequence.getComponentCount() ; i++) {
-								if(subSequence instanceof SequenceContainer) {
-									for(int j=0 ; j<subSequence.getView().getComponentCount() ; j++) {
-										((ActivityRenderingModel)((ActivityView)subSequence.getView().getComponent(j)).getRenderingModel()).setScale((float)(scaleSlider.getValue()) / 100);
-										((JComponent)subSequence.getView().getComponent(j)).revalidate();
+					for (SequenceContainer current : sequenceContainers) {
+						for (SequenceContainer subSequence : current
+								.getChilds()) {
+							for (int i = 0; i < subSequence.getComponentCount(); i++) {
+								if (subSequence instanceof SequenceContainer) {
+									for (int j = 0; j < subSequence.getView()
+											.getComponentCount(); j++) {
+										((ActivityRenderingModel) ((ActivityView) subSequence
+												.getView().getComponent(j))
+												.getRenderingModel())
+												.setScale((float) (scaleSlider
+														.getValue()) / 100);
+										((JComponent) subSequence.getView()
+												.getComponent(j)).revalidate();
 									}
 								}
 							}
 						}
 					}
+					ActivityRenderingModel.CURRENT_SCALE = (float) (scaleSlider
+							.getValue()) / 100;
 				}
 			}
 		});
-
-		scaleSliderPane.add(this.scaleSlider);
-		toolPane.add(scaleSliderPane, BorderLayout.EAST);
 	}
-	
-	private void setupThresholdField()
-	{
-		JPanel thresholdFieldPane = new JPanel();
-		JLabel thresholdFieldLabel = new JLabel("Minimal duration threshold : ");
-		
+
+	private void setupThresholdField() {
 		this.thresholdField = new JTextField("0", 2);
-		this.thresholdField.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent actionEvent)
-			{
+		this.thresholdField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent actionEvent) {
 				Object source = actionEvent.getSource();
 				JTextField s = (JTextField) source;
-				for(SequenceContainer current : sequenceContainers) {
-					for(SequenceContainer subSequence : current.getChilds()) {
-						((SubSequenceRenderingModel)subSequence.getView().getRenderingModel()).setDurationThreshold(Integer.parseInt(s.getText()));
+				for (SequenceContainer current : sequenceContainers) {
+					for (SequenceContainer subSequence : current.getChilds()) {
+						((SubSequenceRenderingModel) subSequence.getView()
+								.getRenderingModel())
+								.setDurationThreshold(Integer.parseInt(s
+										.getText()));
 					}
 				}
+				SubSequenceRenderingModel.CURRENT_DURATION_THRESHOLD = Integer
+						.parseInt(s.getText());
 			}
 		});
-		thresholdFieldPane.add(thresholdFieldLabel);
-		thresholdFieldPane.add(this.thresholdField);
-		toolPane.add(thresholdFieldPane, BorderLayout.WEST);
 	}
 
 	private void setLookAndFeel() {
@@ -159,6 +149,14 @@ public class MainWindow extends JFrame {
 	public List<SequenceContainer> getSequenceContainers() {
 		return sequenceContainers;
 	}
+	public JSlider getScaleSlider() {
+		return scaleSlider;
+	}
+
+	public JTextField getThresholdField() {
+		return thresholdField;
+	}
+
 	public void add(Sequence sequence)
 	{
 		getProcessor().Do(new AddSequence(sequence, this));
