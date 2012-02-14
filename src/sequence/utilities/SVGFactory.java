@@ -1,5 +1,6 @@
 package sequence.utilities;
 
+import java.awt.Color;
 import java.awt.Component;
 
 import sequence.model.Sequence;
@@ -55,7 +56,7 @@ public class SVGFactory {
 		StringBuilder sb = new StringBuilder();
 		sb.append("<g>");
 		sb.append(NEW_LINE);
-		sb.append("<rect width=\""+view.getWidth()+"\" height=\""+view.getHeight()+"\" x=\""+view.getX()+"\" y=\""+view.getY()+"\" fill=\"#"+Integer.toHexString(((ActivityRenderingModel) view.getRenderingModel()).getColor().getRGB()-0xff000000)+"\" />");
+		sb.append("<rect width=\""+view.getWidth()+"\" height=\""+view.getHeight()+"\" x=\""+view.getX()+"\" y=\""+view.getY()+"\" fill=\"#"+ColorToHexa(((ActivityRenderingModel) view.getRenderingModel()).getColor())+"\" />");
 		sb.append(NEW_LINE);
 		if(view.getRenderer() instanceof ActivityContractedRenderer)
 			if(((ActivityContractedRenderer) view.getRenderer()).isContracted())
@@ -111,6 +112,21 @@ public class SVGFactory {
 		sb.append(NEW_LINE);
 		sb.append(content);
 		sb.append("</svg>");
+		return sb.toString();
+	}
+	
+	private static String ColorToHexa(Color color)
+	{
+		StringBuilder sb = new StringBuilder();
+		if(Integer.toHexString(color.getRed()).length()==1)
+			sb.append("0");
+		sb.append(Integer.toHexString(color.getRed()));
+		if(Integer.toHexString(color.getGreen()).length()==1)
+			sb.append("0");
+		sb.append(Integer.toHexString(color.getGreen()));
+		if(Integer.toHexString(color.getBlue()).length()==1)
+			sb.append("0");
+		sb.append(Integer.toHexString(color.getBlue()));
 		return sb.toString();
 	}
 }
