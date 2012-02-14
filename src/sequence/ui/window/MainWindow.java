@@ -6,10 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
@@ -75,6 +77,11 @@ public class MainWindow extends JFrame {
 	
 	private void setupScaleSlider() {
 		this.scaleSlider = new JSlider(JSlider.HORIZONTAL, 100, 300, 100);
+		Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
+		labelTable.put(new Integer(100), new JLabel("100%"));
+		labelTable.put(new Integer(200), new JLabel("200%"));
+		labelTable.put(new Integer(300), new JLabel("300%"));
+		this.scaleSlider.setLabelTable(labelTable);
 		this.scaleSlider.setMajorTickSpacing(100);
 		this.scaleSlider.setPaintLabels(true);
 		this.scaleSlider.setPaintTicks(true);
