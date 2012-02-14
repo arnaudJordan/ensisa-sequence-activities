@@ -22,7 +22,7 @@ public class ActivityView extends View implements BackgroundListener, Scaleable,
 
 	public ActivityView(Model model) {
 		super(model);
-		setRenderer(new ActivityContractedRenderer(this));
+		setRenderer(new ActivityRenderer(this));
 		setRenderingModel(new ActivityRenderingModel());
 		addBackgroundListener(this);
 		popup = new JPopupMenu();

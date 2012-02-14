@@ -6,7 +6,7 @@ import java.awt.Component;
 import sequence.model.Sequence;
 import sequence.model.activity.Activity;
 import sequence.mvc.View;
-import sequence.ui.component.activity.ActivityContractedRenderer;
+import sequence.ui.component.activity.ActivityRenderer;
 import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 
@@ -58,8 +58,8 @@ public class SVGFactory {
 		sb.append(NEW_LINE);
 		sb.append("<rect width=\""+view.getWidth()+"\" height=\""+view.getHeight()+"\" x=\""+view.getX()+"\" y=\""+view.getY()+"\" fill=\"#"+ColorToHexa(((ActivityRenderingModel) view.getRenderingModel()).getColor())+"\" />");
 		sb.append(NEW_LINE);
-		if(view.getRenderer() instanceof ActivityContractedRenderer)
-			if(((ActivityContractedRenderer) view.getRenderer()).isContracted())
+		if(view.getRenderer() instanceof ActivityRenderer)
+			if(((ActivityRenderer) view.getRenderer()).isContracted())
 			{
 				sb.append("<line x1=\""+(view.getX()+view.getWidth()/2-10)+"\" y1=\""+(view.getY()+view.getHeight())+"\" x2=\""+(view.getX()+view.getWidth()/2-5)+"\" y2=\""+view.getY()+"\" style=\"stroke:white;stroke-width:2\" />");
 				sb.append(NEW_LINE);
