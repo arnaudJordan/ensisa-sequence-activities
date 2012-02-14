@@ -23,18 +23,24 @@ import javax.xml.parsers.SAXParserFactory;
 
 import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
+import sequence.processor.command.BackgroundDrawerChange;
+import sequence.ui.component.activity.ActivityRenderer;
+import sequence.ui.utilities.drawer.BackgroundDrawer;
+import sequence.ui.utilities.drawer.StripedBackgroundDrawer;
 import sequence.utilities.Config;
+import sequence.utilities.EventDispatcher;
 
 
 public class MenuBar extends JMenuBar {
 	private static final long serialVersionUID = 1L;
-	private JMenu windowMenu;
+	private JMenu windowsMenu;
 	private ButtonGroup frameMenuItemGroup;
 
 	public MenuBar(final MainWindow parent) {
 		super();
 		createFileMenu(parent);
 		createEditMenu(parent);
+		createOptionMenu(parent);
 		createWindowMenu(parent);
 		createHelpMenu(parent);
 	}
@@ -147,9 +153,60 @@ public class MenuBar extends JMenuBar {
 
 		add(edit);
 	}
+
+	private void createOptionMenu(final MainWindow parent) {
+		JMenu options = new JMenu("Options");
+		
+		JMenu activitiesStyle = new JMenu("Activities style");
+		ButtonGroup activitiesStyleGroup = new ButtonGroup();
+		
+		JRadioButtonMenuItem full = new JRadioButtonMenuItem("Full");
+
+		full.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!(ActivityRenderer.CURRENT_BACKGROUND_DRAWER instanceof BackgroundDrawer))
+					parent.getProcessor().Do(new BackgroundDrawerChange(new BackgroundDrawer()));
+			}
+		});
+		full.setSelected(true);
+		
+		activitiesStyle.add(full);
+		activitiesStyleGroup.add(full);
+		
+		JRadioButtonMenuItem stripped = new JRadioButtonMenuItem("Stripped");
+
+		stripped.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!(ActivityRenderer.CURRENT_BACKGROUND_DRAWER instanceof StripedBackgroundDrawer))
+					parent.getProcessor().Do(new BackgroundDrawerChange(new StripedBackgroundDrawer()));
+			}
+		});
+		
+		activitiesStyle.add(stripped);
+		activitiesStyleGroup.add(stripped);
+
+		options.add(activitiesStyle);
+		
+		JMenuItem windowStyle = new JMenuItem("Window style");
+
+		windowStyle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(parent.getSequenceContainers()!=null)
+					EventQueue.invokeLater(new Runnable(){
+						public void run(){
+							new StyleWindow(parent);
+						}
+					});
+			}
+		});
+
+		options.add(windowStyle);
+		
+		add(options);
+	}
 	
 	private void createWindowMenu(final MainWindow parent) {
-		windowMenu = new JMenu("Window");
+		windowsMenu = new JMenu("Windows");
 		
 		JMenuItem cascade = new JMenuItem("Cascade");
 		cascade.addActionListener(new ActionListener() {
@@ -157,7 +214,7 @@ public class MenuBar extends JMenuBar {
 				parent.getMainPane().cascadeFrames();
 			}
 		});
-		windowMenu.add(cascade);
+		windowsMenu.add(cascade);
 		
 		JMenuItem tile = new JMenuItem("Tile");
 		tile.addActionListener(new ActionListener() {
@@ -165,8 +222,8 @@ public class MenuBar extends JMenuBar {
 				parent.getMainPane().tileFrames();
 			}
 		});
-		windowMenu.add(tile);
-		windowMenu.addSeparator();
+		windowsMenu.add(tile);
+		windowsMenu.addSeparator();
 		
 		JMenuItem close = new JMenuItem("Close");
 		close.setMnemonic('W');
@@ -179,7 +236,7 @@ public class MenuBar extends JMenuBar {
 					f.doDefaultCloseAction();
 			}
 		});
-		windowMenu.add(close);
+		windowsMenu.add(close);
 		
 		JMenuItem closeAll = new JMenuItem("Close all");
 		closeAll.addActionListener(new ActionListener() {
@@ -189,11 +246,11 @@ public class MenuBar extends JMenuBar {
 					f[i].doDefaultCloseAction();
 			}
 		});
-		windowMenu.add(closeAll);
+		windowsMenu.add(closeAll);
 		
-		add(windowMenu);
+		add(windowsMenu);
 	}
-
+	
 	private void createHelpMenu(final MainWindow parent) {
 		JMenu help = new JMenu("Help");
 
@@ -214,29 +271,13 @@ public class MenuBar extends JMenuBar {
 
 		help.add(info);
 		
-		JMenuItem option = new JMenuItem("Option");
-		option.setMnemonic('O');
-
-		option.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(parent.getSequenceContainers()!=null)
-					EventQueue.invokeLater(new Runnable(){
-						public void run(){
-							new OptionWindow(parent);
-						}
-					});
-			}
-		});
-
-		help.add(option);
-		
 		add(help);
 	}
 
 	
 	public void addFrameMenuItem(final JInternalFrame frame) {
 		if(frameMenuItemGroup == null) {
-			windowMenu.addSeparator();
+			windowsMenu.addSeparator();
 			frameMenuItemGroup = new ButtonGroup();
 		}
 		FrameMenuItem item = new FrameMenuItem(frame);
@@ -251,7 +292,7 @@ public class MenuBar extends JMenuBar {
 		});
 		item.setIcon(frame.getFrameIcon());
 		frameMenuItemGroup.add(item);
-		windowMenu.add(item);
+		windowsMenu.add(item);
 	}
 	
 	public void removeFrameMenuItem(final JInternalFrame frame) {
@@ -263,9 +304,9 @@ public class MenuBar extends JMenuBar {
 				break;
 		}
 		frameMenuItemGroup.remove(item);
-		windowMenu.remove(item);
+		windowsMenu.remove(item);
 		if(frameMenuItemGroup.getButtonCount() == 0) {
-			windowMenu.remove(windowMenu.getMenuComponentCount()-1);
+			windowsMenu.remove(windowsMenu.getMenuComponentCount()-1);
 			frameMenuItemGroup = null;
 		}
 	}

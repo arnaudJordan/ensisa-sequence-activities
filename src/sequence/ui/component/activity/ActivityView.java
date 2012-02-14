@@ -9,12 +9,14 @@ import sequence.mvc.View;
 import sequence.ui.component.activity.controller.ActivityMenuColorController;
 import sequence.ui.component.activity.controller.ActivityMenuDeleteController;
 import sequence.ui.component.activity.controller.ActivityMenuEditController;
-import sequence.ui.component.activity.controller.ActivityMenuStripedController;
+import sequence.ui.utilities.drawer.BackgroundDrawer;
+import sequence.utilities.BackgroundListener;
+import sequence.utilities.EventDispatcher;
 import sequence.utilities.Scaleable;
 import sequence.utilities.Timeable;
 
-public class ActivityView extends View implements Timeable, Scaleable {
-	private static final long serialVersionUID = 1L;
+public class ActivityView extends View implements BackgroundListener, Scaleable, Timeable {
+	private static final long serialVersionUID = 1L;	
 	public JPopupMenu popup;
 	private boolean selected;
 
@@ -22,13 +24,11 @@ public class ActivityView extends View implements Timeable, Scaleable {
 		super(model);
 		setRenderer(new ActivityContractedRenderer(this));
 		setRenderingModel(new ActivityRenderingModel());
+		addBackgroundListener(this);
 		popup = new JPopupMenu();
 	    JMenuItem colorItem = new JMenuItem("Color");
 	    colorItem.addActionListener(new ActivityMenuColorController(model, this));
 	    popup.add(colorItem);
-	    JMenuItem stripedItem = new JMenuItem("Striped");
-	    stripedItem.addActionListener(new ActivityMenuStripedController(model, this));
-	    popup.add(stripedItem);
 	    JMenuItem editItem = new JMenuItem("Edit");
 	    editItem.addActionListener(new ActivityMenuEditController(model, this));
 	    popup.add(editItem);
@@ -50,6 +50,16 @@ public class ActivityView extends View implements Timeable, Scaleable {
 
 	public boolean isSelected() {
 		return selected;
+	}
+	
+	public void addBackgroundListener(BackgroundListener bl) {
+		if (bl == null)
+			return;
+		EventDispatcher.add(bl);
+	}
+	
+	public void removeBackgroundListener(BackgroundListener bl) {
+		EventDispatcher.remove(bl);
 	}
 
 	@Override
@@ -77,8 +87,14 @@ public class ActivityView extends View implements Timeable, Scaleable {
 		return ((ActivityRenderingModel) getRenderingModel()).getVScale();
 	}
 	
+	@Override
 	public void modelChanged(Model m) {
 		setToolTipText(((Activity) getModel()).toToolTip());
 		repaint();
+	}
+
+	@Override
+	public void backgroundChanged(BackgroundDrawer bd) {
+		((ActivityRenderer) getRenderer()).setBackgroundDrawer(bd);
 	}
 }

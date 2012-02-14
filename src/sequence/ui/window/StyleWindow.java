@@ -13,7 +13,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 
 import sequence.utilities.Config;
 
-public class OptionWindow extends JDialog {
+public class StyleWindow extends JDialog {
 	private static final long serialVersionUID = 1L;
 	
 	private javax.swing.JButton cancelButton;
@@ -22,9 +22,9 @@ public class OptionWindow extends JDialog {
     private javax.swing.JButton saveButton;
     private javax.swing.JLabel styleLabel;
 
-	public OptionWindow(final JFrame parent)
+	public StyleWindow(final JFrame parent)
 	{
-		super(parent, "Option", true);
+		super(parent, "Style", true);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		initComponents();
 		final LookAndFeel oldLaf = UIManager.getLookAndFeel();
