@@ -13,82 +13,98 @@ import sequence.ui.utilities.drawer.FullBackgroundDrawer;
 
 public class ActivityRenderer extends DefaultRenderer implements Renderer {
 	public static BackgroundDrawer CURRENT_BACKGROUND_DRAWER = new FullBackgroundDrawer();
-	
+
 	protected BackgroundDrawer bd;
 	private boolean contracted;
 
-	public ActivityRenderer(View view) {
+	public ActivityRenderer(final View view) {
 		super(view);
-		this.bd = CURRENT_BACKGROUND_DRAWER;
-		this.contracted = false;
+		bd = CURRENT_BACKGROUND_DRAWER;
+		contracted = false;
 	}
-	
+
 	@Override
-	public void renderView(Graphics2D g) {
-        renderActivity(g);
+	public void renderView(final Graphics2D g) {
+		renderActivity(g);
 	}
-	
-	private void renderActivity(Graphics2D g) {
+
+	private void renderActivity(final Graphics2D g) {
 		renderBackground(g);
 	}
-	
-	private void renderBackground(Graphics2D g) {
-		Activity activity = (Activity) ((ActivityView)getView()).getModel();
-		g.setColor(((ActivityRenderingModel)getView().getRenderingModel()).getColor());
-		if(activity == null)
+
+	private void renderBackground(final Graphics2D g) {
+		final Activity activity = (Activity) ((ActivityView) getView())
+				.getModel();
+		g.setColor(((ActivityRenderingModel) getView().getRenderingModel())
+				.getColor());
+		if (activity == null)
 			return;
-		
-		ActivityRenderingModel renderingModel = ((ActivityRenderingModel)getView().getRenderingModel());
-		int parentWidth = getView().getParent().getWidth();
-		int activityWidth = (int) (activity.getActivitytime().getDuration() * renderingModel.getHScale());
-		bd.draw(g, activityWidth, (int) (renderingModel.getHeight() * renderingModel.getVScale()), ((ActivityRenderingModel)getView().getRenderingModel()).getColor());
-		if(parentWidth<activityWidth)
-		{
-			this.contracted = true;
-			g.drawLine(parentWidth/2 -5 , -5, parentWidth/2 +5, (int) getView().getSize().getHeight()+5);
-			drawCutMark(g, parentWidth/2);
-		}
-		else
-			this.contracted = false;
-		//g.setColor(Color.WHITE);
-		//g.drawString(String.valueOf(activity.getId()), (int) getView().getSize().getWidth()/2, (int) getView().getSize().getHeight()/2);
+
+		final ActivityRenderingModel renderingModel = ((ActivityRenderingModel) getView()
+				.getRenderingModel());
+		final int parentWidth = getView().getParent().getWidth();
+		final int activityWidth = (int) (activity.getActivitytime()
+				.getDuration() * renderingModel.getHScale());
+		bd.draw(g,
+				activityWidth,
+				(int) (renderingModel.getHeight() * renderingModel.getVScale()),
+				((ActivityRenderingModel) getView().getRenderingModel())
+						.getColor());
+		if (parentWidth < activityWidth) {
+			contracted = true;
+			g.drawLine(parentWidth / 2 - 5, -5, parentWidth / 2 + 5,
+					(int) getView().getSize().getHeight() + 5);
+			drawCutMark(g, parentWidth / 2);
+		} else
+			contracted = false;
+		// g.setColor(Color.WHITE);
+		// g.drawString(String.valueOf(activity.getId()), (int)
+		// getView().getSize().getWidth()/2, (int)
+		// getView().getSize().getHeight()/2);
 	}
-	
-	private void drawCutMark(Graphics2D g, int middle)
-	{
-		Graphics2D g2 = (Graphics2D) g.create();
+
+	private void drawCutMark(final Graphics2D g, final int middle) {
+		final Graphics2D g2 = (Graphics2D) g.create();
 		g2.setColor(Color.WHITE);
 		final int gap = 5;
-		g2.drawLine(middle - 2*gap , 0, middle, (int) getView().getSize().getHeight()+5);
-		g2.drawLine(middle , 0, middle + 2*gap, (int) getView().getSize().getHeight()+5);
+		g2.drawLine(middle - 2 * gap, 0, middle, (int) getView().getSize()
+				.getHeight() + 5);
+		g2.drawLine(middle, 0, middle + 2 * gap, (int) getView().getSize()
+				.getHeight() + 5);
 	}
-	
+
 	@Override
 	public Dimension getPreferredSize() {
-		Activity activity = (Activity) ((ActivityView)getView()).getModel();
-		ActivityRenderingModel renderingModel = ((ActivityRenderingModel)getView().getRenderingModel());
-		if(activity != null && renderingModel != null)
-		{
-			int parentWidth = getView().getParent().getWidth();
-			int activityWidth = (int) (activity.getActivitytime().getDuration() * renderingModel.getHScale());
-			if(parentWidth<activityWidth)
-				return new Dimension(parentWidth, (int) (renderingModel.getHeight() * renderingModel.getVScale()));
+		final Activity activity = (Activity) ((ActivityView) getView())
+				.getModel();
+		final ActivityRenderingModel renderingModel = ((ActivityRenderingModel) getView()
+				.getRenderingModel());
+		if (activity != null && renderingModel != null) {
+			final int parentWidth = getView().getParent().getWidth();
+			final int activityWidth = (int) (activity.getActivitytime()
+					.getDuration() * renderingModel.getHScale());
+			if (parentWidth < activityWidth)
+				return new Dimension(parentWidth,
+						(int) (renderingModel.getHeight() * renderingModel
+								.getVScale()));
 			else
-				return new Dimension(activityWidth, (int) (renderingModel.getHeight() * renderingModel.getVScale()));
+				return new Dimension(activityWidth,
+						(int) (renderingModel.getHeight() * renderingModel
+								.getVScale()));
 		}
-			
+
 		return super.getPreferredSize();
 	}
-	
-	public void setBackgroundDrawer(BackgroundDrawer bd) {
+
+	public void setBackgroundDrawer(final BackgroundDrawer bd) {
 		this.bd = bd;
 		getView().getParent().repaint();
 	}
-	
+
 	public BackgroundDrawer getBackgroundDrawer() {
-		return this.bd;
+		return bd;
 	}
-	
+
 	public boolean isContracted() {
 		return contracted;
 	}

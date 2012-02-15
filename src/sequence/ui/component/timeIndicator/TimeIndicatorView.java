@@ -9,7 +9,7 @@ import sequence.utilities.Timeable;
 public class TimeIndicatorView extends View implements Timeable, Scaleable {
 	private static final long serialVersionUID = 1L;
 
-	public TimeIndicatorView(Model model) {
+	public TimeIndicatorView(final Model model) {
 		super(model);
 		setRenderer(new TimeIndicatorRenderer(this));
 		setRenderingModel(new TimeIndicatorRenderingModel());
@@ -38,7 +38,8 @@ public class TimeIndicatorView extends View implements Timeable, Scaleable {
 
 	@Override
 	public int getDuration() {
-		return ((Phase) getModel()).getStopTime()-((Phase) getModel()).getDate();
+		return ((Phase) getModel()).getStopTime()
+				- ((Phase) getModel()).getDate();
 	}
 
 }

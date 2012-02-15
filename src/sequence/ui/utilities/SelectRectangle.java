@@ -12,82 +12,87 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
-public class SelectRectangle extends JPanel implements MouseMotionListener, MouseListener{
+public class SelectRectangle extends JPanel implements MouseMotionListener,
+		MouseListener {
 	private static final long serialVersionUID = 1L;
 	private Rectangle selection;
 	private Point anchor;
-	private Container context;
-	 
-	public SelectRectangle(){
+	private final Container context;
+
+	public SelectRectangle() {
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		this.context = getParent();
+		context = getParent();
 	}
-	
-	public SelectRectangle(Container context){
+
+	public SelectRectangle(final Container context) {
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		this.context = context;
 	}
-	 
+
 	@Override
-	protected void paintComponent(Graphics g) {
+	protected void paintComponent(final Graphics g) {
 		super.paintComponent(g);
-		if(selection!=null) {
-			Graphics2D g2d = (Graphics2D)g;
+		if (selection != null) {
+			final Graphics2D g2d = (Graphics2D) g;
 			g2d.draw(selection);
 		}
 	}
-	
-	public boolean contains(Component c) {
-		for(int i=0 ; i<context.getComponentCount() ; i++) {
-			if(c.equals(context.getComponent(i)))
+
+	public boolean contains(final Component c) {
+		for (int i = 0; i < context.getComponentCount(); i++) {
+			if (c.equals(context.getComponent(i)))
 				return true;
 		}
 		return false;
 	}
-	
-	private void selectComponents(Point p) {
-		Component component = context.getComponentAt(p);
-		if(!contains(component) && !component.equals(context))
+
+	private void selectComponents(final Point p) {
+		final Component component = context.getComponentAt(p);
+		if (!contains(component) && !component.equals(context))
 			add(component);
-		for(int i=0 ; i<getComponentCount() ; i++) {
-			if(!selection.intersects(getComponent(i).getBounds()))
+		for (int i = 0; i < getComponentCount(); i++) {
+			if (!selection.intersects(getComponent(i).getBounds()))
 				remove(getComponent(i));
 		}
 	}
-	
+
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void mousePressed(final MouseEvent e) {
 		anchor = e.getPoint();
 		selection = new Rectangle(anchor);
 		selectComponents(e.getPoint());
 	}
-	 
+
 	@Override
-	public void mouseDragged(MouseEvent e) {
-		selection.setBounds( Math.min(anchor.x,e.getX()), Math.min(anchor.y,e.getY()),
-		Math.abs(e.getX()-anchor.x), Math.abs(e.getY()-anchor.y));
+	public void mouseDragged(final MouseEvent e) {
+		selection.setBounds(Math.min(anchor.x, e.getX()),
+				Math.min(anchor.y, e.getY()), Math.abs(e.getX() - anchor.x),
+				Math.abs(e.getY() - anchor.y));
 		selectComponents(e.getPoint());
 		repaint();
 	}
-	 
+
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void mouseReleased(final MouseEvent e) {
 		selection = null;
 		repaint();
 	}
-	
+
 	@Override
-	public void mouseMoved(MouseEvent e) {
+	public void mouseMoved(final MouseEvent e) {
 	}
+
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(final MouseEvent e) {
 	}
+
 	@Override
-	public void mouseEntered(MouseEvent e) {
+	public void mouseEntered(final MouseEvent e) {
 	}
+
 	@Override
-	public void mouseExited(MouseEvent e) {
+	public void mouseExited(final MouseEvent e) {
 	}
 }

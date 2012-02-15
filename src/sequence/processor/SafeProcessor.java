@@ -8,24 +8,28 @@ package sequence.processor;
  * @see Processor
  */
 public class SafeProcessor extends Processor {
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see sequence.processor.Processor#Undo()
 	 */
 	@Override
-	public void Undo()
-	{
-		if(didCommands.isEmpty()) return;
+	public void Undo() {
+		if (didCommands.isEmpty())
+			return;
 		super.Undo();
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see sequence.processor.Processor#Redo()
 	 */
 	@Override
-	public void Redo()
-	{
-		if(unDidCommands.isEmpty()) return;
+	public void Redo() {
+		if (unDidCommands.isEmpty())
+			return;
 		super.Redo();
 	}
 }

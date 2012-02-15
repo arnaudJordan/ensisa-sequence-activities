@@ -5,9 +5,9 @@ package sequence.utilities;
  */
 public enum Sex {
 
-/** The male. */
-male,
+	/** The male. */
+	male,
 
-/** The female. */
-female
+	/** The female. */
+	female
 }

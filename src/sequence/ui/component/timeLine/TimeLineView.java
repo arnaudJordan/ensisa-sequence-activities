@@ -6,8 +6,8 @@ import sequence.mvc.View;
 public class TimeLineView extends View {
 	private static final long serialVersionUID = 1L;
 
-	public TimeLineView(Model model) {
-		super(model);		
+	public TimeLineView(final Model model) {
+		super(model);
 		setRenderer(new TimeLineRenderer(this));
 	}
 }

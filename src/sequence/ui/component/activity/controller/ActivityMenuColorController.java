@@ -20,31 +20,40 @@ import sequence.ui.window.MainWindow;
 public class ActivityMenuColorController extends Controller implements
 		ActionListener {
 
-	public ActivityMenuColorController(Model model, View view) {
+	public ActivityMenuColorController(final Model model, final View view) {
 		super(model, view);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		ActivityRenderingModel renderingModel = ((ActivityRenderingModel)(((ActivityView)getView()).getRenderingModel()));
-		Color oldColor = renderingModel.getColor();
-		Color newColor = JColorChooser.showDialog(getView(), "Choose a new color", oldColor);
-		if(newColor != null && !newColor.equals(oldColor)) {
-			Container parent = getView().getParent();
-			if(parent != null) {
-				Activity model = (Activity)getView().getModel();
-				CommandList command = new CommandList();
-				for(int i=0 ; i<parent.getComponentCount() ; i++) {
-					Activity componentModel = (Activity)((View)parent.getComponent(i)).getModel();
-					ActivityRenderingModel componentRenderingModel = ((ActivityRenderingModel)((View)parent.getComponent(i)).getRenderingModel());
-					if(componentModel != null && componentRenderingModel != null
-							&& componentModel.getAction().equals(model.getAction())
-							&& componentModel.getTreatedStructure().equals(model.getTreatedStructure())
-							&& componentModel.getUsedInstrument().equals(model.getUsedInstrument()))
-					{
-						command.Add(new ColorChange(componentRenderingModel, newColor));
+	public void actionPerformed(final ActionEvent e) {
+		final ActivityRenderingModel renderingModel = ((ActivityRenderingModel) (((ActivityView) getView())
+				.getRenderingModel()));
+		final Color oldColor = renderingModel.getColor();
+		final Color newColor = JColorChooser.showDialog(getView(),
+				"Choose a new color", oldColor);
+		if (newColor != null && !newColor.equals(oldColor)) {
+			final Container parent = getView().getParent();
+			if (parent != null) {
+				final Activity model = (Activity) getView().getModel();
+				final CommandList command = new CommandList();
+				for (int i = 0; i < parent.getComponentCount(); i++) {
+					final Activity componentModel = (Activity) ((View) parent
+							.getComponent(i)).getModel();
+					final ActivityRenderingModel componentRenderingModel = ((ActivityRenderingModel) ((View) parent
+							.getComponent(i)).getRenderingModel());
+					if (componentModel != null
+							&& componentRenderingModel != null
+							&& componentModel.getAction().equals(
+									model.getAction())
+							&& componentModel.getTreatedStructure().equals(
+									model.getTreatedStructure())
+							&& componentModel.getUsedInstrument().equals(
+									model.getUsedInstrument())) {
+						command.Add(new ColorChange(componentRenderingModel,
+								newColor));
 					}
-					((MainWindow) getView().getTopLevelAncestor()).getProcessor().Do(command);
+					((MainWindow) getView().getTopLevelAncestor())
+							.getProcessor().Do(command);
 				}
 			}
 		}

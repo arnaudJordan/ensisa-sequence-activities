@@ -10,30 +10,32 @@ import sequence.mvc.Model;
 import sequence.mvc.View;
 import sequence.ui.component.sequence.SequenceContainer;
 
-public class SummarizedSequenceController extends Controller implements ActionListener  {
-	
-	public SummarizedSequenceController(Model model, View view) {
+public class SummarizedSequenceController extends Controller implements
+		ActionListener {
+
+	public SummarizedSequenceController(final Model model, final View view) {
 		super(model, view);
-	}	
+	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(final ActionEvent e) {
 		((SequenceContainer) getView().getParent()).add((Sequence) getModel());
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void mousePressed(final MouseEvent e) {
 		checkPopup(e);
 	}
-	 
+
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void mouseReleased(final MouseEvent e) {
 		checkPopup(e);
 	}
-	
-	protected void checkPopup(MouseEvent e) {
+
+	protected void checkPopup(final MouseEvent e) {
 		if (e.getButton() == RIGHT_MOUSE_BUTTON && e.isPopupTrigger()) {
-			((SummarizedSequenceView)getView()).getPopup().show(e.getComponent(), e.getX(), e.getY());
+			((SummarizedSequenceView) getView()).getPopup().show(
+					e.getComponent(), e.getX(), e.getY());
 		}
 	}
 }

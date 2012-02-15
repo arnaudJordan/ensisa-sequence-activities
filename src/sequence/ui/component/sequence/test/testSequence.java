@@ -15,31 +15,32 @@ public class testSequence extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	public testSequence() {
-		try{
-			SAXParserFactory factory = SAXParserFactory.newInstance();
+		try {
+			final SAXParserFactory factory = SAXParserFactory.newInstance();
 
-			SAXParser parser = factory.newSAXParser();
+			final SAXParser parser = factory.newSAXParser();
 
-			File parsedFile = new File("src/data.xml");
-			SequenceHandler sequenceHandler = new SequenceHandler();
+			final File parsedFile = new File("src/data.xml");
+			final SequenceHandler sequenceHandler = new SequenceHandler();
 			parser.parse(parsedFile, sequenceHandler);
-			
-			Sequence model = new Sequence(sequenceHandler.getSequence());
-			SummarizedSequenceView view = new SummarizedSequenceView(model);
+
+			final Sequence model = new Sequence(sequenceHandler.getSequence());
+			final SummarizedSequenceView view = new SummarizedSequenceView(
+					model);
 
 			this.add(view);
-			this.pack();
-			this.setVisible(true);
-			
-		}catch(Exception e){
+			pack();
+			setVisible(true);
+
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable(){
+	public static void main(final String[] args) {
+		EventQueue.invokeLater(new Runnable() {
 			@Override
-			public void run(){
+			public void run() {
 				new testSequence();
 			}
 		});

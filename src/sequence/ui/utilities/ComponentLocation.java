@@ -6,12 +6,13 @@ import java.awt.Toolkit;
 
 public class ComponentLocation {
 
-	public static void setLocation(Component parent, Component child) {
+	public static void setLocation(final Component parent, final Component child) {
 		int x = parent.getLocation().x + parent.getWidth() / 2
 				- child.getPreferredSize().width / 2;
 		int y = parent.getLocation().y + parent.getHeight() / 2
 				- child.getPreferredSize().height / 2;
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		final Dimension screenSize = Toolkit.getDefaultToolkit()
+				.getScreenSize();
 		if (x < 0)
 			x = 0;
 		else if (x + child.getPreferredSize().width > screenSize.width)
@@ -23,8 +24,9 @@ public class ComponentLocation {
 		child.setLocation(x, y);
 	}
 
-	public static void setLocationOnCenterScreen(Component c) {
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	public static void setLocationOnCenterScreen(final Component c) {
+		final Dimension screenSize = Toolkit.getDefaultToolkit()
+				.getScreenSize();
 		System.out.println(c.getPreferredSize().width);
 		c.setLocation(screenSize.width / 2 - c.getPreferredSize().width / 2,
 				screenSize.height / 2 - c.getPreferredSize().height / 2);

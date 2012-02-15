@@ -4,7 +4,7 @@ package sequence.model.location;
  * The Institution model.
  */
 public class Institution {
-	
+
 	/** The institution. */
 	private final String institution;
 
@@ -14,7 +14,7 @@ public class Institution {
 	 * @param institution
 	 *            the institution
 	 */
-	public Institution(String institution) {
+	public Institution(final String institution) {
 		this.institution = institution;
 	}
 
@@ -27,7 +27,9 @@ public class Institution {
 		return institution;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -41,6 +43,6 @@ public class Institution {
 	 * @return the XMLstring
 	 */
 	public String toXML() {
-		return "<institution>"+institution+"</institution>";
+		return "<institution>" + institution + "</institution>";
 	}
 }

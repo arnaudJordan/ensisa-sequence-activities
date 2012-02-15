@@ -4,7 +4,7 @@ package sequence.model.location;
  * The City model.
  */
 public class City {
-	
+
 	/** The city. */
 	private final String city;
 
@@ -14,7 +14,7 @@ public class City {
 	 * @param city
 	 *            the city
 	 */
-	public City(String city) {
+	public City(final String city) {
 		this.city = city;
 	}
 
@@ -27,7 +27,9 @@ public class City {
 		return city;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -41,6 +43,6 @@ public class City {
 	 * @return the XML string
 	 */
 	public String toXML() {
-		return "<city>"+city+"</city>";
+		return "<city>" + city + "</city>";
 	}
 }

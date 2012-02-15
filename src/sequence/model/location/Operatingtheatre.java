@@ -4,7 +4,7 @@ package sequence.model.location;
  * The Operatingtheatre model.
  */
 public class Operatingtheatre {
-	
+
 	/** The operatingtheatre. */
 	private final String operatingtheatre;
 
@@ -14,10 +14,10 @@ public class Operatingtheatre {
 	 * @param operatingtheatre
 	 *            the operatingtheatre
 	 */
-	public Operatingtheatre(String operatingtheatre) {
+	public Operatingtheatre(final String operatingtheatre) {
 		this.operatingtheatre = operatingtheatre;
 	}
-	
+
 	/**
 	 * Gets the operatingtheatre.
 	 * 
@@ -27,7 +27,9 @@ public class Operatingtheatre {
 		return operatingtheatre;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -41,6 +43,6 @@ public class Operatingtheatre {
 	 * @return the XML string
 	 */
 	public String toXML() {
-		return "<operatingtheatre>"+operatingtheatre+"</operatingtheatre>";
+		return "<operatingtheatre>" + operatingtheatre + "</operatingtheatre>";
 	}
 }

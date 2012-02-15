@@ -4,7 +4,7 @@ package sequence.model.activity;
  * The BodyPart model.
  */
 public class BodyPart {
-	
+
 	/** The bodypart. */
 	private final String bodypart;
 
@@ -14,7 +14,7 @@ public class BodyPart {
 	 * @param bodypart
 	 *            the bodypart
 	 */
-	public BodyPart(String bodypart) {
+	public BodyPart(final String bodypart) {
 		super();
 		this.bodypart = bodypart;
 	}
@@ -27,31 +27,37 @@ public class BodyPart {
 	public String getBodypart() {
 		return bodypart;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object o) {
-		if(this == o) return true;
-		if(!(o instanceof BodyPart)) return false;
-	    return this.bodypart.equalsIgnoreCase(((BodyPart)o).getBodypart());
+	public boolean equals(final Object o) {
+		if (this == o)
+			return true;
+		if (!(o instanceof BodyPart))
+			return false;
+		return bodypart.equalsIgnoreCase(((BodyPart) o).getBodypart());
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return bodypart;
 	}
-	
+
 	/**
 	 * Return bodyPart in XML format.
 	 * 
 	 * @return the XML string
 	 */
 	public String toXML() {
-		return "<bodyPart>"+bodypart+"</bodyPart>";
+		return "<bodyPart>" + bodypart + "</bodyPart>";
 	}
 }

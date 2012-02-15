@@ -6,10 +6,10 @@ import sequence.ui.window.MainWindow;
 
 public class UiTest {
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable(){
+	public static void main(final String[] args) {
+		EventQueue.invokeLater(new Runnable() {
 			@Override
-			public void run(){
+			public void run() {
 				new MainWindow("Sequence activities");
 			}
 		});
