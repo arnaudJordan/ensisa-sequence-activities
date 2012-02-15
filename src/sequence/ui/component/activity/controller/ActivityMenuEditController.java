@@ -21,8 +21,10 @@ public class ActivityMenuEditController extends Controller implements
 		super(model, view);
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		EventQueue.invokeLater(new Runnable(){
+			@Override
 			public void run(){
 				new EditActivityWindow((MainWindow) getView().getTopLevelAncestor(),(Activity) getView().getModel(), (Sequence) ((SubSequenceView)getView().getParent()).getModel()).setVisible(true);
 			}

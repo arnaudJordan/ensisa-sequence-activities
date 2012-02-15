@@ -59,18 +59,22 @@ public abstract class View extends JComponent implements ModelListener {
 		return renderingModel;
 	}
 
+	@Override
 	public Dimension getMinimumSize() {               
 		return renderer.getMinimumSize();
     }
 
-    public Dimension getPreferredSize() {
+    @Override
+	public Dimension getPreferredSize() {
      	return renderer.getPreferredSize();
     }
     
-    public Dimension getMaximumSize() {
+    @Override
+	public Dimension getMaximumSize() {
     	return renderer.getMaximumSize();
     }
 	
+	@Override
 	public void paintComponent(Graphics g)
     {
     	super.paintComponent(g);
@@ -78,6 +82,7 @@ public abstract class View extends JComponent implements ModelListener {
     		this.renderer.renderView((Graphics2D)g);
     }
 	
+	@Override
 	public void modelChanged(Model m) {
 		this.repaint();
 	}
@@ -88,6 +93,7 @@ public abstract class View extends JComponent implements ModelListener {
 		this.paint(image.getGraphics());
 		return image;
 	}
+	@Override
 	public BufferedImage createImage(int width, int height)
 	{
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);

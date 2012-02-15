@@ -14,6 +14,7 @@ public class SubSequenceController extends Controller {
 		super(model, view);
 	}	
 
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == LEFT_MOUSE_BUTTON) {
 			for(int i=0 ; i<getView().getComponentCount() ; i++)
@@ -22,10 +23,12 @@ public class SubSequenceController extends Controller {
 		}
 	}
 
+	@Override
 	public void mousePressed(MouseEvent e) {
 		checkPopup(e);
 	}
 
+	@Override
 	public void mouseReleased(MouseEvent e) {
 		checkPopup(e);
 	}

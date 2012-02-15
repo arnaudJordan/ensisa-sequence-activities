@@ -59,7 +59,8 @@ public class SequenceContainer extends JPanel {
        JButton button = new JButton(icon);
        button.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
        button.addActionListener(new ActionListener() {
-           public void actionPerformed(ActionEvent e) {
+           @Override
+		public void actionPerformed(ActionEvent e) {
         	   int response = JOptionPane.showConfirmDialog(getTopLevelAncestor(),
 						"Are you sur you want to close this sub sequence?",
 						"Close sub sequence", JOptionPane.YES_NO_OPTION,
@@ -90,7 +91,8 @@ public class SequenceContainer extends JPanel {
 	   return childs;
    }
 
-   public Dimension getPreferredSize() {
+   @Override
+public Dimension getPreferredSize() {
 	   return new Dimension(getParent().getWidth(), getLayout().minimumLayoutSize(this).height);
    }
 }

@@ -10,6 +10,7 @@ import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.WindowConstants;
 
 import sequence.ui.utilities.ComponentLocation;
 import sequence.utilities.Config;
@@ -26,7 +27,7 @@ public class StyleWindow extends JDialog {
 	public StyleWindow(final JFrame parent)
 	{
 		super(parent, "Style", true);
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		initComponents();
 		ComponentLocation.setLocation(parent, this);
 		final LookAndFeel oldLaf = UIManager.getLookAndFeel();
@@ -37,6 +38,7 @@ public class StyleWindow extends JDialog {
 		
 		final JDialog dialog = this;
 		jComboBox1.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int index = ((JComboBox)e.getSource()).getSelectedIndex();
 				LookAndFeelInfo laf =UIManager.getInstalledLookAndFeels()[index];
@@ -46,11 +48,13 @@ public class StyleWindow extends JDialog {
 		
 		
 		saveButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				dialog.setVisible(false);
 			}
 		});
 		cancelButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				changeLookAndFeel(parent, dialog, oldLaf.getClass().getName());
 				dialog.setVisible(false);

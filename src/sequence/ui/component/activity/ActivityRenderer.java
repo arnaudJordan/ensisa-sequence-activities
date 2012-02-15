@@ -23,6 +23,7 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 		this.contracted = false;
 	}
 	
+	@Override
 	public void renderView(Graphics2D g) {
         renderActivity(g);
 	}
@@ -62,6 +63,7 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 		g2.drawLine(middle , 0, middle + 2*gap, (int) getView().getSize().getHeight()+5);
 	}
 	
+	@Override
 	public Dimension getPreferredSize() {
 		Activity activity = (Activity) ((ActivityView)getView()).getModel();
 		ActivityRenderingModel renderingModel = ((ActivityRenderingModel)getView().getRenderingModel());

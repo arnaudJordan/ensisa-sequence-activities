@@ -31,7 +31,8 @@ public class MDIDesktopPane extends JDesktopPane {
         frames = new ArrayList<JInternalFrame>();
     }
 
-    public void setBounds(int x, int y, int w, int h) {
+    @Override
+	public void setBounds(int x, int y, int w, int h) {
         super.setBounds(x,y,w,h);
         checkDesktopSize();
     }
@@ -77,7 +78,8 @@ public class MDIDesktopPane extends JDesktopPane {
         return retval;
     }
 
-    public void remove(Component c) {
+    @Override
+	public void remove(Component c) {
         super.remove(c);
         checkDesktopSize();
         frames.remove(c);
@@ -194,12 +196,14 @@ class MDIDesktopManager extends DefaultDesktopManager {
         this.desktop = desktop;
     }
 
-    public void endResizingFrame(JComponent f) {
+    @Override
+	public void endResizingFrame(JComponent f) {
         super.endResizingFrame(f);
         resizeDesktop();
     }
 
-    public void endDraggingFrame(JComponent f) {
+    @Override
+	public void endDraggingFrame(JComponent f) {
         super.endDraggingFrame(f);
         resizeDesktop();
     }

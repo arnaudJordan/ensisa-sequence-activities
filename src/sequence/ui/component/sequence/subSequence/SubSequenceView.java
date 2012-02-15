@@ -36,6 +36,7 @@ public class SubSequenceView extends View {
 		return popup;
 	}
 	
+	@Override
 	public void modelChanged(Model m) {
 		removeAll();
 		((SubSequenceRenderer)getRenderer()).initialize();

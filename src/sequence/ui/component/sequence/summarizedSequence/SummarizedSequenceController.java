@@ -16,14 +16,17 @@ public class SummarizedSequenceController extends Controller implements ActionLi
 		super(model, view);
 	}	
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		((SequenceContainer) getView().getParent()).add((Sequence) getModel());
 	}
 
+	@Override
 	public void mousePressed(MouseEvent e) {
 		checkPopup(e);
 	}
 	 
+	@Override
 	public void mouseReleased(MouseEvent e) {
 		checkPopup(e);
 	}

@@ -33,6 +33,7 @@ public class CustomLayout implements LayoutManager {
 		return minimumLayoutSize(target);
 	}
 
+	@Override
 	public Dimension minimumLayoutSize(Container target) {
 		int currentHeight = target.getInsets().top;
 		for(int i=0 ; i < target.getComponentCount(); i++) {

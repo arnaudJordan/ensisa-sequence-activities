@@ -63,6 +63,7 @@ public class UsedInstruments implements Iterable<Instrument> {
 	/* (non-Javadoc)
 	 * @see java.lang.Iterable#iterator()
 	 */
+	@Override
 	public Iterator<Instrument> iterator() {
 		return usedInstruments.iterator();
 	}
@@ -81,6 +82,7 @@ public class UsedInstruments implements Iterable<Instrument> {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
+	@Override
 	public boolean equals(Object o) {
 		if(this == o) return true;
 		if(!(o instanceof UsedInstruments)) return false;

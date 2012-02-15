@@ -63,7 +63,7 @@ public class TimeLayout implements LayoutManager {
 
 				boolean drawed = false;
 				for (int j = 0; j < levelsLastPosition.size(); j++) {
-					int lastPosition = (Integer) levelsLastPosition.get(j);
+					int lastPosition = levelsLastPosition.get(j);
 					if (lastPosition <= currentElement.getStartTime()) {
 						levelsLastPosition.set(j, currentElement.getStopTime());
 						drawed = true;
@@ -109,7 +109,7 @@ public class TimeLayout implements LayoutManager {
 
 				boolean drawed = false;
 				for (int j = 0 ; j < levelsLastPosition.size() ; j++) {
-					int lastPosition = (Integer) levelsLastPosition.get(j);
+					int lastPosition = levelsLastPosition.get(j);
 					if (lastPosition <= currentElement.getStartTime()) {
 						c.setBounds(currentTime, currentHeight
 								+ (c.getHeight() + VGAP) * j,

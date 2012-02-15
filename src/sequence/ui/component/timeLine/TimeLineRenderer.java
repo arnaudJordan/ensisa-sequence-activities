@@ -42,6 +42,7 @@ public class TimeLineRenderer extends DefaultRenderer implements Renderer {
 		}
 	}
 
+	@Override
 	public void renderView(Graphics2D g) {
 		super.renderView(g);
 		setScale();
@@ -56,6 +57,7 @@ public class TimeLineRenderer extends DefaultRenderer implements Renderer {
 		getView().revalidate();
 	}
 	
+	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(getView().getParent().getWidth(), height);
     }

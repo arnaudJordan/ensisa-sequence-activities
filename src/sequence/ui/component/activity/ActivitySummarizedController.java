@@ -16,6 +16,7 @@ public class ActivitySummarizedController extends SummarizedSequenceController {
 		super(model, view);
 	}
 
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == LEFT_MOUSE_BUTTON) {
 			List<Activity> selectedActivities = ((SummarizedSequenceView) getView().getParent()).getSelectedActivities();
@@ -52,6 +53,7 @@ public class ActivitySummarizedController extends SummarizedSequenceController {
 		}
 	}
 
+	@Override
 	protected void checkPopup(MouseEvent e) {
 		if (e.getButton() == RIGHT_MOUSE_BUTTON && e.isPopupTrigger()) {
 			((SummarizedSequenceView)getView().getParent()).getPopup().show(e.getComponent(), e.getX(), e.getY());

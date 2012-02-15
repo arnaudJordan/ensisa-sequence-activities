@@ -42,6 +42,7 @@ public class SummarizedSequenceRenderer extends DefaultRenderer implements Rende
 		scale = (float) (getView().getSize().getWidth()/sequenceSize);
 	}
 
+	@Override
 	public void renderView(Graphics2D g) {
 		super.renderView(g);
 		setScale();
@@ -56,6 +57,7 @@ public class SummarizedSequenceRenderer extends DefaultRenderer implements Rende
 		getView().revalidate();
 	}
 	
+	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(getView().getParent().getWidth(), (int) getView().getLayout().minimumLayoutSize(getView()).getHeight());
     }

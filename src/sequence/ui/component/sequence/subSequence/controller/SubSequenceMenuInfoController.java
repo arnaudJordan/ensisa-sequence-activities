@@ -14,8 +14,10 @@ public class SubSequenceMenuInfoController extends Controller implements ActionL
 		super(model, view);
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		EventQueue.invokeLater(new Runnable(){
+			@Override
 			public void run(){
 				new InfoSequenceWindow(getView().getTopLevelAncestor(), (Sequence) getView().getModel()).setVisible(true);
 			}

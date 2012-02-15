@@ -74,6 +74,7 @@ public class Activitytime {
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
+	@Override
 	public boolean equals(Object o) {
 		if(this == o) return true;
 		if(!(o instanceof Activitytime)) return false;

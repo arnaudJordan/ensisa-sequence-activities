@@ -21,6 +21,7 @@ public class ActivityMenuDeleteController extends Controller implements
 		super(model, view);
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		int response = JOptionPane.showConfirmDialog(
 				getView(),

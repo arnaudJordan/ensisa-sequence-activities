@@ -48,7 +48,8 @@ public class InfoWindow extends javax.swing.JDialog {
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
@@ -115,7 +116,8 @@ public class InfoWindow extends javax.swing.JDialog {
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
-            public void run() {
+            @Override
+			public void run() {
                 new InfoWindow().setVisible(true);
             }
         });

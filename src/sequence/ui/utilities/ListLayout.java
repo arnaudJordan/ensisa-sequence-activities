@@ -19,6 +19,7 @@ public class ListLayout implements LayoutManager {
 		return minimumLayoutSize(parent);
 	}
 
+	@Override
 	public Dimension minimumLayoutSize(Container parent) {
 		return new Dimension(parent.getWidth(), parent.getComponentCount()*parent.getComponent(0).getHeight());
 	}
