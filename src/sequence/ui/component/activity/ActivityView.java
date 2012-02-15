@@ -1,6 +1,8 @@
 package sequence.ui.component.activity;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -21,13 +23,14 @@ public class ActivityView extends View implements BackgroundListener, Scaleable,
 	private static final long serialVersionUID = 1L;	
 	public JPopupMenu popup;
 	private boolean selected;
-	private ActivityView associatedActivity;
+	private List<ActivityView> associatedActivities;
 
 	public ActivityView(Model model) {
 		super(model);
 		setRenderer(new ActivityRenderer(this));
 		setRenderingModel(new ActivityRenderingModel());
 		addBackgroundListener(this);
+		associatedActivities = new ArrayList<ActivityView>();
 	}
 	
 	public ActivityView(ActivityView activityView) {
@@ -35,7 +38,7 @@ public class ActivityView extends View implements BackgroundListener, Scaleable,
 		setRenderer(new ActivityRenderer(this));
 		setRenderingModel(new ActivityRenderingModel(((ActivityRenderingModel) activityView.getRenderingModel()).getColor()));
 		addBackgroundListener(this);
-		activityView.setAssociatedActivity(this);
+		activityView.getAssociatedActivities().add(this);
 		popup = new JPopupMenu();
 	    JMenuItem colorItem = new JMenuItem("Color");
 	    colorItem.addActionListener(new ActivityMenuColorController(activityView.getModel(), activityView));
@@ -67,12 +70,8 @@ public class ActivityView extends View implements BackgroundListener, Scaleable,
 		this.selected = selected;
 	}
 
-	public ActivityView getAssociatedActivity() {
-		return associatedActivity;
-	}
-
-	public void setAssociatedActivity(ActivityView associatedActivity) {
-		this.associatedActivity = associatedActivity;
+	public List<ActivityView> getAssociatedActivities() {
+		return associatedActivities;
 	}
 
 	public void addBackgroundListener(BackgroundListener bl) {
@@ -113,9 +112,10 @@ public class ActivityView extends View implements BackgroundListener, Scaleable,
 	@Override
 	public void modelChanged(Model m) {
 		setToolTipText(((Activity) getModel()).toToolTip());
-		if(associatedActivity != null && m instanceof ActivityRenderingModel) {
+		if(associatedActivities != null && m instanceof ActivityRenderingModel) {
 			Color c = ((ActivityRenderingModel) m).getColor();
-			((ActivityRenderingModel) associatedActivity.getRenderingModel()).setColor(c);
+			for(ActivityView av : associatedActivities)
+				((ActivityRenderingModel) av.getRenderingModel()).setColor(c);
 		}
 		if(getParent() != null)
 			getParent().repaint();
