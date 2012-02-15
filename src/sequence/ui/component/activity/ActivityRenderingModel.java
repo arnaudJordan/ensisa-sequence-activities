@@ -11,6 +11,8 @@ public class ActivityRenderingModel extends DefaultModel implements RenderingMod
 	private static final Color DEFAULT_COLOR = Color.BLACK;
 	private static final int DEFAULT_TRANSPARENCY_ALPHA = 50;
 	private static final int DEFAULT_HEIGHT = 10;
+	private static final float DEFAULT_HSCALE = 1;
+	private static final float DEFAULT_VSCALE = 1;
 	
 	public static float CURRENT_SCALE = 1;
 	
@@ -20,15 +22,15 @@ public class ActivityRenderingModel extends DefaultModel implements RenderingMod
 	private float Hscale, Vscale;
 	
 	public ActivityRenderingModel() {
-		this(DEFAULT_COLOR, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, CURRENT_SCALE, CURRENT_SCALE);
+		this(DEFAULT_COLOR, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, DEFAULT_HSCALE, DEFAULT_VSCALE);
 	}
 	
 	public ActivityRenderingModel(Color color) {
 		this(color, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, CURRENT_SCALE, CURRENT_SCALE);
 	}
 	
-	public ActivityRenderingModel(Color color, float Hscale) {
-		this(color, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, Hscale, CURRENT_SCALE);
+	public ActivityRenderingModel(Color color, float scale) {
+		this(color, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, scale, scale);
 	}
 	
 	public ActivityRenderingModel(Color color, int transparencyAlpha, int height, float Hscale, float Vscale) {

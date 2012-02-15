@@ -38,7 +38,7 @@ public class ActivityView extends View implements BackgroundListener, ScaleListe
 	public ActivityView(ActivityView activityView) {
 		super(activityView.getModel());
 		setRenderer(new ActivityRenderer(this));
-		setRenderingModel(new ActivityRenderingModel(((ActivityRenderingModel) activityView.getRenderingModel()).getColor()));
+		setRenderingModel(new ActivityRenderingModel(((ActivityRenderingModel) activityView.getRenderingModel()).getColor(), ActivityRenderingModel.CURRENT_SCALE));
 		addBackgroundListener(this);
 		addScaleListener(this);
 		activityView.getAssociatedActivities().add(this);
