@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class BorderBackgroundDrawer extends BackgroundDrawer {
-	private static final Color BORDER_COLOR = Color.black;
+	private static final Color BORDER_COLOR = Color.WHITE;
 	
 	private BackgroundDrawer backgroundDrawer;
 
