@@ -32,6 +32,7 @@ import sequence.model.activity.AnatomicStructure;
 import sequence.model.activity.BodyPart;
 import sequence.model.activity.Instrument;
 import sequence.model.activity.UsedInstruments;
+import sequence.ui.component.activity.ActivityView;
 import sequence.ui.utilities.ComponentLocation;
 import sequence.ui.utilities.ListLayout;
 /**
@@ -45,10 +46,11 @@ public class EditActivityWindow extends javax.swing.JDialog {
     	setModalityType(DEFAULT_MODALITY_TYPE);
         initComponents();
     }
-    public EditActivityWindow(final MainWindow mainWindow, final Activity activity, final Sequence sequence) {
+    public EditActivityWindow(final MainWindow mainWindow, final ActivityView activityView, final Sequence sequence) {
     	this(); ;
     	ComponentLocation.setLocation(mainWindow, this);
     	
+    	final Activity activity = (Activity) activityView.getModel();
         id.setText(Integer.toString(activity.getId()));
         DefaultComboBoxModel stateModel = new DefaultComboBoxModel(sequence.states());
         stateEdit.setModel(stateModel);
@@ -188,7 +190,8 @@ public class EditActivityWindow extends javax.swing.JDialog {
                 newActivity.getActivitytime().setStartTime(Integer.parseInt(startTimeEdit.getText()));
                 newActivity.getActivitytime().setStopTime(Integer.parseInt(startTimeEdit.getText()));
                 proc.Do(new ActivityChange(activity, newActivity));
-                mainWindow.repaint();
+                activityView.revalidate();
+                activityView.repaint();
                 dialog.setVisible(false);
             }
         });
