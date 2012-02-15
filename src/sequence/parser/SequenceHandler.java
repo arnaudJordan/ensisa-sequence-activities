@@ -364,6 +364,9 @@ public class SequenceHandler extends DefaultHandler {
 		if(endElementInDate(qName))
 			return true;
 		if(qName.equals("activity")){
+			Activity lastActivity = sequence.getLastActivity();
+			if(lastActivity.getAction()==null||lastActivity.getTreatedStructure()==null||lastActivity.getUsedInstrument()==null||lastActivity.getUsedInstrument().size()==0)
+				sequence.removeLastActivity();
 			buffer = null;
 			inActivity = false;
 			return true;

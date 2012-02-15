@@ -304,6 +304,13 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	}
 	
 	/**
+	 * Remove last activity.
+	 *
+	 */
+	public void removeLastActivity() {
+		activities.remove(activities.size()-1);
+	}
+	/**
 	 * Complete duration.
 	 *
 	 * @return the int
