@@ -8,7 +8,6 @@ import sequence.mvc.DefaultRenderer;
 import sequence.mvc.Renderer;
 import sequence.mvc.View;
 import sequence.ui.component.activity.ActivityController;
-import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.utilities.TimeLayout;
 
@@ -26,8 +25,7 @@ public class SubSequenceRenderer extends DefaultRenderer implements Renderer {
 		for(Activity current : sequence) {
 			if(((SubSequenceRenderingModel)getView().getRenderingModel()).getDurationThreshold() <= current.getActivitytime().getDuration()) {
 				int index = ((Sequence) summarizedSelectedActivities.getModel()).indexOf(current);
-				ActivityView activityView = new ActivityView(current);
-				((ActivityRenderingModel) activityView.getRenderingModel()).setColor(((ActivityRenderingModel) ((View) summarizedSelectedActivities.getComponent(index)).getRenderingModel()).getColor());
+				ActivityView activityView = new ActivityView((ActivityView) summarizedSelectedActivities.getComponent(index));
 				new ActivityController(current, activityView);
 				getView().add(activityView);
 			}
