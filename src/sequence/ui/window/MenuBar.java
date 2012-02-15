@@ -25,7 +25,7 @@ import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
 import sequence.processor.command.BackgroundDrawerChange;
 import sequence.ui.component.activity.ActivityRenderer;
-import sequence.ui.utilities.drawer.BackgroundDrawer;
+import sequence.ui.utilities.drawer.FullBackgroundDrawer;
 import sequence.ui.utilities.drawer.StripedBackgroundDrawer;
 import sequence.utilities.Config;
 
@@ -163,8 +163,8 @@ public class MenuBar extends JMenuBar {
 
 		full.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!(ActivityRenderer.CURRENT_BACKGROUND_DRAWER instanceof BackgroundDrawer))
-					parent.getProcessor().Do(new BackgroundDrawerChange(new BackgroundDrawer()));
+				if(!(ActivityRenderer.CURRENT_BACKGROUND_DRAWER instanceof FullBackgroundDrawer))
+					parent.getProcessor().Do(new BackgroundDrawerChange(new FullBackgroundDrawer()));
 			}
 		});
 		full.setSelected(true);

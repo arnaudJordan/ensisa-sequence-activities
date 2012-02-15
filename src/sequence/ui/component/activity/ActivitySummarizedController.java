@@ -8,7 +8,6 @@ import sequence.mvc.Model;
 import sequence.mvc.View;
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceController;
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
-import sequence.ui.utilities.drawer.BackgroundDrawer;
 import sequence.ui.utilities.drawer.BorderBackgroundDrawer;
 
 public class ActivitySummarizedController extends SummarizedSequenceController {
@@ -31,17 +30,23 @@ public class ActivitySummarizedController extends SummarizedSequenceController {
 				}
 				for(int i=beginIndex; i<endIndex; i++) {
 					if(!selectedActivities.contains(((View) parent.getComponent(i)).getModel())) {
-						((ActivityRenderer) ((View) parent.getComponent(i)).getRenderer()).setBackgroundDrawer(new BorderBackgroundDrawer());
+						ActivityRenderer renderer = ((ActivityRenderer) ((View) parent.getComponent(i)).getRenderer());
+						renderer.setBackgroundDrawer(new BorderBackgroundDrawer(renderer.getBackgroundDrawer()));
 						selectedActivities.add((Activity) ((ActivityView) parent.getComponent(i)).getModel());
 					}
 				}
 			} else if((e.getModifiers() & CTRL) == 0) {
-				for(int i=0; i<parent.getComponentCount(); i++)
-					((ActivityRenderer) ((View) parent.getComponent(i)).getRenderer()).setBackgroundDrawer(new BackgroundDrawer());
+				ActivityRenderer renderer;
+				for(int i=0; i<parent.getComponentCount(); i++) {
+					renderer = ((ActivityRenderer) ((View) parent.getComponent(i)).getRenderer());
+					if(renderer.getBackgroundDrawer() instanceof BorderBackgroundDrawer)
+						renderer.setBackgroundDrawer(((BorderBackgroundDrawer) renderer.getBackgroundDrawer()).getBackgroundDrawer());
+				}
 				selectedActivities.clear();
 			}
 			if(!selectedActivities.contains(activity)) {
-				((ActivityRenderer) ((ActivityView) e.getComponent()).getRenderer()).setBackgroundDrawer(new BorderBackgroundDrawer());
+				ActivityRenderer renderer = ((ActivityRenderer) ((ActivityView) e.getComponent()).getRenderer());
+				renderer.setBackgroundDrawer(new BorderBackgroundDrawer(renderer.getBackgroundDrawer()));
 				selectedActivities.add(activity);
 			}
 		}
