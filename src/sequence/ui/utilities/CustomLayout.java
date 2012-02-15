@@ -39,7 +39,7 @@ public class CustomLayout implements LayoutManager {
 			Component c = target.getComponent(i);
 			if (c.isVisible()) {
 				if(c.getY() < currentHeight)
-					currentHeight += c.getPreferredSize().height + VGAP - (currentHeight - c.getY());
+					currentHeight += c.getPreferredSize().height - VGAP;
 				else
 					currentHeight += c.getPreferredSize().height + VGAP;
 			}
@@ -85,7 +85,7 @@ public class CustomLayout implements LayoutManager {
 				else
 					c.setBounds(leftMargin, currentHeight, c.getPreferredSize().width - HMargin, c.getPreferredSize().height);
 				if(c.getY() < currentHeight)
-					currentHeight += c.getPreferredSize().height + VGAP - (currentHeight - c.getY());
+					currentHeight += c.getPreferredSize().height - VGAP;
 				else
 					currentHeight += c.getPreferredSize().height + VGAP;
 			}
