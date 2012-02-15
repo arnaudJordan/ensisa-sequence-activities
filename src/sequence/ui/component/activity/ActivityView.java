@@ -1,5 +1,7 @@
 package sequence.ui.component.activity;
 
+import java.awt.Color;
+
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
@@ -19,21 +21,30 @@ public class ActivityView extends View implements BackgroundListener, Scaleable,
 	private static final long serialVersionUID = 1L;	
 	public JPopupMenu popup;
 	private boolean selected;
+	private ActivityView associatedActivity;
 
 	public ActivityView(Model model) {
 		super(model);
 		setRenderer(new ActivityRenderer(this));
 		setRenderingModel(new ActivityRenderingModel());
 		addBackgroundListener(this);
+	}
+	
+	public ActivityView(ActivityView activityView) {
+		super(activityView.getModel());
+		setRenderer(new ActivityRenderer(this));
+		setRenderingModel(new ActivityRenderingModel(((ActivityRenderingModel) activityView.getRenderingModel()).getColor()));
+		addBackgroundListener(this);
+		activityView.setAssociatedActivity(this);
 		popup = new JPopupMenu();
 	    JMenuItem colorItem = new JMenuItem("Color");
-	    colorItem.addActionListener(new ActivityMenuColorController(model, this));
+	    colorItem.addActionListener(new ActivityMenuColorController(activityView.getModel(), activityView));
 	    popup.add(colorItem);
 	    JMenuItem editItem = new JMenuItem("Edit");
-	    editItem.addActionListener(new ActivityMenuEditController(model, this));
+	    editItem.addActionListener(new ActivityMenuEditController(activityView.getModel(), this));
 	    popup.add(editItem);
 	    JMenuItem deleteItem = new JMenuItem("Delete");
-	    deleteItem.addActionListener(new ActivityMenuDeleteController(model, this));
+	    deleteItem.addActionListener(new ActivityMenuDeleteController(activityView.getModel(), this));
 	    popup.add(deleteItem);
 	    selected = true;
 	}
@@ -54,6 +65,14 @@ public class ActivityView extends View implements BackgroundListener, Scaleable,
 	
 	public void setSelected(boolean selected) {
 		this.selected = selected;
+	}
+
+	public ActivityView getAssociatedActivity() {
+		return associatedActivity;
+	}
+
+	public void setAssociatedActivity(ActivityView associatedActivity) {
+		this.associatedActivity = associatedActivity;
 	}
 
 	public void addBackgroundListener(BackgroundListener bl) {
@@ -94,6 +113,10 @@ public class ActivityView extends View implements BackgroundListener, Scaleable,
 	@Override
 	public void modelChanged(Model m) {
 		setToolTipText(((Activity) getModel()).toToolTip());
+		if(associatedActivity != null && m instanceof ActivityRenderingModel) {
+			Color c = ((ActivityRenderingModel) m).getColor();
+			((ActivityRenderingModel) associatedActivity.getRenderingModel()).setColor(c);
+		}
 		if(getParent() != null)
 			getParent().repaint();
 	}

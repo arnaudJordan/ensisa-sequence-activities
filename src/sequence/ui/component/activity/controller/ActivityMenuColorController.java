@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JColorChooser;
+
 import sequence.model.activity.Activity;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
