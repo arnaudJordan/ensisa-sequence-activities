@@ -79,7 +79,7 @@ public class InfoSequenceWindow extends javax.swing.JDialog {
 		{
 			if (activityMap.containsKey(activity.getAction()))
 			{
-				int duration = ((Integer)activityMap.get(activity.getAction()));
+				int duration = (activityMap.get(activity.getAction()));
 				activityMap.put(activity.getAction(), duration+activity.getActivitytime().getDuration());
 			}
 			else
@@ -96,8 +96,8 @@ public class InfoSequenceWindow extends javax.swing.JDialog {
 		
 		Iterator<Action> it = keys.iterator();
 		while (it.hasNext()){
-			Action cle = (Action)it.next();
-			int valeur = (Integer)activityMap.get(cle);
+			Action cle = it.next();
+			int valeur = activityMap.get(cle);
 			dataset.setValue(cle.getAction(), valeur);
 		}
 
@@ -123,7 +123,7 @@ public class InfoSequenceWindow extends javax.swing.JDialog {
 		{
 			if (activityMap.containsKey(activity.getTreatedStructure()))
 			{
-				int duration = ((Integer)activityMap.get(activity.getAction()));
+				int duration = (activityMap.get(activity.getAction()));
 				activityMap.put(activity.getTreatedStructure(), duration+activity.getActivitytime().getDuration());
 			}
 			else
@@ -140,8 +140,8 @@ public class InfoSequenceWindow extends javax.swing.JDialog {
 		
 		Iterator<AnatomicStructure> it = keys.iterator();
 		while (it.hasNext()){
-			AnatomicStructure cle = (AnatomicStructure)it.next();
-			int valeur = (Integer)activityMap.get(cle);
+			AnatomicStructure cle = it.next();
+			int valeur = activityMap.get(cle);
 			dataset.setValue(cle.getAnatomicStructure(), valeur);
 		}
 
@@ -195,6 +195,7 @@ public class InfoSequenceWindow extends javax.swing.JDialog {
 
 		okButton.setText("OK");
 		okButton.addActionListener(new java.awt.event.ActionListener() {
+			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				okButtonActionPerformed(evt);
 			}
@@ -345,6 +346,7 @@ public class InfoSequenceWindow extends javax.swing.JDialog {
 	public static void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 
+			@Override
 			public void run() {
 				new InfoSequenceWindow().setVisible(true);
 			}

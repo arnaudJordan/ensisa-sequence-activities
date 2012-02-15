@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -78,7 +79,7 @@ public class MainWindow extends JFrame {
 	}
 	
 	private void setupScaleSlider() {
-		this.scaleSlider = new JSlider(JSlider.HORIZONTAL, 100, 300, 100);
+		this.scaleSlider = new JSlider(SwingConstants.HORIZONTAL, 100, 300, 100);
 		Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
 		labelTable.put(new Integer(100), new JLabel("100%"));
 		labelTable.put(new Integer(200), new JLabel("200%"));
@@ -88,6 +89,7 @@ public class MainWindow extends JFrame {
 		this.scaleSlider.setPaintLabels(true);
 		this.scaleSlider.setPaintTicks(true);
 		this.scaleSlider.addChangeListener(new ChangeListener() {
+			@Override
 			public void stateChanged(ChangeEvent changeEvent) {
 				EventDispatcher.scaleChanged((float) (scaleSlider.getValue()) / 100);
 			}
@@ -97,14 +99,17 @@ public class MainWindow extends JFrame {
 	private void setupThresholdField() {
 		this.thresholdField = new JTextField("0", 2);
 		this.thresholdField.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				updateThresholdField(actionEvent);
 			}
 		});
 		this.thresholdField.addFocusListener(new FocusListener() {
+			@Override
 			public void focusLost(FocusEvent focusEvent) {
 				updateThresholdField(focusEvent);
 			}
+			@Override
 			public void focusGained(FocusEvent focusEvent) {
 			}
 		});
@@ -185,6 +190,7 @@ public class MainWindow extends JFrame {
 		System.setProperty("awt.useSystemAAFontSettings","on");
 		System.setProperty("swing.aatext", "true");
 		EventQueue.invokeLater(new Runnable(){
+			@Override
 			public void run(){
 				new MainWindow("Sequence activities");
 			}

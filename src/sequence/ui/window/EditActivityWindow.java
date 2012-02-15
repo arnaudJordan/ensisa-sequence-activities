@@ -71,7 +71,7 @@ public class EditActivityWindow extends javax.swing.JDialog {
         bodyPartEdit.setModel(bodyPartModel);
         bodyPartEdit.setSelectedIndex(bodyPartModel.getIndexOf(activity.getActuator().getUsedbodypart()));
         bodyPartEdit.setEditable(true);
-        final Object[] asi = (Object[]) sequence.ActionsStructuresInstruments();
+        final Object[] asi = sequence.ActionsStructuresInstruments();
         DefaultComboBoxModel actionModel = new DefaultComboBoxModel((Object[])asi[0]);
         actionEdit.setModel(actionModel);
         actionEdit.setSelectedItem(activity.getAction());
@@ -432,6 +432,7 @@ public class EditActivityWindow extends javax.swing.JDialog {
 	public static void main(String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 
+			@Override
 			public void run() {
 				new EditActivityWindow().setVisible(true);
 			}

@@ -12,17 +12,20 @@ public class DefaultModel implements Model
     	this.listeners = new ArrayList<ModelListener>();        
     }
         
-    public void addModelListener(ModelListener l)
+    @Override
+	public void addModelListener(ModelListener l)
     {
     	this.listeners.add(l);
     }
 
-    public void removeModelListener(ModelListener l)
+    @Override
+	public void removeModelListener(ModelListener l)
     {
     	this.listeners.remove(l);
     }
         
-    public void modelChange()
+    @Override
+	public void modelChange()
     {
     	for(ModelListener m : this.listeners)
         	m.modelChanged(this);

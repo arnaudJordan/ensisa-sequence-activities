@@ -40,6 +40,7 @@ public class testActivity extends JFrame {
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable(){
+			@Override
 			public void run(){
 				new testActivity();
 			}

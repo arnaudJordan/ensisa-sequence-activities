@@ -13,29 +13,35 @@ public class DefaultRenderer implements Renderer {
         this.view = view;
     }
     
-    public View getView() {
+    @Override
+	public View getView() {
         return this.view;
     }
     
-    public void setView(View view) {
+    @Override
+	public void setView(View view) {
         this.view = view;
     }
 
-    public void renderView(Graphics2D g) { 
+    @Override
+	public void renderView(Graphics2D g) { 
     	RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); 
         rh.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY); 
         g.setRenderingHints(rh);
     }
 
-    public Dimension getMinimumSize() {
+    @Override
+	public Dimension getMinimumSize() {
         return this.getPreferredSize();
     }
 
-    public Dimension getPreferredSize() {
+    @Override
+	public Dimension getPreferredSize() {
         return DEFAULT_DIMENSION;
     }
 
-    public Dimension getMaximumSize() {
+    @Override
+	public Dimension getMaximumSize() {
         return this.getPreferredSize();
     }
 }

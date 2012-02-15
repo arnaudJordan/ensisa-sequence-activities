@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 
@@ -44,7 +45,7 @@ public class OpenedFilesSelectWindow extends JDialog {
 
 	public OpenedFilesSelectWindow(List<SequenceContainer> list, final MainWindow parent) throws HeadlessException {
 		super(parent, "Select file", true);
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.parent=parent;
 		initComponents();
 		initFileChooser();
@@ -58,6 +59,7 @@ public class OpenedFilesSelectWindow extends JDialog {
 		
 		class MyCellRenderer extends DefaultListCellRenderer{
 			private static final long serialVersionUID = 1L;
+			@Override
 			public Component getListCellRendererComponent(
 			        JList list,
 			        Object value,
@@ -87,6 +89,7 @@ public class OpenedFilesSelectWindow extends JDialog {
 		
 		final JDialog dialog = this;
 		saveButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				dialog.setVisible(false);
 				int returnVal = fc.showSaveDialog(parent);
@@ -143,6 +146,7 @@ public class OpenedFilesSelectWindow extends JDialog {
 		});
 		
 		cancelButton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				dialog.setVisible(false);
 			}

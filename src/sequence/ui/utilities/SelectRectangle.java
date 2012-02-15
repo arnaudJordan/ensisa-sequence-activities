@@ -30,6 +30,7 @@ public class SelectRectangle extends JPanel implements MouseMotionListener, Mous
 		this.context = context;
 	}
 	 
+	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if(selection!=null) {
@@ -56,30 +57,37 @@ public class SelectRectangle extends JPanel implements MouseMotionListener, Mous
 		}
 	}
 	
+	@Override
 	public void mousePressed(MouseEvent e) {
 		anchor = e.getPoint();
 		selection = new Rectangle(anchor);
 		selectComponents(e.getPoint());
 	}
 	 
+	@Override
 	public void mouseDragged(MouseEvent e) {
-		selection.setBounds( (int)Math.min(anchor.x,e.getX()), (int)Math.min(anchor.y,e.getY()),
-		(int)Math.abs(e.getX()-anchor.x), (int)Math.abs(e.getY()-anchor.y));
+		selection.setBounds( Math.min(anchor.x,e.getX()), Math.min(anchor.y,e.getY()),
+		Math.abs(e.getX()-anchor.x), Math.abs(e.getY()-anchor.y));
 		selectComponents(e.getPoint());
 		repaint();
 	}
 	 
+	@Override
 	public void mouseReleased(MouseEvent e) {
 		selection = null;
 		repaint();
 	}
 	
+	@Override
 	public void mouseMoved(MouseEvent e) {
 	}
+	@Override
 	public void mouseClicked(MouseEvent e) {
 	}
+	@Override
 	public void mouseEntered(MouseEvent e) {
 	}
+	@Override
 	public void mouseExited(MouseEvent e) {
 	}
 }

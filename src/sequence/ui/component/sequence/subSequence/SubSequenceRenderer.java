@@ -32,6 +32,7 @@ public class SubSequenceRenderer extends DefaultRenderer implements Renderer {
 		}
 	}
 
+	@Override
 	public void renderView(Graphics2D g) {
 		super.renderView(g);
         renderSequence(g);
@@ -40,6 +41,7 @@ public class SubSequenceRenderer extends DefaultRenderer implements Renderer {
 	private void renderSequence(Graphics2D g) {
 	}
 	
+	@Override
 	public Dimension getPreferredSize() {
 		int Hinsets = 2*(getView().getParent().getInsets().left + getView().getParent().getInsets().right);
     	return new Dimension(getView().getParent().getWidth() - Hinsets, (int) getView().getLayout().minimumLayoutSize(getView()).getHeight());

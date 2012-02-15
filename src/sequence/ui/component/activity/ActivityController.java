@@ -13,6 +13,7 @@ public class ActivityController extends Controller {
 		super(model, view);
 	}
 
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == LEFT_MOUSE_BUTTON) {
 			Container parent = getView().getParent();
@@ -36,11 +37,13 @@ public class ActivityController extends Controller {
 		}
 	}
 
+	@Override
 	public void mousePressed(MouseEvent e) {
 		checkPopup(e);
     }
 
-    public void mouseReleased(MouseEvent e) {
+    @Override
+	public void mouseReleased(MouseEvent e) {
     	checkPopup(e);
     }
 

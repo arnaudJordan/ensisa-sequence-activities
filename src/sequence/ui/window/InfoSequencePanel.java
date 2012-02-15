@@ -7,7 +7,6 @@ package sequence.ui.window;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.List;
-import javax.swing.JLabel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;

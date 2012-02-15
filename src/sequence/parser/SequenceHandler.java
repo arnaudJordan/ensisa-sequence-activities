@@ -48,6 +48,7 @@ public class SequenceHandler extends DefaultHandler {
 	public SequenceHandler(File file) {
 		this.file=file;
 	}
+	@Override
 	public void startElement(String uri, String localName,
 			String qName, Attributes attributes) throws SAXException{
 		buffer = new StringBuffer();
@@ -321,6 +322,7 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	@Override
 	public void endElement(String uri, String localName, String qName)
 			throws SAXException{
 		if(qName.equals("rec_workflow")){
@@ -637,14 +639,17 @@ public class SequenceHandler extends DefaultHandler {
 		}
 		return false;
 	}
+	@Override
 	public void characters(char[] ch,int start, int length)
 			throws SAXException{
 		String lecture = new String(ch,start,length);
 		if(buffer != null) buffer.append(lecture);       
 	}
+	@Override
 	public void startDocument() throws SAXException {
 		System.out.println("Start parsing");
 	}
+	@Override
 	public void endDocument() throws SAXException {
 		System.out.println("End of parsing");
 	}

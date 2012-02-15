@@ -12,6 +12,7 @@ public class SafeProcessor extends Processor {
 	/* (non-Javadoc)
 	 * @see sequence.processor.Processor#Undo()
 	 */
+	@Override
 	public void Undo()
 	{
 		if(didCommands.isEmpty()) return;
@@ -21,6 +22,7 @@ public class SafeProcessor extends Processor {
 	/* (non-Javadoc)
 	 * @see sequence.processor.Processor#Redo()
 	 */
+	@Override
 	public void Redo()
 	{
 		if(unDidCommands.isEmpty()) return;

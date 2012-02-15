@@ -61,6 +61,7 @@ public class MenuBar extends JMenuBar {
 		fc.setMultiSelectionEnabled(true);
 		
 		open.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				int returnVal = fc.showOpenDialog(parent);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -102,8 +103,10 @@ public class MenuBar extends JMenuBar {
 		save.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.Event.CTRL_MASK));
 		
 		save.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				EventQueue.invokeLater(new Runnable(){
+					@Override
 					public void run(){
 						new OpenedFilesSelectWindow(parent.getSequenceContainers(), parent);
 					}
@@ -118,6 +121,7 @@ public class MenuBar extends JMenuBar {
 		quit.setMnemonic('Q');
 		quit.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.Event.CTRL_MASK));
 		quit.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
@@ -134,7 +138,8 @@ public class MenuBar extends JMenuBar {
         undo.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.Event.CTRL_MASK));
 
         undo.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
+                @Override
+				public void actionPerformed(ActionEvent e) {
                 	parent.getProcessor().Undo();
                 }
         });
@@ -144,7 +149,8 @@ public class MenuBar extends JMenuBar {
         redo.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Y, java.awt.Event.CTRL_MASK));
 
         redo.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
+                @Override
+				public void actionPerformed(ActionEvent e) {
                 	parent.getProcessor().Redo();
                 }
         });
@@ -162,6 +168,7 @@ public class MenuBar extends JMenuBar {
 		JRadioButtonMenuItem full = new JRadioButtonMenuItem("Full");
 
 		full.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!(ActivityRenderer.CURRENT_BACKGROUND_DRAWER instanceof FullBackgroundDrawer))
 					parent.getProcessor().Do(new BackgroundDrawerChange(new FullBackgroundDrawer()));
@@ -175,6 +182,7 @@ public class MenuBar extends JMenuBar {
 		JRadioButtonMenuItem stripped = new JRadioButtonMenuItem("Stripped");
 
 		stripped.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(!(ActivityRenderer.CURRENT_BACKGROUND_DRAWER instanceof StripedBackgroundDrawer))
 					parent.getProcessor().Do(new BackgroundDrawerChange(new StripedBackgroundDrawer()));
@@ -199,9 +207,11 @@ public class MenuBar extends JMenuBar {
 		JMenuItem windowStyle = new JMenuItem("Window style");
 
 		windowStyle.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(parent.getSequenceContainers()!=null)
 					EventQueue.invokeLater(new Runnable(){
+						@Override
 						public void run(){
 							new StyleWindow(parent);
 						}
@@ -219,6 +229,7 @@ public class MenuBar extends JMenuBar {
 		
 		JMenuItem cascade = new JMenuItem("Cascade");
 		cascade.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				parent.getMainPane().cascadeFrames();
 			}
@@ -227,6 +238,7 @@ public class MenuBar extends JMenuBar {
 		
 		JMenuItem tile = new JMenuItem("Tile");
 		tile.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				parent.getMainPane().tileFrames();
 			}
@@ -239,6 +251,7 @@ public class MenuBar extends JMenuBar {
 		close.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.Event.CTRL_MASK));
 
 		close.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				JInternalFrame f = parent.getMainPane().getSelectedFrame();
 				if(f!=null)
@@ -249,6 +262,7 @@ public class MenuBar extends JMenuBar {
 		
 		JMenuItem closeAll = new JMenuItem("Close all");
 		closeAll.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				JInternalFrame[] f = parent.getMainPane().getAllFrames();
 				for(int i=0; i<f.length; i++)
@@ -268,9 +282,11 @@ public class MenuBar extends JMenuBar {
 		info.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.Event.CTRL_MASK));
 
 		info.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(parent.getSequenceContainers()!=null)
 					EventQueue.invokeLater(new Runnable(){
+						@Override
 						public void run(){
 							new InfoWindow(parent).setVisible(true);
 						}
@@ -291,6 +307,7 @@ public class MenuBar extends JMenuBar {
 		}
 		FrameMenuItem item = new FrameMenuItem(frame);
 		item.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ae) {
 				try {
 					frame.setSelected(true);

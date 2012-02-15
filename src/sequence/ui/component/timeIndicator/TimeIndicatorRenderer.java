@@ -17,6 +17,7 @@ public class TimeIndicatorRenderer extends DefaultRenderer implements Renderer {
 		this.tid=new TimeIndicatorDrawer();
 	}
 
+	@Override
 	public void renderView(Graphics2D g) {
 		super.renderView(g);
         renderTimeIndicator(g);
@@ -40,6 +41,7 @@ public class TimeIndicatorRenderer extends DefaultRenderer implements Renderer {
 	public TimeIndicatorDrawer getBackgroundDrawer() {
 		return this.tid;
 	}
+	@Override
 	public Dimension getPreferredSize() {
 		Phase phase = (Phase) ((TimeIndicatorView)getView()).getModel();
 		TimeIndicatorRenderingModel renderingModel = ((TimeIndicatorRenderingModel)getView().getRenderingModel());

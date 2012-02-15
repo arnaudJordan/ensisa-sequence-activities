@@ -14,10 +14,12 @@ public class CommandList implements ICommand {
 	{
 		this.commands=commands;
 	}
+	@Override
 	public void Do() {
 		for(ICommand command : commands)
 			command.Do();
 	}
+	@Override
 	public void Undo() {
 		for(ICommand command : commands)
 			command.Undo();

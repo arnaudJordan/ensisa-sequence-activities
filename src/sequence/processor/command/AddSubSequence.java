@@ -36,6 +36,7 @@ public class AddSubSequence extends Command {
 				selectedActivities = sequence.getActivitiesInPhase(sequence.getPhaseOfActivity(selectedActivity));
 			} else {
 				Collections.sort(selectedActivities, new Comparator<Activity>() {
+					@Override
 					public int compare(Activity a1, Activity a2) {
 						return a1.getId() < a2.getId() ? -1 : 1;
 					}

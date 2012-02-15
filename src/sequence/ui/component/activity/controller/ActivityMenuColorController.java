@@ -24,6 +24,7 @@ public class ActivityMenuColorController extends Controller implements
 		super(model, view);
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		ActivityRenderingModel renderingModel = ((ActivityRenderingModel)(((ActivityView)getView()).getRenderingModel()));
 		Color oldColor = renderingModel.getColor();
