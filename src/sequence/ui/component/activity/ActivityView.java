@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
@@ -16,10 +17,11 @@ import sequence.ui.component.activity.controller.ActivityMenuEditController;
 import sequence.ui.utilities.drawer.BackgroundDrawer;
 import sequence.utilities.BackgroundListener;
 import sequence.utilities.EventDispatcher;
+import sequence.utilities.ScaleListener;
 import sequence.utilities.Scaleable;
 import sequence.utilities.Timeable;
 
-public class ActivityView extends View implements BackgroundListener, Scaleable, Timeable {
+public class ActivityView extends View implements BackgroundListener, ScaleListener, Scaleable, Timeable {
 	private static final long serialVersionUID = 1L;	
 	public JPopupMenu popup;
 	private boolean selected;
@@ -38,6 +40,7 @@ public class ActivityView extends View implements BackgroundListener, Scaleable,
 		setRenderer(new ActivityRenderer(this));
 		setRenderingModel(new ActivityRenderingModel(((ActivityRenderingModel) activityView.getRenderingModel()).getColor()));
 		addBackgroundListener(this);
+		addScaleListener(this);
 		activityView.getAssociatedActivities().add(this);
 		popup = new JPopupMenu();
 	    JMenuItem colorItem = new JMenuItem("Color");
@@ -83,6 +86,14 @@ public class ActivityView extends View implements BackgroundListener, Scaleable,
 	public void removeBackgroundListener(BackgroundListener bl) {
 		EventDispatcher.remove(bl);
 	}
+	
+	public void addScaleListener(ScaleListener sl) {
+		EventDispatcher.add(sl);
+	}
+	
+	public void removeScaleListener(ScaleListener sl) {
+		EventDispatcher.remove(sl);
+	}
 
 	@Override
 	public int getStartTime() {
@@ -124,5 +135,14 @@ public class ActivityView extends View implements BackgroundListener, Scaleable,
 	@Override
 	public void backgroundChanged(BackgroundDrawer bd) {
 		((ActivityRenderer) getRenderer()).setBackgroundDrawer(bd);
+	}
+
+	@Override
+	public void scaleChanged(float scale) {
+		((ActivityRenderingModel) getRenderingModel()).setScale(scale);
+		if(getParent() != null) {
+			((JComponent) getParent()).revalidate();
+			getParent().repaint();
+		}
 	}
 }

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -27,13 +26,12 @@ import sequence.processor.Processor;
 import sequence.processor.SafeProcessor;
 import sequence.processor.command.AddSequence;
 import sequence.processor.command.RemoveSequence;
-import sequence.ui.component.activity.ActivityRenderingModel;
-import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.SequenceContainer;
 import sequence.ui.component.sequence.subSequence.SubSequenceRenderingModel;
 import sequence.ui.utilities.MDIDesktopPane;
 import sequence.ui.utilities.WindowController;
 import sequence.utilities.Config;
+import sequence.utilities.EventDispatcher;
 
 public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -91,26 +89,7 @@ public class MainWindow extends JFrame {
 		this.scaleSlider.setPaintTicks(true);
 		this.scaleSlider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent changeEvent) {
-				for (SequenceContainer current : sequenceContainers) {
-					for (SequenceContainer subSequence : current.getChilds()) {
-						for (int i = 0; i < subSequence.getComponentCount(); i++) {
-							if (subSequence instanceof SequenceContainer) {
-								for (int j = 0; j < subSequence.getView()
-										.getComponentCount(); j++) {
-									((ActivityRenderingModel) ((ActivityView) subSequence
-											.getView().getComponent(j))
-											.getRenderingModel())
-											.setScale((float) (scaleSlider
-													.getValue()) / 100);
-									((JComponent) subSequence.getView()
-											.getComponent(j)).revalidate();
-								}
-							}
-						}
-					}
-					ActivityRenderingModel.CURRENT_SCALE = (float) (scaleSlider
-							.getValue()) / 100;
-				}
+				EventDispatcher.scaleChanged((float) (scaleSlider.getValue()) / 100);
 			}
 		});
 	}
