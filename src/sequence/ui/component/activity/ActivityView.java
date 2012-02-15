@@ -21,45 +21,52 @@ import sequence.utilities.ScaleListener;
 import sequence.utilities.Scaleable;
 import sequence.utilities.Timeable;
 
-public class ActivityView extends View implements BackgroundListener, ScaleListener, Scaleable, Timeable {
-	private static final long serialVersionUID = 1L;	
+public class ActivityView extends View implements BackgroundListener,
+		ScaleListener, Scaleable, Timeable {
+	private static final long serialVersionUID = 1L;
 	public JPopupMenu popup;
 	private boolean selected;
 	private List<ActivityView> associatedActivities;
 
-	public ActivityView(Model model) {
+	public ActivityView(final Model model) {
 		super(model);
 		setRenderer(new ActivityRenderer(this));
 		setRenderingModel(new ActivityRenderingModel());
 		addBackgroundListener(this);
 		associatedActivities = new ArrayList<ActivityView>();
 	}
-	
-	public ActivityView(ActivityView activityView) {
+
+	public ActivityView(final ActivityView activityView) {
 		super(activityView.getModel());
 		setRenderer(new ActivityRenderer(this));
-		setRenderingModel(new ActivityRenderingModel(((ActivityRenderingModel) activityView.getRenderingModel()).getColor(), ActivityRenderingModel.CURRENT_SCALE));
+		setRenderingModel(new ActivityRenderingModel(
+				((ActivityRenderingModel) activityView.getRenderingModel())
+						.getColor(),
+				ActivityRenderingModel.CURRENT_SCALE));
 		addBackgroundListener(this);
 		addScaleListener(this);
 		activityView.getAssociatedActivities().add(this);
 		popup = new JPopupMenu();
-	    JMenuItem colorItem = new JMenuItem("Color");
-	    colorItem.addActionListener(new ActivityMenuColorController(activityView.getModel(), activityView));
-	    popup.add(colorItem);
-	    JMenuItem editItem = new JMenuItem("Edit");
-	    editItem.addActionListener(new ActivityMenuEditController(activityView.getModel(), this));
-	    popup.add(editItem);
-	    JMenuItem deleteItem = new JMenuItem("Delete");
-	    deleteItem.addActionListener(new ActivityMenuDeleteController(activityView.getModel(), this));
-	    popup.add(deleteItem);
-	    selected = true;
+		final JMenuItem colorItem = new JMenuItem("Color");
+		colorItem.addActionListener(new ActivityMenuColorController(
+				activityView.getModel(), activityView));
+		popup.add(colorItem);
+		final JMenuItem editItem = new JMenuItem("Edit");
+		editItem.addActionListener(new ActivityMenuEditController(activityView
+				.getModel(), this));
+		popup.add(editItem);
+		final JMenuItem deleteItem = new JMenuItem("Delete");
+		deleteItem.addActionListener(new ActivityMenuDeleteController(
+				activityView.getModel(), this));
+		popup.add(deleteItem);
+		selected = true;
 	}
-	
+
 	public void select() {
 		setSelected(true);
 		((ActivityRenderingModel) getRenderingModel()).setOpaque();
 	}
-	
+
 	public void deselect() {
 		setSelected(false);
 		((ActivityRenderingModel) getRenderingModel()).setTransparent();
@@ -68,8 +75,8 @@ public class ActivityView extends View implements BackgroundListener, ScaleListe
 	public boolean isSelected() {
 		return selected;
 	}
-	
-	public void setSelected(boolean selected) {
+
+	public void setSelected(final boolean selected) {
 		this.selected = selected;
 	}
 
@@ -77,21 +84,21 @@ public class ActivityView extends View implements BackgroundListener, ScaleListe
 		return associatedActivities;
 	}
 
-	public void addBackgroundListener(BackgroundListener bl) {
+	public void addBackgroundListener(final BackgroundListener bl) {
 		if (bl == null)
 			return;
 		EventDispatcher.add(bl);
 	}
-	
-	public void removeBackgroundListener(BackgroundListener bl) {
+
+	public void removeBackgroundListener(final BackgroundListener bl) {
 		EventDispatcher.remove(bl);
 	}
-	
-	public void addScaleListener(ScaleListener sl) {
+
+	public void addScaleListener(final ScaleListener sl) {
 		EventDispatcher.add(sl);
 	}
-	
-	public void removeScaleListener(ScaleListener sl) {
+
+	public void removeScaleListener(final ScaleListener sl) {
 		EventDispatcher.remove(sl);
 	}
 
@@ -119,28 +126,28 @@ public class ActivityView extends View implements BackgroundListener, ScaleListe
 	public float getVScale() {
 		return ((ActivityRenderingModel) getRenderingModel()).getVScale();
 	}
-	
+
 	@Override
-	public void modelChanged(Model m) {
+	public void modelChanged(final Model m) {
 		setToolTipText(((Activity) getModel()).toToolTip());
-		if(associatedActivities != null && m instanceof ActivityRenderingModel) {
-			Color c = ((ActivityRenderingModel) m).getColor();
-			for(ActivityView av : associatedActivities)
+		if (associatedActivities != null && m instanceof ActivityRenderingModel) {
+			final Color c = ((ActivityRenderingModel) m).getColor();
+			for (final ActivityView av : associatedActivities)
 				((ActivityRenderingModel) av.getRenderingModel()).setColor(c);
 		}
-		if(getParent() != null)
+		if (getParent() != null)
 			getParent().repaint();
 	}
 
 	@Override
-	public void backgroundChanged(BackgroundDrawer bd) {
+	public void backgroundChanged(final BackgroundDrawer bd) {
 		((ActivityRenderer) getRenderer()).setBackgroundDrawer(bd);
 	}
 
 	@Override
-	public void scaleChanged(float scale) {
+	public void scaleChanged(final float scale) {
 		((ActivityRenderingModel) getRenderingModel()).setScale(scale);
-		if(getParent() != null) {
+		if (getParent() != null) {
 			((JComponent) getParent()).revalidate();
 			getParent().repaint();
 		}

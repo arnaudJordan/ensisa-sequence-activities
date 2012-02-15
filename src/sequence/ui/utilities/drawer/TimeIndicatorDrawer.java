@@ -5,22 +5,25 @@ import java.awt.Graphics2D;
 
 public class TimeIndicatorDrawer {
 	private final int TICKWIDTH = 2;
-	private Color color;
+	private final Color color;
+
 	public TimeIndicatorDrawer() {
-		this.color=Color.BLACK;
+		color = Color.BLACK;
 	}
-	public TimeIndicatorDrawer(Color color) {
-		this.color=color;
+
+	public TimeIndicatorDrawer(final Color color) {
+		this.color = color;
 	}
-	public void Draw(Graphics2D g, int width, int height)
-	{
-		Draw(g, width, height, this.color);
+
+	public void Draw(final Graphics2D g, final int width, final int height) {
+		Draw(g, width, height, color);
 	}
-	public void Draw(Graphics2D g, int width, int height, Color color)
-	{
+
+	public void Draw(final Graphics2D g, final int width, final int height,
+			final Color color) {
 		g.setColor(color);
 		g.fillRect(0, 0, TICKWIDTH, height);
 		g.fillRect(0, 0, width, TICKWIDTH);
-		g.fillRect(width-TICKWIDTH, 0, TICKWIDTH, height);
+		g.fillRect(width - TICKWIDTH, 0, TICKWIDTH, height);
 	}
 }

@@ -8,16 +8,15 @@ import java.util.List;
  * The Logs model.
  */
 public class Logs {
-	
+
 	/** The edit events. */
-	private List<EditEvent> editEvents;
-	
+	private final List<EditEvent> editEvents;
+
 	/**
 	 * Instantiates a new logs.
 	 */
-	public Logs()
-	{
-		this.editEvents = new ArrayList<EditEvent>();
+	public Logs() {
+		editEvents = new ArrayList<EditEvent>();
 	}
 
 	/**
@@ -45,7 +44,7 @@ public class Logs {
 	 *            the o
 	 * @return true, if successful
 	 */
-	public boolean contains(Object o) {
+	public boolean contains(final Object o) {
 		return editEvents.contains(o);
 	}
 
@@ -65,18 +64,17 @@ public class Logs {
 	 *            the e
 	 * @return true, if successful
 	 */
-	public boolean add(EditEvent e) {
+	public boolean add(final EditEvent e) {
 		return editEvents.add(e);
 	}
-	
+
 	/**
 	 * Gets the last edit event.
 	 * 
 	 * @return the last edit event
 	 */
-	public EditEvent getLastEditEvent()
-	{
-		return editEvents.get(editEvents.size()-1);
+	public EditEvent getLastEditEvent() {
+		return editEvents.get(editEvents.size() - 1);
 	}
 
 	/**
@@ -86,14 +84,16 @@ public class Logs {
 	 */
 	public String toXML() {
 		final String NEW_LINE = System.getProperty("line.separator");
-		StringBuilder sb = new StringBuilder("<sw-logs>"+NEW_LINE);
-		for(EditEvent editEvent : editEvents)
-			sb.append("\t"+editEvent.toXML()+NEW_LINE);
+		final StringBuilder sb = new StringBuilder("<sw-logs>" + NEW_LINE);
+		for (final EditEvent editEvent : editEvents)
+			sb.append("\t" + editEvent.toXML() + NEW_LINE);
 		sb.append("</sw-logs>");
 		return sb.toString();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

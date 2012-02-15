@@ -4,23 +4,26 @@ import sequence.model.Sequence;
 import sequence.ui.component.sequence.SequenceContainer;
 
 public class RemoveSubSequence extends Command {
-	private SequenceContainer parent;
-	
-	public RemoveSubSequence(Sequence sequence, SequenceContainer parent)
-	{
-		this.model=sequence;
+	private final SequenceContainer parent;
+
+	public RemoveSubSequence(final Sequence sequence,
+			final SequenceContainer parent) {
+		model = sequence;
 		this.parent = parent;
-		this.undo = new AddSubSequence(sequence, parent, this);
+		undo = new AddSubSequence(sequence, parent, this);
 	}
-	public RemoveSubSequence(Sequence sequence, SequenceContainer parent, AddSubSequence addSubSequence) {
-		this.model=sequence;
+
+	public RemoveSubSequence(final Sequence sequence,
+			final SequenceContainer parent, final AddSubSequence addSubSequence) {
+		model = sequence;
 		this.parent = parent;
-		this.undo = addSubSequence;
+		undo = addSubSequence;
 	}
+
 	@Override
 	public void Do() {
-		for(SequenceContainer current : parent.getChilds()) {
-			if(current.getView().getModel().equals(model)) {
+		for (final SequenceContainer current : parent.getChilds()) {
+			if (current.getView().getModel().equals(model)) {
 				parent.getChilds().remove(current);
 				parent.remove(current);
 				break;

@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-
 import sequence.model.Sequence;
 import sequence.model.activity.Activity;
 import sequence.mvc.Controller;
@@ -17,21 +16,20 @@ import sequence.ui.window.MainWindow;
 public class ActivityMenuDeleteController extends Controller implements
 		ActionListener {
 
-	public ActivityMenuDeleteController(Model model, View view) {
+	public ActivityMenuDeleteController(final Model model, final View view) {
 		super(model, view);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		int response = JOptionPane.showConfirmDialog(
-				getView(),
+	public void actionPerformed(final ActionEvent e) {
+		final int response = JOptionPane.showConfirmDialog(getView(),
 				"Are you sur you want to delete this activity?",
-				"Delete activity",
-				JOptionPane.YES_NO_OPTION,
-				JOptionPane.WARNING_MESSAGE
-		);
+				"Delete activity", JOptionPane.YES_NO_OPTION,
+				JOptionPane.WARNING_MESSAGE);
 		if (response == JOptionPane.NO_OPTION)
 			return;
-		((MainWindow) getView().getTopLevelAncestor()).getProcessor().Do(new RemoveActivity((Activity) getModel(), (Sequence) ((View) getView().getParent()).getModel()));
+		((MainWindow) getView().getTopLevelAncestor()).getProcessor().Do(
+				new RemoveActivity((Activity) getModel(),
+						(Sequence) ((View) getView().getParent()).getModel()));
 	}
 }

@@ -8,38 +8,37 @@ import sequence.mvc.DefaultModel;
  * The Activity model.
  */
 public class Activity extends DefaultModel implements Comparable<Activity> {
-	
+
 	/** The id. */
 	private final int id;
-	
+
 	/** The state. */
 	private String state;
-	
+
 	/** The discipline. */
 	private int discipline;
-	
+
 	/** The type. */
 	private int type;
-	
+
 	/** The activitytime. */
 	private Activitytime activitytime;
-	
+
 	/** The actuator. */
 	private Actuator actuator;
-	
+
 	/** The action. */
 	private Action action;
-	
+
 	/** The used instrument. */
 	private UsedInstruments usedInstrument;
-	
+
 	/** The anatomic structure. */
 	private AnatomicStructure anatomicStructure;
-	
+
 	/** The note. */
 	private Note note;
 
-	
 	/**
 	 * Instantiates a new activity.
 	 * 
@@ -52,14 +51,15 @@ public class Activity extends DefaultModel implements Comparable<Activity> {
 	 * @param type
 	 *            the type number
 	 */
-	public Activity(int id, String state, int discipline, int type) {
-		this.id=id;
-		this.state=state;
-		this.discipline=discipline;
-		this.type=type;
-		
-		this.activitytime=new Activitytime();
-		this.usedInstrument=new UsedInstruments();
+	public Activity(final int id, final String state, final int discipline,
+			final int type) {
+		this.id = id;
+		this.state = state;
+		this.discipline = discipline;
+		this.type = type;
+
+		activitytime = new Activitytime();
+		usedInstrument = new UsedInstruments();
 	}
 
 	/**
@@ -68,27 +68,28 @@ public class Activity extends DefaultModel implements Comparable<Activity> {
 	 * @param activity
 	 *            the copied activity
 	 */
-	public Activity(Activity activity) {
-		this.id=activity.getId();
-		this.state=activity.getState();
-		this.discipline=activity.getDiscipline();
-		this.type=activity.getType();
-		
-		this.activitytime=activity.getActivitytime();
-		this.actuator=activity.getActuator();
-		this.usedInstrument=activity.getUsedInstrument();
+	public Activity(final Activity activity) {
+		id = activity.getId();
+		state = activity.getState();
+		discipline = activity.getDiscipline();
+		type = activity.getType();
+
+		activitytime = activity.getActivitytime();
+		actuator = activity.getActuator();
+		usedInstrument = activity.getUsedInstrument();
 	}
-	
+
 	/**
 	 * Sets the state.
 	 * 
 	 * @param state
 	 *            the new state
 	 */
-	public void setState(String state) {
-		if(this.state == state) return;
-		this.state=state;
-		this.modelChange();
+	public void setState(final String state) {
+		if (this.state == state)
+			return;
+		this.state = state;
+		modelChange();
 	}
 
 	/**
@@ -106,10 +107,11 @@ public class Activity extends DefaultModel implements Comparable<Activity> {
 	 * @param note
 	 *            the new note
 	 */
-	public void setNote(Note note) {
-		if(this.note == note) return;
+	public void setNote(final Note note) {
+		if (this.note == note)
+			return;
 		this.note = note;
-		this.modelChange();
+		modelChange();
 	}
 
 	/**
@@ -156,19 +158,20 @@ public class Activity extends DefaultModel implements Comparable<Activity> {
 	public Activitytime getActivitytime() {
 		return activitytime;
 	}
-	
+
 	/**
 	 * Sets the activitytime.
 	 * 
 	 * @param activitytime
 	 *            the new activitytime
 	 */
-	public void setActivitytime(Activitytime activitytime) {
-		if(this.activitytime == activitytime) return;
-		this.activitytime=activitytime;
-		this.modelChange();
+	public void setActivitytime(final Activitytime activitytime) {
+		if (this.activitytime == activitytime)
+			return;
+		this.activitytime = activitytime;
+		modelChange();
 	}
-	
+
 	/**
 	 * Gets the actuator.
 	 * 
@@ -186,17 +189,18 @@ public class Activity extends DefaultModel implements Comparable<Activity> {
 	public Action getAction() {
 		return action;
 	}
-        
-    /**
+
+	/**
 	 * Sets the used instrument.
 	 * 
 	 * @param usedInstruments
 	 *            the new used instrument
 	 */
-    public void setUsedInstrument(UsedInstruments usedInstruments) {
-        if(this.usedInstrument == usedInstruments) return;
-		this.usedInstrument=usedInstruments;
-		this.modelChange();
+	public void setUsedInstrument(final UsedInstruments usedInstruments) {
+		if (usedInstrument == usedInstruments)
+			return;
+		usedInstrument = usedInstruments;
+		modelChange();
 	}
 
 	/**
@@ -223,38 +227,42 @@ public class Activity extends DefaultModel implements Comparable<Activity> {
 	 * @param actuator
 	 *            the new actuator
 	 */
-	public void setActuator(Actuator actuator) {
-		if(this.actuator == actuator) return;
-		this.actuator=actuator;
-		this.modelChange();
+	public void setActuator(final Actuator actuator) {
+		if (this.actuator == actuator)
+			return;
+		this.actuator = actuator;
+		modelChange();
 	}
-	
+
 	/**
 	 * Sets the treated structure.
 	 * 
 	 * @param anatomicStructure
 	 *            the new treated structure
 	 */
-	public void setTreatedStructure(AnatomicStructure anatomicStructure) {
-		if(this.anatomicStructure == anatomicStructure) return;
-		this.anatomicStructure=anatomicStructure;
-		this.modelChange();
+	public void setTreatedStructure(final AnatomicStructure anatomicStructure) {
+		if (this.anatomicStructure == anatomicStructure)
+			return;
+		this.anatomicStructure = anatomicStructure;
+		modelChange();
 	}
-	
+
 	/**
 	 * Sets the action.
 	 * 
 	 * @param action
 	 *            the new action
 	 */
-	public void setAction(Action action) {
-		if(this.action == action) return;
-		this.action=action;
-		this.modelChange();
+	public void setAction(final Action action) {
+		if (this.action == action)
+			return;
+		this.action = action;
+		modelChange();
 	}
-	
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -274,12 +282,13 @@ public class Activity extends DefaultModel implements Comparable<Activity> {
 	 */
 	public String toToolTip() {
 		final String NEW_LINE = "<br>";
-		return "<html>" + "&lt;" + action + ", " + anatomicStructure + ", " + usedInstrument + "&gt;" + NEW_LINE
-				+ "begin at : " + activitytime.getStartTime() + NEW_LINE
-				+ "end at : " + activitytime.getStopTime() + NEW_LINE
-				+ "duration : " + activitytime.getDuration() + "</html>";
+		return "<html>" + "&lt;" + action + ", " + anatomicStructure + ", "
+				+ usedInstrument + "&gt;" + NEW_LINE + "begin at : "
+				+ activitytime.getStartTime() + NEW_LINE + "end at : "
+				+ activitytime.getStopTime() + NEW_LINE + "duration : "
+				+ activitytime.getDuration() + "</html>";
 	}
-	
+
 	/**
 	 * Return activity in XML format.
 	 * 
@@ -287,20 +296,23 @@ public class Activity extends DefaultModel implements Comparable<Activity> {
 	 */
 	public String toXML() {
 		final String NEW_LINE = System.getProperty("line.separator");
-		StringBuilder sb = new StringBuilder("<activity id=\""+id+"\" state=\""+state+"\" discipline=\""+discipline+"\" type=\""+type+"\">"+NEW_LINE);
-		if(activitytime!=null)
-			sb.append("\t"+activitytime.toXML()+NEW_LINE);
-		if(actuator!=null)
-			sb.append("\t"+actuator.toXML()+NEW_LINE);
-		if(action!=null)
-			sb.append("\t<action>"+action.toXML()+"</action>"+NEW_LINE);
-		if(usedInstrument!=null)
-			sb.append("\t"+usedInstrument.toXML()+NEW_LINE);
-		if(anatomicStructure!=null)
-			sb.append("\t<treatedStructure>"+anatomicStructure.toXML()+"</treatedStructure>"+NEW_LINE);
-		if(note!=null)
-			sb.append("\t"+note.toXML()+NEW_LINE);
-		sb.append("</activity>"+NEW_LINE);
+		final StringBuilder sb = new StringBuilder("<activity id=\"" + id
+				+ "\" state=\"" + state + "\" discipline=\"" + discipline
+				+ "\" type=\"" + type + "\">" + NEW_LINE);
+		if (activitytime != null)
+			sb.append("\t" + activitytime.toXML() + NEW_LINE);
+		if (actuator != null)
+			sb.append("\t" + actuator.toXML() + NEW_LINE);
+		if (action != null)
+			sb.append("\t<action>" + action.toXML() + "</action>" + NEW_LINE);
+		if (usedInstrument != null)
+			sb.append("\t" + usedInstrument.toXML() + NEW_LINE);
+		if (anatomicStructure != null)
+			sb.append("\t<treatedStructure>" + anatomicStructure.toXML()
+					+ "</treatedStructure>" + NEW_LINE);
+		if (note != null)
+			sb.append("\t" + note.toXML() + NEW_LINE);
+		sb.append("</activity>" + NEW_LINE);
 		return sb.toString();
 	}
 
@@ -310,10 +322,11 @@ public class Activity extends DefaultModel implements Comparable<Activity> {
 	 * @param type
 	 *            the new type
 	 */
-	public void setType(int type) {
-		if(this.type == type) return;
-		this.type=type;
-		this.modelChange();
+	public void setType(final int type) {
+		if (this.type == type)
+			return;
+		this.type = type;
+		modelChange();
 	}
 
 	/**
@@ -322,14 +335,15 @@ public class Activity extends DefaultModel implements Comparable<Activity> {
 	 * @param discipline
 	 *            the new discipline
 	 */
-	public void setDiscipline(int discipline) {
-		if(this.discipline == discipline) return;
-		this.discipline=discipline;
-		this.modelChange();
+	public void setDiscipline(final int discipline) {
+		if (this.discipline == discipline)
+			return;
+		this.discipline = discipline;
+		modelChange();
 	}
 
 	@Override
-	public int compareTo(Activity o) {
+	public int compareTo(final Activity o) {
 		return new Integer(id).compareTo(o.getId());
 	}
 }

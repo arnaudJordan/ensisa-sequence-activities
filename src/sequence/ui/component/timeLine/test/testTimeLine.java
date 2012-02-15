@@ -20,35 +20,36 @@ public class testTimeLine extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	public testTimeLine() {
-		SAXParserFactory factory = SAXParserFactory.newInstance();
+		final SAXParserFactory factory = SAXParserFactory.newInstance();
 
 		SAXParser parser;
 		try {
 			parser = factory.newSAXParser();
-			File parsedFile = new File("C:\\Documents and Settings\\voegtlin\\Bureau\\data.xml");
-			SequenceHandler sequenceHandler = new SequenceHandler();
+			final File parsedFile = new File(
+					"C:\\Documents and Settings\\voegtlin\\Bureau\\data.xml");
+			final SequenceHandler sequenceHandler = new SequenceHandler();
 			parser.parse(parsedFile, sequenceHandler);
 
-			Sequence sequence = sequenceHandler.getSequence();
-			Phases model = sequence.getPhases();
-			TimeLineView view = new TimeLineView(model);
+			final Sequence sequence = sequenceHandler.getSequence();
+			final Phases model = sequence.getPhases();
+			final TimeLineView view = new TimeLineView(model);
 
 			this.add(view);
-			this.pack();
-			this.setVisible(true);
-		} catch (ParserConfigurationException e) {
+			pack();
+			setVisible(true);
+		} catch (final ParserConfigurationException e) {
 			e.printStackTrace();
-		} catch (SAXException e) {
+		} catch (final SAXException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable(){
+	public static void main(final String[] args) {
+		EventQueue.invokeLater(new Runnable() {
 			@Override
-			public void run(){
+			public void run() {
 				new testTimeLine();
 			}
 		});

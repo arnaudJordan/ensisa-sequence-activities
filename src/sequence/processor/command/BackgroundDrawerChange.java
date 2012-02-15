@@ -6,18 +6,21 @@ import sequence.ui.utilities.drawer.StripedBackgroundDrawer;
 import sequence.utilities.EventDispatcher;
 
 public class BackgroundDrawerChange extends Command {
-	private BackgroundDrawer bd;
-	
-	public BackgroundDrawerChange(BackgroundDrawer bd)
-	{
-		this.bd=bd;
-		BackgroundDrawer bd2 = (bd instanceof StripedBackgroundDrawer) ? new FullBackgroundDrawer() : new StripedBackgroundDrawer();
-		this.undo=new BackgroundDrawerChange(bd2, this);
+	private final BackgroundDrawer bd;
+
+	public BackgroundDrawerChange(final BackgroundDrawer bd) {
+		this.bd = bd;
+		final BackgroundDrawer bd2 = (bd instanceof StripedBackgroundDrawer) ? new FullBackgroundDrawer()
+				: new StripedBackgroundDrawer();
+		undo = new BackgroundDrawerChange(bd2, this);
 	}
-	public BackgroundDrawerChange(BackgroundDrawer bd, BackgroundDrawerChange stripedChange) {
-		this.bd=bd;
-		this.undo=stripedChange;
+
+	public BackgroundDrawerChange(final BackgroundDrawer bd,
+			final BackgroundDrawerChange stripedChange) {
+		this.bd = bd;
+		undo = stripedChange;
 	}
+
 	@Override
 	public void Do() {
 		EventDispatcher.backgroundChanged(bd);

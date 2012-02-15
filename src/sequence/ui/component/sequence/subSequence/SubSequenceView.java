@@ -11,23 +11,25 @@ import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuInfo
 
 public class SubSequenceView extends View {
 	private static final long serialVersionUID = 1L;
-	private View summarizedView;
-	private JPopupMenu popup;
+	private final View summarizedView;
+	private final JPopupMenu popup;
 
-	public SubSequenceView(Model model, View summarizedView) {
+	public SubSequenceView(final Model model, final View summarizedView) {
 		super(model);
 		setRenderingModel(new SubSequenceRenderingModel());
 		this.summarizedView = summarizedView;
 		setRenderer(new SubSequenceRenderer(this));
 		popup = new JPopupMenu();
-		JMenuItem exportMenu = new JMenuItem("Export");
-		exportMenu.addActionListener(new SubSequenceMenuExportController(getModel(), this));		
+		final JMenuItem exportMenu = new JMenuItem("Export");
+		exportMenu.addActionListener(new SubSequenceMenuExportController(
+				getModel(), this));
 		popup.add(exportMenu);
-	    JMenuItem infoItem = new JMenuItem("Info");
-	    infoItem.addActionListener(new SubSequenceMenuInfoController(getModel(), this));
-	    popup.add(infoItem);
+		final JMenuItem infoItem = new JMenuItem("Info");
+		infoItem.addActionListener(new SubSequenceMenuInfoController(
+				getModel(), this));
+		popup.add(infoItem);
 	}
-	
+
 	public View getSummarizedView() {
 		return summarizedView;
 	}
@@ -35,11 +37,11 @@ public class SubSequenceView extends View {
 	public JPopupMenu getPopup() {
 		return popup;
 	}
-	
+
 	@Override
-	public void modelChanged(Model m) {
+	public void modelChanged(final Model m) {
 		removeAll();
-		((SubSequenceRenderer)getRenderer()).initialize();
+		((SubSequenceRenderer) getRenderer()).initialize();
 		((SequenceContainer) getSummarizedView().getParent()).revalidate();
 		getSummarizedView().getParent().repaint();
 	}

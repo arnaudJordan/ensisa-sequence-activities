@@ -4,7 +4,7 @@ package sequence.model.location;
  * The Country model.
  */
 public class Country {
-	
+
 	/** The country. */
 	private final String country;
 
@@ -14,7 +14,7 @@ public class Country {
 	 * @param country
 	 *            the country
 	 */
-	public Country(String country) {
+	public Country(final String country) {
 		this.country = country;
 	}
 
@@ -27,7 +27,9 @@ public class Country {
 		return country;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -41,6 +43,6 @@ public class Country {
 	 * @return the XML string
 	 */
 	public String toXML() {
-		return "<country>"+country+"</country>";
+		return "<country>" + country + "</country>";
 	}
 }

@@ -14,66 +14,64 @@ import sequence.parser.SequenceHandler;
 import sequence.ui.window.MainWindow;
 import sequence.utilities.Config;
 
-
 public class WindowController implements WindowListener {
-	private MainWindow window;
-	
-	public WindowController(MainWindow window)
-	{
+	private final MainWindow window;
+
+	public WindowController(final MainWindow window) {
 		this.window = window;
 	}
-	
+
 	@Override
-	public void windowOpened(WindowEvent e) {
-		Config config = this.window.getConfig();
-		List<File> lastOpenedFiles = config.getLastOpenedFiles();
-		for(File file:lastOpenedFiles)
-		{
-			try{
-				SAXParserFactory factory = SAXParserFactory.newInstance();
-				SAXParser parser = factory.newSAXParser();
-				SequenceHandler sequenceHandler = new SequenceHandler(file);
-				parser.parse(file, sequenceHandler);				
-				
-				Sequence sequence = sequenceHandler.getSequence();
+	public void windowOpened(final WindowEvent e) {
+		final Config config = window.getConfig();
+		final List<File> lastOpenedFiles = config.getLastOpenedFiles();
+		for (final File file : lastOpenedFiles) {
+			try {
+				final SAXParserFactory factory = SAXParserFactory.newInstance();
+				final SAXParser parser = factory.newSAXParser();
+				final SequenceHandler sequenceHandler = new SequenceHandler(
+						file);
+				parser.parse(file, sequenceHandler);
+
+				final Sequence sequence = sequenceHandler.getSequence();
 				window.add(sequence);
-			}catch(Exception ex){
+			} catch (final Exception ex) {
 				ex.printStackTrace();
 			}
 		}
 	}
 
 	@Override
-	public void windowClosing(WindowEvent e) {
-		Config config = this.window.getConfig();
-		config.setWindowSize(this.window.getSize());
-		config.setWindowLocation(this.window.getLocation());
-		config.setExtendedState(this.window.getExtendedState());
+	public void windowClosing(final WindowEvent e) {
+		final Config config = window.getConfig();
+		config.setWindowSize(window.getSize());
+		config.setWindowLocation(window.getLocation());
+		config.setExtendedState(window.getExtendedState());
 		try {
-			Config.serialize(this.window.getConfig());
-		} catch (IOException ex) {
+			Config.serialize(window.getConfig());
+		} catch (final IOException ex) {
 			ex.printStackTrace();
 		}
 	}
 
 	@Override
-	public void windowClosed(WindowEvent e) {
+	public void windowClosed(final WindowEvent e) {
 	}
 
 	@Override
-	public void windowIconified(WindowEvent e) {
+	public void windowIconified(final WindowEvent e) {
 	}
 
 	@Override
-	public void windowDeiconified(WindowEvent e) {
+	public void windowDeiconified(final WindowEvent e) {
 	}
 
 	@Override
-	public void windowActivated(WindowEvent e) {
+	public void windowActivated(final WindowEvent e) {
 	}
 
 	@Override
-	public void windowDeactivated(WindowEvent e) {
+	public void windowDeactivated(final WindowEvent e) {
 	}
 
 }

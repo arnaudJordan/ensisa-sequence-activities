@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
 import sequence.model.Sequence;
 import sequence.mvc.View;
 import sequence.processor.Processor;
@@ -37,93 +38,93 @@ import sequence.utilities.EventDispatcher;
 public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private Config config;
-	
+
 	/* Model */
-	private List<SequenceContainer> sequenceContainers;
-	private Processor processor;
-	
+	private final List<SequenceContainer> sequenceContainers;
+	private final Processor processor;
+
 	/* Window elements */
-	private MDIDesktopPane mainPane;
+	private final MDIDesktopPane mainPane;
 	private JSlider scaleSlider;
 	private JTextField thresholdField;
 
-	public MainWindow(String title) throws HeadlessException {
+	public MainWindow(final String title) throws HeadlessException {
 		super(title);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.addWindowListener(new WindowController(this));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addWindowListener(new WindowController(this));
 
-		this.processor=new SafeProcessor();
+		processor = new SafeProcessor();
 		try {
 			setConfig(Config.deserialize());
-		}catch(Exception e){
+		} catch (final Exception e) {
 			setConfig(new Config());
 		}
-		this.setPreferredSize(config.getWindowSize());
+		setPreferredSize(config.getWindowSize());
 		this.setLocation(config.getWindowLocation());
-		this.setLookAndFeel();
-		
-		this.sequenceContainers = new ArrayList<SequenceContainer>();
-		this.mainPane = new MDIDesktopPane();
-		
-		this.setupScaleSlider();
-		this.setupThresholdField();
-		
-		this.setJMenuBar(new MenuBar(this));
-		
-		JScrollPane scrollPane = new JScrollPane(this.getMainPane());
+		setLookAndFeel();
+
+		sequenceContainers = new ArrayList<SequenceContainer>();
+		mainPane = new MDIDesktopPane();
+
+		setupScaleSlider();
+		setupThresholdField();
+
+		setJMenuBar(new MenuBar(this));
+
+		final JScrollPane scrollPane = new JScrollPane(getMainPane());
 		scrollPane.setWheelScrollingEnabled(true);
 		this.add(scrollPane);
 
-		this.pack();
-		this.setVisible(true);
+		pack();
+		setVisible(true);
 	}
-	
+
 	private void setupScaleSlider() {
-		this.scaleSlider = new JSlider(SwingConstants.HORIZONTAL, 100, 300, 100);
-		Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
+		scaleSlider = new JSlider(SwingConstants.HORIZONTAL, 100, 300, 100);
+		final Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
 		labelTable.put(new Integer(100), new JLabel("100%"));
 		labelTable.put(new Integer(200), new JLabel("200%"));
 		labelTable.put(new Integer(300), new JLabel("300%"));
-		this.scaleSlider.setLabelTable(labelTable);
-		this.scaleSlider.setMajorTickSpacing(100);
-		this.scaleSlider.setPaintLabels(true);
-		this.scaleSlider.setPaintTicks(true);
-		this.scaleSlider.addChangeListener(new ChangeListener() {
+		scaleSlider.setLabelTable(labelTable);
+		scaleSlider.setMajorTickSpacing(100);
+		scaleSlider.setPaintLabels(true);
+		scaleSlider.setPaintTicks(true);
+		scaleSlider.addChangeListener(new ChangeListener() {
 			@Override
-			public void stateChanged(ChangeEvent changeEvent) {
+			public void stateChanged(final ChangeEvent changeEvent) {
 				EventDispatcher.scaleChanged((float) (scaleSlider.getValue()) / 100);
 			}
 		});
 	}
 
 	private void setupThresholdField() {
-		this.thresholdField = new JTextField("0", 2);
-		this.thresholdField.addActionListener(new ActionListener() {
+		thresholdField = new JTextField("0", 2);
+		thresholdField.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
+			public void actionPerformed(final ActionEvent actionEvent) {
 				updateThresholdField(actionEvent);
 			}
 		});
-		this.thresholdField.addFocusListener(new FocusListener() {
+		thresholdField.addFocusListener(new FocusListener() {
 			@Override
-			public void focusLost(FocusEvent focusEvent) {
+			public void focusLost(final FocusEvent focusEvent) {
 				updateThresholdField(focusEvent);
 			}
+
 			@Override
-			public void focusGained(FocusEvent focusEvent) {
+			public void focusGained(final FocusEvent focusEvent) {
 			}
 		});
 	}
-	
-	private void updateThresholdField(AWTEvent e) {
-		Object source = e.getSource();
-		JTextField s = (JTextField) source;
-		for (SequenceContainer current : sequenceContainers) {
-			for (SequenceContainer subSequence : current.getChilds()) {
+
+	private void updateThresholdField(final AWTEvent e) {
+		final Object source = e.getSource();
+		final JTextField s = (JTextField) source;
+		for (final SequenceContainer current : sequenceContainers) {
+			for (final SequenceContainer subSequence : current.getChilds()) {
 				((SubSequenceRenderingModel) subSequence.getView()
-						.getRenderingModel())
-						.setDurationThreshold(Integer.parseInt(s
-								.getText()));
+						.getRenderingModel()).setDurationThreshold(Integer
+						.parseInt(s.getText()));
 			}
 		}
 		SubSequenceRenderingModel.CURRENT_DURATION_THRESHOLD = Integer
@@ -133,21 +134,22 @@ public class MainWindow extends JFrame {
 	private void setLookAndFeel() {
 		try {
 			UIManager.setLookAndFeel(config.getStyle());
-		} catch (Exception e) {
+		} catch (final Exception e) {
 		}
 	}
-	
+
 	public Config getConfig() {
 		return config;
 	}
 
-	public void setConfig(Config config) {
+	public void setConfig(final Config config) {
 		this.config = config;
 	}
 
 	public List<SequenceContainer> getSequenceContainers() {
 		return sequenceContainers;
 	}
+
 	public JSlider getScaleSlider() {
 		return scaleSlider;
 	}
@@ -156,53 +158,54 @@ public class MainWindow extends JFrame {
 		return thresholdField;
 	}
 
-	public void add(Sequence sequence)
-	{
+	public void add(final Sequence sequence) {
 		getProcessor().Do(new AddSequence(sequence, this));
 	}
-	public void remove(SequenceContainer sequenceContainer)
-	{
-		getProcessor().Do(new RemoveSequence((Sequence) sequenceContainer.getView().getModel(), this));
+
+	public void remove(final SequenceContainer sequenceContainer) {
+		getProcessor().Do(
+				new RemoveSequence((Sequence) sequenceContainer.getView()
+						.getModel(), this));
 	}
-	public void remove(Sequence sequence) {
-		for(SequenceContainer sc : sequenceContainers)
-		{
-			if(sc.getView().getModel().equals(sequence))
-			{
-				this.sequenceContainers.remove(sc);
-		        this.mainPane.remove(sc);
-		        config.removeOpenedFile(sequence.getFile());
-		        try {
+
+	public void remove(final Sequence sequence) {
+		for (final SequenceContainer sc : sequenceContainers) {
+			if (sc.getView().getModel().equals(sequence)) {
+				sequenceContainers.remove(sc);
+				mainPane.remove(sc);
+				config.removeOpenedFile(sequence.getFile());
+				try {
 					Config.serialize(config);
-				} catch (IOException e) {
+				} catch (final IOException e) {
 					e.printStackTrace();
 				}
-		        break;
+				break;
 			}
-		}		
+		}
 	}
-	
+
 	public Processor getProcessor() {
 		return processor;
 	}
-	
-	public static void main(String[] args) {
-		System.setProperty("awt.useSystemAAFontSettings","on");
+
+	public static void main(final String[] args) {
+		System.setProperty("awt.useSystemAAFontSettings", "on");
 		System.setProperty("swing.aatext", "true");
-		EventQueue.invokeLater(new Runnable(){
+		EventQueue.invokeLater(new Runnable() {
 			@Override
-			public void run(){
+			public void run() {
 				new MainWindow("Sequence activities");
 			}
 		});
 	}
+
 	public MDIDesktopPane getMainPane() {
 		return mainPane;
 	}
-	public View getSequenceContainers(Sequence selectedSequence) {
-		for(SequenceContainer s : sequenceContainers)
-		{
-			if(s.getView().getModel().equals(selectedSequence))
+
+	public View getSequenceContainers(final Sequence selectedSequence) {
+		for (final SequenceContainer s : sequenceContainers) {
+			if (s.getView().getModel().equals(selectedSequence))
 				return s.getView();
 		}
 		return null;

@@ -11,44 +11,52 @@ import sequence.ui.utilities.drawer.TimeIndicatorDrawer;
 
 public class TimeIndicatorRenderer extends DefaultRenderer implements Renderer {
 	protected TimeIndicatorDrawer tid;
-	
-	public TimeIndicatorRenderer(View view) {
+
+	public TimeIndicatorRenderer(final View view) {
 		super(view);
-		this.tid=new TimeIndicatorDrawer();
+		tid = new TimeIndicatorDrawer();
 	}
 
 	@Override
-	public void renderView(Graphics2D g) {
+	public void renderView(final Graphics2D g) {
 		super.renderView(g);
-        renderTimeIndicator(g);
+		renderTimeIndicator(g);
 	}
-	
-	private void renderTimeIndicator(Graphics2D g) {
+
+	private void renderTimeIndicator(final Graphics2D g) {
 		renderBackground(g);
 	}
 
-	private void renderBackground(Graphics2D g) {
-		Phase phase = (Phase) ((TimeIndicatorView)getView()).getModel();
-		if(phase != null)
-			tid.Draw(g, (int)(getView().getSize().getWidth()), (int)(getView().getSize().getHeight()), ((TimeIndicatorRenderingModel)getView().getRenderingModel()).getColor());
+	private void renderBackground(final Graphics2D g) {
+		final Phase phase = (Phase) ((TimeIndicatorView) getView()).getModel();
+		if (phase != null)
+			tid.Draw(g, (int) (getView().getSize().getWidth()),
+					(int) (getView().getSize().getHeight()),
+					((TimeIndicatorRenderingModel) getView()
+							.getRenderingModel()).getColor());
 	}
-	
-	public void setBackgroundDrawer(TimeIndicatorDrawer tid)
-	{
-		this.tid=tid;
+
+	public void setBackgroundDrawer(final TimeIndicatorDrawer tid) {
+		this.tid = tid;
 		getView().repaint();
 	}
+
 	public TimeIndicatorDrawer getBackgroundDrawer() {
-		return this.tid;
+		return tid;
 	}
+
 	@Override
 	public Dimension getPreferredSize() {
-		Phase phase = (Phase) ((TimeIndicatorView)getView()).getModel();
-		TimeIndicatorRenderingModel renderingModel = ((TimeIndicatorRenderingModel)getView().getRenderingModel());
-		if(phase != null && renderingModel != null)
-			return new Dimension((int)(((TimeIndicatorView) this.getView()).getDuration()* renderingModel.getHScale()) + 1, (int)(((TimeIndicatorRenderingModel)getView().getRenderingModel()).getHeight() * renderingModel.getVScale()));
+		final Phase phase = (Phase) ((TimeIndicatorView) getView()).getModel();
+		final TimeIndicatorRenderingModel renderingModel = ((TimeIndicatorRenderingModel) getView()
+				.getRenderingModel());
+		if (phase != null && renderingModel != null)
+			return new Dimension((int) (((TimeIndicatorView) getView())
+					.getDuration() * renderingModel.getHScale()) + 1,
+					(int) (((TimeIndicatorRenderingModel) getView()
+							.getRenderingModel()).getHeight() * renderingModel
+							.getVScale()));
 		return super.getPreferredSize();
 	}
 
-	
 }
