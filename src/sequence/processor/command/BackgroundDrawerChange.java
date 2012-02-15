@@ -1,6 +1,7 @@
 package sequence.processor.command;
 
 import sequence.ui.utilities.drawer.BackgroundDrawer;
+import sequence.ui.utilities.drawer.FullBackgroundDrawer;
 import sequence.ui.utilities.drawer.StripedBackgroundDrawer;
 import sequence.utilities.EventDispatcher;
 
@@ -10,7 +11,7 @@ public class BackgroundDrawerChange extends Command {
 	public BackgroundDrawerChange(BackgroundDrawer bd)
 	{
 		this.bd=bd;
-		BackgroundDrawer bd2 = (bd instanceof StripedBackgroundDrawer) ? new BackgroundDrawer() : new StripedBackgroundDrawer();
+		BackgroundDrawer bd2 = (bd instanceof StripedBackgroundDrawer) ? new FullBackgroundDrawer() : new StripedBackgroundDrawer();
 		this.undo=new BackgroundDrawerChange(bd2, this);
 	}
 	public BackgroundDrawerChange(BackgroundDrawer bd, BackgroundDrawerChange stripedChange) {

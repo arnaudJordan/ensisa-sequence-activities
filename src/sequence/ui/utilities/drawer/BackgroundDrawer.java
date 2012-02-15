@@ -3,8 +3,8 @@ package sequence.ui.utilities.drawer;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class BackgroundDrawer {
-	private Color color;
+public abstract class BackgroundDrawer {
+	protected Color color;
 	
 	public BackgroundDrawer() {
 		this.color=Color.BLACK;
@@ -12,13 +12,8 @@ public class BackgroundDrawer {
 	public BackgroundDrawer(Color color) {
 		this.color=color;
 	}
-	public void Draw(Graphics2D g, int width, int height)
-	{
-		Draw(g, width, height, this.color);
+	public void draw(Graphics2D g, int width, int height) {
+		draw(g, width, height, color);
 	}
-	public void Draw(Graphics2D g, int width, int height, Color color)
-	{
-		g.setColor(color);
-		g.fillRect(0, 0, width, height);
-	}
+	public abstract void draw(Graphics2D g, int width, int height, Color color);
 }

@@ -9,9 +9,10 @@ import sequence.mvc.DefaultRenderer;
 import sequence.mvc.Renderer;
 import sequence.mvc.View;
 import sequence.ui.utilities.drawer.BackgroundDrawer;
+import sequence.ui.utilities.drawer.FullBackgroundDrawer;
 
 public class ActivityRenderer extends DefaultRenderer implements Renderer {
-	public static BackgroundDrawer CURRENT_BACKGROUND_DRAWER = new BackgroundDrawer();
+	public static BackgroundDrawer CURRENT_BACKGROUND_DRAWER = new FullBackgroundDrawer();
 	
 	protected BackgroundDrawer bd;
 	private boolean contracted;
@@ -39,7 +40,7 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 		ActivityRenderingModel renderingModel = ((ActivityRenderingModel)getView().getRenderingModel());
 		int parentWidth = getView().getParent().getWidth();
 		int activityWidth = (int) (activity.getActivitytime().getDuration() * renderingModel.getHScale());
-		bd.Draw(g, activityWidth, (int) (renderingModel.getHeight() * renderingModel.getVScale()), ((ActivityRenderingModel)getView().getRenderingModel()).getColor());
+		bd.draw(g, activityWidth, (int) (renderingModel.getHeight() * renderingModel.getVScale()), ((ActivityRenderingModel)getView().getRenderingModel()).getColor());
 		if(parentWidth<activityWidth)
 		{
 			this.contracted = true;
@@ -77,10 +78,9 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 		return super.getPreferredSize();
 	}
 	
-	public void setBackgroundDrawer(BackgroundDrawer bd)
-	{
-		this.bd=bd;
-		getView().repaint();
+	public void setBackgroundDrawer(BackgroundDrawer bd) {
+		this.bd = bd;
+		getView().getParent().repaint();
 	}
 	
 	public BackgroundDrawer getBackgroundDrawer() {

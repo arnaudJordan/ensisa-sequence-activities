@@ -39,12 +39,12 @@ public class ActivityView extends View implements BackgroundListener, Scaleable,
 	}
 	
 	public void select() {
-		selected = true;
+		setSelected(true);
 		((ActivityRenderingModel) getRenderingModel()).setOpaque();
 	}
 	
 	public void deselect() {
-		selected = false;
+		setSelected(false);
 		((ActivityRenderingModel) getRenderingModel()).setTransparent();
 	}
 
@@ -52,6 +52,10 @@ public class ActivityView extends View implements BackgroundListener, Scaleable,
 		return selected;
 	}
 	
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
 	public void addBackgroundListener(BackgroundListener bl) {
 		if (bl == null)
 			return;
@@ -90,7 +94,8 @@ public class ActivityView extends View implements BackgroundListener, Scaleable,
 	@Override
 	public void modelChanged(Model m) {
 		setToolTipText(((Activity) getModel()).toToolTip());
-		repaint();
+		if(getParent() != null)
+			getParent().repaint();
 	}
 
 	@Override
