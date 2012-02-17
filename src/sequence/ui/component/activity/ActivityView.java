@@ -135,6 +135,10 @@ public class ActivityView extends View implements BackgroundListener,
 			for (final ActivityView av : associatedActivities)
 				((ActivityRenderingModel) av.getRenderingModel()).setColor(c);
 		}
+		if (m instanceof Activity) {
+			revalidate();
+			repaint();
+		}
 		if (getParent() != null)
 			getParent().repaint();
 	}

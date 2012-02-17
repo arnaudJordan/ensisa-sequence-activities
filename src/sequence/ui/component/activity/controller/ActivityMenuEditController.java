@@ -5,10 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import sequence.model.Sequence;
+import sequence.model.activity.Activity;
 import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
-import sequence.ui.component.activity.ActivityView;
 import sequence.ui.component.sequence.subSequence.SubSequenceView;
 import sequence.ui.window.EditActivityWindow;
 import sequence.ui.window.MainWindow;
@@ -26,7 +26,8 @@ public class ActivityMenuEditController extends Controller implements
 			@Override
 			public void run() {
 				new EditActivityWindow((MainWindow) getView()
-						.getTopLevelAncestor(), (ActivityView) getView(),
+						.getTopLevelAncestor(),
+						(Activity) getView().getModel(),
 						(Sequence) ((SubSequenceView) getView().getParent())
 								.getModel()).setVisible(true);
 			}
