@@ -24,29 +24,10 @@ public class SummarizedSequenceView extends View {
 		final JMenuItem exportItem = new JMenuItem("Develop");
 		exportItem.addActionListener(new SummarizedSequenceController(
 				getModel(), this));
-
 		final JMenuItem exportMenu = new JMenuItem("Export");
 		exportMenu.addActionListener(new SubSequenceMenuExportController(
 				getModel(), this));
-		/*
-		 * JMenuItem imageExportMenu = new JMenuItem("to image");
-		 * imageExportMenu.addActionListener(new
-		 * SubSequenceMenuImageExportController(getModel(), this));
-		 * exportMenu.add(imageExportMenu);
-		 * 
-		 * JMenuItem svgExportMenu = new JMenuItem("to svg");
-		 * svgExportMenu.addActionListener(new
-		 * SubSequenceMenuSVGExportController(getModel(), this));
-		 * exportMenu.add(svgExportMenu);
-		 * 
-		 * JMenuItem tikzExportMenu = new JMenuItem("to tikz");
-		 * tikzExportMenu.addActionListener(new
-		 * SubSequenceMenuTikzExportController(getModel(), this));
-		 * exportMenu.add(tikzExportMenu);
-		 */
-
 		popup.add(exportMenu);
-
 		popup.add(exportItem);
 	}
 

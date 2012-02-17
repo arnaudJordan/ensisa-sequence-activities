@@ -3,7 +3,7 @@ package sequence.processor.command;
 import sequence.ui.utilities.drawer.BackgroundDrawer;
 import sequence.ui.utilities.drawer.FullBackgroundDrawer;
 import sequence.ui.utilities.drawer.StripedBackgroundDrawer;
-import sequence.utilities.EventDispatcher;
+import sequence.utilities.OptionEventDispatcher;
 
 public class BackgroundDrawerChange extends Command {
 	private final BackgroundDrawer bd;
@@ -23,6 +23,6 @@ public class BackgroundDrawerChange extends Command {
 
 	@Override
 	public void Do() {
-		EventDispatcher.backgroundChanged(bd);
+		OptionEventDispatcher.backgroundChanged(bd);
 	}
 }

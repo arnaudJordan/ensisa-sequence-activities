@@ -16,7 +16,7 @@ import sequence.ui.component.activity.controller.ActivityMenuDeleteController;
 import sequence.ui.component.activity.controller.ActivityMenuEditController;
 import sequence.ui.utilities.drawer.BackgroundDrawer;
 import sequence.utilities.BackgroundListener;
-import sequence.utilities.EventDispatcher;
+import sequence.utilities.OptionEventDispatcher;
 import sequence.utilities.ScaleListener;
 import sequence.utilities.Scaleable;
 import sequence.utilities.Timeable;
@@ -87,19 +87,19 @@ public class ActivityView extends View implements BackgroundListener,
 	public void addBackgroundListener(final BackgroundListener bl) {
 		if (bl == null)
 			return;
-		EventDispatcher.add(bl);
+		OptionEventDispatcher.add(bl);
 	}
 
 	public void removeBackgroundListener(final BackgroundListener bl) {
-		EventDispatcher.remove(bl);
+		OptionEventDispatcher.remove(bl);
 	}
 
 	public void addScaleListener(final ScaleListener sl) {
-		EventDispatcher.add(sl);
+		OptionEventDispatcher.add(sl);
 	}
 
 	public void removeScaleListener(final ScaleListener sl) {
-		EventDispatcher.remove(sl);
+		OptionEventDispatcher.remove(sl);
 	}
 
 	@Override

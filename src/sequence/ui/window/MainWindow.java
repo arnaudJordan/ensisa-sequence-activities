@@ -29,11 +29,10 @@ import sequence.processor.SafeProcessor;
 import sequence.processor.command.AddSequence;
 import sequence.processor.command.RemoveSequence;
 import sequence.ui.component.sequence.SequenceContainer;
-import sequence.ui.component.sequence.subSequence.SubSequenceRenderingModel;
 import sequence.ui.utilities.MDIDesktopPane;
 import sequence.ui.utilities.WindowController;
 import sequence.utilities.Config;
-import sequence.utilities.EventDispatcher;
+import sequence.utilities.OptionEventDispatcher;
 
 public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -92,7 +91,7 @@ public class MainWindow extends JFrame {
 		scaleSlider.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(final ChangeEvent changeEvent) {
-				EventDispatcher.scaleChanged((float) (scaleSlider.getValue()) / 100);
+				OptionEventDispatcher.scaleChanged((float) (scaleSlider.getValue()) / 100);
 			}
 		});
 	}
@@ -120,15 +119,7 @@ public class MainWindow extends JFrame {
 	private void updateThresholdField(final AWTEvent e) {
 		final Object source = e.getSource();
 		final JTextField s = (JTextField) source;
-		for (final SequenceContainer current : sequenceContainers) {
-			for (final SequenceContainer subSequence : current.getChilds()) {
-				((SubSequenceRenderingModel) subSequence.getView()
-						.getRenderingModel()).setDurationThreshold(Integer
-						.parseInt(s.getText()));
-			}
-		}
-		SubSequenceRenderingModel.CURRENT_DURATION_THRESHOLD = Integer
-				.parseInt(s.getText());
+		OptionEventDispatcher.thresholdChanged(Integer.parseInt(s.getText()));
 	}
 
 	private void setLookAndFeel() {
