@@ -77,6 +77,9 @@ public class Activity extends DefaultModel implements Comparable<Activity> {
 		activitytime = activity.getActivitytime();
 		actuator = activity.getActuator();
 		usedInstrument = activity.getUsedInstrument();
+		action = activity.getAction();
+		anatomicStructure = activity.getTreatedStructure();
+		note = activity.getNote();
 	}
 
 	/**
