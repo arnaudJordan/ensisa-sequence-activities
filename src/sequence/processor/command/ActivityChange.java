@@ -28,15 +28,15 @@ public class ActivityChange extends Command {
 
 	@Override
 	public void Do() {
-		final Activity oldmodel = (Activity) model;
-		oldmodel.setState(newModel.getState());
-		oldmodel.setType(newModel.getType());
-		oldmodel.setDiscipline(newModel.getDiscipline());
-		oldmodel.setActuator(newModel.getActuator());
-		oldmodel.setAction(newModel.getAction());
-		oldmodel.setUsedInstrument(newModel.getUsedInstrument());
-		oldmodel.setTreatedStructure(newModel.getTreatedStructure());
-		oldmodel.setNote(newModel.getNote());
-		oldmodel.setActivitytime(newModel.getActivitytime());
+		final Activity activity = (Activity) model;
+		activity.setState(newModel.getState());
+		activity.setType(newModel.getType());
+		activity.setDiscipline(newModel.getDiscipline());
+		activity.setActuator(newModel.getActuator());
+		activity.setAction(newModel.getAction());
+		activity.setUsedInstrument(newModel.getUsedInstrument());
+		activity.setTreatedStructure(newModel.getTreatedStructure());
+		activity.setNote(newModel.getNote());
+		activity.setActivitytime(newModel.getActivitytime());
 	}
 }
