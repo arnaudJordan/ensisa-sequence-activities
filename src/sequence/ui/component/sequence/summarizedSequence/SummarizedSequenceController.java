@@ -19,7 +19,11 @@ public class SummarizedSequenceController extends Controller implements
 
 	@Override
 	public void actionPerformed(final ActionEvent e) {
-		((SequenceContainer) getView().getParent()).add((Sequence) getModel());
+		final Sequence subSequenceModel = new Sequence(
+				((Sequence) getModel()).getWorkflowID(),
+				((SummarizedSequenceView) getView())
+						.getSortedSelectedActivities());
+		((SequenceContainer) getView().getParent()).add(subSequenceModel);
 	}
 
 	@Override

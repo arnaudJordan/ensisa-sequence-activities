@@ -98,7 +98,7 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 
 	public void setBackgroundDrawer(final BackgroundDrawer bd) {
 		this.bd = bd;
-		if(getView().getParent() != null)
+		if (getView().getParent() != null)
 			getView().getParent().repaint();
 	}
 
