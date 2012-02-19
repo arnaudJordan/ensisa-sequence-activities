@@ -1,5 +1,7 @@
 package sequence.processor.command;
 
+import java.awt.Component;
+
 import sequence.model.Sequence;
 import sequence.ui.component.sequence.SequenceContainer;
 
@@ -22,11 +24,13 @@ public class RemoveSubSequence extends Command {
 
 	@Override
 	public void Do() {
-		for (final SequenceContainer current : parent.getChilds()) {
-			if (current.getView().getModel().equals(model)) {
-				parent.getChilds().remove(current);
-				parent.remove(current);
-				break;
+		for (int i = 0; i < parent.getComponentCount(); i++) {
+			final Component c = parent.getComponent(i);
+			if (c instanceof SequenceContainer) {
+				if (((SequenceContainer) c).getView().getModel().equals(model)) {
+					parent.remove(c);
+					break;
+				}
 			}
 		}
 		parent.revalidate();

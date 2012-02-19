@@ -4,9 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,7 +22,6 @@ import sequence.ui.window.MainWindow;
 public class SequenceContainer extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private View view;
-	private List<SequenceContainer> childs;
 
 	public SequenceContainer(final View view, final String label,
 			final SequenceContainer parent) {
@@ -34,7 +30,6 @@ public class SequenceContainer extends JPanel {
 
 	public SequenceContainer(final View view, final String label) {
 		this.view = view;
-		childs = new ArrayList<SequenceContainer>();
 
 		setBackground(Color.WHITE);
 		setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -50,7 +45,6 @@ public class SequenceContainer extends JPanel {
 	public SequenceContainer(final View view, final String title,
 			final String label, final SequenceContainer parent) {
 		this.view = view;
-		childs = new ArrayList<SequenceContainer>();
 
 		setBackground(Color.WHITE);
 		setBorder(BorderFactory.createTitledBorder(title));
@@ -91,10 +85,6 @@ public class SequenceContainer extends JPanel {
 
 	public View getView() {
 		return view;
-	}
-
-	public List<SequenceContainer> getChilds() {
-		return childs;
 	}
 
 	@Override
