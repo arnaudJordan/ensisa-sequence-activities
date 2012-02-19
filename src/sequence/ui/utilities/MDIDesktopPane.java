@@ -41,7 +41,7 @@ public class MDIDesktopPane extends JDesktopPane {
 		super.setBounds(x, y, w, h);
 		checkDesktopSize();
 	}
-
+	
 	public Component add(final JInternalFrame frame) {
 		frames.add(frame);
 		final JInternalFrame[] array = getAllFrames();
@@ -85,6 +85,14 @@ public class MDIDesktopPane extends JDesktopPane {
 	}
 
 	@Override
+	public Component add(final Component c) {
+		final Component comp = super.add(c);
+		if (c instanceof JInternalFrame)
+			frames.add((JInternalFrame) c);
+		return comp;
+	}
+	
+	@Override
 	public void remove(final Component c) {
 		super.remove(c);
 		checkDesktopSize();
@@ -95,6 +103,7 @@ public class MDIDesktopPane extends JDesktopPane {
 	 * Cascade all internal frames
 	 */
 	public void cascadeFrames() {
+		System.out.println(frames);
 		int x = 0;
 		int y = 0;
 		// JInternalFrame allFrames[] = getAllFrames();
