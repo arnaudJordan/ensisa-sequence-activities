@@ -639,12 +639,10 @@ public class SequenceHandler extends DefaultHandler {
 
 	@Override
 	public void startDocument() throws SAXException {
-		System.out.println("Start parsing");
 	}
 
 	@Override
 	public void endDocument() throws SAXException {
-		System.out.println("End of parsing");
 	}
 
 	public Sequence getSequence() {
