@@ -183,7 +183,7 @@ public class OpenedFilesSelectWindow extends JDialog {
 			fstream = new FileWriter(f);
 			final BufferedWriter out = new BufferedWriter(fstream);
 			out.write(SVGFactory.AddHeader(SVGFactory.SequenceToSVG(parent
-					.getSequenceContainers(selectedSequence))));
+					.getSequenceContainer(selectedSequence).getView())));
 			out.close();
 			return true;
 		} catch (final Exception e) {
@@ -199,7 +199,7 @@ public class OpenedFilesSelectWindow extends JDialog {
 			final FileWriter fstream = new FileWriter(f);
 			final BufferedWriter out = new BufferedWriter(fstream);
 			out.write(TikzFactory.AddHeader(TikzFactory.SequenceToTikz(parent
-					.getSequenceContainers(selectedSequence))));
+					.getSequenceContainer(selectedSequence).getView())));
 			out.close();
 			return true;
 		} catch (final Exception e) {
@@ -212,9 +212,8 @@ public class OpenedFilesSelectWindow extends JDialog {
 		for (int i = 0; i < ImageIO.getWriterFormatNames().length; i++) {
 			if (ImageIO.getWriterFormatNames()[i].equals(ext)) {
 				try {
-					ImageIO.write(parent
-							.getSequenceContainers(selectedSequence)
-							.createImage(), ext, f);
+					ImageIO.write(parent.getSequenceContainer(selectedSequence)
+							.getView().createImage(), ext, f);
 					return true;
 				} catch (final IOException e) {
 					e.printStackTrace();

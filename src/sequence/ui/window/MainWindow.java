@@ -7,12 +7,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
@@ -23,12 +23,12 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import sequence.model.Sequence;
-import sequence.mvc.View;
 import sequence.processor.Processor;
 import sequence.processor.SafeProcessor;
 import sequence.processor.command.AddSequence;
 import sequence.processor.command.RemoveSequence;
 import sequence.ui.component.sequence.SequenceContainer;
+import sequence.ui.component.sequence.SequenceFrame;
 import sequence.ui.utilities.MDIDesktopPane;
 import sequence.ui.utilities.WindowController;
 import sequence.utilities.Config;
@@ -153,26 +153,8 @@ public class MainWindow extends JFrame {
 		getProcessor().Do(new AddSequence(sequence, this));
 	}
 
-	public void remove(final SequenceContainer sequenceContainer) {
-		getProcessor().Do(
-				new RemoveSequence((Sequence) sequenceContainer.getView()
-						.getModel(), this));
-	}
-
 	public void remove(final Sequence sequence) {
-		for (final SequenceContainer sc : sequenceContainers) {
-			if (sc.getView().getModel().equals(sequence)) {
-				sequenceContainers.remove(sc);
-				mainPane.remove(sc);
-				config.removeOpenedFile(sequence.getFile());
-				try {
-					Config.serialize(config);
-				} catch (final IOException e) {
-					e.printStackTrace();
-				}
-				break;
-			}
-		}
+		getProcessor().Do(new RemoveSequence(sequence, this));
 	}
 
 	public Processor getProcessor() {
@@ -194,10 +176,21 @@ public class MainWindow extends JFrame {
 		return mainPane;
 	}
 
-	public View getSequenceContainers(final Sequence selectedSequence) {
-		for (final SequenceContainer s : sequenceContainers) {
-			if (s.getView().getModel().equals(selectedSequence))
-				return s.getView();
+	public SequenceContainer getSequenceContainer(final Sequence selectedSequence) {
+		for (final SequenceContainer sc : sequenceContainers) {
+			if (sc.getView().getModel().equals(selectedSequence))
+				return sc;
+		}
+		return null;
+	}
+	
+	public SequenceFrame getSequenceFrame(final Sequence sequence) {
+		final JInternalFrame[] frames = mainPane.getAllFrames();
+		SequenceFrame f;
+		for (int i = 0; i < frames.length; i++) {
+			f = (SequenceFrame) frames[i];
+			if (f.getSequenceContainer().getView().getModel().equals(sequence))
+				return f;
 		}
 		return null;
 	}

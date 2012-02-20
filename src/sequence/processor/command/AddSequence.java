@@ -1,6 +1,5 @@
 package sequence.processor.command;
 
-import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
@@ -9,6 +8,7 @@ import javax.swing.event.InternalFrameListener;
 
 import sequence.model.Sequence;
 import sequence.ui.component.sequence.SequenceContainer;
+import sequence.ui.component.sequence.SequenceFrame;
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceController;
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
 import sequence.ui.utilities.MDIDesktopPane;
@@ -18,10 +18,10 @@ import sequence.ui.window.MenuBar;
 public class AddSequence extends Command {
 	private final MainWindow mainWindow;
 
-	public AddSequence(final Sequence model, final MainWindow mainWindow) {
-		this.model = model;
+	public AddSequence(final Sequence sequence, final MainWindow mainWindow) {
+		model = sequence;
 		this.mainWindow = mainWindow;
-		undo = new RemoveSequence(model, mainWindow, this);
+		undo = new RemoveSequence(sequence, mainWindow, this);
 	}
 
 	public AddSequence(final Sequence sequence, final MainWindow mainWindow,
@@ -38,8 +38,8 @@ public class AddSequence extends Command {
 		final MDIDesktopPane mainPane = mainWindow.getMainPane();
 		final SequenceContainer sc = new SequenceContainer(view,
 				"Summarized sequence");
-		final JInternalFrame f = new JInternalFrame(
-				((Sequence) model).getWorkflowID(), true, true, true, true);
+		final SequenceFrame f = new SequenceFrame(
+				((Sequence) model).getWorkflowID(), sc);
 		f.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		f.addInternalFrameListener(new InternalFrameListener() {
 			@Override
@@ -68,9 +68,7 @@ public class AddSequence extends Command {
 						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (response == JOptionPane.NO_OPTION)
 					return;
-				f.dispose();
-				mainWindow.remove(sc);
-				((MenuBar) mainWindow.getJMenuBar()).removeFrameMenuItem(f);
+				mainWindow.remove((Sequence) model);
 			}
 
 			@Override
