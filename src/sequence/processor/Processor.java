@@ -32,7 +32,6 @@ public class Processor {
 	 *            the command
 	 */
 	public void Do(final ICommand command) {
-		System.out.println("Do : " + command.getClass().toString());
 		command.Do();
 		didCommands.push(command);
 	}
