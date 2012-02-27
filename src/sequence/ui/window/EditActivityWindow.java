@@ -38,22 +38,30 @@ import sequence.ui.utilities.ListLayout;
 import com.jidesoft.swing.AutoCompletion;
 
 /**
- * 
+ * The Class EditActivityWindow.
+ *
  * @author jordan
  */
 public class EditActivityWindow extends javax.swing.JDialog {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** Creates new form EditActivityWindow */
+	/**
+	 * Creates new form EditActivityWindow.
+	 */
 	public EditActivityWindow() {
 		setModalityType(DEFAULT_MODALITY_TYPE);
 		initComponents();
 	}
 
+	/**
+	 * Instantiates a new edits the activity window.
+	 *
+	 * @param mainWindow the main window
+	 * @param activity the activity
+	 * @param sequence the sequence
+	 */
 	public EditActivityWindow(final MainWindow mainWindow,
 			final Activity activity, final Sequence sequence) {
 		this();
@@ -632,8 +640,9 @@ public class EditActivityWindow extends javax.swing.JDialog {
 	}// </editor-fold>//GEN-END:initComponents
 
 	/**
-	 * @param args
-	 *            the command line arguments
+	 * The main method.
+	 *
+	 * @param args the command line arguments
 	 */
 	public static void main(final String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
@@ -646,35 +655,94 @@ public class EditActivityWindow extends javax.swing.JDialog {
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
+	/** The action. */
 	private javax.swing.JLabel action;
+	
+	/** The action edit. */
 	private javax.swing.JComboBox actionEdit;
+	
+	/** The actuator. */
 	private javax.swing.JLabel actuator;
+	
+	/** The anatomic structure. */
 	private javax.swing.JLabel anatomicStructure;
+	
+	/** The anatomic structure edit. */
 	private javax.swing.JComboBox anatomicStructureEdit;
+	
+	/** The body part edit. */
 	private javax.swing.JComboBox bodyPartEdit;
+	
+	/** The cancel button. */
 	private javax.swing.JButton cancelButton;
+	
+	/** The discipline. */
 	private javax.swing.JLabel discipline;
+	
+	/** The discipline edit. */
 	private javax.swing.JComboBox disciplineEdit;
+	
+	/** The duration. */
 	private javax.swing.JLabel duration;
+	
+	/** The duration edit. */
 	private javax.swing.JTextField durationEdit;
+	
+	/** The end time. */
 	private javax.swing.JLabel endTime;
+	
+	/** The end time edit. */
 	private javax.swing.JTextField endTimeEdit;
+	
+	/** The id. */
 	private javax.swing.JLabel id;
+	
+	/** The j combo box1. */
 	private javax.swing.JComboBox jComboBox1;
+	
+	/** The j scroll pane1. */
 	private javax.swing.JScrollPane jScrollPane1;
+	
+	/** The note. */
 	private javax.swing.JLabel note;
+	
+	/** The note edit. */
 	private javax.swing.JScrollPane noteEdit;
+	
+	/** The note text. */
 	private javax.swing.JTextArea noteText;
+	
+	/** The position edit. */
 	private javax.swing.JComboBox positionEdit;
+	
+	/** The save button. */
 	private javax.swing.JButton saveButton;
+	
+	/** The start time. */
 	private javax.swing.JLabel startTime;
+	
+	/** The start time edit. */
 	private javax.swing.JTextField startTimeEdit;
+	
+	/** The state. */
 	private javax.swing.JLabel state;
+	
+	/** The state edit. */
 	private javax.swing.JComboBox stateEdit;
+	
+	/** The title. */
 	private javax.swing.JLabel title;
+	
+	/** The type. */
 	private javax.swing.JLabel type;
+	
+	/** The type edit. */
 	private javax.swing.JComboBox typeEdit;
+	
+	/** The used instrument list. */
 	private javax.swing.JPanel usedInstrumentList;
+	
+	/** The used instruments. */
 	private javax.swing.JLabel usedInstruments;
 	// End of variables declaration//GEN-END:variables
 }

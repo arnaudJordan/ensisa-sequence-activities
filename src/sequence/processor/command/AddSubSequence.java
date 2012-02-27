@@ -6,9 +6,22 @@ import sequence.ui.component.sequence.subSequence.SubSequenceView;
 import sequence.ui.component.sequence.subSequence.controller.SubSequenceController;
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
 
+/**
+ * The command that is used to add a sub sequence from a summarized sequence. A sequence container
+ * containing a sub sequence view instanciated with the sequence will be
+ * added to the parent of the summarized sequence.
+ */
 public class AddSubSequence extends Command {
+	
+	/** The parent. */
 	private final SequenceContainer parent;
 
+	/**
+	 * Instantiates a new adds the sub sequence.
+	 *
+	 * @param sequence the sequence
+	 * @param parent the parent
+	 */
 	public AddSubSequence(final Sequence sequence,
 			final SequenceContainer parent) {
 		model = sequence;
@@ -16,6 +29,13 @@ public class AddSubSequence extends Command {
 		undo = new RemoveSubSequence(sequence, parent, this);
 	}
 
+	/**
+	 * Instantiates a new adds the sub sequence.
+	 *
+	 * @param sequence the sequence
+	 * @param parent the parent
+	 * @param removeSubSequence the remove sub sequence
+	 */
 	public AddSubSequence(final Sequence sequence,
 			final SequenceContainer parent,
 			final RemoveSubSequence removeSubSequence) {
@@ -24,6 +44,9 @@ public class AddSubSequence extends Command {
 		undo = removeSubSequence;
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.processor.command.Command#Do()
+	 */
 	@Override
 	public void Do() {
 		final SummarizedSequenceView view = (SummarizedSequenceView) parent

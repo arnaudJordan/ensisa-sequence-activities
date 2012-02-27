@@ -21,13 +21,29 @@ import sequence.utilities.ScaleListener;
 import sequence.utilities.Scaleable;
 import sequence.utilities.Timeable;
 
+/**
+ * The Class ActivityView.
+ */
 public class ActivityView extends View implements BackgroundListener,
 		ScaleListener, Scaleable, Timeable {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The popup. */
 	public JPopupMenu popup;
+	
+	/** The selected. */
 	private boolean selected;
+	
+	/** The associated activities. */
 	private List<ActivityView> associatedActivities;
 
+	/**
+	 * Instantiates a new activity view.
+	 *
+	 * @param model the model
+	 */
 	public ActivityView(final Model model) {
 		super(model);
 		setRenderer(new ActivityRenderer(this));
@@ -36,6 +52,11 @@ public class ActivityView extends View implements BackgroundListener,
 		associatedActivities = new ArrayList<ActivityView>();
 	}
 
+	/**
+	 * Instantiates a new activity view.
+	 *
+	 * @param activityView the activity view
+	 */
 	public ActivityView(final ActivityView activityView) {
 		super(activityView.getModel());
 		setRenderer(new ActivityRenderer(this));
@@ -62,71 +83,130 @@ public class ActivityView extends View implements BackgroundListener,
 		selected = true;
 	}
 
+	/**
+	 * Select.
+	 */
 	public void select() {
 		setSelected(true);
 		((ActivityRenderingModel) getRenderingModel()).setOpaque();
 	}
 
+	/**
+	 * Deselect.
+	 */
 	public void deselect() {
 		setSelected(false);
 		((ActivityRenderingModel) getRenderingModel()).setTransparent();
 	}
 
+	/**
+	 * Checks if is selected.
+	 *
+	 * @return true, if is selected
+	 */
 	public boolean isSelected() {
 		return selected;
 	}
 
+	/**
+	 * Sets the selected.
+	 *
+	 * @param selected the new selected
+	 */
 	public void setSelected(final boolean selected) {
 		this.selected = selected;
 	}
 
+	/**
+	 * Gets the associated activities.
+	 *
+	 * @return the associated activities
+	 */
 	public List<ActivityView> getAssociatedActivities() {
 		return associatedActivities;
 	}
 
+	/**
+	 * Adds the background listener.
+	 *
+	 * @param bl the bl
+	 */
 	public void addBackgroundListener(final BackgroundListener bl) {
 		if (bl == null)
 			return;
 		OptionEventDispatcher.add(bl);
 	}
 
+	/**
+	 * Removes the background listener.
+	 *
+	 * @param bl the bl
+	 */
 	public void removeBackgroundListener(final BackgroundListener bl) {
 		OptionEventDispatcher.remove(bl);
 	}
 
+	/**
+	 * Adds the scale listener.
+	 *
+	 * @param sl the sl
+	 */
 	public void addScaleListener(final ScaleListener sl) {
 		OptionEventDispatcher.add(sl);
 	}
 
+	/**
+	 * Removes the scale listener.
+	 *
+	 * @param sl the sl
+	 */
 	public void removeScaleListener(final ScaleListener sl) {
 		OptionEventDispatcher.remove(sl);
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.utilities.Timeable#getStartTime()
+	 */
 	@Override
 	public int getStartTime() {
 		return ((Activity) getModel()).getActivitytime().getStartTime();
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.utilities.Timeable#getStopTime()
+	 */
 	@Override
 	public int getStopTime() {
 		return ((Activity) getModel()).getActivitytime().getStopTime();
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.utilities.Timeable#getDuration()
+	 */
 	@Override
 	public int getDuration() {
 		return ((Activity) getModel()).getActivitytime().getDuration();
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.utilities.Scaleable#getHScale()
+	 */
 	@Override
 	public float getHScale() {
 		return ((ActivityRenderingModel) getRenderingModel()).getHScale();
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.utilities.Scaleable#getVScale()
+	 */
 	@Override
 	public float getVScale() {
 		return ((ActivityRenderingModel) getRenderingModel()).getVScale();
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.mvc.View#modelChanged(sequence.mvc.Model)
+	 */
 	@Override
 	public void modelChanged(final Model m) {
 		setToolTipText(((Activity) getModel()).toToolTip());
@@ -143,11 +223,17 @@ public class ActivityView extends View implements BackgroundListener,
 			getParent().repaint();
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.utilities.BackgroundListener#backgroundChanged(sequence.ui.utilities.drawer.BackgroundDrawer)
+	 */
 	@Override
 	public void backgroundChanged(final BackgroundDrawer bd) {
 		((ActivityRenderer) getRenderer()).setBackgroundDrawer(bd);
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.utilities.ScaleListener#scaleChanged(float)
+	 */
 	@Override
 	public void scaleChanged(final float scale) {
 		((ActivityRenderingModel) getRenderingModel()).setScale(scale);

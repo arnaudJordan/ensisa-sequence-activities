@@ -9,15 +9,39 @@ import sequence.ui.window.MainWindow;
 import sequence.ui.window.MenuBar;
 import sequence.utilities.Config;
 
+/**
+ * The command that is used to remove the sequence frame that contains the
+ * sequence, from the dekstop pane
+ */
 public class RemoveSequence extends Command {
+
+	/** The main window. */
 	private final MainWindow mainWindow;
 
+	/**
+	 * Instantiates a new removes the sequence.
+	 * 
+	 * @param sequence
+	 *            the sequence
+	 * @param mainWindow
+	 *            the main window
+	 */
 	public RemoveSequence(final Sequence sequence, final MainWindow mainWindow) {
 		model = sequence;
 		this.mainWindow = mainWindow;
 		undo = new AddSequence(sequence, mainWindow, this);
 	}
 
+	/**
+	 * Instantiates a new removes the sequence.
+	 * 
+	 * @param sequence
+	 *            the sequence
+	 * @param mainWindow
+	 *            the main window
+	 * @param addSequence
+	 *            the add sequence
+	 */
 	public RemoveSequence(final Sequence sequence, final MainWindow mainWindow,
 			final AddSequence addSequence) {
 		model = sequence;
@@ -25,6 +49,11 @@ public class RemoveSequence extends Command {
 		undo = addSequence;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sequence.processor.command.Command#Do()
+	 */
 	@Override
 	public void Do() {
 		final SequenceContainer sc = mainWindow

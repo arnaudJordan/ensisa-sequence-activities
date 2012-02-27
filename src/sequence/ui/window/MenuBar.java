@@ -29,11 +29,25 @@ import sequence.ui.utilities.drawer.FullBackgroundDrawer;
 import sequence.ui.utilities.drawer.StripedBackgroundDrawer;
 import sequence.utilities.Config;
 
+/**
+ * The Class MenuBar.
+ */
 public class MenuBar extends JMenuBar {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The windows menu. */
 	private JMenu windowsMenu;
+	
+	/** The frame menu item group. */
 	private ButtonGroup frameMenuItemGroup;
 
+	/**
+	 * Instantiates a new menu bar.
+	 *
+	 * @param parent the parent
+	 */
 	public MenuBar(final MainWindow parent) {
 		super();
 		createFileMenu(parent);
@@ -43,6 +57,11 @@ public class MenuBar extends JMenuBar {
 		createHelpMenu(parent);
 	}
 
+	/**
+	 * Creates the file menu.
+	 *
+	 * @param parent the parent
+	 */
 	private void createFileMenu(final MainWindow parent) {
 		final JMenu file = new JMenu("File");
 
@@ -135,6 +154,11 @@ public class MenuBar extends JMenuBar {
 		add(file);
 	}
 
+	/**
+	 * Creates the edit menu.
+	 *
+	 * @param parent the parent
+	 */
 	private void createEditMenu(final MainWindow parent) {
 		final JMenu edit = new JMenu("Edit");
 		final JMenuItem undo = new JMenuItem("Undo");
@@ -165,6 +189,11 @@ public class MenuBar extends JMenuBar {
 		add(edit);
 	}
 
+	/**
+	 * Creates the option menu.
+	 *
+	 * @param parent the parent
+	 */
 	private void createOptionMenu(final MainWindow parent) {
 		final JMenu options = new JMenu("Options");
 
@@ -235,6 +264,11 @@ public class MenuBar extends JMenuBar {
 		add(options);
 	}
 
+	/**
+	 * Creates the window menu.
+	 *
+	 * @param parent the parent
+	 */
 	private void createWindowMenu(final MainWindow parent) {
 		windowsMenu = new JMenu("Windows");
 
@@ -287,6 +321,11 @@ public class MenuBar extends JMenuBar {
 		add(windowsMenu);
 	}
 
+	/**
+	 * Creates the help menu.
+	 *
+	 * @param parent the parent
+	 */
 	private void createHelpMenu(final MainWindow parent) {
 		final JMenu help = new JMenu("Help");
 
@@ -313,6 +352,11 @@ public class MenuBar extends JMenuBar {
 		add(help);
 	}
 
+	/**
+	 * Adds the frame menu item.
+	 *
+	 * @param frame the frame
+	 */
 	public void addFrameMenuItem(final JInternalFrame frame) {
 		if (frameMenuItemGroup == null) {
 			windowsMenu.addSeparator();
@@ -334,6 +378,11 @@ public class MenuBar extends JMenuBar {
 		windowsMenu.add(item);
 	}
 
+	/**
+	 * Removes the frame menu item.
+	 *
+	 * @param frame the frame
+	 */
 	public void removeFrameMenuItem(final JInternalFrame frame) {
 		final Enumeration<AbstractButton> items = frameMenuItemGroup
 				.getElements();
@@ -351,6 +400,11 @@ public class MenuBar extends JMenuBar {
 		}
 	}
 
+	/**
+	 * Select frame menu item.
+	 *
+	 * @param frame the frame
+	 */
 	public void selectFrameMenuItem(final JInternalFrame frame) {
 		final Enumeration<AbstractButton> items = frameMenuItemGroup
 				.getElements();
@@ -363,18 +417,32 @@ public class MenuBar extends JMenuBar {
 		frameMenuItemGroup.setSelected(item.getModel(), true);
 	}
 
+	/**
+	 * The Class FrameMenuItem.
+	 */
 	class FrameMenuItem extends JRadioButtonMenuItem {
-		/**
-		 * 
-		 */
+		
+		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
+		
+		/** The frame. */
 		private final JInternalFrame frame;
 
+		/**
+		 * Instantiates a new frame menu item.
+		 *
+		 * @param frame the frame
+		 */
 		public FrameMenuItem(final JInternalFrame frame) {
 			super(frame.getTitle());
 			this.frame = frame;
 		}
 
+		/**
+		 * Gets the frame.
+		 *
+		 * @return the frame
+		 */
 		public JInternalFrame getFrame() {
 			return frame;
 		}

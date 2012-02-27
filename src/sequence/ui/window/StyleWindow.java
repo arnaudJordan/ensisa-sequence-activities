@@ -15,15 +15,34 @@ import javax.swing.WindowConstants;
 import sequence.ui.utilities.ComponentLocation;
 import sequence.utilities.Config;
 
+/**
+ * The Class StyleWindow.
+ */
 public class StyleWindow extends JDialog {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The cancel button. */
 	private javax.swing.JButton cancelButton;
+	
+	/** The j combo box1. */
 	private javax.swing.JComboBox jComboBox1;
+	
+	/** The j separator1. */
 	private javax.swing.JSeparator jSeparator1;
+	
+	/** The save button. */
 	private javax.swing.JButton saveButton;
+	
+	/** The style label. */
 	private javax.swing.JLabel styleLabel;
 
+	/**
+	 * Instantiates a new style window.
+	 *
+	 * @param parent the parent
+	 */
 	public StyleWindow(final JFrame parent) {
 		super(parent, "Style", true);
 		setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
@@ -64,6 +83,13 @@ public class StyleWindow extends JDialog {
 		setVisible(true);
 	}
 
+	/**
+	 * Change look and feel.
+	 *
+	 * @param parent the parent
+	 * @param dialog the dialog
+	 * @param laf the laf
+	 */
 	private void changeLookAndFeel(final JFrame parent, final JDialog dialog,
 			final String laf) {
 		try {
@@ -77,6 +103,9 @@ public class StyleWindow extends JDialog {
 		SwingUtilities.updateComponentTreeUI(dialog);
 	}
 
+	/**
+	 * Inits the components.
+	 */
 	private void initComponents() {
 
 		styleLabel = new javax.swing.JLabel();

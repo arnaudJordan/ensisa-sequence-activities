@@ -11,9 +11,17 @@ import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
 
+/**
+ * The Class testSequence.
+ */
 public class testSequence extends JFrame {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Instantiates a new test sequence.
+	 */
 	public testSequence() {
 		try {
 			final SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -37,6 +45,11 @@ public class testSequence extends JFrame {
 		}
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(final String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			@Override

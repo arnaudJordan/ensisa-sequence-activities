@@ -14,11 +14,25 @@ import sequence.mvc.Model;
 import sequence.mvc.View;
 import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuExportController;
 
+/**
+ * The Class SummarizedSequenceView.
+ */
 public class SummarizedSequenceView extends View {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The selected activities. */
 	private final List<Activity> selectedActivities;
+	
+	/** The popup. */
 	private final JPopupMenu popup;
 
+	/**
+	 * Instantiates a new summarized sequence view.
+	 *
+	 * @param model the model
+	 */
 	public SummarizedSequenceView(final Model model) {
 		super(model);
 		selectedActivities = new ArrayList<Activity>();
@@ -34,14 +48,29 @@ public class SummarizedSequenceView extends View {
 		popup.add(exportItem);
 	}
 
+	/**
+	 * Gets the popup.
+	 *
+	 * @return the popup
+	 */
 	public JPopupMenu getPopup() {
 		return popup;
 	}
 
+	/**
+	 * Gets the selected activities.
+	 *
+	 * @return the selected activities
+	 */
 	public List<Activity> getSelectedActivities() {
 		return selectedActivities;
 	}
 	
+	/**
+	 * Gets the sorted selected activities.
+	 *
+	 * @return the sorted selected activities
+	 */
 	public List<Activity> getSortedSelectedActivities() {
 		if (!selectedActivities.isEmpty()) {
 			if (selectedActivities.size() == 1) {

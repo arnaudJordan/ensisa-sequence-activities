@@ -11,9 +11,22 @@ import org.xml.sax.SAXException;
 
 import sequence.parser.SequenceHandler;
 
+/**
+ * The Class ParserTest.
+ */
 public class ParserTest {
+	
+	/** The Constant FILEPATH. */
 	private final static String FILEPATH = "src/data.xml";
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 * @throws ParserConfigurationException the parser configuration exception
+	 * @throws SAXException the sAX exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void main(final String[] args)
 			throws ParserConfigurationException, SAXException, IOException {
 		try {

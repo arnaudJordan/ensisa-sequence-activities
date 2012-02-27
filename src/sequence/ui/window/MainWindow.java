@@ -34,19 +34,40 @@ import sequence.ui.utilities.WindowController;
 import sequence.utilities.Config;
 import sequence.utilities.OptionEventDispatcher;
 
+/**
+ * The Class MainWindow.
+ */
 public class MainWindow extends JFrame {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The config. */
 	private Config config;
 
 	/* Model */
+	/** The sequence containers. */
 	private final List<SequenceContainer> sequenceContainers;
+	
+	/** The processor. */
 	private final Processor processor;
 
 	/* Window elements */
+	/** The main pane. */
 	private final MDIDesktopPane mainPane;
+	
+	/** The scale slider. */
 	private JSlider scaleSlider;
+	
+	/** The threshold field. */
 	private JTextField thresholdField;
 
+	/**
+	 * Instantiates a new main window.
+	 *
+	 * @param title the title
+	 * @throws HeadlessException the headless exception
+	 */
 	public MainWindow(final String title) throws HeadlessException {
 		super(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,6 +99,9 @@ public class MainWindow extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Setup scale slider.
+	 */
 	private void setupScaleSlider() {
 		scaleSlider = new JSlider(SwingConstants.HORIZONTAL, 100, 300, 100);
 		final Hashtable<Integer, JLabel> labelTable = new Hashtable<Integer, JLabel>();
@@ -96,6 +120,9 @@ public class MainWindow extends JFrame {
 		});
 	}
 
+	/**
+	 * Setup threshold field.
+	 */
 	private void setupThresholdField() {
 		thresholdField = new JTextField("0", 2);
 		thresholdField.addActionListener(new ActionListener() {
@@ -116,12 +143,20 @@ public class MainWindow extends JFrame {
 		});
 	}
 
+	/**
+	 * Update threshold field.
+	 *
+	 * @param e the e
+	 */
 	private void updateThresholdField(final AWTEvent e) {
 		final Object source = e.getSource();
 		final JTextField s = (JTextField) source;
 		OptionEventDispatcher.thresholdChanged(Integer.parseInt(s.getText()));
 	}
 
+	/**
+	 * Sets the look and feel.
+	 */
 	private void setLookAndFeel() {
 		try {
 			UIManager.setLookAndFeel(config.getStyle());
@@ -129,38 +164,83 @@ public class MainWindow extends JFrame {
 		}
 	}
 
+	/**
+	 * Gets the config.
+	 *
+	 * @return the config
+	 */
 	public Config getConfig() {
 		return config;
 	}
 
+	/**
+	 * Sets the config.
+	 *
+	 * @param config the new config
+	 */
 	public void setConfig(final Config config) {
 		this.config = config;
 	}
 
+	/**
+	 * Gets the sequence containers.
+	 *
+	 * @return the sequence containers
+	 */
 	public List<SequenceContainer> getSequenceContainers() {
 		return sequenceContainers;
 	}
 
+	/**
+	 * Gets the scale slider.
+	 *
+	 * @return the scale slider
+	 */
 	public JSlider getScaleSlider() {
 		return scaleSlider;
 	}
 
+	/**
+	 * Gets the threshold field.
+	 *
+	 * @return the threshold field
+	 */
 	public JTextField getThresholdField() {
 		return thresholdField;
 	}
 
+	/**
+	 * Adds the.
+	 *
+	 * @param sequence the sequence
+	 */
 	public void add(final Sequence sequence) {
 		getProcessor().Do(new AddSequence(sequence, this));
 	}
 
+	/**
+	 * Removes the.
+	 *
+	 * @param sequence the sequence
+	 */
 	public void remove(final Sequence sequence) {
 		getProcessor().Do(new RemoveSequence(sequence, this));
 	}
 
+	/**
+	 * Gets the processor.
+	 *
+	 * @return the processor
+	 */
 	public Processor getProcessor() {
 		return processor;
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(final String[] args) {
 		System.setProperty("awt.useSystemAAFontSettings", "on");
 		System.setProperty("swing.aatext", "true");
@@ -172,10 +252,21 @@ public class MainWindow extends JFrame {
 		});
 	}
 
+	/**
+	 * Gets the main pane.
+	 *
+	 * @return the main pane
+	 */
 	public MDIDesktopPane getMainPane() {
 		return mainPane;
 	}
 
+	/**
+	 * Gets the sequence container.
+	 *
+	 * @param selectedSequence the selected sequence
+	 * @return the sequence container
+	 */
 	public SequenceContainer getSequenceContainer(final Sequence selectedSequence) {
 		for (final SequenceContainer sc : sequenceContainers) {
 			if (sc.getView().getModel().equals(selectedSequence))
@@ -184,6 +275,12 @@ public class MainWindow extends JFrame {
 		return null;
 	}
 	
+	/**
+	 * Gets the sequence frame.
+	 *
+	 * @param sequence the sequence
+	 * @return the sequence frame
+	 */
 	public SequenceFrame getSequenceFrame(final Sequence sequence) {
 		final JInternalFrame[] frames = mainPane.getAllFrames();
 		SequenceFrame f;

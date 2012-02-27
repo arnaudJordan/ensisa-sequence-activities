@@ -345,6 +345,9 @@ public class Activity extends DefaultModel implements Comparable<Activity> {
 		modelChange();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
 	@Override
 	public int compareTo(final Activity o) {
 		return new Integer(id).compareTo(o.getId());

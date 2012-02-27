@@ -35,22 +35,44 @@ import sequence.model.location.Location;
 import sequence.model.location.Operatingtheatre;
 import sequence.utilities.Sex;
 
+/**
+ * The Class SequenceHandler.
+ */
 public class SequenceHandler extends DefaultHandler {
+	
+	/** The file. */
 	private File file;
+	
+	/** The sequence. */
 	private Sequence sequence;
+	
+	/** The booleans used to check if we are in a specific markup. */
 	private boolean inSequence, inDiscipline, inParticipant, inActivity,
 			inPatient, inLocation, inDate, inState, inActivityTime, inActuator,
 			inAction, inUsedInstruments, inTreatedStructure;
+	
+	/** The buffer. */
 	private StringBuffer buffer;
 
+	/**
+	 * Instantiates a new sequence handler.
+	 */
 	public SequenceHandler() {
 		super();
 	}
 
+	/**
+	 * Instantiates a new sequence handler.
+	 *
+	 * @param file the file
+	 */
 	public SequenceHandler(final File file) {
 		this.file = file;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.xml.sax.helpers.DefaultHandler#startElement(java.lang.String, java.lang.String, java.lang.String, org.xml.sax.Attributes)
+	 */
 	@Override
 	public void startElement(final String uri, final String localName,
 			final String qName, final Attributes attributes)
@@ -73,6 +95,14 @@ public class SequenceHandler extends DefaultHandler {
 			return;
 	}
 
+	/**
+	 * Start element in sequence.
+	 *
+	 * @param qName the q name
+	 * @param attributes the attributes
+	 * @return true, if successful
+	 * @throws SAXException the sAX exception
+	 */
 	private boolean startElementInSequence(final String qName,
 			final Attributes attributes) throws SAXException {
 		if (!inSequence)
@@ -129,6 +159,13 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * Start element in discipline.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 * @throws SAXException the sAX exception
+	 */
 	private boolean startElementInDiscipline(final String qName)
 			throws SAXException {
 		if (!inDiscipline)
@@ -143,6 +180,13 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * Start element in participant.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 * @throws SAXException the sAX exception
+	 */
 	private boolean startElementInParticipant(final String qName)
 			throws SAXException {
 		if (!inParticipant)
@@ -164,6 +208,14 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * Start element in state.
+	 *
+	 * @param qName the q name
+	 * @param attributes the attributes
+	 * @return true, if successful
+	 * @throws SAXException the sAX exception
+	 */
 	private boolean startElementInState(final String qName,
 			final Attributes attributes) throws SAXException {
 		if (!inState)
@@ -185,6 +237,12 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * Start element in patient.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 */
 	private boolean startElementInPatient(final String qName) {
 		if (!inPatient)
 			return false;
@@ -203,6 +261,12 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * Start element in location.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 */
 	private boolean startElementInLocation(final String qName) {
 		if (!inLocation)
 			return false;
@@ -221,6 +285,12 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * Start element in date.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 */
 	private boolean startElementInDate(final String qName) {
 		if (!inDate)
 			return false;
@@ -239,6 +309,12 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * Start element in activity.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 */
 	private boolean startElementInActivity(final String qName) {
 		if (!inActivity)
 			return false;
@@ -286,6 +362,12 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * Start element in activity time.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 */
 	private boolean startElementInActivityTime(final String qName) {
 		if (!inActivityTime)
 			return false;
@@ -303,6 +385,9 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.xml.sax.helpers.DefaultHandler#endElement(java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void endElement(final String uri, final String localName,
 			final String qName) throws SAXException {
@@ -313,6 +398,12 @@ public class SequenceHandler extends DefaultHandler {
 			return;
 	}
 
+	/**
+	 * End element in sequence.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 */
 	private boolean endElementInSequence(final String qName) {
 		if (!inSequence)
 			return false;
@@ -374,6 +465,12 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * End element in discipline.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 */
 	private boolean endElementInDiscipline(final String qName) {
 		if (!inDiscipline)
 			return false;
@@ -386,6 +483,12 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * End element in participant.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 */
 	private boolean endElementInParticipant(final String qName) {
 		if (!inParticipant)
 			return false;
@@ -427,6 +530,12 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * End element in state.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 */
 	private boolean endElementInState(final String qName) {
 		if (!inState)
 			return false;
@@ -437,6 +546,12 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * End element in activity.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 */
 	private boolean endElementInActivity(final String qName) {
 		if (!inActivity)
 			return false;
@@ -505,6 +620,12 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * End element in activity time.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 */
 	private boolean endElementInActivityTime(final String qName) {
 		if (!inActivityTime)
 			return false;
@@ -530,6 +651,12 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * End element in patient.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 */
 	private boolean endElementInPatient(final String qName) {
 		if (!inPatient)
 			return false;
@@ -560,6 +687,12 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * End element in location.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 */
 	private boolean endElementInLocation(final String qName) {
 		if (!inLocation)
 			return false;
@@ -593,6 +726,12 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/**
+	 * End element in date.
+	 *
+	 * @param qName the q name
+	 * @return true, if successful
+	 */
 	private boolean endElementInDate(final String qName) {
 		if (!inDate)
 			return false;
@@ -629,6 +768,9 @@ public class SequenceHandler extends DefaultHandler {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.xml.sax.helpers.DefaultHandler#characters(char[], int, int)
+	 */
 	@Override
 	public void characters(final char[] ch, final int start, final int length)
 			throws SAXException {
@@ -637,14 +779,25 @@ public class SequenceHandler extends DefaultHandler {
 			buffer.append(lecture);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.xml.sax.helpers.DefaultHandler#startDocument()
+	 */
 	@Override
 	public void startDocument() throws SAXException {
 	}
 
+	/* (non-Javadoc)
+	 * @see org.xml.sax.helpers.DefaultHandler#endDocument()
+	 */
 	@Override
 	public void endDocument() throws SAXException {
 	}
 
+	/**
+	 * Gets the sequence.
+	 *
+	 * @return the sequence
+	 */
 	public Sequence getSequence() {
 		return sequence;
 	}

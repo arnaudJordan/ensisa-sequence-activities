@@ -12,9 +12,17 @@ import sequence.parser.SequenceHandler;
 import sequence.ui.component.activity.ActivityController;
 import sequence.ui.component.activity.ActivityView;
 
+/**
+ * The Class testActivity.
+ */
 public class testActivity extends JFrame {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Instantiates a new test activity.
+	 */
 	public testActivity() {
 		try {
 			final SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -38,6 +46,11 @@ public class testActivity extends JFrame {
 		}
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(final String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			@Override

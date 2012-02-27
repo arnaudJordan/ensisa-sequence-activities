@@ -9,24 +9,28 @@ import sequence.ui.component.sequence.SequenceContainer;
 import sequence.ui.utilities.ComponentLocation;
 
 /**
- * 
+ * The Class InfoWindow.
+ *
  * @author arnaud
  */
 public class InfoWindow extends javax.swing.JDialog {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Creates new form InfoWindow2
+	 * Creates new form InfoWindow2.
 	 */
 	public InfoWindow() {
 		setModalityType(DEFAULT_MODALITY_TYPE);
 		initComponents();
 	}
 
+	/**
+	 * Instantiates a new info window.
+	 *
+	 * @param parent the parent
+	 */
 	public InfoWindow(final MainWindow parent) {
 		this();
 		ComponentLocation.setLocation(parent, this);
@@ -83,13 +87,19 @@ public class InfoWindow extends javax.swing.JDialog {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
+	/**
+	 * J button1 action performed.
+	 *
+	 * @param evt the evt
+	 */
 	private void jButton1ActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 		setVisible(false);
 	}// GEN-LAST:event_jButton1ActionPerformed
 
 	/**
-	 * @param args
-	 *            the command line arguments
+	 * The main method.
+	 *
+	 * @param args the command line arguments
 	 */
 	public static void main(final String args[]) {
 		/*
@@ -139,7 +149,10 @@ public class InfoWindow extends javax.swing.JDialog {
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
+	/** The j button1. */
 	private javax.swing.JButton jButton1;
+	
+	/** The j tabbed pane1. */
 	private javax.swing.JTabbedPane jTabbedPane1;
 	// End of variables declaration//GEN-END:variables
 }

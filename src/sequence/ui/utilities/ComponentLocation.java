@@ -4,8 +4,20 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+/**
+ * The Class ComponentLocation offers static methods to se the location of a
+ * component.
+ */
 public class ComponentLocation {
 
+	/**
+	 * Sets the location relative to the component's parent.
+	 * 
+	 * @param parent
+	 *            the parent
+	 * @param child
+	 *            the child
+	 */
 	public static void setLocation(final Component parent, final Component child) {
 		int x = parent.getLocation().x + parent.getWidth() / 2
 				- child.getPreferredSize().width / 2;
@@ -24,6 +36,11 @@ public class ComponentLocation {
 		child.setLocation(x, y);
 	}
 
+	/**
+	 * Sets the location on center screen.
+	 *
+	 * @param c the new location on center screen
+	 */
 	public static void setLocationOnCenterScreen(final Component c) {
 		final Dimension screenSize = Toolkit.getDefaultToolkit()
 				.getScreenSize();

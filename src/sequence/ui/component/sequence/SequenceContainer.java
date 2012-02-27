@@ -19,15 +19,35 @@ import sequence.ui.component.timeLine.TimeLineView;
 import sequence.ui.utilities.CustomLayout;
 import sequence.ui.window.MainWindow;
 
+/**
+ * The Class SequenceContainer.
+ */
 public class SequenceContainer extends JPanel {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The view. */
 	private View view;
 
+	/**
+	 * Instantiates a new sequence container.
+	 *
+	 * @param view the view
+	 * @param label the label
+	 * @param parent the parent
+	 */
 	public SequenceContainer(final View view, final String label,
 			final SequenceContainer parent) {
 		this(view, "", label, parent);
 	}
 
+	/**
+	 * Instantiates a new sequence container.
+	 *
+	 * @param view the view
+	 * @param label the label
+	 */
 	public SequenceContainer(final View view, final String label) {
 		this.view = view;
 
@@ -42,6 +62,14 @@ public class SequenceContainer extends JPanel {
 		super.add(this.view);
 	}
 
+	/**
+	 * Instantiates a new sequence container.
+	 *
+	 * @param view the view
+	 * @param title the title
+	 * @param label the label
+	 * @param parent the parent
+	 */
 	public SequenceContainer(final View view, final String title,
 			final String label, final SequenceContainer parent) {
 		this.view = view;
@@ -73,20 +101,38 @@ public class SequenceContainer extends JPanel {
 		super.add(this.view);
 	}
 
+	/**
+	 * Adds the.
+	 *
+	 * @param sequence the sequence
+	 */
 	public void add(final Sequence sequence) {
 		((MainWindow) getTopLevelAncestor()).getProcessor().Do(
 				new AddSubSequence(sequence, this));
 	}
 
+	/**
+	 * Removes the.
+	 *
+	 * @param sequence the sequence
+	 */
 	public void remove(final Sequence sequence) {
 		((MainWindow) getTopLevelAncestor()).getProcessor().Do(
 				new RemoveSubSequence(sequence, this));
 	}
 
+	/**
+	 * Gets the view.
+	 *
+	 * @return the view
+	 */
 	public View getView() {
 		return view;
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(getParent().getWidth(), getLayout()

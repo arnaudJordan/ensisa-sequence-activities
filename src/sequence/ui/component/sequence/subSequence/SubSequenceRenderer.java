@@ -12,14 +12,25 @@ import sequence.ui.component.activity.ActivityController;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.utilities.TimeLayout;
 
+/**
+ * The Class SubSequenceRenderer.
+ */
 public class SubSequenceRenderer extends DefaultRenderer implements Renderer {
 
+	/**
+	 * Instantiates a new sub sequence renderer.
+	 *
+	 * @param view the view
+	 */
 	public SubSequenceRenderer(final View view) {
 		super(view);
 		getView().setLayout(new TimeLayout());
 		initialize();
 	}
 
+	/**
+	 * Initialize.
+	 */
 	public void initialize() {
 		final Sequence sequence = (Sequence) getView().getModel();
 		final View summarizedSelectedActivities = ((SubSequenceView) getView())
@@ -39,15 +50,26 @@ public class SubSequenceRenderer extends DefaultRenderer implements Renderer {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.mvc.DefaultRenderer#renderView(java.awt.Graphics2D)
+	 */
 	@Override
 	public void renderView(final Graphics2D g) {
 		super.renderView(g);
 		renderSequence(g);
 	}
 
+	/**
+	 * Render sequence.
+	 *
+	 * @param g the g
+	 */
 	private void renderSequence(final Graphics2D g) {
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.mvc.DefaultRenderer#getPreferredSize()
+	 */
 	@Override
 	public Dimension getPreferredSize() {
 		final int Hinsets = 2 * (getView().getParent().getInsets().left + getView()

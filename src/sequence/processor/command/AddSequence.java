@@ -15,15 +15,40 @@ import sequence.ui.utilities.MDIDesktopPane;
 import sequence.ui.window.MainWindow;
 import sequence.ui.window.MenuBar;
 
+/**
+ * The command that is used to add a sequence in the dektop pane. A sequence frame
+ * containing a summarized sequence view instanciated with the sequence will be
+ * added to the desktop pane.
+ */
 public class AddSequence extends Command {
+
+	/** The main window. */
 	private final MainWindow mainWindow;
 
+	/**
+	 * Instantiates a new adds the sequence.
+	 * 
+	 * @param sequence
+	 *            the sequence
+	 * @param mainWindow
+	 *            the main window
+	 */
 	public AddSequence(final Sequence sequence, final MainWindow mainWindow) {
 		model = sequence;
 		this.mainWindow = mainWindow;
 		undo = new RemoveSequence(sequence, mainWindow, this);
 	}
 
+	/**
+	 * Instantiates a new adds the sequence.
+	 * 
+	 * @param sequence
+	 *            the sequence
+	 * @param mainWindow
+	 *            the main window
+	 * @param removeSequence
+	 *            the remove sequence
+	 */
 	public AddSequence(final Sequence sequence, final MainWindow mainWindow,
 			final RemoveSequence removeSequence) {
 		model = sequence;
@@ -31,6 +56,11 @@ public class AddSequence extends Command {
 		undo = removeSequence;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sequence.processor.command.Command#Do()
+	 */
 	@Override
 	public void Do() {
 		final SummarizedSequenceView view = new SummarizedSequenceView(model);

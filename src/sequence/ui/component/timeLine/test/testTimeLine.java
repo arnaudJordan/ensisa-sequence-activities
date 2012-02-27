@@ -16,9 +16,17 @@ import sequence.model.Sequence;
 import sequence.parser.SequenceHandler;
 import sequence.ui.component.timeLine.TimeLineView;
 
+/**
+ * The Class testTimeLine.
+ */
 public class testTimeLine extends JFrame {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Instantiates a new test time line.
+	 */
 	public testTimeLine() {
 		final SAXParserFactory factory = SAXParserFactory.newInstance();
 
@@ -46,6 +54,11 @@ public class testTimeLine extends JFrame {
 		}
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(final String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			@Override

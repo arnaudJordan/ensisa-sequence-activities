@@ -14,10 +14,20 @@ import sequence.ui.component.activity.ActivityView;
 import sequence.ui.utilities.TimeLayout;
 import sequence.utilities.ColorFactory;
 
+/**
+ * The Class SummarizedSequenceRenderer.
+ */
 public class SummarizedSequenceRenderer extends DefaultRenderer implements
 		Renderer {
+	
+	/** The scale. */
 	private float scale;
 
+	/**
+	 * Instantiates a new summarized sequence renderer.
+	 *
+	 * @param view the view
+	 */
 	public SummarizedSequenceRenderer(final View view) {
 		super(view);
 		getView().setLayout(new TimeLayout());
@@ -25,6 +35,9 @@ public class SummarizedSequenceRenderer extends DefaultRenderer implements
 		initialize();
 	}
 
+	/**
+	 * Initialize.
+	 */
 	public void initialize() {
 		final Sequence sequence = (Sequence) getView().getModel();
 		final ColorFactory colorFactory = new ColorFactory(sequence);
@@ -39,6 +52,9 @@ public class SummarizedSequenceRenderer extends DefaultRenderer implements
 		}
 	}
 
+	/**
+	 * Sets the scale.
+	 */
 	public void setScale() {
 		final Sequence sequence = (Sequence) getView().getModel();
 		final int sequenceSize = sequence.getLastActivity().getActivitytime()
@@ -47,6 +63,9 @@ public class SummarizedSequenceRenderer extends DefaultRenderer implements
 		scale = (float) (getView().getSize().getWidth() / sequenceSize);
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.mvc.DefaultRenderer#renderView(java.awt.Graphics2D)
+	 */
 	@Override
 	public void renderView(final Graphics2D g) {
 		super.renderView(g);
@@ -54,6 +73,11 @@ public class SummarizedSequenceRenderer extends DefaultRenderer implements
 		renderSequence(g);
 	}
 
+	/**
+	 * Render sequence.
+	 *
+	 * @param g the g
+	 */
 	private void renderSequence(final Graphics2D g) {
 		for (int i = 0; i < getView().getComponentCount(); i++) {
 			final ActivityView activityView = (ActivityView) getView()
@@ -64,6 +88,9 @@ public class SummarizedSequenceRenderer extends DefaultRenderer implements
 		getView().revalidate();
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.mvc.DefaultRenderer#getPreferredSize()
+	 */
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(getView().getParent().getWidth(), (int) getView()
