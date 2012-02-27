@@ -38,22 +38,29 @@ import sequence.model.activity.AnatomicStructure;
 import sequence.ui.utilities.ComponentLocation;
 
 /**
- * 
+ * The Class InfoSequenceWindow.
+ *
  * @author jordan
  */
 public class InfoSequenceWindow extends javax.swing.JDialog {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** Creates new form InfoActivityWindow */
+	/**
+	 * Creates new form InfoActivityWindow.
+	 */
 	public InfoSequenceWindow() {
 		setModalityType(DEFAULT_MODALITY_TYPE);
 		initComponents();
 	}
 
+	/**
+	 * Instantiates a new info sequence window.
+	 *
+	 * @param parent the parent
+	 * @param sequence the sequence
+	 */
 	public InfoSequenceWindow(final Container parent, final Sequence sequence) {
 		this();
 		setSize(600, 550);
@@ -82,6 +89,12 @@ public class InfoSequenceWindow extends javax.swing.JDialog {
 		});
 	}
 
+	/**
+	 * Creates the action chart.
+	 *
+	 * @param sequence the sequence
+	 * @return the chart panel
+	 */
 	private ChartPanel createActionChart(final Sequence sequence) {
 		final Map<Action, Integer> activityMap = new HashMap<Action, Integer>();
 		for (final Activity activity : sequence) {
@@ -123,6 +136,12 @@ public class InfoSequenceWindow extends javax.swing.JDialog {
 		return chartPanel;
 	}
 
+	/**
+	 * Creates the zone chart.
+	 *
+	 * @param sequence the sequence
+	 * @return the chart panel
+	 */
 	private ChartPanel createZoneChart(final Sequence sequence) {
 		final Map<AnatomicStructure, Integer> activityMap = new HashMap<AnatomicStructure, Integer>();
 		for (final Activity activity : sequence) {
@@ -434,13 +453,19 @@ public class InfoSequenceWindow extends javax.swing.JDialog {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
+	/**
+	 * Ok button action performed.
+	 *
+	 * @param evt the evt
+	 */
 	private void okButtonActionPerformed(final java.awt.event.ActionEvent evt) {// GEN-FIRST:event_okButtonActionPerformed
 		// TODO add your handling code here:
 	}// GEN-LAST:event_okButtonActionPerformed
 
 	/**
-	 * @param args
-	 *            the command line arguments
+	 * The main method.
+	 *
+	 * @param args the command line arguments
 	 */
 	public static void main(final String args[]) {
 		java.awt.EventQueue.invokeLater(new Runnable() {
@@ -453,25 +478,64 @@ public class InfoSequenceWindow extends javax.swing.JDialog {
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
+	/** The action number. */
 	private javax.swing.JLabel actionNumber;
+	
+	/** The activity number. */
 	private javax.swing.JLabel activityNumber;
+	
+	/** The complete duration. */
 	private javax.swing.JLabel completeDuration;
+	
+	/** The graphics pane. */
 	private javax.swing.JPanel graphicsPane;
+	
+	/** The id. */
 	private javax.swing.JLabel id;
+	
+	/** The instrument number. */
 	private javax.swing.JLabel instrumentNumber;
+	
+	/** The j label1. */
 	private javax.swing.JLabel jLabel1;
+	
+	/** The j label2. */
 	private javax.swing.JLabel jLabel2;
+	
+	/** The j label3. */
 	private javax.swing.JLabel jLabel3;
+	
+	/** The j label4. */
 	private javax.swing.JLabel jLabel4;
+	
+	/** The j label5. */
 	private javax.swing.JLabel jLabel5;
+	
+	/** The j label6. */
 	private javax.swing.JLabel jLabel6;
+	
+	/** The j panel1. */
 	private javax.swing.JPanel jPanel1;
+	
+	/** The j tabbed pane1. */
 	private javax.swing.JTabbedPane jTabbedPane1;
+	
+	/** The jlabel5. */
 	private javax.swing.JLabel jlabel5;
+	
+	/** The mean activity duration. */
 	private javax.swing.JLabel meanActivityDuration;
+	
+	/** The ok button. */
 	private javax.swing.JButton okButton;
+	
+	/** The structure number. */
 	private javax.swing.JLabel structureNumber;
+	
+	/** The title. */
 	private javax.swing.JLabel title;
+	
+	/** The work duration. */
 	private javax.swing.JLabel workDuration;
 	// End of variables declaration//GEN-END:variables
 }

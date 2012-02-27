@@ -15,24 +15,45 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+/**
+ * The layout that is used by sequence containers.
+ */
 public class CustomLayout implements LayoutManager {
+	
+	/** The Constant VGAP. */
 	private static final int VGAP = 10;
+	
+	/** The Constant BORDER_TEXT_SPACING. */
 	private static final int BORDER_TEXT_SPACING = 2;
+	
+	/** The Constant BORDER_STROKE_SIZE. */
 	private static final int BORDER_STROKE_SIZE = 1;
 
+	/* (non-Javadoc)
+	 * @see java.awt.LayoutManager#addLayoutComponent(java.lang.String, java.awt.Component)
+	 */
 	@Override
 	public void addLayoutComponent(final String name, final Component comp) {
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.LayoutManager#removeLayoutComponent(java.awt.Component)
+	 */
 	@Override
 	public void removeLayoutComponent(final Component comp) {
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.LayoutManager#preferredLayoutSize(java.awt.Container)
+	 */
 	@Override
 	public Dimension preferredLayoutSize(final Container target) {
 		return minimumLayoutSize(target);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.LayoutManager#minimumLayoutSize(java.awt.Container)
+	 */
 	@Override
 	public Dimension minimumLayoutSize(final Container target) {
 		int currentHeight = target.getInsets().top;
@@ -48,6 +69,9 @@ public class CustomLayout implements LayoutManager {
 		return new Dimension(target.getWidth(), currentHeight);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.LayoutManager#layoutContainer(java.awt.Container)
+	 */
 	@Override
 	public void layoutContainer(final Container target) {
 		final Insets targetInsets = target.getInsets();

@@ -16,12 +16,11 @@ import sequence.model.activity.BodyPart;
 import sequence.model.activity.Instrument;
 import sequence.model.location.Location;
 import sequence.mvc.DefaultModel;
-import sequence.mvc.Model;
 
 /**
  * The Sequence model.
  */
-public class Sequence extends DefaultModel implements Iterable<Activity>, Model {
+public class Sequence extends DefaultModel implements Iterable<Activity> {
 
 	/** The file. */
 	private File file;
@@ -143,7 +142,7 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	 * Contains.
 	 * 
 	 * @param o
-	 *            the o
+	 *            the object
 	 * @return true, if successful
 	 */
 	public boolean contains(final Object o) {
@@ -154,7 +153,7 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	 * Index of.
 	 * 
 	 * @param o
-	 *            the o
+	 *            the object
 	 * @return the int
 	 */
 	public int indexOf(final Object o) {
@@ -201,6 +200,12 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		activities.add(activity);
 	}
 
+	/**
+	 * Adds the activity at the right index, sorted by activities' id.
+	 * 
+	 * @param activity
+	 *            the activity
+	 */
 	public void addActivitySorted(final Activity activity) {
 		int index = 0;
 		while (index < size()
@@ -211,6 +216,12 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		modelChange();
 	}
 
+	/**
+	 * Removes the activity.
+	 * 
+	 * @param activity
+	 *            the activity
+	 */
 	public void removeActivity(final Activity activity) {
 		activities.remove(activity);
 		modelChange();
@@ -265,6 +276,9 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 		return date;
 	}
 
+	/**
+	 * Generate date.
+	 */
 	private void generateDate() {
 		date = new Date();
 		date.setStartTime(get(0).getActivitytime().getStartTime());
@@ -329,18 +343,18 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	}
 
 	/**
-	 * Complete duration.
+	 * Returns the complete duration of the sequence.
 	 * 
-	 * @return the int
+	 * @return the complete duration of the sequence
 	 */
 	public int completeDuration() {
 		return getDate().getDuration();
 	}
 
 	/**
-	 * Complete work duration.
+	 * Returns the sum of all activities' duration.
 	 * 
-	 * @return the int
+	 * @return the sum of all activities' duration
 	 */
 	public int completeWorkDuration() {
 		int duration = 0;
@@ -351,9 +365,9 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	}
 
 	/**
-	 * Phase duration.
+	 * Returns the list of all phases' duration.
 	 * 
-	 * @return the list
+	 * @return the list of all phases' duration
 	 */
 	public List<Integer> phaseDuration() {
 		final List<Integer> phasesDuration = new ArrayList<Integer>();
@@ -370,11 +384,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	}
 
 	/**
-	 * Gets the activities in phase.
+	 * Gets the activities contained in the phase.
 	 * 
 	 * @param phase
 	 *            the phase
-	 * @return the activities in phase
+	 * @return the activities contained in the phase
 	 */
 	public List<Activity> getActivitiesInPhase(final Phase phase) {
 		final List<Activity> activities = new ArrayList<Activity>();
@@ -394,11 +408,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	}
 
 	/**
-	 * Gets the phase of activity.
+	 * Gets the phase that contains the activity.
 	 * 
 	 * @param activity
 	 *            the activity
-	 * @return the phase of activity
+	 * @return the phase that contains the activity
 	 */
 	public Phase getPhaseOfActivity(final Activity activity) {
 		for (final Phase current : phases) {
@@ -430,9 +444,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	}
 
 	/**
-	 * States.
+	 * Returns an array of all the different activities' states contained in
+	 * this sequence.
 	 * 
-	 * @return the object[]
+	 * @return the array of all the different activities' states contained in
+	 *         this sequence
 	 */
 	public Object[] states() {
 		final Set<String> set = new HashSet<String>();
@@ -443,9 +459,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	}
 
 	/**
-	 * Disciplines.
+	 * Returns an array of all the different activities' disciplines contained
+	 * in this sequence.
 	 * 
-	 * @return the object[]
+	 * @return the array of all the different activities' disciplines contained
+	 *         in this sequence
 	 */
 	public Object[] disciplines() {
 		final Set<Integer> set = new HashSet<Integer>();
@@ -456,9 +474,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	}
 
 	/**
-	 * Types.
+	 * Returns an array of all the different activities' types contained in this
+	 * sequence.
 	 * 
-	 * @return the object[]
+	 * @return the array of all the different activities' types contained in
+	 *         this sequence
 	 */
 	public Object[] types() {
 		final Set<Integer> set = new HashSet<Integer>();
@@ -469,9 +489,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	}
 
 	/**
-	 * Action structure instrument number.
+	 * Returns the number of all the different activities' action, structure and
+	 * instruments contained in this sequence.
 	 * 
-	 * @return the int[]
+	 * @return the number array of all the different activities' action,
+	 *         structure and instruments contained in this sequence
 	 */
 	public int[] ActionStructureInstrumentNumber() {
 		final Object[] tab = ActionsStructuresInstruments();
@@ -480,9 +502,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	}
 
 	/**
-	 * Actions structures instruments.
+	 * Returns an array of all the different activities' action, structure and
+	 * instruments contained in this sequence.
 	 * 
-	 * @return the object[]
+	 * @return the array of all the different activities' action, structure and
+	 *         instruments contained in this sequence
 	 */
 	public Object[] ActionsStructuresInstruments() {
 		final List<Action> actions = new ArrayList<Action>();
@@ -516,9 +540,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	}
 
 	/**
-	 * Positions.
+	 * Returns an array of all the different actuators' positions of all the
+	 * activities contained in this sequence.
 	 * 
-	 * @return the object[]
+	 * @return Returns the array of all the different actuators' positions of
+	 *         all the activities contained in this sequence
 	 */
 	public Object[] Positions() {
 		final List<Position> positions = new ArrayList<Position>();
@@ -534,9 +560,11 @@ public class Sequence extends DefaultModel implements Iterable<Activity>, Model 
 	}
 
 	/**
-	 * Body parts.
+	 * Returns an array of all the different actuators' used body parts of all
+	 * the activities contained in this sequence.
 	 * 
-	 * @return the object[]
+	 * @return the array of all the different actuators' used body parts of all
+	 *         the activities contained in this sequence
 	 */
 	public Object[] BodyParts() {
 		final List<BodyPart> bodyParts = new ArrayList<BodyPart>();

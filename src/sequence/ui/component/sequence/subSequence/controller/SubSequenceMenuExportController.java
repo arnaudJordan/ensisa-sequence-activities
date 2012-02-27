@@ -20,13 +20,25 @@ import sequence.utilities.Config;
 import sequence.utilities.SVGFactory;
 import sequence.utilities.TikzFactory;
 
+/**
+ * The Class SubSequenceMenuExportController.
+ */
 public class SubSequenceMenuExportController extends Controller implements
 		ActionListener {
 
+	/**
+	 * Instantiates a new sub sequence menu export controller.
+	 *
+	 * @param model the model
+	 * @param view the view
+	 */
 	public SubSequenceMenuExportController(final Model model, final View view) {
 		super(model, view);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		final JFileChooser fc = new JFileChooser();
@@ -89,6 +101,13 @@ public class SubSequenceMenuExportController extends Controller implements
 		}
 	}
 
+	/**
+	 * Svg export.
+	 *
+	 * @param f the f
+	 * @param ext the ext
+	 * @return true, if successful
+	 */
 	private boolean svgExport(final File f, final String ext) {
 		if (!ext.equalsIgnoreCase("svg"))
 			return false;
@@ -105,6 +124,13 @@ public class SubSequenceMenuExportController extends Controller implements
 		return false;
 	}
 
+	/**
+	 * Tikz export.
+	 *
+	 * @param f the f
+	 * @param ext the ext
+	 * @return true, if successful
+	 */
 	private boolean tikzExport(final File f, final String ext) {
 		if (!ext.equalsIgnoreCase("tex"))
 			return false;
@@ -121,6 +147,13 @@ public class SubSequenceMenuExportController extends Controller implements
 		return false;
 	}
 
+	/**
+	 * Image export.
+	 *
+	 * @param ext the ext
+	 * @param f the f
+	 * @return true, if successful
+	 */
 	private boolean imageExport(final String ext, final File f) {
 		for (int i = 0; i < ImageIO.getWriterFormatNames().length; i++) {
 			if (ImageIO.getWriterFormatNames()[i].equals(ext)) {

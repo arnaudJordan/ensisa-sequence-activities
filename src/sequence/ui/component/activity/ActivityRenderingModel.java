@@ -6,36 +6,79 @@ import sequence.mvc.DefaultModel;
 import sequence.mvc.RenderingModel;
 import sequence.utilities.ColorFactory;
 
+/**
+ * The Class ActivityRenderingModel.
+ */
 public class ActivityRenderingModel extends DefaultModel implements
 		RenderingModel {
 
+	/** The Constant DEFAULT_COLOR. */
 	private static final Color DEFAULT_COLOR = Color.BLACK;
+	
+	/** The Constant DEFAULT_TRANSPARENCY_ALPHA. */
 	private static final int DEFAULT_TRANSPARENCY_ALPHA = 50;
+	
+	/** The Constant DEFAULT_HEIGHT. */
 	private static final int DEFAULT_HEIGHT = 10;
+	
+	/** The Constant DEFAULT_HSCALE. */
 	private static final float DEFAULT_HSCALE = 1;
+	
+	/** The Constant DEFAULT_VSCALE. */
 	private static final float DEFAULT_VSCALE = 1;
 
+	/** The current scale that is used by every activities.. */
 	public static float CURRENT_SCALE = 1;
 
+	/** The color. */
 	private Color color;
+	
+	/** The transparency alpha. */
 	private int transparencyAlpha;
+	
+	/** The height. */
 	private int height;
+	
+	/** The Vscale. */
 	private float Hscale, Vscale;
 
+	/**
+	 * Instantiates a new activity rendering model.
+	 */
 	public ActivityRenderingModel() {
 		this(DEFAULT_COLOR, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT,
 				DEFAULT_HSCALE, DEFAULT_VSCALE);
 	}
 
+	/**
+	 * Instantiates a new activity rendering model.
+	 *
+	 * @param color the color
+	 */
 	public ActivityRenderingModel(final Color color) {
 		this(color, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, CURRENT_SCALE,
 				CURRENT_SCALE);
 	}
 
+	/**
+	 * Instantiates a new activity rendering model.
+	 *
+	 * @param color the color
+	 * @param scale the scale
+	 */
 	public ActivityRenderingModel(final Color color, final float scale) {
 		this(color, DEFAULT_TRANSPARENCY_ALPHA, DEFAULT_HEIGHT, scale, scale);
 	}
 
+	/**
+	 * Instantiates a new activity rendering model.
+	 *
+	 * @param color the color
+	 * @param transparencyAlpha the transparency alpha
+	 * @param height the height
+	 * @param Hscale the hscale
+	 * @param Vscale the vscale
+	 */
 	public ActivityRenderingModel(final Color color,
 			final int transparencyAlpha, final int height, final float Hscale,
 			final float Vscale) {
@@ -46,6 +89,11 @@ public class ActivityRenderingModel extends DefaultModel implements
 		this.Vscale = Vscale;
 	}
 
+	/**
+	 * Sets the color.
+	 *
+	 * @param color the new color
+	 */
 	public void setColor(final Color color) {
 		if (this.color == color)
 			return;
@@ -53,10 +101,20 @@ public class ActivityRenderingModel extends DefaultModel implements
 		modelChange();
 	}
 
+	/**
+	 * Gets the color.
+	 *
+	 * @return the color
+	 */
 	public Color getColor() {
 		return color;
 	}
 
+	/**
+	 * Sets the transparency alpha.
+	 *
+	 * @param transparencyAlpha the new transparency alpha
+	 */
 	public void setTransparencyAlpha(final int transparencyAlpha) {
 		if (this.transparencyAlpha == transparencyAlpha)
 			return;
@@ -64,18 +122,34 @@ public class ActivityRenderingModel extends DefaultModel implements
 		modelChange();
 	}
 
+	/**
+	 * Sets the transparent.
+	 */
 	public void setTransparent() {
 		setColor(ColorFactory.setAlpha(color, transparencyAlpha));
 	}
 
+	/**
+	 * Sets the opaque.
+	 */
 	public void setOpaque() {
 		setColor(ColorFactory.setAlpha(color, 255));
 	}
 
+	/**
+	 * Gets the transparency alpha.
+	 *
+	 * @return the transparency alpha
+	 */
 	public int getTransparencyAlpha() {
 		return transparencyAlpha;
 	}
 
+	/**
+	 * Sets the height.
+	 *
+	 * @param height the new height
+	 */
 	public void setHeight(final int height) {
 		if (this.height == height)
 			return;
@@ -83,10 +157,20 @@ public class ActivityRenderingModel extends DefaultModel implements
 		modelChange();
 	}
 
+	/**
+	 * Gets the height.
+	 *
+	 * @return the height
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * Sets the h scale.
+	 *
+	 * @param Hscale the new h scale
+	 */
 	public void setHScale(final float Hscale) {
 		if (this.Hscale == Hscale)
 			return;
@@ -94,10 +178,20 @@ public class ActivityRenderingModel extends DefaultModel implements
 		modelChange();
 	}
 
+	/**
+	 * Gets the h scale.
+	 *
+	 * @return the h scale
+	 */
 	public float getHScale() {
 		return Hscale;
 	}
 
+	/**
+	 * Sets the v scale.
+	 *
+	 * @param Vscale the new v scale
+	 */
 	public void setVScale(final float Vscale) {
 		if (this.Vscale == Vscale)
 			return;
@@ -105,10 +199,20 @@ public class ActivityRenderingModel extends DefaultModel implements
 		modelChange();
 	}
 
+	/**
+	 * Gets the v scale.
+	 *
+	 * @return the v scale
+	 */
 	public float getVScale() {
 		return Vscale;
 	}
 
+	/**
+	 * Sets the scale.
+	 *
+	 * @param scale the new scale
+	 */
 	public void setScale(final float scale) {
 		if (Hscale == scale && Vscale == scale)
 			return;

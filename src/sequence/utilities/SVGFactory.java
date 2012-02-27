@@ -134,6 +134,12 @@ public class SVGFactory {
 		return sb.toString();
 	}
 
+	/**
+	 * Color to hexa.
+	 *
+	 * @param color the color
+	 * @return the string
+	 */
 	private static String ColorToHexa(final Color color) {
 		final StringBuilder sb = new StringBuilder();
 		if (Integer.toHexString(color.getRed()).length() == 1)

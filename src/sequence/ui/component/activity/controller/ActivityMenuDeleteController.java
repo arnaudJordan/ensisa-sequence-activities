@@ -13,13 +13,25 @@ import sequence.mvc.View;
 import sequence.processor.command.RemoveActivity;
 import sequence.ui.window.MainWindow;
 
+/**
+ * The Class ActivityMenuDeleteController.
+ */
 public class ActivityMenuDeleteController extends Controller implements
 		ActionListener {
 
+	/**
+	 * Instantiates a new activity menu delete controller.
+	 *
+	 * @param model the model
+	 * @param view the view
+	 */
 	public ActivityMenuDeleteController(final Model model, final View view) {
 		super(model, view);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		final int response = JOptionPane.showConfirmDialog(getView(),

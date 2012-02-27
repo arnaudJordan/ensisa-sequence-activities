@@ -8,12 +8,24 @@ import sequence.mvc.Controller;
 import sequence.mvc.Model;
 import sequence.mvc.View;
 
+/**
+ * The Class ActivityController.
+ */
 public class ActivityController extends Controller {
 
+	/**
+	 * Instantiates a new activity controller.
+	 *
+	 * @param model the model
+	 * @param view the view
+	 */
 	public ActivityController(final Model model, final View view) {
 		super(model, view);
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.mvc.Controller#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(final MouseEvent e) {
 		if (e.getButton() == LEFT_MOUSE_BUTTON) {
@@ -46,16 +58,27 @@ public class ActivityController extends Controller {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.mvc.Controller#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(final MouseEvent e) {
 		checkPopup(e);
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.mvc.Controller#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(final MouseEvent e) {
 		checkPopup(e);
 	}
 
+	/**
+	 * Check popup.
+	 *
+	 * @param e the e
+	 */
 	private void checkPopup(final MouseEvent e) {
 		if (e.getButton() == RIGHT_MOUSE_BUTTON && e.isPopupTrigger()) {
 			((ActivityView) getView()).popup.show(e.getComponent(), e.getX(),

@@ -12,10 +12,22 @@ import sequence.ui.component.timeIndicator.TimeIndicatorRenderingModel;
 import sequence.ui.component.timeIndicator.TimeIndicatorView;
 import sequence.ui.utilities.TimeLayout;
 
+/**
+ * The Class TimeLineRenderer.
+ */
 public class TimeLineRenderer extends DefaultRenderer implements Renderer {
+	
+	/** The scale. */
 	private float scale = 1;
+	
+	/** The height. */
 	private final int height = 10;
 
+	/**
+	 * Instantiates a new time line renderer.
+	 *
+	 * @param view the view
+	 */
 	public TimeLineRenderer(final View view) {
 		super(view);
 		getView().setLayout(new TimeLayout());
@@ -23,6 +35,9 @@ public class TimeLineRenderer extends DefaultRenderer implements Renderer {
 		initialize();
 	}
 
+	/**
+	 * Initialize.
+	 */
 	public void initialize() {
 		final Phases phases = (Phases) getView().getModel();
 		for (final Phase phase : phases) {
@@ -35,6 +50,9 @@ public class TimeLineRenderer extends DefaultRenderer implements Renderer {
 		}
 	}
 
+	/**
+	 * Sets the scale.
+	 */
 	public void setScale() {
 		final Phases phases = (Phases) getView().getModel();
 		if (phases.size() > 0) {
@@ -44,6 +62,9 @@ public class TimeLineRenderer extends DefaultRenderer implements Renderer {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.mvc.DefaultRenderer#renderView(java.awt.Graphics2D)
+	 */
 	@Override
 	public void renderView(final Graphics2D g) {
 		super.renderView(g);
@@ -51,6 +72,11 @@ public class TimeLineRenderer extends DefaultRenderer implements Renderer {
 		renderTimeLine(g);
 	}
 
+	/**
+	 * Render time line.
+	 *
+	 * @param g the g
+	 */
 	private void renderTimeLine(final Graphics2D g) {
 		for (int i = 0; i < getView().getComponentCount(); i++) {
 			final TimeIndicatorView timeIndicatorView = (TimeIndicatorView) getView()
@@ -61,6 +87,9 @@ public class TimeLineRenderer extends DefaultRenderer implements Renderer {
 		getView().revalidate();
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.mvc.DefaultRenderer#getPreferredSize()
+	 */
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(getView().getParent().getWidth(), height);

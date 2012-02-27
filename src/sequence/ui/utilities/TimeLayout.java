@@ -22,21 +22,35 @@ import sequence.utilities.Timeable;
  * @author Arnaud Jordan
  */
 public class TimeLayout implements LayoutManager {
+	
+	/** The Constant VGAP. */
 	private static final int VGAP = 10;
 
+	/* (non-Javadoc)
+	 * @see java.awt.LayoutManager#addLayoutComponent(java.lang.String, java.awt.Component)
+	 */
 	@Override
 	public void addLayoutComponent(final String name, final Component comp) {
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.LayoutManager#removeLayoutComponent(java.awt.Component)
+	 */
 	@Override
 	public void removeLayoutComponent(final Component comp) {
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.LayoutManager#preferredLayoutSize(java.awt.Container)
+	 */
 	@Override
 	public Dimension preferredLayoutSize(final Container parent) {
 		return minimumLayoutSize(parent);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.LayoutManager#minimumLayoutSize(java.awt.Container)
+	 */
 	@Override
 	public Dimension minimumLayoutSize(final Container parent) {
 		// If there are no component size is 0.
@@ -86,6 +100,9 @@ public class TimeLayout implements LayoutManager {
 		return new Dimension(parentWidth, currentHeight);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.LayoutManager#layoutContainer(java.awt.Container)
+	 */
 	@Override
 	public void layoutContainer(final Container parent) {
 		if (parent.getComponentCount() == 0)

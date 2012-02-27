@@ -17,13 +17,25 @@ import sequence.ui.component.activity.ActivityRenderingModel;
 import sequence.ui.component.activity.ActivityView;
 import sequence.ui.window.MainWindow;
 
+/**
+ * The Class ActivityMenuColorController.
+ */
 public class ActivityMenuColorController extends Controller implements
 		ActionListener {
 
+	/**
+	 * Instantiates a new activity menu color controller.
+	 *
+	 * @param model the model
+	 * @param view the view
+	 */
 	public ActivityMenuColorController(final Model model, final View view) {
 		super(model, view);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(final ActionEvent e) {
 		final ActivityRenderingModel renderingModel = ((ActivityRenderingModel) (((ActivityView) getView())

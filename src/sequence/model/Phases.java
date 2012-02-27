@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import sequence.mvc.Model;
-import sequence.mvc.ModelListener;
+import sequence.mvc.DefaultModel;
 
 /**
  * The Phases model.
  */
-public class Phases implements Iterable<Phase>, Model {
+public class Phases extends DefaultModel implements Iterable<Phase> {
 
 	/** The phases. */
 	private final List<Phase> phases;
@@ -44,7 +43,7 @@ public class Phases implements Iterable<Phase>, Model {
 	 * Index of.
 	 * 
 	 * @param o
-	 *            the o
+	 *            the object
 	 * @return the int
 	 */
 	public int indexOf(final Object o) {
@@ -65,7 +64,7 @@ public class Phases implements Iterable<Phase>, Model {
 	 * Adds the.
 	 * 
 	 * @param e
-	 *            the e
+	 *            the phase
 	 * @return true, if successful
 	 */
 	public boolean add(final Phase e) {
@@ -118,23 +117,4 @@ public class Phases implements Iterable<Phase>, Model {
 		sb.append("</state>");
 		return sb.toString();
 	}
-
-	@Override
-	public void addModelListener(final ModelListener l) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void removeModelListener(final ModelListener l) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void modelChange() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

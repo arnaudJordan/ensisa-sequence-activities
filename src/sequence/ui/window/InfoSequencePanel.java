@@ -19,23 +19,27 @@ import sequence.model.Sequence;
 import sequence.utilities.Sex;
 
 /**
- * 
+ * The Class InfoSequencePanel.
+ *
  * @author arnaud
  */
 public class InfoSequencePanel extends javax.swing.JPanel {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Creates new form InfoSequencePanel
+	 * Creates new form InfoSequencePanel.
 	 */
 	public InfoSequencePanel() {
 		initComponents();
 	}
 
+	/**
+	 * Instantiates a new info sequence panel.
+	 *
+	 * @param sequence the sequence
+	 */
 	public InfoSequencePanel(final Sequence sequence) {
 		initComponents();
 		numberActivities.setText(String.valueOf(sequence.activityNumber()));
@@ -51,6 +55,12 @@ public class InfoSequencePanel extends javax.swing.JPanel {
 		revalidate();
 	}
 
+	/**
+	 * Creates the chart.
+	 *
+	 * @param sequence the sequence
+	 * @return the chart panel
+	 */
 	private ChartPanel createChart(final Sequence sequence) {
 		final Phases phases = sequence.getPhases();
 		final List<Integer> phasesDuration = sequence.phaseDuration();
@@ -259,18 +269,43 @@ public class InfoSequencePanel extends javax.swing.JPanel {
 	}// </editor-fold>//GEN-END:initComponents
 		// Variables declaration - do not modify//GEN-BEGIN:variables
 
-	private javax.swing.JLabel actuator;
+	/** The actuator. */
+		private javax.swing.JLabel actuator;
+	
+	/** The actuator label. */
 	private javax.swing.JLabel actuatorLabel;
+	
+	/** The age. */
 	private javax.swing.JLabel age;
+	
+	/** The age label. */
 	private javax.swing.JLabel ageLabel;
+	
+	/** The chart panel. */
 	private javax.swing.JPanel chartPanel;
+	
+	/** The general information label. */
 	private javax.swing.JLabel generalInformationLabel;
+	
+	/** The note. */
 	private javax.swing.JLabel note;
+	
+	/** The note label. */
 	private javax.swing.JLabel noteLabel;
+	
+	/** The number activities. */
 	private javax.swing.JLabel numberActivities;
+	
+	/** The number activities label. */
 	private javax.swing.JLabel numberActivitiesLabel;
+	
+	/** The patient information label. */
 	private javax.swing.JLabel patientInformationLabel;
+	
+	/** The sex. */
 	private javax.swing.JLabel sex;
+	
+	/** The sex label. */
 	private javax.swing.JLabel sexLabel;
 	// End of variables declaration//GEN-END:variables
 }

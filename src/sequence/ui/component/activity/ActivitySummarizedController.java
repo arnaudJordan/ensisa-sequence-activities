@@ -10,12 +10,24 @@ import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceContr
 import sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceView;
 import sequence.ui.utilities.drawer.BorderBackgroundDrawer;
 
+/**
+ * The Class ActivitySummarizedController.
+ */
 public class ActivitySummarizedController extends SummarizedSequenceController {
 
+	/**
+	 * Instantiates a new activity summarized controller.
+	 *
+	 * @param model the model
+	 * @param view the view
+	 */
 	public ActivitySummarizedController(final Model model, final View view) {
 		super(model, view);
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.mvc.Controller#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(final MouseEvent e) {
 		if (e.getButton() == LEFT_MOUSE_BUTTON) {
@@ -67,6 +79,9 @@ public class ActivitySummarizedController extends SummarizedSequenceController {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.ui.component.sequence.summarizedSequence.SummarizedSequenceController#checkPopup(java.awt.event.MouseEvent)
+	 */
 	@Override
 	protected void checkPopup(final MouseEvent e) {
 		if (e.getButton() == RIGHT_MOUSE_BUTTON && e.isPopupTrigger()) {

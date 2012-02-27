@@ -11,11 +11,26 @@ import sequence.ui.component.sequence.subSequence.controller.SubSequenceMenuInfo
 import sequence.utilities.OptionEventDispatcher;
 import sequence.utilities.ThresholdListener;
 
+/**
+ * The Class SubSequenceView.
+ */
 public class SubSequenceView extends View implements ThresholdListener {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The summarized view. */
 	private final View summarizedView;
+	
+	/** The popup. */
 	private final JPopupMenu popup;
 
+	/**
+	 * Instantiates a new sub sequence view.
+	 *
+	 * @param model the model
+	 * @param summarizedView the summarized view
+	 */
 	public SubSequenceView(final Model model, final View summarizedView) {
 		super(model);
 		setRenderingModel(new SubSequenceRenderingModel());
@@ -33,24 +48,47 @@ public class SubSequenceView extends View implements ThresholdListener {
 		popup.add(infoItem);
 	}
 
+	/**
+	 * Gets the summarized view.
+	 *
+	 * @return the summarized view
+	 */
 	public View getSummarizedView() {
 		return summarizedView;
 	}
 
+	/**
+	 * Gets the popup.
+	 *
+	 * @return the popup
+	 */
 	public JPopupMenu getPopup() {
 		return popup;
 	}
 	
+	/**
+	 * Adds the threshold listener.
+	 *
+	 * @param tl the tl
+	 */
 	public void addThresholdListener(final ThresholdListener tl) {
 		if (tl == null)
 			return;
 		OptionEventDispatcher.add(tl);
 	}
 
+	/**
+	 * Removes the threshold listener.
+	 *
+	 * @param tl the tl
+	 */
 	public void removeThresholdListener(final ThresholdListener tl) {
 		OptionEventDispatcher.remove(tl);
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.mvc.View#modelChanged(sequence.mvc.Model)
+	 */
 	@Override
 	public void modelChanged(final Model m) {
 		removeAll();
@@ -59,6 +97,9 @@ public class SubSequenceView extends View implements ThresholdListener {
 		getSummarizedView().getParent().repaint();
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.utilities.ThresholdListener#thresholdChanged(int)
+	 */
 	@Override
 	public void thresholdChanged(final int threshold) {
 		((SubSequenceRenderingModel) getRenderingModel()).setDurationThreshold(threshold);

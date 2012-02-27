@@ -1,12 +1,11 @@
 package sequence.model;
 
-import sequence.mvc.Model;
-import sequence.mvc.ModelListener;
+import sequence.mvc.DefaultModel;
 
 /**
  * The Phase model.
  */
-public class Phase implements Model {
+public class Phase extends DefaultModel {
 
 	/** The date. */
 	private final int date;
@@ -14,6 +13,7 @@ public class Phase implements Model {
 	/** The name. */
 	private String name;
 
+	/** The stop time. */
 	private int stopTime = 0;
 
 	/**
@@ -89,25 +89,20 @@ public class Phase implements Model {
 		return "<value time=\"" + date + "\">" + name + "</value>";
 	}
 
-	@Override
-	public void addModelListener(final ModelListener l) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void removeModelListener(final ModelListener l) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void modelChange() {
-		// TODO Auto-generated method stub
-	}
-
+	/**
+	 * Sets the stop time.
+	 *
+	 * @param stopTime the new stop time
+	 */
 	public void setStopTime(final int stopTime) {
 		this.stopTime = stopTime;
 	}
 
+	/**
+	 * Gets the stop time.
+	 *
+	 * @return the stop time
+	 */
 	public int getStopTime() {
 		return stopTime;
 	}

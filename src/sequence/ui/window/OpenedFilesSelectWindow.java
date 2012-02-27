@@ -30,17 +30,42 @@ import sequence.utilities.Config;
 import sequence.utilities.SVGFactory;
 import sequence.utilities.TikzFactory;
 
+/**
+ * The Class OpenedFilesSelectWindow.
+ */
 public class OpenedFilesSelectWindow extends JDialog {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The save button. */
 	private JButton saveButton;
+	
+	/** The cancel button. */
 	private JButton cancelButton;
+	
+	/** The j list. */
 	private JList jList;
+	
+	/** The scroll pane. */
 	private JScrollPane scrollPane;
+	
+	/** The fc. */
 	private JFileChooser fc;
+	
+	/** The parent. */
 	private MainWindow parent;
+	
+	/** The selected sequence. */
 	private Sequence selectedSequence;
 
+	/**
+	 * Instantiates a new opened files select window.
+	 *
+	 * @param list the list
+	 * @param parent the parent
+	 * @throws HeadlessException the headless exception
+	 */
 	public OpenedFilesSelectWindow(final List<SequenceContainer> list,
 			final MainWindow parent) throws HeadlessException {
 		super(parent, "Select file", true);
@@ -148,6 +173,9 @@ public class OpenedFilesSelectWindow extends JDialog {
 		setVisible(true);
 	}
 
+	/**
+	 * Inits the file chooser.
+	 */
 	private void initFileChooser() {
 		fc = new JFileChooser();
 
@@ -164,6 +192,13 @@ public class OpenedFilesSelectWindow extends JDialog {
 			fc.setCurrentDirectory(config.getLastOpenedDirectory());
 	}
 
+	/**
+	 * Save.
+	 *
+	 * @param f the f
+	 * @param ext the ext
+	 * @return true, if successful
+	 */
 	private boolean save(final File f, final String ext) {
 		if (!ext.equalsIgnoreCase("xml"))
 			return false;
@@ -175,6 +210,13 @@ public class OpenedFilesSelectWindow extends JDialog {
 		return true;
 	}
 
+	/**
+	 * Svg export.
+	 *
+	 * @param f the f
+	 * @param ext the ext
+	 * @return true, if successful
+	 */
 	private boolean svgExport(final File f, final String ext) {
 		if (!ext.equalsIgnoreCase("svg"))
 			return false;
@@ -192,6 +234,13 @@ public class OpenedFilesSelectWindow extends JDialog {
 		return false;
 	}
 
+	/**
+	 * Tikz export.
+	 *
+	 * @param f the f
+	 * @param ext the ext
+	 * @return true, if successful
+	 */
 	private boolean tikzExport(final File f, final String ext) {
 		if (!ext.equalsIgnoreCase("tex"))
 			return false;
@@ -208,6 +257,13 @@ public class OpenedFilesSelectWindow extends JDialog {
 		return false;
 	}
 
+	/**
+	 * Image export.
+	 *
+	 * @param ext the ext
+	 * @param f the f
+	 * @return true, if successful
+	 */
 	private boolean imageExport(final String ext, final File f) {
 		for (int i = 0; i < ImageIO.getWriterFormatNames().length; i++) {
 			if (ImageIO.getWriterFormatNames()[i].equals(ext)) {
@@ -224,6 +280,9 @@ public class OpenedFilesSelectWindow extends JDialog {
 		return false;
 	}
 
+	/**
+	 * Inits the components.
+	 */
 	private void initComponents() {
 
 		scrollPane = new javax.swing.JScrollPane();

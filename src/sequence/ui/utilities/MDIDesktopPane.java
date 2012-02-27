@@ -21,14 +21,22 @@ import javax.swing.JViewport;
  * left or bottom, providing the MDIDesktopPane is in a ScrollPane.
  */
 public class MDIDesktopPane extends JDesktopPane {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The FRAM e_ offset. */
 	private static int FRAME_OFFSET = 20;
+	
+	/** The manager. */
 	private final MDIDesktopManager manager;
+	
+	/** The frames. */
 	private final List<JInternalFrame> frames;
 
+	/**
+	 * Instantiates a new mDI desktop pane.
+	 */
 	public MDIDesktopPane() {
 		manager = new MDIDesktopManager(this);
 		setDesktopManager(manager);
@@ -36,12 +44,21 @@ public class MDIDesktopPane extends JDesktopPane {
 		frames = new ArrayList<JInternalFrame>();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.Component#setBounds(int, int, int, int)
+	 */
 	@Override
 	public void setBounds(final int x, final int y, final int w, final int h) {
 		super.setBounds(x, y, w, h);
 		checkDesktopSize();
 	}
 	
+	/**
+	 * Adds the.
+	 *
+	 * @param frame the frame
+	 * @return the component
+	 */
 	public Component add(final JInternalFrame frame) {
 		frames.add(frame);
 		final JInternalFrame[] array = getAllFrames();
@@ -84,6 +101,9 @@ public class MDIDesktopPane extends JDesktopPane {
 		return retval;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.Container#add(java.awt.Component)
+	 */
 	@Override
 	public Component add(final Component c) {
 		final Component comp = super.add(c);
@@ -92,6 +112,9 @@ public class MDIDesktopPane extends JDesktopPane {
 		return comp;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.awt.Container#remove(java.awt.Component)
+	 */
 	@Override
 	public void remove(final Component c) {
 		super.remove(c);
@@ -100,7 +123,7 @@ public class MDIDesktopPane extends JDesktopPane {
 	}
 
 	/**
-	 * Cascade all internal frames
+	 * Cascade all internal frames.
 	 */
 	public void cascadeFrames() {
 		System.out.println(frames);
@@ -137,7 +160,7 @@ public class MDIDesktopPane extends JDesktopPane {
 	}
 
 	/**
-	 * Tile all internal frames
+	 * Tile all internal frames.
 	 */
 	public void tileFrames() {
 		final java.awt.Component allFrames[] = getAllFrames();
@@ -181,6 +204,8 @@ public class MDIDesktopPane extends JDesktopPane {
 	/**
 	 * Sets all component size properties ( maximum, minimum, preferred) to the
 	 * given dimension.
+	 *
+	 * @param d the new all size
 	 */
 	public void setAllSize(final Dimension d) {
 		setMinimumSize(d);
@@ -191,11 +216,17 @@ public class MDIDesktopPane extends JDesktopPane {
 	/**
 	 * Sets all component size properties ( maximum, minimum, preferred) to the
 	 * given width and height.
+	 *
+	 * @param width the width
+	 * @param height the height
 	 */
 	public void setAllSize(final int width, final int height) {
 		setAllSize(new Dimension(width, height));
 	}
 
+	/**
+	 * Check desktop size.
+	 */
 	private void checkDesktopSize() {
 		if (getParent() != null && isVisible())
 			manager.resizeDesktop();

@@ -11,27 +11,53 @@ import sequence.mvc.View;
 import sequence.ui.utilities.drawer.BackgroundDrawer;
 import sequence.ui.utilities.drawer.FullBackgroundDrawer;
 
+/**
+ * The Class ActivityRenderer.
+ */
 public class ActivityRenderer extends DefaultRenderer implements Renderer {
+	
+	/** The current background drawer that is used by every activities. */
 	public static BackgroundDrawer CURRENT_BACKGROUND_DRAWER = new FullBackgroundDrawer();
 
+	/** The background drawer. */
 	protected BackgroundDrawer bd;
+	
+	/** The contracted. */
 	private boolean contracted;
 
+	/**
+	 * Instantiates a new activity renderer.
+	 *
+	 * @param view the view
+	 */
 	public ActivityRenderer(final View view) {
 		super(view);
 		bd = CURRENT_BACKGROUND_DRAWER;
 		contracted = false;
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.mvc.DefaultRenderer#renderView(java.awt.Graphics2D)
+	 */
 	@Override
 	public void renderView(final Graphics2D g) {
 		renderActivity(g);
 	}
 
+	/**
+	 * Render activity.
+	 *
+	 * @param g the g
+	 */
 	private void renderActivity(final Graphics2D g) {
 		renderBackground(g);
 	}
 
+	/**
+	 * Render background.
+	 *
+	 * @param g the g
+	 */
 	private void renderBackground(final Graphics2D g) {
 		final Activity activity = (Activity) ((ActivityView) getView())
 				.getModel();
@@ -63,6 +89,12 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 		// getView().getSize().getHeight()/2);
 	}
 
+	/**
+	 * Draw cut mark.
+	 *
+	 * @param g the g
+	 * @param middle the middle
+	 */
 	private void drawCutMark(final Graphics2D g, final int middle) {
 		final Graphics2D g2 = (Graphics2D) g.create();
 		g2.setColor(Color.WHITE);
@@ -73,6 +105,9 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 				.getHeight() + 5);
 	}
 
+	/* (non-Javadoc)
+	 * @see sequence.mvc.DefaultRenderer#getPreferredSize()
+	 */
 	@Override
 	public Dimension getPreferredSize() {
 		final Activity activity = (Activity) ((ActivityView) getView())
@@ -96,16 +131,31 @@ public class ActivityRenderer extends DefaultRenderer implements Renderer {
 		return super.getPreferredSize();
 	}
 
+	/**
+	 * Sets the background drawer.
+	 *
+	 * @param bd the new background drawer
+	 */
 	public void setBackgroundDrawer(final BackgroundDrawer bd) {
 		this.bd = bd;
 		if (getView().getParent() != null)
 			getView().getParent().repaint();
 	}
 
+	/**
+	 * Gets the background drawer.
+	 *
+	 * @return the background drawer
+	 */
 	public BackgroundDrawer getBackgroundDrawer() {
 		return bd;
 	}
 
+	/**
+	 * Checks if is contracted.
+	 *
+	 * @return true, if is contracted
+	 */
 	public boolean isContracted() {
 		return contracted;
 	}
